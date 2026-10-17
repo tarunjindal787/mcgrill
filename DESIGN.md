@@ -121,6 +121,10 @@ Rounded-corner (16px), full-colour photographic cards (no duotone filter) with: 
 ### Why McGill / Student Experience / Agents
 Three distinct layouts instead of three copies of the same card grid, per the brief's "avoid placing identical card grids in every section": an editorial image-+-icon-list split (Why McGill, on an Aqua tint background), a photo-+-copy split (Student Experience, white background), and a dark Navy band with a gold CTA (Agents) — giving the page the "balanced light, coloured and dark sections" rhythm the brief asked for, instead of an all-white page.
 
+## Revision 3 (2026-10-17): Structure & Clarity Pass
+
+Added three sections that previously didn't stand on their own: **About** (`#about` — narrative + a verified facts panel, includes an explicit "not to be confused with McGill University in Canada" line), **Educational Streams** (`#streams` — five clickable tiles, each applying the matching course-discipline filter and scrolling to `#courses`; real navigation, not decoration), and **Campus & Location** (`#campus` — a genuine Google Maps embed of the real address plus a "Get directions" link, `target="_blank" rel="noopener noreferrer"`). Hero headline changed to the client-specified "Quality Education. Better Career Pathways." Fixed a responsive risk: adding a 6th desktop nav link made the header tight at exactly the 1024px breakpoint, so the phone number now only shows at `xl` (1280px+), with just the Enquire Now button visible from `lg` to `xl`. Also reworded one course photo's alt text ("university lecture hall" → "college lecture hall") since this institute is unrelated to McGill University (Canada) and the alt text shouldn't accidentally reinforce that association. `html`'s `scroll-smooth` and the new `goToStream()` JS scroll now both check `prefers-reduced-motion` before animating.
+
 ## Do's and Don'ts
 
 ### Do:

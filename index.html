@@ -215,6 +215,10 @@
         }
 
         section[id] { scroll-margin-top: 5.5rem; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+        }
     </style>
 </head>
 <body class="bg-offwhite text-navy font-sans antialiased selection:bg-gold/30 selection:text-navy">
@@ -241,7 +245,8 @@
                 </div>
             </a>
 
-            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+            <nav class="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium">
+                <a href="#about" class="nav-underline-link hover:text-ocean transition-colors">About</a>
                 <a href="#courses" class="nav-underline-link hover:text-ocean transition-colors">Courses</a>
                 <a href="#why" class="nav-underline-link hover:text-ocean transition-colors">Why McGill</a>
                 <a href="#agents" class="nav-underline-link hover:text-ocean transition-colors">Agents</a>
@@ -249,12 +254,12 @@
                 <a href="#contact" class="nav-underline-link hover:text-ocean transition-colors">Contact</a>
             </nav>
 
-            <div class="hidden lg:flex items-center gap-5">
-                <a href="tel:+61296987318" class="text-sm font-medium text-muted hover:text-navy transition-colors flex items-center gap-2">
+            <div class="hidden lg:flex items-center gap-4 xl:gap-5">
+                <a href="tel:+61296987318" class="hidden xl:flex text-sm font-medium text-muted hover:text-navy transition-colors items-center gap-2">
                     <i class="fa-solid fa-phone text-ocean"></i>
                     <span>+61 2 9698 7318</span>
                 </a>
-                <button onclick="openEnquiryModal('General Enquiry')" class="bg-ocean hover:bg-oceanDeep text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors focus-ring-on-dark">
+                <button onclick="openEnquiryModal('General Enquiry')" class="bg-ocean hover:bg-oceanDeep text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors focus-ring-on-dark whitespace-nowrap">
                     Enquire Now
                 </button>
             </div>
@@ -267,6 +272,7 @@
         </div>
 
         <div id="mobile-menu" class="hidden lg:hidden bg-offwhite border-b hairline px-4 pt-3 pb-5 space-y-1">
+            <a href="#about" class="mobile-link block py-2.5 text-sm font-semibold">About</a>
             <a href="#courses" class="mobile-link block py-2.5 text-sm font-semibold">Courses</a>
             <a href="#why" class="mobile-link block py-2.5 text-sm font-semibold">Why McGill</a>
             <a href="#agents" class="mobile-link block py-2.5 text-sm font-semibold">Agents</a>
@@ -291,10 +297,10 @@
                 <div class="lg:col-span-6 order-2 lg:order-1">
                     <p class="text-sm font-semibold tracking-wide text-ocean mb-4">Vocational &amp; English Language Education</p>
                     <h1 class="font-display font-extrabold text-hero text-navy text-balance">
-                        A registered institute,<br>not just a promise.
+                        Quality Education.<br>Better Career Pathways.
                     </h1>
                     <p class="mt-6 text-body-lg text-muted max-w-xl">
-                        McGill Institute Australia is a government-registered training organization in Parramatta, Sydney, delivering Engineering, Hospitality, Business, Management and English programs to local and international students.
+                        McGill Institute Australia (RTO 45906, CRICOS 03678G) is a government-registered training organization in Parramatta, Sydney, delivering Engineering, Hospitality, Business, Management and English programs to local and international students.
                     </p>
 
                     <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -374,6 +380,96 @@
                         <p class="text-navy font-semibold">+61 2 9698 7318</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTITUTIONAL INTRODUCTION -->
+    <section id="about" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-5 gap-14 items-start">
+                <div class="lg:col-span-3">
+                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">About McGill Institute</p>
+                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">A government-registered institute in the heart of Parramatta.</h2>
+                    <p class="text-body-lg text-muted max-w-xl mb-5">
+                        McGill Institute Australia is a Registered Training Organization delivering nationally recognised vocational qualifications and English language programs. Based in Parramatta, Sydney's second CBD, it serves domestic students seeking a practical career change and international students studying under a CRICOS-registered course.
+                    </p>
+                    <p class="text-body-lg text-muted max-w-xl">
+                        Training spans five disciplines — Engineering, Hospitality, Business, Management and English — each led by qualifications registered under RTO 45906. McGill Institute Australia should not be confused with McGill University in Canada; it is an independent Australian vocational provider.
+                    </p>
+                </div>
+                <div class="lg:col-span-2 bg-aqua rounded-2xl p-8">
+                    <p class="font-mono text-[11px] uppercase tracking-wider text-mutedLight mb-4">At a glance</p>
+                    <dl class="space-y-4 text-sm">
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">Registration</dt>
+                            <dd class="text-navy font-semibold text-right">RTO 45906</dd>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">CRICOS Provider</dt>
+                            <dd class="text-navy font-semibold text-right">03678G</dd>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">ABN</dt>
+                            <dd class="text-navy font-semibold text-right">91 835 873 060</dd>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">Campus</dt>
+                            <dd class="text-navy font-semibold text-right">Parramatta, NSW</dd>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">Disciplines</dt>
+                            <dd class="text-navy font-semibold text-right">5</dd>
+                        </div>
+                        <div class="flex items-start justify-between gap-4">
+                            <dt class="text-muted">Registered Courses</dt>
+                            <dd class="text-navy font-semibold text-right">7</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATIONAL STREAMS -->
+    <section id="streams" class="py-20 lg:py-28 bg-offwhite">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-2xl mb-12">
+                <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Educational Streams</p>
+                <h2 class="font-display font-extrabold text-section-heading text-navy text-balance">Five disciplines, one registration.</h2>
+                <p class="mt-4 text-body-lg text-muted">Select a stream to jump straight to its courses below.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                <button type="button" onclick="goToStream('engineering')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
+                    <div class="w-12 h-12 rounded-full tag-engineering flex items-center justify-center mb-4"><i class="fa-solid fa-gears"></i></div>
+                    <h3 class="font-display font-bold text-navy mb-1">Engineering</h3>
+                    <p class="text-xs text-muted leading-relaxed mb-3">Fabrication trade skills for manufacturing and construction.</p>
+                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
+                </button>
+                <button type="button" onclick="goToStream('hospitality')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
+                    <div class="w-12 h-12 rounded-full tag-hospitality flex items-center justify-center mb-4"><i class="fa-solid fa-kitchen-set"></i></div>
+                    <h3 class="font-display font-bold text-navy mb-1">Hospitality</h3>
+                    <p class="text-xs text-muted leading-relaxed mb-3">Kitchen and hospitality management, from supervisor to manager.</p>
+                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View 2 courses &rarr;</span>
+                </button>
+                <button type="button" onclick="goToStream('business')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
+                    <div class="w-12 h-12 rounded-full tag-business flex items-center justify-center mb-4"><i class="fa-solid fa-briefcase"></i></div>
+                    <h3 class="font-display font-bold text-navy mb-1">Business</h3>
+                    <p class="text-xs text-muted leading-relaxed mb-3">Core to advanced business administration qualifications.</p>
+                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View 2 courses &rarr;</span>
+                </button>
+                <button type="button" onclick="goToStream('management')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
+                    <div class="w-12 h-12 rounded-full tag-management flex items-center justify-center mb-4"><i class="fa-solid fa-sitemap"></i></div>
+                    <h3 class="font-display font-bold text-navy mb-1">Management</h3>
+                    <p class="text-xs text-muted leading-relaxed mb-3">Strategic leadership for experienced professionals.</p>
+                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
+                </button>
+                <button type="button" onclick="goToStream('english')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
+                    <div class="w-12 h-12 rounded-full tag-english flex items-center justify-center mb-4"><i class="fa-solid fa-language"></i></div>
+                    <h3 class="font-display font-bold text-navy mb-1">English</h3>
+                    <p class="text-xs text-muted leading-relaxed mb-3">General English for everyday life, study and work.</p>
+                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
+                </button>
             </div>
         </div>
     </section>
@@ -511,7 +607,7 @@
                 <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col md:col-span-2 lg:col-span-1" data-discipline="english">
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1758270704524-596810e891b5 -->
                     <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-[center_25%]" src="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=800&q=80" srcset="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=600&q=80 600w, https://images.unsplash.com/photo-1758270704524-596810e891b5?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A smiling international student among classmates in a bright university lecture hall" loading="lazy" width="800" height="600">
+                        <img class="course-photo w-full h-full object-cover object-[center_25%]" src="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=800&q=80" srcset="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=600&q=80 600w, https://images.unsplash.com/photo-1758270704524-596810e891b5?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A smiling international student among classmates in a bright college lecture hall" loading="lazy" width="800" height="600">
                     </div>
                     <div class="p-7 flex flex-col flex-1">
                         <div class="flex items-center justify-between gap-2 mb-3">
@@ -619,6 +715,38 @@
                         <li class="flex items-start gap-3"><i class="fa-solid fa-check text-gold mt-1"></i><span>Support across the full enrolment journey</span></li>
                         <li class="flex items-start gap-3"><i class="fa-solid fa-check text-gold mt-1"></i><span>CRICOS-registered courses (03678G) for international students</span></li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAMPUS & LOCATION -->
+    <section id="campus" class="py-20 lg:py-28 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-10 items-stretch">
+                <div>
+                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Campus &amp; Location</p>
+                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">Based in Parramatta, Sydney's second CBD.</h2>
+                    <p class="text-body-lg text-muted mb-6 max-w-lg">The campus sits within walking distance of Parramatta train and bus interchange, in a precinct that's become a second commercial centre for Sydney.</p>
+                    <div class="space-y-4 text-sm mb-6">
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-location-dot text-ocean mt-0.5"></i>
+                            <span class="text-navy font-medium">Level 1, 30 Cowper St, Parramatta NSW 2150, Australia</span>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="fa-solid fa-train-subway text-ocean mt-0.5"></i>
+                            <span class="text-navy font-medium">Short walk from Parramatta Station</span>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-ocean hover:text-oceanDeep">
+                        Get directions <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+                <div class="rounded-3xl overflow-hidden shadow-lg min-h-[320px]">
+                    <iframe
+                        title="Map showing McGill Institute Australia's campus at Level 1, 30 Cowper St, Parramatta NSW 2150"
+                        src="https://maps.google.com/maps?q=Level%201%2C%2030%20Cowper%20St%2C%20Parramatta%20NSW%202150&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                        class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -742,8 +870,10 @@
                 <div>
                     <p class="font-semibold uppercase tracking-wider text-[11px] mb-4 text-offwhite/60">Explore</p>
                     <nav class="flex flex-col gap-2.5 text-offwhite/80">
+                        <a href="#about" class="hover:text-gold w-fit">About</a>
                         <a href="#courses" class="hover:text-gold w-fit">Courses</a>
                         <a href="#agents" class="hover:text-gold w-fit">Agents</a>
+                        <a href="#campus" class="hover:text-gold w-fit">Campus &amp; Location</a>
                         <a href="#students" class="hover:text-gold w-fit">Students</a>
                         <a href="#brochure" class="hover:text-gold w-fit">Brochure</a>
                     </nav>
@@ -852,6 +982,14 @@
         });
         // Initialize default active state
         document.querySelector('.filter-pill[data-filter="all"]').classList.add('bg-navy', 'text-offwhite', 'border-navy');
+
+        // Educational Streams tiles: apply the matching course filter, then scroll to the catalogue
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        function goToStream(discipline) {
+            const targetBtn = document.querySelector('.filter-pill[data-filter="' + discipline + '"]');
+            if (targetBtn) targetBtn.click();
+            document.getElementById('courses').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+        }
 
         // Enquiry modal
         const enquiryModal = document.getElementById('enquiry-modal');
