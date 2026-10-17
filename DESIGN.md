@@ -8,6 +8,7 @@ colors:
   muted: "#5B5952"
   muted-light: "#6F6C64"
   line: "#D8D4CC"
+  line-mark: "#C2BCAE"
   seal: "#A6281E"
   seal-deep: "#7E1D15"
 typography:
@@ -66,6 +67,7 @@ One warm-white ground, one ink, one accent.
 - **Ground** (#F7F5F2): The page's one background color.
 - **Card White** (#FFFFFF): Course-plate and feature-card surfaces.
 - **Ink** (#16181A): Primary text and the header/footer registration-strip background. Never pure black.
+- **Line Mark** (#C2BCAE): A slightly lighter, more muted gray than the structural hairline color, reserved specifically for the crosshair registration-mark ticks (`.plate-marks`), so they read as a quieter secondary mark distinct from the main dividing lines.
 - **Muted** (#5B5952) / **Muted Light** (#6F6C64): Secondary text. Muted Light is reserved for small uppercase labels (10–11px) and is deliberately darker than a typical "tertiary gray" to clear WCAG AA at that size — a lighter tone was tried and failed contrast at 3.3:1; this one measures 4.8:1+.
 
 ### The One Accent — Seal Red
@@ -87,6 +89,9 @@ One warm-white ground, one ink, one accent.
 
 ### The Seal
 A circular SVG badge: two concentric rings, curved registration text along the ring (RTO number on top, CRICOS status on the bottom, set via `textPath`), a centered mark, and four crosshair corner ticks outside the circle. Rotates continuously and slowly (50s linear, `prefers-reduced-motion` respected) — decorative dignity, not a data indicator. This is a first-viewport citizen in the hero, not a footer badge.
+
+### Photographic Plates (signature component, new)
+Each course plate and the "Why McGill" panel carry a real photograph (sourced under the Unsplash License, which permits this use without attribution — provenance for each is noted in an HTML comment above its `<img>` tag) treated with a duotone filter (`grayscale(1) contrast(1.08) brightness(1.03)`) plus a bottom ink-gradient overlay (`.plate-photo-frame`). This is a deliberate choice, not a fallback: a real design annual's plate section often *is* a photograph, so this is authentic to the direction, not a decorative add-on — and full-color stock photography would have introduced competing hues that dilute the One-Seal Rule. **These are generic stock photos illustrating each discipline (a workshop, a kitchen, an office, a certificate), not real photographs of McGill's own campus, students, or facilities** — alt text describes them generically for this reason. Replace with real campus/course photography when available; until then, don't caption or alt-text any of them as if they depict McGill specifically.
 
 ### Plate Cards
 Course-catalog entries are "plates," not generic cards: white background, thin hairline border, a `Space Mono` plate number ("PLATE NO. 01") above the content, and crosshair corner marks on two corners (top-right, bottom-left) via the `.plate-marks` utility. The course grid uses a `gap-px` CSS-grid trick with a `line`-colored background showing through the 1px gaps as hairline dividers, rather than individual card borders — keeps the registry feel of one continuous sheet rather than a stack of separate boxes.

@@ -82,6 +82,25 @@
 
         .hairline { border-color: #d8d4cc; }
 
+        /* Photographic plates: duotone treatment keeps stock photography inside the
+           one-accent system instead of competing with it. Desaturate, lift blacks to
+           ink (not pure black), and let the ground-tinted shadow gradient integrate
+           the photo with the cream ledger it sits in. */
+        .plate-photo {
+            filter: grayscale(1) contrast(1.08) brightness(1.03);
+        }
+        .plate-photo-frame {
+            position: relative;
+            overflow: hidden;
+        }
+        .plate-photo-frame::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(22,24,26,0) 55%, rgba(22,24,26,0.55) 100%);
+            pointer-events: none;
+        }
+
         .plate-number {
             font-family: 'Space Mono', monospace;
         }
@@ -272,81 +291,123 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line border hairline" id="course-grid">
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="engineering">
+                <div class="course-card plate-marks bg-card" data-discipline="engineering">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;01</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-gears text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): https://unsplash.com/photos/JpzMc-FMUes -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1738162837389-3b02d6dd507b?w=640&q=80" alt="Metal fabrication workshop" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Certificate III in Engineering<br>&ndash; Fabrication Trade</h3>
-                    <p class="text-muted text-xs leading-relaxed">A hands-on trade qualification in metal fabrication, covering workshop safety, reading technical drawings, and fabrication techniques used across manufacturing and construction.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Engineering</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;01</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-gears text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Certificate III in Engineering<br>&ndash; Fabrication Trade</h3>
+                        <p class="text-muted text-xs leading-relaxed">A hands-on trade qualification in metal fabrication, covering workshop safety, reading technical drawings, and fabrication techniques used across manufacturing and construction.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Engineering</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="hospitality">
+                <div class="course-card plate-marks bg-card" data-discipline="hospitality">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;02</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-kitchen-set text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1790156591339-cfe16da8e4b6 -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1790156591339-cfe16da8e4b6?w=640&q=80" alt="Chef working in a commercial kitchen" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Certificate IV in Kitchen Management</h3>
-                    <p class="text-muted text-xs leading-relaxed">Trains cooks moving into kitchen supervision: food safety systems, menu and cost control, and leading a kitchen team in a commercial setting.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;02</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-kitchen-set text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Certificate IV in Kitchen Management</h3>
+                        <p class="text-muted text-xs leading-relaxed">Trains cooks moving into kitchen supervision: food safety systems, menu and cost control, and leading a kitchen team in a commercial setting.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="hospitality">
+                <div class="course-card plate-marks bg-card" data-discipline="hospitality">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;03</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-concierge-bell text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1790156591339-cfe16da8e4b6 -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1790156591339-cfe16da8e4b6?w=640&q=80" alt="Chef working in a commercial kitchen" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Diploma of Hospitality Management</h3>
-                    <p class="text-muted text-xs leading-relaxed">A higher-level qualification for running hospitality operations: rostering, budgeting, service standards, and managing staff across front- and back-of-house.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;03</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-concierge-bell text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Diploma of Hospitality Management</h3>
+                        <p class="text-muted text-xs leading-relaxed">A higher-level qualification for running hospitality operations: rostering, budgeting, service standards, and managing staff across front- and back-of-house.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="business">
+                <div class="course-card plate-marks bg-card" data-discipline="business">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;04</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-briefcase text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1517048676732-d65bc937f952 -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=640&q=80" alt="Business team in a meeting" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Certificate IV of Business</h3>
-                    <p class="text-muted text-xs leading-relaxed">Core business skills for coordination and supervisory roles: workplace communication, basic project and finance administration, and business operations.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;04</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-briefcase text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Certificate IV of Business</h3>
+                        <p class="text-muted text-xs leading-relaxed">Core business skills for coordination and supervisory roles: workplace communication, basic project and finance administration, and business operations.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="business">
+                <div class="course-card plate-marks bg-card" data-discipline="business">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;05</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-chart-line text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1517048676732-d65bc937f952 -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=640&q=80" alt="Business team in a meeting" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Diploma of Business</h3>
-                    <p class="text-muted text-xs leading-relaxed">A deeper business qualification for those moving toward management: planning, marketing, finance, and leading teams within an organization.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;05</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-chart-line text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Diploma of Business</h3>
+                        <p class="text-muted text-xs leading-relaxed">A deeper business qualification for those moving toward management: planning, marketing, finance, and leading teams within an organization.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8" data-discipline="management">
+                <div class="course-card plate-marks bg-card" data-discipline="management">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;06</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-sitemap text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1758518730037-a16581a040e8 -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1758518730037-a16581a040e8?w=640&q=80" alt="Business professionals in a strategy meeting" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">Graduate Diploma of Management</h3>
-                    <p class="text-muted text-xs leading-relaxed">An advanced qualification for experienced professionals building strategic management capability: organizational leadership, strategy, and governance.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Management</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;06</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-sitemap text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">Graduate Diploma of Management</h3>
+                        <p class="text-muted text-xs leading-relaxed">An advanced qualification for experienced professionals building strategic management capability: organizational leadership, strategy, and governance.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Management</p>
+                    </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card p-8 md:col-span-2 lg:col-span-1" data-discipline="english">
+                <div class="course-card plate-marks bg-card md:col-span-2 lg:col-span-1" data-discipline="english">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
-                    <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;07</p>
-                    <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
-                        <i class="fa-solid fa-language text-seal"></i>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1567057420215-0afa9aa9253a -->
+                    <div class="plate-photo-frame aspect-[4/3]">
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1567057420215-0afa9aa9253a?w=640&q=80" alt="Student writing in a notebook" loading="lazy" width="640" height="480">
                     </div>
-                    <h3 class="font-black uppercase text-base mb-2">General English Programs</h3>
-                    <p class="text-muted text-xs leading-relaxed">English language programs supporting everyday communication and further study or work in Australia, for students building their English proficiency.</p>
-                    <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: English</p>
+                    <div class="p-8">
+                        <p class="plate-number text-[11px] text-mutedLight mb-4">PLATE&nbsp;NO.&nbsp;07</p>
+                        <div class="w-11 h-11 border border-ink flex items-center justify-center mb-5">
+                            <i class="fa-solid fa-language text-seal"></i>
+                        </div>
+                        <h3 class="font-black uppercase text-base mb-2">General English Programs</h3>
+                        <p class="text-muted text-xs leading-relaxed">English language programs supporting everyday communication and further study or work in Australia, for students building their English proficiency.</p>
+                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: English</p>
+                    </div>
                 </div>
 
             </div>
@@ -361,7 +422,12 @@
             <div class="grid lg:grid-cols-3 gap-10">
                 <div class="lg:col-span-1">
                     <p class="text-xs font-bold tracking-[0.2em] uppercase text-seal mb-3">Why McGill</p>
-                    <h2 class="font-black uppercase text-3xl tracking-tight">One registration.<br>Every pathway.</h2>
+                    <h2 class="font-black uppercase text-3xl tracking-tight mb-7">One registration.<br>Every pathway.</h2>
+                    <!-- Stock photo (Unsplash License, no attribution required): photo-1589330694653-ded6df03f754 -->
+                    <div class="plate-marks plate-photo-frame aspect-[4/5]">
+                        <span class="mark-tr"></span><span class="mark-bl"></span>
+                        <img class="plate-photo w-full h-full object-cover" src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=640&q=80" alt="A certificate document bearing an official seal" loading="lazy" width="640" height="800">
+                    </div>
                 </div>
                 <div class="lg:col-span-2 grid sm:grid-cols-2 gap-10">
                     <div class="plate-marks border hairline p-7">

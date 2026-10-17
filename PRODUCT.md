@@ -48,7 +48,9 @@ Confirmed accurate by the client (pulled from the live mcgill.edu.au site):
 - Courses offered: Certificate III in Engineering – Fabrication Trade; Certificate IV in Kitchen Management; Diploma of Hospitality Management; Certificate IV of Business; Diploma of Business; Graduate Diploma of Management; General English programs.
 - Site sections on the live site: Courses, Agents, Students (handbook/forms/policies), Brochure, Contact. Rotating banner taglines (e.g. "Quality education creates great careers"). Contact form fields: name, mobile, email, message.
 
-Absent evidence (do not fabricate): course fees/pricing; specific academic or English-proficiency entry requirements per course; intake dates/term calendar; CRICOS course codes; staff/trainer names or bios; real student testimonials or employment outcomes; a real logo file (none supplied yet — will need a placeholder or type-based wordmark until one is provided); any literal AI-powered feature (explicitly out of scope per client).
+Absent evidence (do not fabricate): course fees/pricing; specific academic or English-proficiency entry requirements per course; intake dates/term calendar; CRICOS course codes; staff/trainer names or bios; real student testimonials or employment outcomes; a real logo file (none supplied yet — will need a placeholder or type-based wordmark until one is provided); any literal AI-powered feature (explicitly out of scope per client); real photography of McGill's actual campus, classrooms, or students (none supplied yet — see below).
+
+**On imagery (added 2026-10-17):** The course plates and "Why McGill" panel use real stock photography (sourced under the Unsplash License, which permits this use without attribution) illustrating each discipline generically — a metal workshop, a commercial kitchen, a business meeting, a certificate with a seal. These are **not** photos of McGill's own campus, staff, or students, and are not captioned or alt-texted as if they were. Replace with real McGill photography when the client supplies it; DESIGN.md's Photographic Plates section records exactly which image is used where and its source.
 
 ## Product Principles
 
