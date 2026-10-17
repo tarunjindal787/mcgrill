@@ -111,23 +111,136 @@
             background-color: #16181a;
             color: #f7f5f2;
         }
+
+        /* Header: frosted-glass state only engages after scrolling, rather than
+           sitting at a fixed opacity the whole time. */
+        #site-header {
+            transition: background-color 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            background-color: rgba(247,245,242,0.0);
+            backdrop-filter: blur(0px);
+        }
+        #site-header.header-scrolled {
+            background-color: rgba(247,245,242,0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 0 rgba(22,24,26,0.06);
+        }
+
+        /* Desktop nav underline, consistent with the hero's existing link treatment */
+        .nav-underline-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-underline-link::after {
+            content: "";
+            position: absolute;
+            left: 0; bottom: 0;
+            height: 1px; width: 100%;
+            background-color: #a6281e;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+        .nav-underline-link:hover::after { transform: scaleX(1); }
+
+        /* Course card hover: lift, inset accent border (no layout shift since the
+           card has no border of its own -- the grid's 1px gap supplies dividers),
+           and the photo scales within its own overflow-hidden frame. */
+        .course-card {
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: inset 0 0 0 1.5px #a6281e, 0 14px 28px -16px rgba(22,24,26,0.35);
+            z-index: 1;
+        }
+        .plate-photo {
+            transition: transform 0.5s ease;
+        }
+        .course-card:hover .plate-photo {
+            transform: scale(1.06);
+        }
+
+        /* Discipline badge: a registry tag, not a generic SaaS pill */
+        .discipline-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+        }
+
+        /* Vertical hairline divider for inline stat strips */
+        .stat-divider {
+            width: 1px;
+            align-self: stretch;
+        }
+
+        /* Floating-label form fields */
+        .form-field { position: relative; }
+        .form-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #d8d4cc;
+            padding: 22px 2px 9px;
+            color: #16181a;
+            font-size: 0.9rem;
+            font-family: 'Public Sans', sans-serif;
+            border-radius: 0;
+        }
+        .form-input:focus {
+            outline: none;
+            border-bottom: 2px solid #a6281e;
+            padding-bottom: 8px;
+        }
+        .form-label {
+            position: absolute;
+            left: 2px;
+            top: 22px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #5b5952;
+            pointer-events: none;
+            transition: transform 0.18s ease, color 0.18s ease;
+            transform-origin: left top;
+        }
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            transform: translateY(-16px) scale(0.84);
+            color: #a6281e;
+        }
+        textarea.form-input { resize: vertical; min-height: 96px; }
+
+        /* Submit button: a brief, honest "sending" state before the success panel */
+        .btn-submit[data-state="sending"] .btn-label { opacity: 0; }
+        .btn-submit[data-state="sending"] .btn-spinner { opacity: 1; }
+        .btn-spinner {
+            opacity: 0;
+            transition: opacity 0.15s ease;
+            animation: btnSpin 0.7s linear infinite;
+        }
+        @keyframes btnSpin { to { transform: rotate(360deg); } }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-spinner { animation: none; }
+        }
     </style>
 </head>
 <body class="bg-ground text-ink font-sans antialiased selection:bg-seal/20 selection:text-ink">
 
     <!-- REGISTRATION LEDGER STRIP -->
     <div class="bg-ink text-ground font-mono text-[11px] tracking-widest uppercase py-2 px-4">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-6 gap-y-1">
-            <span>RTO&nbsp;45906</span>
-            <span class="hidden sm:inline text-ground/30">&middot;</span>
-            <span>CRICOS Registered Provider</span>
-            <span class="hidden sm:inline text-ground/30">&middot;</span>
-            <span>Parramatta, NSW</span>
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-seal text-[10px]"></i>RTO&nbsp;45906</span>
+            <span class="hidden sm:block stat-divider bg-ground/20"></span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-seal text-[10px]"></i>CRICOS Registered Provider</span>
+            <span class="hidden sm:block stat-divider bg-ground/20"></span>
+            <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-seal text-[10px]"></i>Parramatta, NSW</span>
         </div>
     </div>
 
     <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 bg-ground/95 backdrop-blur-sm border-b hairline">
+    <header id="site-header" class="sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#home" class="flex items-center gap-3">
                 <div class="w-10 h-10 border-2 border-ink flex items-center justify-center font-black text-sm shrink-0">MI</div>
@@ -138,11 +251,11 @@
             </a>
 
             <nav class="hidden lg:flex items-center gap-8 text-xs font-bold tracking-widest uppercase">
-                <a href="#courses" class="hover:text-seal transition-colors">Courses</a>
-                <a href="#agents" class="hover:text-seal transition-colors">Agents</a>
-                <a href="#students" class="hover:text-seal transition-colors">Students</a>
-                <a href="#brochure" class="hover:text-seal transition-colors">Brochure</a>
-                <a href="#contact" class="hover:text-seal transition-colors">Contact</a>
+                <a href="#courses" class="nav-underline-link hover:text-seal transition-colors">Courses</a>
+                <a href="#agents" class="nav-underline-link hover:text-seal transition-colors">Agents</a>
+                <a href="#students" class="nav-underline-link hover:text-seal transition-colors">Students</a>
+                <a href="#brochure" class="nav-underline-link hover:text-seal transition-colors">Brochure</a>
+                <a href="#contact" class="nav-underline-link hover:text-seal transition-colors">Contact</a>
             </nav>
 
             <div class="hidden lg:flex items-center gap-5">
@@ -162,18 +275,20 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden lg:hidden bg-ground border-b hairline px-4 pt-3 pb-6 space-y-1">
+        <div id="mobile-menu" class="hidden lg:hidden bg-ground border-b hairline px-4 pt-3 pb-5 space-y-1">
             <a href="#courses" class="mobile-link block py-2.5 text-sm font-bold tracking-wide uppercase">Courses</a>
             <a href="#agents" class="mobile-link block py-2.5 text-sm font-bold tracking-wide uppercase">Agents</a>
             <a href="#students" class="mobile-link block py-2.5 text-sm font-bold tracking-wide uppercase">Students</a>
             <a href="#brochure" class="mobile-link block py-2.5 text-sm font-bold tracking-wide uppercase">Brochure</a>
             <a href="#contact" class="mobile-link block py-2.5 text-sm font-bold tracking-wide uppercase">Contact</a>
-            <a href="tel:+61296987318" class="mobile-link flex items-center gap-2 py-2.5 text-sm font-bold">
-                <i class="fa-solid fa-phone text-seal"></i> +61 2 9698 7318
-            </a>
-            <button onclick="openEnquiryModal('Mobile Menu')" class="w-full mt-3 bg-seal text-ground font-bold py-3.5 text-xs tracking-widest uppercase focus-ring-on-dark">
-                Apply Now
-            </button>
+            <div class="mt-4 pt-4 border-t hairline flex items-center gap-3">
+                <a href="tel:+61296987318" aria-label="Call McGill Institute" class="shrink-0 w-12 h-12 flex items-center justify-center border border-ink text-ink">
+                    <i class="fa-solid fa-phone"></i>
+                </a>
+                <button onclick="openEnquiryModal('Mobile Menu')" class="flex-1 bg-seal text-ground font-bold py-3.5 text-xs tracking-widest uppercase focus-ring-on-dark">
+                    Apply Now
+                </button>
+            </div>
         </div>
     </header>
 
@@ -243,22 +358,22 @@
     <!-- REGISTRATION / TRUST STRIP -->
     <section class="border-b hairline bg-card">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid sm:grid-cols-3 gap-8 font-mono text-xs">
-                <div class="flex items-start gap-3">
+            <div class="grid sm:grid-cols-3 gap-8 font-mono text-xs divide-y sm:divide-y-0 sm:divide-x divide-line">
+                <div class="flex items-start gap-3 sm:pr-8">
                     <i class="fa-solid fa-building-columns text-seal mt-0.5"></i>
                     <div>
                         <p class="uppercase tracking-wider text-mutedLight text-[10px] mb-1">Registration</p>
                         <p class="text-ink font-bold">RTO 45906 &middot; CRICOS Provider</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-3">
+                <div class="flex items-start gap-3 pt-6 sm:pt-0 sm:px-8">
                     <i class="fa-solid fa-location-dot text-seal mt-0.5"></i>
                     <div>
                         <p class="uppercase tracking-wider text-mutedLight text-[10px] mb-1">Campus</p>
                         <p class="text-ink font-bold">Level 1, 30 Cowper St, Parramatta NSW 2150</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-3">
+                <div class="flex items-start gap-3 pt-6 sm:pt-0 sm:pl-8">
                     <i class="fa-solid fa-phone text-seal mt-0.5"></i>
                     <div>
                         <p class="uppercase tracking-wider text-mutedLight text-[10px] mb-1">Contact</p>
@@ -291,7 +406,7 @@
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-line border hairline" id="course-grid">
 
-                <div class="course-card plate-marks bg-card" data-discipline="engineering">
+                <div class="course-card group plate-marks bg-card" data-discipline="engineering">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): https://unsplash.com/photos/JpzMc-FMUes -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -304,11 +419,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Certificate III in Engineering<br>&ndash; Fabrication Trade</h3>
                         <p class="text-muted text-xs leading-relaxed">A hands-on trade qualification in metal fabrication, covering workshop safety, reading technical drawings, and fabrication techniques used across manufacturing and construction.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Engineering</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Engineering<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card" data-discipline="hospitality">
+                <div class="course-card group plate-marks bg-card" data-discipline="hospitality">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1790156591339-cfe16da8e4b6 -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -321,11 +436,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Certificate IV in Kitchen Management</h3>
                         <p class="text-muted text-xs leading-relaxed">Trains cooks moving into kitchen supervision: food safety systems, menu and cost control, and leading a kitchen team in a commercial setting.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Hospitality<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card" data-discipline="hospitality">
+                <div class="course-card group plate-marks bg-card" data-discipline="hospitality">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1790156591339-cfe16da8e4b6 -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -338,11 +453,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Diploma of Hospitality Management</h3>
                         <p class="text-muted text-xs leading-relaxed">A higher-level qualification for running hospitality operations: rostering, budgeting, service standards, and managing staff across front- and back-of-house.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Hospitality</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Hospitality<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card" data-discipline="business">
+                <div class="course-card group plate-marks bg-card" data-discipline="business">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1517048676732-d65bc937f952 -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -355,11 +470,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Certificate IV of Business</h3>
                         <p class="text-muted text-xs leading-relaxed">Core business skills for coordination and supervisory roles: workplace communication, basic project and finance administration, and business operations.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Business<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card" data-discipline="business">
+                <div class="course-card group plate-marks bg-card" data-discipline="business">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1517048676732-d65bc937f952 -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -372,11 +487,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Diploma of Business</h3>
                         <p class="text-muted text-xs leading-relaxed">A deeper business qualification for those moving toward management: planning, marketing, finance, and leading teams within an organization.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Business</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Business<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card" data-discipline="management">
+                <div class="course-card group plate-marks bg-card" data-discipline="management">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1758518730037-a16581a040e8 -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -389,11 +504,11 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">Graduate Diploma of Management</h3>
                         <p class="text-muted text-xs leading-relaxed">An advanced qualification for experienced professionals building strategic management capability: organizational leadership, strategy, and governance.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: Management</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>Management<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
-                <div class="course-card plate-marks bg-card md:col-span-2 lg:col-span-1" data-discipline="english">
+                <div class="course-card group plate-marks bg-card md:col-span-2 lg:col-span-1" data-discipline="english">
                     <span class="mark-tr"></span><span class="mark-bl"></span>
                     <!-- Stock photo (Unsplash License, no attribution required): photo-1567057420215-0afa9aa9253a -->
                     <div class="plate-photo-frame aspect-[4/3]">
@@ -406,7 +521,7 @@
                         </div>
                         <h3 class="font-black uppercase text-base mb-2">General English Programs</h3>
                         <p class="text-muted text-xs leading-relaxed">English language programs supporting everyday communication and further study or work in Australia, for students building their English proficiency.</p>
-                        <p class="mt-5 pt-4 border-t hairline text-[10px] font-mono uppercase tracking-wider text-mutedLight">Discipline: English</p>
+                        <div class="mt-5 pt-4 border-t hairline"><span class="discipline-badge inline-flex items-center gap-1 border border-ink/15 bg-ink/[0.03] text-ink px-2.5 py-1 uppercase"><span class="text-mutedLight">[</span>English<span class="text-mutedLight">]</span></span></div>
                     </div>
                 </div>
 
@@ -555,28 +670,32 @@
                     </div>
                 </div>
                 <div class="lg:col-span-3">
-                    <form id="enquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                        <div>
-                            <label for="field-name" class="block text-[11px] font-bold text-muted uppercase tracking-wider mb-2">Full Name</label>
-                            <input id="field-name" type="text" required placeholder="Full name" class="w-full bg-ground border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal">
+                    <form id="enquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="form-field">
+                            <input id="field-name" type="text" required placeholder=" " class="form-input peer">
+                            <label for="field-name" class="form-label">Full Name</label>
                         </div>
-                        <div class="grid sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="field-mobile" class="block text-[11px] font-bold text-muted uppercase tracking-wider mb-2">Mobile</label>
-                                <input id="field-mobile" type="tel" required placeholder="Mobile number" class="w-full bg-ground border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal">
+                        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-6">
+                            <div class="form-field">
+                                <input id="field-mobile" type="tel" required placeholder=" " class="form-input peer">
+                                <label for="field-mobile" class="form-label">Mobile</label>
                             </div>
-                            <div>
-                                <label for="field-email" class="block text-[11px] font-bold text-muted uppercase tracking-wider mb-2">Email</label>
-                                <input id="field-email" type="email" required placeholder="email@example.com" class="w-full bg-ground border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal">
+                            <div class="form-field">
+                                <input id="field-email" type="email" required placeholder=" " class="form-input peer">
+                                <label for="field-email" class="form-label">Email</label>
                             </div>
                         </div>
-                        <div>
-                            <label for="field-message" class="block text-[11px] font-bold text-muted uppercase tracking-wider mb-2">Message</label>
-                            <textarea id="field-message" rows="4" placeholder="Tell us what you're enquiring about" class="w-full bg-ground border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal"></textarea>
+                        <div class="form-field">
+                            <textarea id="field-message" rows="3" placeholder=" " class="form-input peer"></textarea>
+                            <label for="field-message" class="form-label">Message</label>
                         </div>
                         <p id="enquiry-context" class="text-[11px] font-mono text-mutedLight"></p>
-                        <button type="submit" class="w-full sm:w-auto bg-seal hover:bg-sealDeep text-ground font-bold px-9 py-4 text-xs tracking-widest uppercase transition-colors focus-ring-on-dark">
-                            Submit Enquiry
+                        <button type="submit" id="enquiry-submit-btn" class="btn-submit relative w-full sm:w-auto bg-seal hover:bg-sealDeep text-ground font-bold px-9 py-4 text-xs tracking-widest uppercase transition-colors focus-ring-on-dark">
+                            <span class="btn-label inline-flex items-center gap-2 transition-opacity">
+                                <span>Submit Enquiry</span>
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                            <i class="fa-solid fa-circle-notch btn-spinner absolute inset-0 m-auto"></i>
                         </button>
                     </form>
                     <div id="enquiry-success" class="hidden text-center py-10">
@@ -637,11 +756,15 @@
             </div>
             <div class="p-6">
                 <p class="text-sm text-muted mb-5">Leave your details and our admissions team will follow up. You can also use the full enquiry form at the bottom of the page.</p>
-                <form id="modal-form" onsubmit="handleModalSubmit(event)" class="space-y-4">
-                    <label for="modal-field-name" class="sr-only">Full name</label>
-                    <input id="modal-field-name" type="text" required placeholder="Full name" class="w-full bg-card border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal">
-                    <label for="modal-field-email" class="sr-only">Email address</label>
-                    <input id="modal-field-email" type="email" required placeholder="Email address" class="w-full bg-card border hairline px-4 py-3.5 text-ink text-sm focus:outline-none focus:border-seal">
+                <form id="modal-form" onsubmit="handleModalSubmit(event)" class="space-y-6">
+                    <div class="form-field">
+                        <input id="modal-field-name" type="text" required placeholder=" " class="form-input peer">
+                        <label for="modal-field-name" class="form-label">Full Name</label>
+                    </div>
+                    <div class="form-field">
+                        <input id="modal-field-email" type="email" required placeholder=" " class="form-input peer">
+                        <label for="modal-field-email" class="form-label">Email Address</label>
+                    </div>
                     <button type="submit" class="w-full bg-seal hover:bg-sealDeep text-ground font-bold py-4 text-xs tracking-widest uppercase transition-colors focus-ring-on-dark">Submit</button>
                 </form>
                 <div id="modal-success" class="hidden text-center py-6">
@@ -669,6 +792,21 @@
                 mobileBtn.setAttribute('aria-expanded', 'false');
             });
         });
+        // Close the mobile menu when the Apply/Call footer is used too
+        mobileMenu.querySelectorAll('a[href^="tel:"], button').forEach(el => {
+            el.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+
+        // Header: frosted-glass state engages only after scrolling
+        const siteHeader = document.getElementById('site-header');
+        function updateHeaderScrollState() {
+            siteHeader.classList.toggle('header-scrolled', window.scrollY > 12);
+        }
+        updateHeaderScrollState();
+        window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
 
         // Course discipline filter — decisive, no-fade state change
         const filterButtons = document.querySelectorAll('.filter-pill');
@@ -736,8 +874,15 @@
         // Main contact form
         function handleFormSubmit(event) {
             event.preventDefault();
-            document.getElementById('enquiry-form').classList.add('hidden');
-            document.getElementById('enquiry-success').classList.remove('hidden');
+            const btn = document.getElementById('enquiry-submit-btn');
+            btn.setAttribute('data-state', 'sending');
+            btn.disabled = true;
+            setTimeout(() => {
+                document.getElementById('enquiry-form').classList.add('hidden');
+                document.getElementById('enquiry-success').classList.remove('hidden');
+                btn.removeAttribute('data-state');
+                btn.disabled = false;
+            }, 650);
         }
     </script>
 </body>
