@@ -23,3 +23,9 @@ The client requested a full redesign audit that explicitly asked to move off the
 - **CTA copy:** Hero primary/secondary actions became "Explore Courses" (anchor to `#courses`) and "Enquire Now" (opens the enquiry modal) per the client's explicit request; every other "Apply Now" button sitewide was renamed "Enquire Now" for consistency and honesty (see PRODUCT.md's 2026-10-17 redesign note).
 
 See DESIGN.md's Overview section for the full current color/type system; this entry exists so the original comp-selection record above stays legible as history rather than being silently overwritten.
+
+---
+
+## Revision 2 — 2026-10-17: "Colourful Editorial" (the institutional-ledger motif retired)
+
+A second same-day brief asked for a further pivot: study mcgill.edu.au for facts/branding reference, move to navy/ocean/gold/off-white/aqua, bring in colourful real photography, and make the site read as "premium, energetic, welcoming, human" rather than an institutional ledger. This retires the crosshair-marks/numbered-plates/duotone-photography motif from Revision 1 in favor of a warmer, full-colour, rounded-card editorial system — a second intentional evolution, not drift. See DESIGN.md's "Revision 2" section for the full system, the verified-fact corrections (CRICOS 03678G, ABN, qualification codes), and the English-course photo correction (round 1's photo was discovered to depict African schoolchildren, not adult international students, and was replaced).

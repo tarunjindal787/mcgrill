@@ -38,6 +38,15 @@
         ],
         "createdAt": "2026-10-17T13:20:49.005Z",
         "reason": "Intentional: a small 2px radius on the focus-visible outline only, to avoid a harsh pixel-perfect corner on some browsers' outline rendering, within a system whose shape language is otherwise rounded:none."
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-17T14:15:25.211Z",
+        "reason": "Client's brief explicitly named Plus Jakarta Sans (headings) and Inter (body/nav/buttons) by face, verbatim, as a requirement for this round's redesign -- the brief wins over the general anti-cliche-font guidance."
       }
     ]
   }
