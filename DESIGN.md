@@ -109,7 +109,11 @@ The hero, student-life, and agents SVG illustrations use a small set of deeper i
 
 ## Imagery
 
-No stock photography anywhere, per the brief's explicit constraint. Every visual is CSS/SVG: the hero's abstract transit-themed illustration, the student-life section's skyline silhouette, the agents section's route-line graphic, and the signature rail itself. Two spots are explicitly labelled as pending real photography (`.placeholder-chip` — the Student Life section, and the Campus map).
+**Updated 2026-10-21 (later the same day):** the original `/loop` brief banned stock photography; a direct follow-up request explicitly asked for "many photos." Rather than scrape the real mcgill.edu.au (copyright risk, and the exact thing the original brief said not to copy) or AI-generate fake "students"/"campus" images for a real, CRICOS-registered institution (a materially different risk than decorative stock photography — prospective students make real enrolment and visa decisions based on this material), the resolution — confirmed with the user — was **properly licensed stock photography** (Unsplash License, free tier), used purely as generic illustrative imagery, exactly as an earlier round of this same project already did successfully.
+
+Ten photos, each sourced, verified live (HTTP 200, confirmed free-tier not Unsplash+), and visually inspected before use — see the full list and alt text in DECISIONS.md. None are captioned or alt-texted as if they depict McGill's actual campus, staff, or students. Two early candidates were rejected during sourcing specifically for looking like a *specific, recognisable* real place (a Collegiate-Gothic archway with a statue, and San Francisco's Transamerica Pyramid with its cable-car tracks) — using either would have risked viewers mistaking this small Parramatta CBD institute for a different, grander, or foreign institution.
+
+The Campus & Location section's map still uses a placeholder, not a stock photo of "the building" — that's the one claim ("this is literally our premises") a generic photo can't honestly stand in for. The Student Life section's photo is deliberately generic (friends at a café) rather than claimed to be Parramatta specifically, since Unsplash's own location tagging for "Parramatta" turned out to be unreliable (mostly Perth/Melbourne/generic results) and a specific misattributed-location caption would itself be dishonest.
 
 ## Dark mode
 

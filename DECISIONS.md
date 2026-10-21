@@ -39,7 +39,7 @@ The brief explicitly requires "no stock-photo dependence... CSS or SVG illustrat
 - `[EMAIL]` — no email address supplied.
 - Fees, durations, intakes, entry requirements, delivery mode — shown as "On enquiry" / "To be confirmed" per course, never invented.
 - General English's course code — shown as "Code to be confirmed," never blank or a dash, per the brief.
-- Campus/course photography — explicitly marked placeholder blocks (labelled "Photo placeholder — real campus photography pending"), no stock photos substituted.
+- Course/hero/student-life/agents photography — **resolved 2026-10-21**: replaced with licensed stock photography (see "Photos added" section below). The Campus & Location section's map area remains a placeholder, since no stock photo can honestly stand in for "this is our actual building."
 - Map embed — a static placeholder panel (no live iframe, since no confirmed Google Maps API key/embed policy for this exact rebuild) with a real "Get directions" link to the verified address via a standard Google Maps search URL (not an embedded API frame).
 - Social links, if any appear — none added; no real accounts confirmed.
 
@@ -59,3 +59,24 @@ The first build pass used Fraunces (variable serif) for headings, per the origin
 - Enquiry form fields (brief caps it under 6): Name, Email, Phone, Course of interest, Message — 5 fields.
 - Dark mode: implemented via `prefers-color-scheme` plus a manual `data-theme` override toggle, stored only in a page-level JS variable (not localStorage, per the brief's explicit ban) — the toggle resets on reload, which is an accepted tradeoff of that constraint and is noted again in REPORT.md.
 - JSON-LD: `EducationalOrganization` for the institute, one `Course` entry per offering (including the General English program, whose code is rendered as unconfirmed rather than omitted from structured data entirely, to avoid implying the program doesn't exist).
+
+## Photos added (2026-10-21, follow-up request)
+
+User explicitly asked to add many photos, offering two specific options: AI-generate them, or take them from the real mcgill.edu.au. Both declined (reasoning given directly to the user and confirmed via a follow-up question); licensed stock photography was used instead, per the user's confirmed choice. Ten photos, all Unsplash License (free tier, verified not `premium_photo-`/Unsplash+), each downloaded locally into `photos/` rather than hotlinked:
+
+| File | Used in | Unsplash photo ID | Alt text |
+|---|---|---|---|
+| `photos/hero.jpg` | Hero | 1758270705518-b61b40527e76 | Students collaborating around a laptop in a bright classroom |
+| `photos/course-engineering.jpg` | Cert III Engineering card | 1776159904891-e7b213b8198f | A welder working on a metal fabrication project in a workshop |
+| `photos/course-hospitality-kitchen.jpg` | Cert IV Kitchen Mgmt card | 1790156591339-cfe16da8e4b6 | A chef preparing food in a commercial kitchen |
+| `photos/course-hospitality-service.jpg` | Diploma Hospitality Mgmt card | 1566670735914-b2038696981d | A waiter serving a plate of food at an outdoor café |
+| `photos/course-business-notes.jpg` | Cert IV Business card | 1517048676732-d65bc937f952 | Colleagues taking notes during a business meeting |
+| `photos/course-business-diploma.jpg` | Diploma of Business card | 1758691736483-5f600b509962 | A presenter discussing a sales chart to colleagues in an office |
+| `photos/course-management.jpg` | Grad Dip Management card | 1758518730037-a16581a040e8 | A group of colleagues in a discussion around a meeting table |
+| `photos/course-english.jpg` | General English card | 1758270704524-596810e891b5 | A student smiling in a lecture hall |
+| `photos/student-life.jpg` | Study in Parramatta section | 1753351057073-fde40b1883f8 | Friends socialising over coffee at a café |
+| `photos/agents.jpg` | Agents section | 1686771416282-3888ddaf249b | Two professionals shaking hands over a desk |
+
+Two candidates were sourced, downloaded, and **rejected** during this process before being used anywhere: a "students walking through a university campus archway" photo (unmistakably a grand Collegiate-Gothic building with a statue — not representative of a small Parramatta CBD institute, risked implying a different/grander campus) and a "sunny street" photo that turned out to be San Francisco (Transamerica Pyramid and cable-car tracks clearly visible). Both are a reminder that "generic stock photo" still needs a visual-inspection pass, not just a license check — a photo can be perfectly free-to-use and still misrepresent the business by depicting a specific, recognisable real place that isn't this one.
+
+The Campus & Location section's map placeholder was deliberately **not** replaced with a stock "office building" photo — that section makes an implicit "this is our premises" claim that a generic photo can't honestly satisfy, unlike the course cards (which only ever claimed "this illustrates the discipline," never "this is our classroom").

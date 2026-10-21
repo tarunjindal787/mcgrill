@@ -45,3 +45,7 @@ The brief requires rendering the page in a headless browser at 390/768/1280/1920
 - Resolve the Typography family-count judgment call either by accepting it as a documented exception or by removing the third face.
 - Run a dedicated proofread pass over all original copy.
 - Validate the HTML against a real validator if one becomes available offline.
+
+## Photos added (2026-10-21, follow-up to deployment)
+
+Added 10 photos across the site (hero, all 7 course cards, Study in Parramatta, Agents) using properly licensed stock photography (Unsplash License, free tier) after declining two riskier options the user initially suggested — AI-generating fake "student"/"campus" images, and scraping photos from the real mcgill.edu.au — both explained to the user, who then confirmed licensed stock as the approach. Full sourcing details, photo IDs, and alt text in DECISIONS.md. Two sourced candidates were rejected during visual inspection for depicting unmistakably specific real places (a Collegiate-Gothic campus archway with a statue; San Francisco's Transamerica Pyramid) that would have misrepresented this small Parramatta institute. Course cards now bleed a photo to the card's top edge (object-fit: cover, 3:2 ratio, subtle zoom on hover) ahead of the existing diagonal coral corner-cut accent. The Campus & Location map placeholder was deliberately left as a placeholder rather than given a stock "building" photo. Detector re-run clean (zero findings) after the change; JS/JSON syntax and duplicate-ID checks also clean.

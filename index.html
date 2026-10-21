@@ -262,8 +262,12 @@
   .hero h1 em { font-style: normal; font-weight: 800; color: var(--coral-text); }
   .hero-lede { font-size: 1.15rem; color: var(--text-muted); max-width: 48ch; }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
-  .hero-art { position: relative; aspect-ratio: 4/3; border-radius: 24px; background: var(--indigo); overflow: hidden; }
-  .hero-art svg { width: 100%; height: 100%; }
+  .hero-art { position: relative; aspect-ratio: 4/3; border-radius: 24px; background: var(--indigo); overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35); }
+  .hero-art img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-art::before {
+    content: ""; position: absolute; top: 0; right: 0; width: 56px; height: 56px; z-index: 1;
+    background: var(--coral-bright); clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
 
   /* ============ Trust strip ============ */
   .trust-strip { background: var(--ink); color: var(--paper); padding: 1.5rem 0; }
@@ -313,15 +317,21 @@
   .course-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
   .course-card {
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
-    padding: 1.75rem; display: flex; flex-direction: column; gap: 0.9rem; position: relative; overflow: hidden;
+    padding: 0 1.75rem 1.75rem; display: flex; flex-direction: column; gap: 0.9rem; position: relative; overflow: hidden;
     clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .course-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(20,23,43,0.25); }
+  .course-card:hover .course-photo img { transform: scale(1.06); }
   .course-card::before {
-    content: ""; position: absolute; top: 0; right: 0; width: 22px; height: 22px;
+    content: ""; position: absolute; top: 0; right: 0; width: 22px; height: 22px; z-index: 2;
     background: var(--coral-bright); clip-path: polygon(100% 0, 0 0, 100% 100%);
   }
+  .course-photo {
+    margin: 0 -1.75rem; aspect-ratio: 3/2; overflow: hidden; position: relative;
+  }
+  .course-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
+  @media (prefers-reduced-motion: reduce) { .course-card:hover .course-photo img { transform: none; } }
   .tag { display: inline-flex; align-self: flex-start; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.7rem; border-radius: var(--radius-pill); }
   .tag-engineering { background: var(--tag-engineering-bg); color: var(--tag-engineering-text); }
   .tag-hospitality { background: var(--tag-hospitality-bg); color: var(--tag-hospitality-text); }
@@ -345,8 +355,8 @@
   /* ============ Student life ============ */
   .life-grid { display: grid; gap: var(--space-lg); align-items: center; }
   @media (min-width: 900px) { .life-grid { grid-template-columns: 0.9fr 1.1fr; } }
-  .life-art { aspect-ratio: 1/1; border-radius: 24px; background: var(--indigo); position: relative; overflow: hidden; }
-  .life-art svg { width: 100%; height: 100%; }
+  .life-art { aspect-ratio: 4/3; border-radius: 24px; background: var(--indigo); position: relative; overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35); }
+  .life-art img { width: 100%; height: 100%; object-fit: cover; }
   .life-copy ul { padding-left: 1.2rem; margin: 1.25rem 0; }
   .life-copy li { margin-bottom: 0.6rem; color: var(--text-muted); }
 
@@ -508,17 +518,8 @@
           <a href="#courses" class="btn btn-outline">Explore Courses</a>
         </div>
       </div>
-      <div class="hero-art reveal" aria-hidden="true">
-        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
-          <rect width="400" height="300" fill="#1E2A5E"/>
-          <circle cx="330" cy="60" r="90" fill="#243270"/>
-          <path d="M0 230 L80 170 L150 210 L230 140 L310 190 L400 150 L400 300 L0 300 Z" fill="#162052"/>
-          <line x1="20" y1="110" x2="380" y2="110" stroke="#D84727" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
-          <circle cx="20" cy="110" r="8" fill="#D84727"/>
-          <circle cx="140" cy="110" r="8" fill="#E8A33D"/>
-          <circle cx="260" cy="110" r="8" fill="#E8A33D"/>
-          <circle cx="380" cy="110" r="8" fill="#E8A33D"/>
-        </svg>
+      <div class="hero-art reveal">
+        <img src="photos/hero.jpg" alt="Students collaborating around a laptop in a bright classroom" width="1600" height="900" fetchpriority="high">
       </div>
     </div>
   </section>
@@ -631,16 +632,8 @@
   <!-- STUDENT LIFE / PARRAMATTA -->
   <section id="student-life" style="background: var(--bg-dim);">
     <div class="container life-grid">
-      <div class="life-art reveal" aria-hidden="true">
-        <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
-          <rect width="300" height="300" fill="#1E2A5E"/>
-          <rect x="30" y="160" width="40" height="110" fill="#243270"/>
-          <rect x="90" y="110" width="40" height="160" fill="#2A3680"/>
-          <rect x="150" y="140" width="40" height="130" fill="#243270"/>
-          <rect x="210" y="90" width="40" height="180" fill="#2A3680"/>
-          <path d="M0 270 Q150 240 300 270 L300 300 L0 300 Z" fill="#D84727" opacity="0.85"/>
-          <circle cx="250" cy="55" r="26" fill="#E8A33D"/>
-        </svg>
+      <div class="life-art reveal">
+        <img src="photos/student-life.jpg" alt="Friends socialising over coffee at a café" width="1200" height="675" loading="lazy">
       </div>
       <div class="life-copy reveal">
         <span class="section-eyebrow">Study in Parramatta</span>
@@ -706,19 +699,8 @@
         </ul>
         <a href="#enquiry" class="btn btn-ghost-inverse">Enquire as an Agent</a>
       </div>
-      <div class="reveal" aria-hidden="true" style="aspect-ratio:4/3; border-radius:24px; overflow:hidden; background:#162052;">
-        <svg viewBox="0 0 300 220" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-          <rect width="300" height="220" fill="#162052"/>
-          <g stroke="#D84727" stroke-width="2" opacity="0.8">
-            <line x1="40" y1="180" x2="120" y2="60"/>
-            <line x1="120" y1="60" x2="200" y2="140"/>
-            <line x1="200" y1="140" x2="260" y2="40"/>
-          </g>
-          <circle cx="40" cy="180" r="7" fill="#E8A33D"/>
-          <circle cx="120" cy="60" r="7" fill="#E8A33D"/>
-          <circle cx="200" cy="140" r="7" fill="#E8A33D"/>
-          <circle cx="260" cy="40" r="7" fill="#D84727"/>
-        </svg>
+      <div class="reveal" style="aspect-ratio:4/3; border-radius:24px; overflow:hidden; background:#162052; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35);">
+        <img src="photos/agents.jpg" alt="Two professionals shaking hands over a desk" width="1200" height="800" loading="lazy" style="width:100%; height:100%; object-fit:cover;">
       </div>
     </div>
   </section>
@@ -947,13 +929,13 @@
 
   /* ---------- Course data ---------- */
   var COURSES = [
-    { id: 'mem31922', code: 'MEM31922', name: 'Certificate III in Engineering (Fabrication Trade)', stream: 'engineering', tagLabel: 'Engineering', desc: 'Hands-on trade training in metal fabrication, welding, and workshop safety, building the practical skills needed for a career on the shop floor.' },
-    { id: 'sit40521', code: 'SIT40521', name: 'Certificate IV in Kitchen Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Kitchen operations and supervision training covering food safety, menu planning, and leading a commercial kitchen team.' },
-    { id: 'sit50422', code: 'SIT50422', name: 'Diploma of Hospitality Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Broader hospitality leadership training across food and beverage, accommodation, and guest service operations, for supervisory and management roles.' },
-    { id: 'bsb40120', code: 'BSB40120', name: 'Certificate IV in Business', stream: 'business', tagLabel: 'Business', desc: 'Core business skills training in communication, administration, and workplace operations for roles across any industry.' },
-    { id: 'bsb50120', code: 'BSB50120', name: 'Diploma of Business', stream: 'business', tagLabel: 'Business', desc: 'Advanced business training in planning, operations, and leadership, for graduates moving into coordination or management roles.' },
-    { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate-level management training focused on leading learning and development within an organisation.' },
-    { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', stream: 'english', tagLabel: 'English', desc: 'English language training for students building the language skills needed for further study or daily life in Australia.' }
+    { id: 'mem31922', code: 'MEM31922', name: 'Certificate III in Engineering (Fabrication Trade)', stream: 'engineering', tagLabel: 'Engineering', desc: 'Hands-on trade training in metal fabrication, welding, and workshop safety, building the practical skills needed for a career on the shop floor.', img: 'photos/course-engineering.jpg', imgAlt: 'A welder working on a metal fabrication project in a workshop' },
+    { id: 'sit40521', code: 'SIT40521', name: 'Certificate IV in Kitchen Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Kitchen operations and supervision training covering food safety, menu planning, and leading a commercial kitchen team.', img: 'photos/course-hospitality-kitchen.jpg', imgAlt: 'A chef preparing food in a commercial kitchen' },
+    { id: 'sit50422', code: 'SIT50422', name: 'Diploma of Hospitality Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Broader hospitality leadership training across food and beverage, accommodation, and guest service operations, for supervisory and management roles.', img: 'photos/course-hospitality-service.jpg', imgAlt: 'A waiter serving a plate of food at an outdoor café' },
+    { id: 'bsb40120', code: 'BSB40120', name: 'Certificate IV in Business', stream: 'business', tagLabel: 'Business', desc: 'Core business skills training in communication, administration, and workplace operations for roles across any industry.', img: 'photos/course-business-notes.jpg', imgAlt: 'Colleagues taking notes during a business meeting' },
+    { id: 'bsb50120', code: 'BSB50120', name: 'Diploma of Business', stream: 'business', tagLabel: 'Business', desc: 'Advanced business training in planning, operations, and leadership, for graduates moving into coordination or management roles.', img: 'photos/course-business-diploma.jpg', imgAlt: 'A presenter discussing a sales chart to colleagues in an office' },
+    { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate-level management training focused on leading learning and development within an organisation.', img: 'photos/course-management.jpg', imgAlt: 'A group of colleagues in a discussion around a meeting table' },
+    { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', stream: 'english', tagLabel: 'English', desc: 'English language training for students building the language skills needed for further study or daily life in Australia.', img: 'photos/course-english.jpg', imgAlt: 'A student smiling in a lecture hall' }
   ];
 
   var grid = document.getElementById('course-grid');
@@ -963,6 +945,7 @@
     card.id = 'course-' + c.id;
     card.setAttribute('data-stream', c.stream);
     card.innerHTML =
+      '<div class="course-photo"><img src="' + c.img + '" alt="' + c.imgAlt + '" width="900" height="600" loading="lazy"></div>' +
       '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
       '<h3>' + c.name + '</h3>' +
       '<p class="course-code mono">' + c.code + '</p>' +
