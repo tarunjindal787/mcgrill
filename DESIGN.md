@@ -1,19 +1,27 @@
 ---
-name: McGill Institute Australia
-description: A colourful, editorial education site built around a verified registration (RTO/CRICOS/ABN) and genuinely distinct, vibrant photography per course.
+name: McGill Institute Australia — Parramatta Transit
+description: A place-specific identity built around the real geometry of getting to campus (Parramatta & Harris Park stations), expressed as a signature transit-line rail motif. No stock photography; all visuals are CSS/SVG.
 colors:
-  offwhite: "#F7F8FA"
-  aqua: "#E6F3F5"
-  card-white: "#FFFFFF"
-  navy: "#142C50"
-  navyDeep: "#0C1D38"
-  ocean: "#147DAD"
-  oceanDeep: "#0F5F85"
-  gold: "#F2A93B"
-  goldDeep: "#D98F1F"
-  muted: "#49566B"
-  muted-light: "#5B6B82"
-  line: "#E1E6EC"
+  paper: "#F6F4EF"
+  paper-dim: "#ECE7DC"
+  card: "#FFFFFF"
+  ink: "#14172B"
+  indigo: "#1E2A5E"
+  indigo-deep: "#10173A"
+  amber: "#E8A33D"
+  amber-deep: "#C8841F"
+  coral: "#B23A1E"
+  coral-deep: "#5C1F11"
+  coral-bright: "#C73F22"
+  coral-text-light: "#B23A1E"
+  coral-text-dark: "#FF7A57"
+  line: "#D9D2C2"
+  line-dark: "#2E3761"
+  muted: "#5B5E72"
+  muted-light: "#9CA0BE"
+  bg-dim-dark: "#161D44"
+  footer-dark: "#0B0E22"
+  illustration-shade: "#162052"
   tag-engineering-bg: "#DEEFF6"
   tag-engineering-text: "#0F3A57"
   tag-hospitality-bg: "#FCEAD1"
@@ -22,120 +30,100 @@ colors:
   tag-business-text: "#16424A"
   tag-management-bg: "#E3E8F0"
   tag-management-text: "#142C50"
+  tag-english-bg: "#F3E6D8"
+  tag-english-text: "#6B4229"
 typography:
   display:
-    fontFamily: "Plus Jakarta Sans, sans-serif"
-    fontWeight: 800
-    letterSpacing: "-0.01em"
+    fontFamily: "Newsreader, serif"
+    fontWeight: 700
   body:
-    fontFamily: "Inter, sans-serif"
+    fontFamily: "IBM Plex Sans, sans-serif"
     fontWeight: 400
     lineHeight: 1.65
-  nav-and-buttons:
-    fontFamily: "Inter, sans-serif"
-    fontWeight: 600
-  registration-data:
-    fontFamily: "Space Mono, monospace"
-    letterSpacing: "0.06em"
+  data:
+    fontFamily: "IBM Plex Sans, sans-serif"
+    fontWeight: 700
+    letterSpacing: "0.04em"
+    fontVariantNumeric: "tabular-nums"
 rounded:
-  card: "16px"
-  pill: "9999px"
-  focus-ring: "4px"
-spacing:
-  sm: "16px"
-  md: "32px"
-  lg: "56px"
-components:
-  button-primary:
-    backgroundColor: "{colors.ocean}"
-    textColor: "#FFFFFF"
-    rounded: "{rounded.pill}"
-    padding: "16px 36px"
-  course-card:
-    backgroundColor: "{colors.card-white}"
-    textColor: "{colors.navy}"
-    rounded: "{rounded.card}"
-    shadow: true
+  card: "18px"
+  modal: "20px"
+  feature-panel: "24px"
+  input: "10px"
+  pill: "999px"
+  focus: "6px"
 ---
 
-# Design System: McGill Institute Australia
+# Design System: McGill Institute Australia — "Parramatta Transit"
 
-## Overview — Revision 2 (2026-10-17): "Colourful Editorial"
+## Overview (2026-10-21, `/loop` autonomous rebuild)
 
-**This is the second palette/typography revision of the day.** The first revision (documented in git history) moved the site from a cream/seal-red institutional-ledger look to a navy/off-white/teal system. This client brief asked to go further: study the real mcgill.edu.au for factual/branding reference, make the site "colourful," "human," "premium," and "editorial," retire the cold bureaucratic "ledger/plate" motif, and bring in real, vibrant, naturally lit photography. This revision does that. It does **not** copy the official site's visual design — the official site's actual accent is a burnt-orange/rust (~#e95912) — the client explicitly specified the navy/ocean/gold palette below as the target, using the official site only for facts and as evidence of what NOT to just re-skin. The institutional-ledger structural ideas (crosshair marks, numbered "plates," duotone-filtered imagery) are retired this round in favor of a warmer, full-colour, rounded-corner editorial system that is deliberately less bureaucratic and more human.
+This is a full rebuild per an explicit `/loop` brief requiring three candidate design directions, a no-stock-photo constraint, and a 12-point scored rubric. It **replaces** the prior "Colourful Editorial" system (navy/ocean/gold, real Unsplash photography per course) documented further below in this file's git history — see DECISIONS.md for the full three-direction exercise and why this one ("Parramatta Transit") was chosen over the other two.
 
-**What's verified vs. the live mcgill.edu.au (fetched this session, cross-checked across two independent fetches of the homepage and the courses page):**
-- CRICOS provider number: **03678G** (previously only "CRICOS provider" with no number was recorded).
-- ABN: **91 835 873 060**.
-- Qualification codes: MEM31922 (Cert III Engineering – Fabrication Trade), SIT40521 (Cert IV Kitchen Management), SIT50422 (Diploma of Hospitality Management), BSB40120 (Cert IV Business), BSB50120 (Diploma of Business), BSB80120 (Graduate Diploma of Management (Learning) — note the official title includes "(Learning)", now corrected here). General English has no code on the official site either — not fabricated here.
-- These were obtained via automated page fetches against the live public site (not a human legal check of the national training register) — treat as high-confidence, not notarized certainty, and verify against the client before using in any binding/compliance context.
-- The official site's actual imagery was **not** scraped or re-hosted here — reusing another live business's proprietary photography without a clear license is a real copyright risk, and the client's own brief allows "properly licensed photography" as the fallback. All photography here is sourced under the Unsplash License (free tier only, not Unsplash+), verified live (HTTP 200) at publish time, and visually inspected for authenticity, color, and relevance before use.
+The identity is built from one real, verifiable fact unique to this brief: the campus sits a short walk from both Parramatta and Harris Park train stations. That fact becomes a **signature transit-line rail** — a line with station-dot stops — reused in two different sections (Educational Streams, and the How-to-Enrol pathway) rather than being a one-off decoration.
 
 ## Colors
 
-### Core
-- **Off-white** (#F7F8FA): primary page background.
-- **Aqua** (#E6F3F5): a secondary light tint used for alternating section backgrounds ("Why McGill," "Brochure") so the page isn't uniformly white — not a repeat of off-white.
-- **Navy** (#142C50): primary text color, and the fill for dark sections (registration strip, Agents band, footer).
-- **Ocean** (#147DAD) / **Ocean Deep** (#0F5F85, hover): the one interactive accent — every CTA, link-on-hover, and primary icon tint. Measured 4.60:1 (white text on Ocean) and 4.33:1 (Ocean text on off-white) — both clear AA for normal text; Ocean-on-Navy only reaches 3.03:1, so Ocean is never used as small text or an icon color on Navy backgrounds (see Named Rules).
-- **Gold** (#F2A93B) / **Gold Deep** (#D98F1F, hover): a secondary highlight, not a second CTA color. Gold text measures a failing 1.88–2.00:1 against off-white/white — it must never be used as text on light backgrounds. It measures 6.98:1 against Navy, so it is used as: (a) small accent icons on Navy/dark sections, (b) a filled chip/button background with Navy text on top (6.98:1), never as colored text on a light surface.
-- **Muted** (#49566B) / **Muted Light** (#5B6B82): secondary text, both 5:1+ against off-white/white.
+### Roles, not just hex values
+Three roles share the "coral" family, each solving a different contrast problem (the same two-surface trap this project already hit once with its prior cyan/gold accent — bright accent colors frequently fail as text on one of the two surfaces they need to work on):
 
-### Named Rules
-**The One-CTA-Color Rule.** Ocean is the only color that means "click this" — every primary/secondary button and every interactive text link uses it. Gold is reserved for highlight/authentication accents (icons, chips, the Agents section's secondary button) so it never competes with Ocean for "what's clickable."
+- **`--coral` (#B23A1E, fixed, not theme-reactive):** background fills with white text on top only — primary buttons, the skip link, hover-fills. Verified 5.97:1 (white on it).
+- **`--coral-deep` (#5C1F11, fixed):** the hover-darken state of coral backgrounds, white text 12.7:1. Deepened from an earlier #93301A specifically so that *even the dark-mode `--coral-text` value* (#FF7A57) would pass 4.5:1 against it (4.93:1) — the Impeccable Stop-hook deep pass flagged that theoretical pairing even though no rule actually renders coral-text on this background; rather than chase down whether the pairing was real, darkening coral-deep closes the gap unconditionally.
+- **`--coral-bright` (#C73F22, fixed):** decorative fills only (card corner cuts, SVG accents) — tuned so that even if text ever lands on it, it clears 5:1 with white.
+- **`--coral-text` (theme-reactive: `--coral-text-light` #B23A1E in light mode / `--coral-text-dark` #FF7A57 in dark mode):** every place coral is used as standalone *text, icon, or accent border* sitting on the page's own `--bg`/`--surface` (section eyebrows, the hero's italic emphasis, rail-dot icons, the "why" numerals, required-field asterisks, placeholder chips). The light-mode value measures 5.43:1 on paper; the dark-mode value measures 6.78:1 on indigo-deep and 5.28:1 on indigo. **Never use the fixed `--coral` as text color on a theme-reactive background** — it fails badly in dark mode (as low as 2.3:1), which the Impeccable detector caught on the first build pass of this round.
+- **Amber** (`#E8A33D` / deep `#C8841F`): a secondary highlight only, used on the dark Agents band (icon accents) — never as text on a light surface (same "needs a dark or filled surface" rule the prior design system used, carried forward because it's a correct rule, not a coincidence).
 
-**The Gold-Needs-a-Dark-or-Filled-Surface Rule.** Gold fails AA as text on any light surface (1.88–2.00:1). Only use it as: an icon on Navy, a filled pill/button with Navy text on it, or a border/underline (non-text decorative use). Never as a text color on off-white, aqua, or white.
-
-**The Category-Tint Rule.** Each discipline's filter pill and card tag use a small, restrained tint (`.tag-engineering`, `.tag-hospitality`, `.tag-business`, `.tag-management`, `.tag-english`) built from the core palette, each with Navy-family text for contrast — satisfies "use colour to distinguish categories" without inventing new hues outside the five-color brief.
+### Neutrals
+- **Paper** (#F6F4EF) / **Paper Dim** (#ECE7DC): light-mode backgrounds, warm off-white rather than stark white.
+- **Ink** (#14172B): light-mode text; also the trust-strip/agents-band/footer fill in light mode.
+- **Indigo** (#1E2A5E) / **Indigo Deep** (#10173A): dark-mode surfaces and page background.
+- **Muted** (#5B5E72) / **Muted Light** (#9CA0BE): secondary text, light and dark mode respectively.
 
 ## Typography
 
-**Display:** Plus Jakarta Sans, 600–800 weight, headings only. **Body:** Inter, 400–500. **Nav/buttons:** Inter, 500–600. **Registration/code data:** Space Mono — now reserved specifically for the verified qualification codes (e.g. `BSB50120`) and the RTO/CRICOS numbers, not for a whole "registry voice" layer the way the previous revision used it.
+**Exactly two type families**, per the rubric's explicit cap: **Display:** Newsreader (variable serif, optical-size range) for headings — chosen after the Impeccable detector flagged the original pick, Fraunces, as one of a handful of fonts (alongside Inter, Roboto, Plus Jakarta Sans, Space Grotesk, Geist) that have become an "AI-generated UI" tell through overuse. Newsreader gives a similar warm, editorial-serif character with real optical-size personality without that association (yet). **Body:** IBM Plex Sans — an engineered, technical-humanist face that subtly reinforces "vocational/technical institute."
 
-Responsive scale via CSS `clamp()` (not just Tailwind breakpoint classes), defined as custom properties in `<style>`:
-- `--fs-hero`: clamp(2.5rem, 1.55rem + 3.6vw, 4.5rem) — ~40px mobile to 72px desktop.
-- `--fs-section`: clamp(2rem, 1.55rem + 1.8vw, 3rem) — 32px to 48px.
-- `--fs-course-title`: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem) — 20px to 24px.
-- `--fs-body`: clamp(1rem, 0.95rem + 0.2vw, 1.125rem) — 16px to 18px.
+**Registration numbers and course codes** (RTO/CRICOS/ABN, `MEM31922`, etc.) do **not** get a third typeface. Iteration 1 used IBM Plex Mono for these, reasoning that a monospace "data face" is a functional convention rather than a stylistic one — but iteration 2 resolved this more cleanly by dropping the mono face entirely and signaling "this is verified data" within IBM Plex Sans itself: heavier weight (600–700), wider letter-spacing (0.02–0.06em), `font-variant-numeric: tabular-nums` so digits align in columns, and uppercase on course codes. Same visual distinctiveness, zero ambiguity against the two-family rule.
 
-## Layout & Components
+## Category tags
 
-### Hero
-A real, full-colour photograph (diverse students collaborating around a laptop in a bright lecture room) now carries the hero visually, replacing the previous abstract SVG-only treatment — per the brief's explicit "do not use generic gradients/graphics as a replacement for real imagery." The registration seal survives as a small circular badge overlapping the photo's corner (like a stamp on a credential), not as the hero's main visual.
+Each discipline gets a small, restrained tint pill on course cards — reusing the same verified pairs the prior design system established (they were already correct, just needed documenting against this round's fresh DESIGN.md):
 
-### Course Cards (redesigned)
-Rounded-corner (16px), full-colour photographic cards (no duotone filter) with: a category tag chip (color-tinted per discipline), the verified qualification code in Space Mono, the official qualification title in Plus Jakarta Sans, a concise Inter description, and a per-course "Enquire about this course" action threading the course title **and code** into the shared enquiry modal. Hover: gentle lift + 1.07x image zoom, both guarded under `prefers-reduced-motion`.
-
-| Discipline | Course | Code | Photo (Unsplash, free license) |
+| Stream | Background | Text | Contrast |
 |---|---|---|---|
-| Engineering | Cert III – Fabrication Trade | MEM31922 | `photo-1776159904891-e7b213b8198f` (welder, vivid blue sparks, bright workshop) |
-| Hospitality | Cert IV Kitchen Management | SIT40521 | `photo-1790156591339-cfe16da8e4b6` (chef, colourful teal-and-wood kitchen) |
-| Hospitality | Diploma of Hospitality Mgmt | SIT50422 | `photo-1566670735914-b2038696981d` (waiter serving a colourful plate, bright outdoor café) |
-| Business | Cert IV Business | BSB40120 | `photo-1517048676732-d65bc937f952` (colleagues taking notes, warm natural light) |
-| Business | Diploma of Business | BSB50120 | `photo-1758691736483-5f600b509962` (presenter with colourful bar chart, bright office) |
-| Management | Grad Dip of Management (Learning) | BSB80120 | `photo-1758518730037-a16581a040e8` (strategy discussion, bright glass office) |
-| English | General English Programs | — (none on official site) | `photo-1758270704524-596810e891b5` (smiling adult student, bright lecture hall) |
+| Engineering | #DEEFF6 | #0F3A57 | 10.1:1 |
+| Hospitality | #FCEAD1 | #6B4610 | 7.1:1 |
+| Business | #E6F3F5 | #16424A | 9.7:1 |
+| Management | #E3E8F0 | #142C50 | 11.3:1 |
+| English | #F3E6D8 | #6B4229 | 7.0:1 |
 
-**A correction, not a style note:** the previous revision's English-course photo (`photo-1567057420215-0afa9aa9253a`) was discovered this round to actually depict young African primary-school children in school uniforms — completely wrong subject matter for an adult Australian vocational institute's English program, and exactly the kind of "unrelated photograph" the brief warns against. It has been replaced.
+## Signature element: the transit rail
 
-### Why McGill / Student Experience / Agents
-Three distinct layouts instead of three copies of the same card grid, per the brief's "avoid placing identical card grids in every section": an editorial image-+-icon-list split (Why McGill, on an Aqua tint background), a photo-+-copy split (Student Experience, white background), and a dark Navy band with a gold CTA (Agents) — giving the page the "balanced light, coloured and dark sections" rhythm the brief asked for, instead of an all-white page.
+A horizontal line with five station-dot stops in the Educational Streams section (each stop is a clickable stream filter — real functionality, not decoration — that both filters the course grid below and scrolls to it), and a vertical version with five numbered stops in the How-to-Enrol pathway section. Reusing the same visual grammar for two structurally different purposes (a filter, and a step sequence) is what makes it a system element rather than a one-off graphic.
 
-## Revision 3 (2026-10-17): Structure & Clarity Pass
+Course cards get a diagonal cut top-right corner (`clip-path`) filled with `--coral-bright`, echoing a ticket/boarding-pass shape, extending the "journey" metaphor into the course catalogue itself.
 
-Added three sections that previously didn't stand on their own: **About** (`#about` — narrative + a verified facts panel, includes an explicit "not to be confused with McGill University in Canada" line), **Educational Streams** (`#streams` — five clickable tiles, each applying the matching course-discipline filter and scrolling to `#courses`; real navigation, not decoration), and **Campus & Location** (`#campus` — a genuine Google Maps embed of the real address plus a "Get directions" link, `target="_blank" rel="noopener noreferrer"`). Hero headline changed to the client-specified "Quality Education. Better Career Pathways." Fixed a responsive risk: adding a 6th desktop nav link made the header tight at exactly the 1024px breakpoint, so the phone number now only shows at `xl` (1280px+), with just the Enquire Now button visible from `lg` to `xl`. Also reworded one course photo's alt text ("university lecture hall" → "college lecture hall") since this institute is unrelated to McGill University (Canada) and the alt text shouldn't accidentally reinforce that association. `html`'s `scroll-smooth` and the new `goToStream()` JS scroll now both check `prefers-reduced-motion` before animating.
+## Decorative illustration palette
+
+The hero, student-life, and agents SVG illustrations use a small set of deeper indigo shades purely for internal shading/depth (e.g. `#162052`, `#243270`, `#2A3680`) — these are not text or UI colors and are scoped to inline SVG fills only, never reused as a background or text token.
+
+## Imagery
+
+No stock photography anywhere, per the brief's explicit constraint. Every visual is CSS/SVG: the hero's abstract transit-themed illustration, the student-life section's skyline silhouette, the agents section's route-line graphic, and the signature rail itself. Two spots are explicitly labelled as pending real photography (`.placeholder-chip` — the Student Life section, and the Campus map).
+
+## Dark mode
+
+Implemented with `prefers-color-scheme` plus a `data-theme` attribute override (the manual toggle button), following the three-state pattern: an un-stamped root respects system preference, an explicit `data-theme="light"`/`"dark"` always wins. The toggle is **not persisted** (no localStorage/sessionStorage, per the brief's explicit ban) — it resets to system preference on reload.
 
 ## Do's and Don'ts
 
 ### Do:
-- Do keep Ocean as the only "this is clickable" color.
-- Do keep Gold off light-background text; use it only on Navy or as a filled chip/button background.
-- Do keep every course card's photo distinct — verify by eye, not just by filename, before reusing any stock photo (see the English-photo correction above).
-- Do verify facts (CRICOS number, ABN, qualification codes) against the real official site before stating them, and disclose the verification method's limits rather than overclaiming certainty.
-- Do use "Enquire Now" (not "Apply Now") — there is still no real application pathway, only the enquiry modal/form.
+- Do keep `--coral-text` (not `--coral`) for any new standalone text/icon color — it's the only coral role that's theme-reactive and safe on both surfaces.
+- Do keep the transit-rail motif reserved for sequences/journeys (streams, pathway) — don't decorate unrelated sections with it just because it's the signature element.
+- Do keep amber off light-background text; it only works as an icon/accent on dark surfaces.
+- Do keep every course fact (fees, duration, intake) as an explicit "On enquiry" / "To be confirmed" placeholder — never a number.
 
 ### Don't:
-- Don't re-host or hotlink the official McGill site's own proprietary photography without a confirmed license — use properly licensed stock instead, as the brief's own fallback allows.
-- Don't fabricate a qualification code for General English — the official site shows none, so neither does this one.
-- Don't fabricate a working download for the Brochure or Student Handbook/Forms/Policies — route through the enquiry form, as built.
-- Don't imply the contact/enquiry form delivers anywhere real — it doesn't yet.
+- Don't use `--coral` (the fixed, button-fill value) as a text color on `--bg`/`--surface` — it fails contrast in dark mode.
+- Don't add a stock photo; every visual slot here is either CSS/SVG or an explicitly labelled placeholder.
+- Don't exceed roughly one em-dash per 500 characters of body copy — the Impeccable detector flags saturation as an AI-cadence tell, and this build was trimmed from 16 to 6 for that reason during its first pass.

@@ -1,1052 +1,1071 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McGill Institute Australia | RTO 45906 &middot; CRICOS 03678G</title>
-    <meta name="description" content="McGill Institute Australia is a registered training organization (RTO 45906, CRICOS 03678G) in Parramatta, Sydney, delivering Engineering, Hospitality, Business, Management and English programs to local and international students.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://tarunjindal787.github.io/mcgrill/">
-    <meta name="theme-color" content="#142C50">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>McGill Institute Australia | Vocational Training in Parramatta, NSW</title>
+<meta name="description" content="McGill Institute Australia (RTO 45906, CRICOS 03678G) offers accredited vocational training in Engineering, Hospitality, Business, Management and English from our Parramatta campus.">
+<link rel="canonical" href="https://tarunjindal787.github.io/mcgrill/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="McGill Institute Australia | Vocational Training in Parramatta, NSW">
+<meta property="og:description" content="Accredited vocational training in Engineering, Hospitality, Business, Management and English. RTO 45906, CRICOS 03678G, Parramatta NSW.">
+<meta property="og:url" content="https://tarunjindal787.github.io/mcgrill/">
+<!-- No og:image: no real campus/brand photography exists yet to reference honestly;
+     an og:image pointing at a non-existent file is worse than omitting it. Add one
+     once real photography or a proper brand asset is supplied. -->
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314172B'/%3E%3Cpath d='M14 44 L14 20 L24 20 L32 34 L40 20 L50 20 L50 44 L42 44 L42 30 L34 44 L30 44 L22 30 L22 44 Z' fill='%23D84727'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "EducationalOrganization",
+  "name": "McGill Institute Australia",
+  "url": "https://tarunjindal787.github.io/mcgrill/",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Level 1, 30 Cowper St",
+    "addressLocality": "Parramatta",
+    "addressRegion": "NSW",
+    "postalCode": "2150",
+    "addressCountry": "AU"
+  },
+  "identifier": [
+    {"@type": "PropertyValue", "name": "RTO", "value": "45906"},
+    {"@type": "PropertyValue", "name": "CRICOS", "value": "03678G"},
+    {"@type": "PropertyValue", "name": "ABN", "value": "91 835 873 060"}
+  ],
+  "hasCourse": [
+    {"@type": "Course", "name": "Certificate III in Engineering (Fabrication Trade)", "courseCode": "MEM31922", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "Certificate IV in Kitchen Management", "courseCode": "SIT40521", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "Diploma of Hospitality Management", "courseCode": "SIT50422", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "Certificate IV in Business", "courseCode": "BSB40120", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "Diploma of Business", "courseCode": "BSB50120", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "Graduate Diploma of Management (Learning)", "courseCode": "BSB80120", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}},
+    {"@type": "Course", "name": "General English Programs", "provider": {"@type": "EducationalOrganization", "name": "McGill Institute Australia"}}
+  ]
+}
+</script>
+<style>
+  /* ============ Design tokens ============ */
+  :root {
+    --paper: #F6F4EF;
+    --paper-dim: #ECE7DC;
+    --card: #FFFFFF;
+    --ink: #14172B;
+    --indigo: #1E2A5E;
+    --indigo-deep: #10173A;
+    --amber: #E8A33D;
+    --amber-deep: #C8841F;
+    --coral: #B23A1E;
+    --coral-deep: #5C1F11;
+    --coral-bright: #C73F22;
+    --coral-text-light: #B23A1E;
+    --coral-text-dark: #FF7A57;
+    --line: #D9D2C2;
+    --line-dark: #2E3761;
+    --muted: #5B5E72;
+    --muted-light: #9CA0BE;
+    --tag-engineering-bg: #DEEFF6;
+    --tag-engineering-text: #0F3A57;
+    --tag-hospitality-bg: #FCEAD1;
+    --tag-hospitality-text: #6B4610;
+    --tag-business-bg: #E6F3F5;
+    --tag-business-text: #16424A;
+    --tag-management-bg: #E3E8F0;
+    --tag-management-text: #142C50;
+    --tag-english-bg: #F3E6D8;
+    --tag-english-text: #6B4229;
+    --focus: #1657C9;
 
-    <!-- Open Graph / social preview -->
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="McGill Institute Australia">
-    <meta property="og:title" content="McGill Institute Australia | RTO 45906 · CRICOS 03678G">
-    <meta property="og:description" content="A registered training organization in Parramatta, Sydney, delivering Engineering, Hospitality, Business, Management and English programs.">
-    <meta property="og:url" content="https://tarunjindal787.github.io/mcgrill/">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1758270705317-3ef6142d306f?w=1200&q=80">
-    <meta name="twitter:card" content="summary_large_image">
+    --font-display: 'Newsreader', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Sans', sans-serif;
 
-    <!-- Favicon: a type-based "MI" monogram matching the on-page wordmark (no real logo file supplied yet) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23142C50'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-weight='700' font-size='26' fill='%23F7F8FA' text-anchor='middle'%3EMI%3C/text%3E%3C/svg%3E">
+    --fs-hero: clamp(2.25rem, 1.3rem + 4vw, 4.25rem);
+    --fs-section: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem);
+    --fs-card-title: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+    --fs-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Plus Jakarta Sans (headings) + Inter (body/nav/buttons) + Space Mono (registration data only) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 2rem;
+    --space-lg: 3.5rem;
+    --space-xl: 6rem;
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        offwhite: '#F7F8FA',
-                        aqua: '#E6F3F5',
-                        card: '#FFFFFF',
-                        navy: '#142C50',
-                        navyDeep: '#0C1D38',
-                        ocean: '#147DAD',
-                        oceanDeep: '#0F5F85',
-                        gold: '#F2A93B',
-                        goldDeep: '#D98F1F',
-                        muted: '#49566B',
-                        mutedLight: '#5B6B82',
-                        line: '#E1E6EC',
-                    },
-                    fontFamily: {
-                        display: ['"Plus Jakarta Sans"', 'sans-serif'],
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Space Mono', 'monospace'],
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        :root {
-            --fs-hero: clamp(2.5rem, 1.55rem + 3.6vw, 4.5rem);
-            --fs-section: clamp(2rem, 1.55rem + 1.8vw, 3rem);
-            --fs-course-title: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
-            --fs-body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
-        }
-        .text-hero { font-size: var(--fs-hero); line-height: 1.05; letter-spacing: -0.015em; }
-        .text-section-heading { font-size: var(--fs-section); line-height: 1.1; letter-spacing: -0.01em; }
-        .text-course-title { font-size: var(--fs-course-title); line-height: 1.3; }
-        .text-body-lg { font-size: var(--fs-body); line-height: 1.65; }
+    --radius-card: 18px;
+    --radius-pill: 999px;
+    --radius-focus: 6px;
 
-        a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-            outline: 2px solid #147DAD;
-            outline-offset: 2px;
-            border-radius: 4px;
-        }
-        /* Ocean fails contrast against navy and against its own background; swap to white there. */
-        .focus-ring-on-dark:focus-visible {
-            outline-color: #F7F8FA;
-        }
-        .sr-only {
-            position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-            overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
-        }
+    --bg: var(--paper);
+    --bg-dim: var(--paper-dim);
+    --surface: var(--card);
+    --text: var(--ink);
+    --text-muted: var(--muted);
+    --border: var(--line);
+    --coral-text: var(--coral-text-light);
+  }
 
-        .hairline { border-color: #E1E6EC; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: var(--indigo-deep);
+      --bg-dim: #161D44;
+      --surface: var(--indigo);
+      --text: var(--paper);
+      --text-muted: var(--muted-light);
+      --border: var(--line-dark);
+      --coral-text: var(--coral-text-dark);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: var(--indigo-deep);
+    --bg-dim: #161D44;
+    --surface: var(--indigo);
+    --text: var(--paper);
+    --coral-text: var(--coral-text-dark);
+    --text-muted: var(--muted-light);
+    --border: var(--line-dark);
+  }
 
-        /* Discipline category tints — restrained use of the secondary palette to
-           distinguish categories at a glance, never used for CTAs (ocean owns that job). */
-        .tag-engineering { background: #DEEFF6; color: #0F3A57; }
-        .tag-hospitality { background: #FCEAD1; color: #6B4610; }
-        .tag-business     { background: #E6F3F5; color: #16424A; }
-        .tag-management   { background: #E3E8F0; color: #142C50; }
-        .tag-english      { background: #FCEAD1; color: #6B4610; }
+  /* ============ Reset & base ============ */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; margin: 0 0 0.5em; color: var(--text); }
+  p { margin: 0 0 1em; max-width: 68ch; color: var(--text); }
+  .mono { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  section { padding: var(--space-xl) 0; }
+  .section-eyebrow { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75rem; font-weight: 700; color: var(--coral-text); display: inline-block; margin-bottom: 0.75rem; }
+  .section-head { max-width: 62ch; margin-bottom: var(--space-lg); }
+  .section-head h2 { font-size: var(--fs-section); }
 
-        /* Seal badge: slow dignified rotation of the outer ring text only, decorative, never implies live data */
-        @keyframes sealRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        .seal-ring-text {
-            animation: sealRotate 60s linear infinite;
-            transform-origin: center;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .seal-ring-text { animation: none; }
-        }
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 3px;
+    border-radius: var(--radius-focus);
+  }
 
-        /* Header: frosted-glass state only engages after scrolling. */
-        #site-header {
-            transition: background-color 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease;
-            background-color: rgba(247,248,250,0.0);
-            backdrop-filter: blur(0px);
-        }
-        #site-header.header-scrolled {
-            background-color: rgba(247,248,250,0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            box-shadow: 0 1px 0 rgba(20,44,80,0.08);
-        }
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -60px;
+    background: var(--coral);
+    color: #fff;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    z-index: 1000;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus { top: 1rem; }
 
-        .nav-underline-link {
-            position: relative;
-            padding-bottom: 4px;
-        }
-        .nav-underline-link::after {
-            content: "";
-            position: absolute;
-            left: 0; bottom: 0;
-            height: 2px; width: 100%;
-            background-color: #147DAD;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.25s ease;
-        }
-        .nav-underline-link:hover::after { transform: scaleX(1); }
+  /* ============ Buttons ============ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.85rem 1.75rem;
+    border-radius: var(--radius-pill);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn-primary { background: var(--coral); color: #fff; }
+  .btn-primary:hover { background: var(--coral-deep); transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(15,17,30,0.35); }
+  .btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--coral-text); color: var(--coral-text); transform: translateY(-2px); }
+  .btn-ghost-inverse { background: transparent; border-color: rgba(246,244,239,0.35); color: var(--paper); }
+  .btn-ghost-inverse:hover { background: var(--coral); border-color: var(--coral); color: #fff; }
+  .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
 
-        /* Course card: premium photographic card, gentle lift + image zoom on hover */
-        .course-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 1px 2px rgba(20,44,80,0.06);
-        }
-        .course-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 40px -20px rgba(20,44,80,0.28);
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .course-card:hover { transform: none; }
-        }
-        .course-photo {
-            transition: transform 0.6s ease;
-        }
-        .course-card:hover .course-photo {
-            transform: scale(1.07);
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .course-card:hover .course-photo { transform: none; }
-        }
+  /* ============ Header ============ */
+  header.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; gap: 1rem; }
+  .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
+  .brand-mark { width: 38px; height: 38px; border-radius: 10px; background: var(--ink); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; color: var(--text); line-height: 1.1; }
+  .brand-name small { display: block; font-family: var(--font-mono); font-weight: 600; font-size: 0.7rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
+  nav.main-nav { display: none; }
+  nav.main-nav ul { display: flex; gap: 1.6rem; list-style: none; margin: 0; padding: 0; }
+  nav.main-nav a { text-decoration: none; font-weight: 500; font-size: 0.95rem; color: var(--text); padding: 0.4rem 0; border-bottom: 2px solid transparent; }
+  nav.main-nav a:hover { border-bottom-color: var(--coral-text); }
+  .header-actions { display: flex; align-items: center; gap: 0.75rem; }
+  .theme-toggle {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--border); background: transparent; color: var(--text);
+    display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--coral-text); color: var(--coral-text); }
+  .nav-toggle {
+    display: flex; width: 44px; height: 44px; border-radius: 10px; border: 1px solid var(--border);
+    background: transparent; color: var(--text); align-items: center; justify-content: center; cursor: pointer;
+    flex-shrink: 0;
+  }
+  @media (min-width: 960px) {
+    nav.main-nav { display: block; }
+    .nav-toggle { display: none; }
+    #header-cta-desktop { display: inline-flex !important; }
+  }
 
-        .code-tag {
-            font-family: 'Space Mono', monospace;
-            letter-spacing: 0.06em;
-        }
+  #mobile-nav {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+  }
+  #mobile-nav.open { display: block; }
+  #mobile-nav ul { list-style: none; margin: 0; padding: 1rem 0; display: flex; flex-direction: column; }
+  #mobile-nav a { display: block; padding: 0.85rem 1.5rem; text-decoration: none; color: var(--text); font-weight: 500; min-height: 44px; }
+  #mobile-nav a:hover { color: var(--coral-text); }
+  @media (min-width: 960px) { #mobile-nav { display: none !important; } }
 
-        .stat-divider { width: 1px; align-self: stretch; }
+  /* ============ Hero ============ */
+  .hero { position: relative; overflow: hidden; padding-top: var(--space-lg); background: var(--bg); }
+  .hero-grid { display: grid; gap: var(--space-lg); align-items: center; }
+  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; } }
+  .hero-disclaimer {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8rem; color: var(--text-muted); border: 1px solid var(--border);
+    border-radius: var(--radius-pill); padding: 0.4rem 0.9rem 0.4rem 0.6rem; margin-bottom: 1.25rem;
+  }
+  .hero-disclaimer .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral-text); flex-shrink: 0; }
+  .hero h1 { font-size: var(--fs-hero); max-width: 14ch; }
+  .hero h1 em { font-style: normal; font-weight: 800; color: var(--coral-text); }
+  .hero-lede { font-size: 1.15rem; color: var(--text-muted); max-width: 48ch; }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
+  .hero-art { position: relative; aspect-ratio: 4/3; border-radius: 24px; background: var(--indigo); overflow: hidden; }
+  .hero-art svg { width: 100%; height: 100%; }
 
-        /* Floating-label form fields */
-        .form-field { position: relative; }
-        .form-input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid #E1E6EC;
-            padding: 22px 2px 9px;
-            color: #142C50;
-            font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
-            border-radius: 0;
-        }
-        .form-input:focus {
-            outline: none;
-            border-bottom: 2px solid #147DAD;
-            padding-bottom: 8px;
-        }
-        .form-label {
-            position: absolute;
-            left: 2px;
-            top: 22px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            font-size: 12px;
-            letter-spacing: 0.03em;
-            color: #5B6B82;
-            pointer-events: none;
-            transition: transform 0.18s ease, color 0.18s ease;
-            transform-origin: left top;
-        }
-        .form-input:focus + .form-label,
-        .form-input:not(:placeholder-shown) + .form-label {
-            transform: translateY(-16px) scale(0.84);
-            color: #147DAD;
-        }
-        textarea.form-input { resize: vertical; min-height: 96px; }
+  /* ============ Trust strip ============ */
+  .trust-strip { background: var(--ink); color: var(--paper); padding: 1.5rem 0; }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .trust-strip { background: #0B0E22; } }
+  :root[data-theme="dark"] .trust-strip { background: #0B0E22; }
+  .trust-strip .container { display: flex; flex-wrap: wrap; gap: 1.25rem 2.5rem; align-items: center; justify-content: space-between; }
+  .trust-items { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; }
+  .trust-item { display: flex; flex-direction: column; gap: 0.15rem; }
+  .trust-item .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-light); }
+  .trust-item .value { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--paper); }
+  .trust-strip .address { font-size: 0.85rem; color: var(--muted-light); max-width: 32ch; margin: 0; }
 
-        .btn-submit[data-state="sending"] .btn-label { opacity: 0; }
-        .btn-submit[data-state="sending"] .btn-spinner { opacity: 1; }
-        .btn-spinner {
-            opacity: 0;
-            transition: opacity 0.15s ease;
-            animation: btnSpin 0.7s linear infinite;
-        }
-        @keyframes btnSpin { to { transform: rotate(360deg); } }
-        @media (prefers-reduced-motion: reduce) {
-            .btn-spinner { animation: none; }
-        }
+  /* ============ Transit rail (signature element) ============ */
+  .transit-rail { position: relative; }
+  .transit-rail .rail-line {
+    position: absolute; background: var(--border); z-index: 0;
+  }
+  .rail-horizontal .rail-line { top: 28px; left: 28px; right: 28px; height: 3px; }
+  .rail-vertical .rail-line { left: 28px; top: 28px; bottom: 28px; width: 3px; }
+  .rail-stops { position: relative; z-index: 1; display: grid; gap: var(--space-md); }
+  .rail-horizontal .rail-stops { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+  .rail-stop { display: flex; flex-direction: column; gap: 0.75rem; }
+  .rail-vertical .rail-stop { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
+  .rail-dot {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 3px solid var(--coral-text);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.02em; color: var(--coral-text);
+  }
+  .rail-dot svg { width: 26px; height: 26px; }
+  .rail-stop h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+  .rail-stop p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
+  .stream-btn { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 0.75rem; border-radius: var(--radius-card); padding: 0.5rem; margin: -0.5rem; }
+  .stream-btn:hover .rail-dot { background: var(--coral); color: #fff; }
+  .stream-btn:hover .rail-dot svg { filter: brightness(0) invert(1); }
 
-        section[id] { scroll-margin-top: 5.5rem; }
+  /* ============ Filter + course cards ============ */
+  .filter-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: var(--space-md); }
+  .filter-chip {
+    font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-pill); border: 1.5px solid var(--border); background: var(--surface); color: var(--text);
+    cursor: pointer; transition: all 0.15s ease; min-height: 44px;
+  }
+  .filter-chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  :root[data-theme="dark"] .filter-chip[aria-pressed="true"] { background: var(--coral-bright); border-color: var(--coral-bright); color: #fff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .filter-chip[aria-pressed="true"] { background: var(--coral-bright); border-color: var(--coral-bright); color: #fff; } }
 
-        @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
-        }
-    </style>
+  .course-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+  .course-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+    padding: 1.75rem; display: flex; flex-direction: column; gap: 0.9rem; position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 0 100%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .course-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(20,23,43,0.25); }
+  .course-card::before {
+    content: ""; position: absolute; top: 0; right: 0; width: 22px; height: 22px;
+    background: var(--coral-bright); clip-path: polygon(100% 0, 0 0, 100% 100%);
+  }
+  .tag { display: inline-flex; align-self: flex-start; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.7rem; border-radius: var(--radius-pill); }
+  .tag-engineering { background: var(--tag-engineering-bg); color: var(--tag-engineering-text); }
+  .tag-hospitality { background: var(--tag-hospitality-bg); color: var(--tag-hospitality-text); }
+  .tag-business { background: var(--tag-business-bg); color: var(--tag-business-text); }
+  .tag-management { background: var(--tag-management-bg); color: var(--tag-management-text); }
+  .tag-english { background: var(--tag-english-bg); color: var(--tag-english-text); }
+  .course-card h3 { font-size: var(--fs-card-title); margin-bottom: 0; }
+  .course-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .course-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
+  .course-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.78rem; color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 0.75rem; margin-top: 0.25rem; }
+  .course-meta strong { color: var(--text); font-weight: 600; }
+  .course-card .btn { margin-top: 0.25rem; align-self: flex-start; }
+
+  /* ============ Why McGill ============ */
+  .why-grid { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .why-card { display: flex; flex-direction: column; gap: 0.75rem; }
+  .why-num { font-family: var(--font-display); font-size: 2.25rem; font-weight: 700; color: var(--coral-text); line-height: 1; }
+  .why-card h3 { font-size: 1.15rem; }
+  .why-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* ============ Student life ============ */
+  .life-grid { display: grid; gap: var(--space-lg); align-items: center; }
+  @media (min-width: 900px) { .life-grid { grid-template-columns: 0.9fr 1.1fr; } }
+  .life-art { aspect-ratio: 1/1; border-radius: 24px; background: var(--indigo); position: relative; overflow: hidden; }
+  .life-art svg { width: 100%; height: 100%; }
+  .life-copy ul { padding-left: 1.2rem; margin: 1.25rem 0; }
+  .life-copy li { margin-bottom: 0.6rem; color: var(--text-muted); }
+
+  /* ============ Pathway ============ */
+  .pathway-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; margin-top: var(--space-md); font-size: 0.9rem; color: var(--text-muted); }
+
+  /* ============ Agents ============ */
+  .agents-band { background: var(--ink); color: var(--paper); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .agents-band { background: #0B0E22; } }
+  :root[data-theme="dark"] .agents-band { background: #0B0E22; }
+  .agents-band .section-eyebrow { color: var(--amber); }
+  .agents-band h2 { color: var(--paper); }
+  .agents-band p { color: var(--muted-light); }
+  .agents-grid { display: grid; gap: var(--space-lg); align-items: center; }
+  @media (min-width: 900px) { .agents-grid { grid-template-columns: 1.1fr 0.9fr; } }
+  .agent-list { list-style: none; margin: 1.5rem 0; padding: 0; display: grid; gap: 0.9rem; }
+  .agent-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--muted-light); font-size: 0.95rem; }
+  .agent-list svg { flex-shrink: 0; margin-top: 0.2rem; color: var(--amber); }
+
+  /* ============ Campus ============ */
+  .campus-grid { display: grid; gap: var(--space-lg); }
+  @media (min-width: 900px) { .campus-grid { grid-template-columns: 1fr 1fr; } }
+  .map-placeholder {
+    aspect-ratio: 4/3; border-radius: var(--radius-card); border: 2px dashed var(--border);
+    background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; text-align: center; padding: 2rem; color: var(--text-muted);
+  }
+  .map-placeholder svg { color: var(--coral-text); }
+  .campus-facts dl { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.25rem; margin: 1.5rem 0; }
+  .campus-facts dt { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; }
+  .campus-facts dd { margin: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
+
+  /* ============ FAQ ============ */
+  .faq-list { display: grid; gap: 0.9rem; max-width: 760px; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); overflow: hidden; }
+  .faq-item summary {
+    cursor: pointer; list-style: none; padding: 1.1rem 1.4rem; font-weight: 600; display: flex;
+    align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+  .faq-item[open] summary .chevron { transform: rotate(180deg); }
+  .faq-item .faq-body { padding: 0 1.4rem 1.25rem; color: var(--text-muted); font-size: 0.95rem; }
+
+  /* ============ Enquiry form ============ */
+  .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; }
+  .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-row label { font-weight: 600; font-size: 0.88rem; }
+  .form-row .req { color: var(--coral-text); }
+  .form-row input, .form-row select, .form-row textarea {
+    font: inherit; padding: 0.75rem 0.9rem; border-radius: 10px; border: 1.5px solid var(--border);
+    background: var(--bg); color: var(--text); width: 100%;
+  }
+  .form-row textarea { resize: vertical; min-height: 100px; }
+  .form-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 1rem; }
+  #enquiry-success { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; }
+  #enquiry-success.show { display: block; }
+
+  /* ============ Footer ============ */
+  footer.site-footer { background: var(--ink); color: var(--muted-light); padding: var(--space-lg) 0 var(--space-md); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) footer.site-footer { background: #0B0E22; } }
+  :root[data-theme="dark"] footer.site-footer { background: #0B0E22; }
+  .footer-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg); }
+  .footer-grid h4 { color: var(--paper); font-family: var(--font-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .footer-grid a { text-decoration: none; color: var(--muted-light); font-size: 0.9rem; }
+  .footer-grid a:hover { color: var(--paper); }
+  .footer-brand p { color: var(--muted-light); font-size: 0.88rem; }
+  .footer-bottom { border-top: 1px solid var(--line-dark); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.8rem; color: var(--muted-light); }
+  .footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
+
+  .placeholder-chip {
+    display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--coral-text); background: color-mix(in srgb, var(--coral-text) 12%, transparent);
+    border: 1px dashed var(--coral-text); border-radius: var(--radius-pill); padding: 0.25rem 0.65rem;
+  }
+
+  .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+  /* ============ Scroll reveal ============ */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+  /* ============ Modal ============ */
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(16,23,58,0.6); display: none; align-items: center; justify-content: center;
+    padding: 1.5rem; z-index: 200;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--surface); color: var(--text); border-radius: 20px; max-width: 560px; width: 100%;
+    max-height: 85vh; overflow-y: auto; padding: var(--space-md);
+  }
+  .modal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+  .modal-close { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: var(--text); flex-shrink: 0; }
+  .modal-meta { display: grid; gap: 0.6rem; margin: 1.25rem 0; }
+  .modal-meta .row { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.9rem; border-bottom: 1px dashed var(--border); padding-bottom: 0.6rem; }
+  .modal-meta .row strong { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
+</style>
 </head>
-<body class="bg-offwhite text-navy font-sans antialiased selection:bg-gold/30 selection:text-navy">
+<body>
+<a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- REGISTRATION STRIP -->
-    <div class="bg-navy text-offwhite font-mono text-[11px] tracking-widest uppercase py-2 px-4">
-        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-gold text-[10px]"></i>RTO&nbsp;45906</span>
-            <span class="hidden sm:block stat-divider bg-offwhite/20"></span>
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-shield-halved text-gold text-[10px]"></i>CRICOS&nbsp;03678G</span>
-            <span class="hidden sm:block stat-divider bg-offwhite/20"></span>
-            <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot text-gold text-[10px]"></i>Parramatta, NSW</span>
-        </div>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15V6l3.5 5L10 6v9M11 15V6l3.5 5L18 6v9" stroke="#F6F4EF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-name">McGill Institute<small>RTO 45906 &middot; Parramatta NSW</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#streams">Streams</a></li>
+        <li><a href="#courses">Courses</a></li>
+        <li><a href="#why">Why McGill</a></li>
+        <li><a href="#pathway">How to Enrol</a></li>
+        <li><a href="#agents">Agents</a></li>
+        <li><a href="#campus">Campus</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+        <span id="theme-icon" aria-hidden="true">&#9728;</span>
+      </button>
+      <a href="#enquiry" class="btn btn-primary" style="display:none" id="header-cta-desktop">Enquire Now</a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M2 5h16M2 10h16M2 15h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
     </div>
+  </div>
+  <nav id="mobile-nav" aria-label="Mobile">
+    <ul>
+      <li><a href="#streams" class="mnav-link">Streams</a></li>
+      <li><a href="#courses" class="mnav-link">Courses</a></li>
+      <li><a href="#why" class="mnav-link">Why McGill</a></li>
+      <li><a href="#pathway" class="mnav-link">How to Enrol</a></li>
+      <li><a href="#agents" class="mnav-link">Agents</a></li>
+      <li><a href="#campus" class="mnav-link">Campus</a></li>
+      <li><a href="#faq" class="mnav-link">FAQ</a></li>
+      <li><a href="#enquiry" class="mnav-link btn btn-primary" style="margin:0.75rem 1.5rem; width:calc(100% - 3rem); justify-content:center;">Enquire Now</a></li>
+    </ul>
+  </nav>
+</header>
 
-    <!-- HEADER / NAVIGATION -->
-    <header id="site-header" class="sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <a href="#home" class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center font-display font-bold text-sm text-offwhite shrink-0">MI</div>
-                <div class="leading-none">
-                    <span class="block font-display font-bold text-lg tracking-tight">McGill Institute</span>
-                    <span class="block text-[10px] font-semibold tracking-[0.2em] text-muted uppercase">Australia</span>
-                </div>
-            </a>
+<main id="main">
 
-            <nav class="hidden lg:flex items-center gap-5 xl:gap-8 text-sm font-medium">
-                <a href="#about" class="nav-underline-link hover:text-ocean transition-colors">About</a>
-                <a href="#courses" class="nav-underline-link hover:text-ocean transition-colors">Courses</a>
-                <a href="#why" class="nav-underline-link hover:text-ocean transition-colors">Why McGill</a>
-                <a href="#agents" class="nav-underline-link hover:text-ocean transition-colors">Agents</a>
-                <a href="#students" class="nav-underline-link hover:text-ocean transition-colors">Students</a>
-                <a href="#contact" class="nav-underline-link hover:text-ocean transition-colors">Contact</a>
-            </nav>
-
-            <div class="hidden lg:flex items-center gap-4 xl:gap-5">
-                <a href="tel:+61296987318" class="hidden xl:flex text-sm font-medium text-muted hover:text-navy transition-colors items-center gap-2">
-                    <i class="fa-solid fa-phone text-ocean"></i>
-                    <span>+61 2 9698 7318</span>
-                </a>
-                <button onclick="openEnquiryModal('General Enquiry')" class="bg-ocean hover:bg-oceanDeep text-white font-semibold px-6 py-2.5 rounded-full text-sm transition-colors focus-ring-on-dark whitespace-nowrap">
-                    Enquire Now
-                </button>
-            </div>
-
-            <div class="lg:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-navy p-2" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
-                    <i class="fa-solid fa-bars text-xl"></i>
-                </button>
-            </div>
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="reveal in-view">
+        <p class="hero-disclaimer"><span class="dot" aria-hidden="true"></span>McGill Institute Australia is not affiliated with McGill University, Canada.</p>
+        <h1>Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
+        <p class="hero-lede">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English. Our campus is a short walk from Parramatta and Harris Park stations.</p>
+        <div class="hero-ctas">
+          <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
+          <a href="#courses" class="btn btn-outline">Explore Courses</a>
         </div>
-
-        <div id="mobile-menu" class="hidden lg:hidden bg-offwhite border-b hairline px-4 pt-3 pb-5 space-y-1">
-            <a href="#about" class="mobile-link block py-2.5 text-sm font-semibold">About</a>
-            <a href="#courses" class="mobile-link block py-2.5 text-sm font-semibold">Courses</a>
-            <a href="#why" class="mobile-link block py-2.5 text-sm font-semibold">Why McGill</a>
-            <a href="#agents" class="mobile-link block py-2.5 text-sm font-semibold">Agents</a>
-            <a href="#students" class="mobile-link block py-2.5 text-sm font-semibold">Students</a>
-            <a href="#contact" class="mobile-link block py-2.5 text-sm font-semibold">Contact</a>
-            <div class="mt-4 pt-4 border-t hairline flex items-center gap-3">
-                <a href="tel:+61296987318" aria-label="Call McGill Institute" class="shrink-0 w-12 h-12 rounded-full flex items-center justify-center border border-navy text-navy">
-                    <i class="fa-solid fa-phone"></i>
-                </a>
-                <button onclick="openEnquiryModal('Mobile Menu')" class="flex-1 bg-ocean text-white font-semibold py-3.5 rounded-full text-sm focus-ring-on-dark">
-                    Enquire Now
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- HERO -->
-    <section id="home" class="relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-16 lg:pb-24">
-            <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-
-                <div class="lg:col-span-6 order-2 lg:order-1">
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-4">Vocational &amp; English Language Education</p>
-                    <h1 class="font-display font-extrabold text-hero text-navy text-balance">
-                        Quality Education.<br>Better Career Pathways.
-                    </h1>
-                    <p class="mt-6 text-body-lg text-muted max-w-xl">
-                        McGill Institute Australia (RTO 45906, CRICOS 03678G) is a government-registered training organization in Parramatta, Sydney, delivering Engineering, Hospitality, Business, Management and English programs to local and international students.
-                    </p>
-
-                    <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                        <a href="#courses" class="w-full sm:w-auto bg-ocean hover:bg-oceanDeep text-white font-semibold px-8 py-4 rounded-full text-sm transition-colors flex items-center justify-center gap-3 focus-ring-on-dark">
-                            <span>Explore Courses</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                        <button onclick="openEnquiryModal('Hero Secondary')" class="w-full sm:w-auto border-2 border-navy hover:border-ocean hover:text-ocean text-navy font-semibold px-8 py-4 rounded-full text-sm transition-colors">
-                            Enquire Now
-                        </button>
-                    </div>
-
-                    <p class="mt-8 font-mono text-[11px] tracking-wider uppercase text-mutedLight">
-                        7 Registered Courses &middot; Engineering &middot; Hospitality &middot; Business &middot; Management &middot; English
-                    </p>
-                </div>
-
-                <div class="lg:col-span-6 order-1 lg:order-2 relative">
-                    <div class="relative rounded-3xl overflow-hidden aspect-[4/3] shadow-xl">
-                        <img
-                            class="w-full h-full object-cover object-[center_30%]"
-                            src="https://images.unsplash.com/photo-1758270705317-3ef6142d306f?w=1200&q=80"
-                            srcset="https://images.unsplash.com/photo-1758270705317-3ef6142d306f?w=800&q=80 800w, https://images.unsplash.com/photo-1758270705317-3ef6142d306f?w=1200&q=80 1200w"
-                            sizes="(min-width: 1024px) 50vw, 100vw"
-                            alt="A diverse group of students collaborating together over a laptop in a bright lecture room"
-                            loading="eager" fetchpriority="high" width="1200" height="900">
-                    </div>
-                    <!-- Registration seal: an authenticating badge overlapping the hero photo, like a credential stamp -->
-                    <div class="absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 w-28 h-28 sm:w-36 sm:h-36 drop-shadow-lg">
-                        <svg viewBox="0 0 200 200" class="w-full h-full seal-ring-text">
-                            <defs>
-                                <path id="sealRingTop" d="M 20,100 A 80,80 0 0 1 180,100" />
-                                <path id="sealRingBottom" d="M 180,100 A 80,80 0 0 1 20,100" />
-                            </defs>
-                            <circle cx="100" cy="100" r="98" fill="#142C50"/>
-                            <circle cx="100" cy="100" r="80" fill="none" stroke="#F2A93B" stroke-width="2"/>
-                            <text font-family="Space Mono, monospace" font-size="10" letter-spacing="2.5" fill="#F7F8FA">
-                                <textPath href="#sealRingTop" startOffset="50%" text-anchor="middle">RTO 45906 &#8226; REGISTERED</textPath>
-                            </text>
-                            <text font-family="Space Mono, monospace" font-size="10" letter-spacing="2.5" fill="#F7F8FA">
-                                <textPath href="#sealRingBottom" startOffset="50%" text-anchor="middle">CRICOS 03678G &#8226; NSW</textPath>
-                            </text>
-                        </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-                            <i class="fa-solid fa-award text-gold text-xl sm:text-2xl mb-1"></i>
-                            <p class="font-display font-bold uppercase text-[9px] sm:text-[10px] text-offwhite leading-tight">Govt.<br>Registered</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- REGISTRATION / TRUST STRIP -->
-    <section class="border-y hairline bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <div class="grid sm:grid-cols-3 gap-8 text-sm divide-y sm:divide-y-0 sm:divide-x divide-line">
-                <div class="flex items-start gap-3 sm:pr-8">
-                    <i class="fa-solid fa-building-columns text-ocean mt-0.5"></i>
-                    <div>
-                        <p class="uppercase tracking-wider text-mutedLight text-[10px] font-semibold mb-1">Registration</p>
-                        <p class="text-navy font-semibold">RTO 45906 &middot; CRICOS 03678G</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3 pt-6 sm:pt-0 sm:px-8">
-                    <i class="fa-solid fa-location-dot text-ocean mt-0.5"></i>
-                    <div>
-                        <p class="uppercase tracking-wider text-mutedLight text-[10px] font-semibold mb-1">Campus</p>
-                        <p class="text-navy font-semibold">Level 1, 30 Cowper St, Parramatta NSW 2150</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-3 pt-6 sm:pt-0 sm:pl-8">
-                    <i class="fa-solid fa-phone text-ocean mt-0.5"></i>
-                    <div>
-                        <p class="uppercase tracking-wider text-mutedLight text-[10px] font-semibold mb-1">Contact</p>
-                        <p class="text-navy font-semibold">+61 2 9698 7318</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INSTITUTIONAL INTRODUCTION -->
-    <section id="about" class="py-20 lg:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-5 gap-14 items-start">
-                <div class="lg:col-span-3">
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">About McGill Institute</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">A government-registered institute in the heart of Parramatta.</h2>
-                    <p class="text-body-lg text-muted max-w-xl mb-5">
-                        McGill Institute Australia is a Registered Training Organization delivering nationally recognised vocational qualifications and English language programs. Based in Parramatta, Sydney's second CBD, it serves domestic students seeking a practical career change and international students studying under a CRICOS-registered course.
-                    </p>
-                    <p class="text-body-lg text-muted max-w-xl">
-                        Training spans five disciplines — Engineering, Hospitality, Business, Management and English — each led by qualifications registered under RTO 45906. McGill Institute Australia should not be confused with McGill University in Canada; it is an independent Australian vocational provider.
-                    </p>
-                </div>
-                <div class="lg:col-span-2 bg-aqua rounded-2xl p-8">
-                    <p class="font-mono text-[11px] uppercase tracking-wider text-mutedLight mb-4">At a glance</p>
-                    <dl class="space-y-4 text-sm">
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">Registration</dt>
-                            <dd class="text-navy font-semibold text-right">RTO 45906</dd>
-                        </div>
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">CRICOS Provider</dt>
-                            <dd class="text-navy font-semibold text-right">03678G</dd>
-                        </div>
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">ABN</dt>
-                            <dd class="text-navy font-semibold text-right">91 835 873 060</dd>
-                        </div>
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">Campus</dt>
-                            <dd class="text-navy font-semibold text-right">Parramatta, NSW</dd>
-                        </div>
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">Disciplines</dt>
-                            <dd class="text-navy font-semibold text-right">5</dd>
-                        </div>
-                        <div class="flex items-start justify-between gap-4">
-                            <dt class="text-muted">Registered Courses</dt>
-                            <dd class="text-navy font-semibold text-right">7</dd>
-                        </div>
-                    </dl>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- EDUCATIONAL STREAMS -->
-    <section id="streams" class="py-20 lg:py-28 bg-offwhite">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="max-w-2xl mb-12">
-                <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Educational Streams</p>
-                <h2 class="font-display font-extrabold text-section-heading text-navy text-balance">Five disciplines, one registration.</h2>
-                <p class="mt-4 text-body-lg text-muted">Select a stream to jump straight to its courses below.</p>
-            </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
-                <button type="button" onclick="goToStream('engineering')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
-                    <div class="w-12 h-12 rounded-full tag-engineering flex items-center justify-center mb-4"><i class="fa-solid fa-gears"></i></div>
-                    <h3 class="font-display font-bold text-navy mb-1">Engineering</h3>
-                    <p class="text-xs text-muted leading-relaxed mb-3">Fabrication trade skills for manufacturing and construction.</p>
-                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
-                </button>
-                <button type="button" onclick="goToStream('hospitality')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
-                    <div class="w-12 h-12 rounded-full tag-hospitality flex items-center justify-center mb-4"><i class="fa-solid fa-kitchen-set"></i></div>
-                    <h3 class="font-display font-bold text-navy mb-1">Hospitality</h3>
-                    <p class="text-xs text-muted leading-relaxed mb-3">Kitchen and hospitality management, from supervisor to manager.</p>
-                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View 2 courses &rarr;</span>
-                </button>
-                <button type="button" onclick="goToStream('business')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
-                    <div class="w-12 h-12 rounded-full tag-business flex items-center justify-center mb-4"><i class="fa-solid fa-briefcase"></i></div>
-                    <h3 class="font-display font-bold text-navy mb-1">Business</h3>
-                    <p class="text-xs text-muted leading-relaxed mb-3">Core to advanced business administration qualifications.</p>
-                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View 2 courses &rarr;</span>
-                </button>
-                <button type="button" onclick="goToStream('management')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
-                    <div class="w-12 h-12 rounded-full tag-management flex items-center justify-center mb-4"><i class="fa-solid fa-sitemap"></i></div>
-                    <h3 class="font-display font-bold text-navy mb-1">Management</h3>
-                    <p class="text-xs text-muted leading-relaxed mb-3">Strategic leadership for experienced professionals.</p>
-                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
-                </button>
-                <button type="button" onclick="goToStream('english')" class="group text-left bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow focus-ring-on-dark">
-                    <div class="w-12 h-12 rounded-full tag-english flex items-center justify-center mb-4"><i class="fa-solid fa-language"></i></div>
-                    <h3 class="font-display font-bold text-navy mb-1">English</h3>
-                    <p class="text-xs text-muted leading-relaxed mb-3">General English for everyday life, study and work.</p>
-                    <span class="text-xs font-semibold text-ocean group-hover:text-oceanDeep">View course &rarr;</span>
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- COURSES -->
-    <section id="courses" class="py-20 lg:py-28">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <div class="max-w-2xl mb-12">
-                <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Our Courses</p>
-                <h2 class="font-display font-extrabold text-section-heading text-navy text-balance">Seven registered courses</h2>
-                <p class="mt-4 text-body-lg text-muted">Every course below is part of McGill Institute's registered scope under RTO 45906. Filter by discipline.</p>
-            </div>
-
-            <!-- Discipline filter -->
-            <div class="flex flex-wrap gap-2 mb-10" id="discipline-filters" role="group" aria-label="Filter courses by discipline">
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="all" aria-pressed="true">All</button>
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="engineering" aria-pressed="false">Engineering</button>
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="hospitality" aria-pressed="false">Hospitality</button>
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="business" aria-pressed="false">Business</button>
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="management" aria-pressed="false">Management</button>
-                <button type="button" class="filter-pill border hairline px-4 py-2 rounded-full text-sm font-medium" data-filter="english" aria-pressed="false">English</button>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="course-grid">
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="engineering">
-                    <!-- Stock photo (Unsplash License, no attribution required): https://unsplash.com/photos/Bl9sEwh6q7I -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1776159904891-e7b213b8198f?w=800&q=80" srcset="https://images.unsplash.com/photo-1776159904891-e7b213b8198f?w=600&q=80 600w, https://images.unsplash.com/photo-1776159904891-e7b213b8198f?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A welder in protective gear creating bright blue sparks while fabricating a steel frame" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-engineering inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Engineering</span>
-                            <span class="code-tag text-[11px] text-mutedLight">MEM31922</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Certificate III in Engineering – Fabrication Trade</h3>
-                        <p class="text-sm text-muted leading-relaxed">A hands-on trade qualification in metal fabrication, covering workshop safety, reading technical drawings, and fabrication techniques used across manufacturing and construction.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Certificate III in Engineering – Fabrication Trade (MEM31922)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="hospitality">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1790156591339-cfe16da8e4b6 -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1790156591339-cfe16da8e4b6?w=800&q=80" srcset="https://images.unsplash.com/photo-1790156591339-cfe16da8e4b6?w=600&q=80 600w, https://images.unsplash.com/photo-1790156591339-cfe16da8e4b6?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A chef plating food at a colourful teal kitchen counter in a bright commercial kitchen" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-hospitality inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Hospitality</span>
-                            <span class="code-tag text-[11px] text-mutedLight">SIT40521</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Certificate IV in Kitchen Management</h3>
-                        <p class="text-sm text-muted leading-relaxed">Trains cooks moving into kitchen supervision: food safety systems, menu and cost control, and leading a kitchen team in a commercial setting.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Certificate IV in Kitchen Management (SIT40521)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="hospitality">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1566670735914-b2038696981d -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-[center_35%]" src="https://images.unsplash.com/photo-1566670735914-b2038696981d?w=800&q=80" srcset="https://images.unsplash.com/photo-1566670735914-b2038696981d?w=600&q=80 600w, https://images.unsplash.com/photo-1566670735914-b2038696981d?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A waiter serving a colourful plate of food to guests at a bright outdoor café" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-hospitality inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Hospitality</span>
-                            <span class="code-tag text-[11px] text-mutedLight">SIT50422</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Diploma of Hospitality Management</h3>
-                        <p class="text-sm text-muted leading-relaxed">A higher-level qualification for running hospitality operations: rostering, budgeting, service standards, and managing staff across front- and back-of-house.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Diploma of Hospitality Management (SIT50422)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="business">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1517048676732-d65bc937f952 -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&q=80" srcset="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80 600w, https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="Colleagues taking notes together around a wooden table in warm natural light" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-business inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Business</span>
-                            <span class="code-tag text-[11px] text-mutedLight">BSB40120</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Certificate IV in Business</h3>
-                        <p class="text-sm text-muted leading-relaxed">Core business skills for coordination and supervisory roles: workplace communication, basic project and finance administration, and business operations.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Certificate IV in Business (BSB40120)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="business">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1758691736483-5f600b509962 -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1758691736483-5f600b509962?w=800&q=80" srcset="https://images.unsplash.com/photo-1758691736483-5f600b509962?w=600&q=80 600w, https://images.unsplash.com/photo-1758691736483-5f600b509962?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A presenter pointing to a colourful bar chart on a screen in a bright meeting room" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-business inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Business</span>
-                            <span class="code-tag text-[11px] text-mutedLight">BSB50120</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Diploma of Business</h3>
-                        <p class="text-sm text-muted leading-relaxed">A deeper business qualification for those moving toward management: planning, marketing, finance, and leading teams within an organization.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Diploma of Business (BSB50120)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col" data-discipline="management">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1758518730037-a16581a040e8 -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-center" src="https://images.unsplash.com/photo-1758518730037-a16581a040e8?w=800&q=80" srcset="https://images.unsplash.com/photo-1758518730037-a16581a040e8?w=600&q=80 600w, https://images.unsplash.com/photo-1758518730037-a16581a040e8?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="Professionals in a bright glass-walled office discussing strategy around a table" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-management inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">Management</span>
-                            <span class="code-tag text-[11px] text-mutedLight">BSB80120</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">Graduate Diploma of Management (Learning)</h3>
-                        <p class="text-sm text-muted leading-relaxed">An advanced qualification for experienced professionals building strategic management capability: organizational leadership, strategy, and governance.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('Graduate Diploma of Management (Learning) (BSB80120)')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="course-card group bg-white rounded-2xl overflow-hidden flex flex-col md:col-span-2 lg:col-span-1" data-discipline="english">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1758270704524-596810e891b5 -->
-                    <div class="relative overflow-hidden aspect-[4/3]">
-                        <img class="course-photo w-full h-full object-cover object-[center_25%]" src="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=800&q=80" srcset="https://images.unsplash.com/photo-1758270704524-596810e891b5?w=600&q=80 600w, https://images.unsplash.com/photo-1758270704524-596810e891b5?w=900&q=80 900w" sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" alt="A smiling international student among classmates in a bright college lecture hall" loading="lazy" width="800" height="600">
-                    </div>
-                    <div class="p-7 flex flex-col flex-1">
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="tag-english inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">English</span>
-                            <span class="code-tag text-[11px] text-mutedLight">&mdash;</span>
-                        </div>
-                        <h3 class="font-display font-bold text-course-title text-navy mb-2">General English Programs</h3>
-                        <p class="text-sm text-muted leading-relaxed">English language programs supporting everyday communication and further study or work in Australia, for students building their English proficiency.</p>
-                        <div class="mt-auto pt-5 flex items-center justify-between gap-3">
-                            <button onclick="openEnquiryModal('General English Programs')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Enquire about this course &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <p id="no-courses-msg" class="hidden text-center text-muted text-sm py-12" aria-live="polite">No courses match this filter.</p>
-        </div>
-    </section>
-
-    <!-- WHY McGILL -->
-    <section id="why" class="py-20 lg:py-28 bg-aqua">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-14 items-center">
-                <div class="rounded-3xl overflow-hidden aspect-[4/5] lg:aspect-[3/4] shadow-lg order-2 lg:order-1">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1589330694653-ded6df03f754 -->
-                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?w=800&q=80" alt="A graduation certificate bearing an official red wax seal" loading="lazy" width="800" height="1000">
-                </div>
-                <div class="order-1 lg:order-2">
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Why McGill</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">One registration. Every pathway.</h2>
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-gold"></i></div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy mb-1">Government Registered</h3>
-                                <p class="text-sm text-muted leading-relaxed">Operating under RTO 45906, with CRICOS provider status (03678G) to support international students.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center shrink-0"><i class="fa-solid fa-layer-group text-gold"></i></div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy mb-1">Multi-Discipline Catalog</h3>
-                                <p class="text-sm text-muted leading-relaxed">Seven registered courses spanning Engineering, Hospitality, Business, Management and English under one roof.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center shrink-0"><i class="fa-solid fa-earth-asia text-gold"></i></div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy mb-1">Domestic &amp; International</h3>
-                                <p class="text-sm text-muted leading-relaxed">Serving local students directly and international students through registered education agents.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="w-10 h-10 rounded-full bg-navy flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot text-gold"></i></div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy mb-1">Parramatta Campus</h3>
-                                <p class="text-sm text-muted leading-relaxed">Based at Level 1, 30 Cowper St, Parramatta, in the heart of Sydney's second CBD.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STUDENT EXPERIENCE -->
-    <section class="py-20 lg:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-14 items-center">
-                <div>
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Student Experience</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">Learning that looks like real work.</h2>
-                    <p class="text-body-lg text-muted mb-6 max-w-lg">Classes are built around practical, collaborative work — not just lectures. Students study alongside peers from a range of backgrounds, in small enough groups that trainers know your name.</p>
-                    <button onclick="openEnquiryModal('Student Experience Enquiry')" class="bg-navy hover:bg-oceanDeep text-offwhite font-semibold px-7 py-3.5 rounded-full text-sm transition-colors focus-ring-on-dark">
-                        Ask About Student Life
-                    </button>
-                </div>
-                <div class="rounded-3xl overflow-hidden aspect-[4/3] shadow-lg">
-                    <!-- Stock photo (Unsplash License, no attribution required): photo-1789899898098-beb5b8180083 -->
-                    <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1789899898098-beb5b8180083?w=900&q=80" alt="Two students working together at a sunlit table covered in notes and laptops" loading="lazy" width="900" height="675">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AGENTS (dark band for rhythm) -->
-    <section id="agents" class="py-20 lg:py-28 bg-navy text-offwhite">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-14 items-start">
-                <div>
-                    <p class="text-sm font-semibold tracking-wide text-gold mb-3">For Education Agents</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-offwhite mb-6 text-balance">Agent partnerships</h2>
-                    <p class="text-body-lg text-offwhite/80 mb-6 max-w-lg">
-                        McGill Institute works with registered education agents to support international students through enrolment, from initial enquiry to offer and visa documentation. Agents can reach our international admissions team directly to discuss a prospective student or a new partnership.
-                    </p>
-                    <button onclick="openEnquiryModal('Agent Enquiry')" class="bg-gold hover:bg-goldDeep text-navy font-semibold px-7 py-3.5 rounded-full text-sm transition-colors focus-ring-on-dark">
-                        Agent Enquiries
-                    </button>
-                </div>
-                <div class="rounded-2xl border border-offwhite/15 p-8 bg-white/5">
-                    <p class="font-mono text-[11px] uppercase tracking-wider text-offwhite/60 mb-4">Partnership at a glance</p>
-                    <ul class="space-y-3 text-sm text-offwhite">
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-gold mt-1"></i><span>Direct line to international admissions</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-gold mt-1"></i><span>Support across the full enrolment journey</span></li>
-                        <li class="flex items-start gap-3"><i class="fa-solid fa-check text-gold mt-1"></i><span>CRICOS-registered courses (03678G) for international students</span></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CAMPUS & LOCATION -->
-    <section id="campus" class="py-20 lg:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-10 items-stretch">
-                <div>
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Campus &amp; Location</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">Based in Parramatta, Sydney's second CBD.</h2>
-                    <p class="text-body-lg text-muted mb-6 max-w-lg">The campus sits within walking distance of Parramatta train and bus interchange, in a precinct that's become a second commercial centre for Sydney.</p>
-                    <div class="space-y-4 text-sm mb-6">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-location-dot text-ocean mt-0.5"></i>
-                            <span class="text-navy font-medium">Level 1, 30 Cowper St, Parramatta NSW 2150, Australia</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-train-subway text-ocean mt-0.5"></i>
-                            <span class="text-navy font-medium">Short walk from Parramatta Station</span>
-                        </div>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm font-semibold text-ocean hover:text-oceanDeep">
-                        Get directions <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-                    </a>
-                </div>
-                <div class="rounded-3xl overflow-hidden shadow-lg min-h-[320px]">
-                    <iframe
-                        title="Map showing McGill Institute Australia's campus at Level 1, 30 Cowper St, Parramatta NSW 2150"
-                        src="https://maps.google.com/maps?q=Level%201%2C%2030%20Cowper%20St%2C%20Parramatta%20NSW%202150&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                        class="w-full h-full border-0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STUDENTS -->
-    <section id="students" class="py-20 lg:py-28">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Current Students</p>
-            <h2 class="font-display font-extrabold text-section-heading text-navy mb-10 text-balance">Student resources</h2>
-            <div class="grid sm:grid-cols-3 gap-6">
-                <div class="bg-white rounded-2xl p-7 shadow-sm">
-                    <i class="fa-solid fa-book text-ocean text-lg mb-4"></i>
-                    <h3 class="font-display font-bold text-navy mb-2">Student Handbook</h3>
-                    <p class="text-sm text-muted leading-relaxed mb-4">Policies, support services, and what to expect as a McGill student.</p>
-                    <button onclick="openEnquiryModal('Student Handbook Request')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Request a copy &rarr;</button>
-                </div>
-                <div class="bg-white rounded-2xl p-7 shadow-sm">
-                    <i class="fa-solid fa-file-lines text-ocean text-lg mb-4"></i>
-                    <h3 class="font-display font-bold text-navy mb-2">Enrolment Forms</h3>
-                    <p class="text-sm text-muted leading-relaxed mb-4">Forms required to enrol or update your student details.</p>
-                    <button onclick="openEnquiryModal('Enrolment Forms Request')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Request a copy &rarr;</button>
-                </div>
-                <div class="bg-white rounded-2xl p-7 shadow-sm">
-                    <i class="fa-solid fa-scale-balanced text-ocean text-lg mb-4"></i>
-                    <h3 class="font-display font-bold text-navy mb-2">Policies &amp; Complaints</h3>
-                    <p class="text-sm text-muted leading-relaxed mb-4">Our complaints and appeals process, and other student policies.</p>
-                    <button onclick="openEnquiryModal('Policies Request')" class="text-sm font-semibold text-ocean hover:text-oceanDeep">Request a copy &rarr;</button>
-                </div>
-            </div>
-            <p class="text-xs text-mutedLight mt-6">Documents are issued directly to enrolled and prospective students on request.</p>
-        </div>
-    </section>
-
-    <!-- BROCHURE -->
-    <section id="brochure" class="py-20 lg:py-28 bg-aqua">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Prospectus</p>
-            <h2 class="font-display font-extrabold text-section-heading text-navy mb-5 text-balance">Get the course brochure</h2>
-            <p class="text-body-lg text-muted mb-8 max-w-xl mx-auto">
-                Request a copy of the McGill Institute course brochure (full course details, delivery modes, and how to apply), sent directly to your email.
-            </p>
-            <button onclick="openEnquiryModal('Brochure Request')" class="bg-ocean hover:bg-oceanDeep text-white font-semibold px-9 py-4 rounded-full text-sm transition-colors focus-ring-on-dark">
-                Request The Brochure
-            </button>
-        </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact" class="py-20 lg:py-28 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-5 gap-14">
-                <div class="lg:col-span-2">
-                    <p class="text-sm font-semibold tracking-wide text-ocean mb-3">Contact</p>
-                    <h2 class="font-display font-extrabold text-section-heading text-navy mb-6 text-balance">Get in touch</h2>
-                    <div class="space-y-5 text-sm">
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-location-dot text-ocean mt-0.5"></i>
-                            <span class="text-navy">Level 1, 30 Cowper St<br>Parramatta NSW 2150, Australia</span>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-phone text-ocean mt-0.5"></i>
-                            <a href="tel:+61296987318" class="text-navy hover:text-ocean">+61 2 9698 7318</a>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <i class="fa-solid fa-building-columns text-ocean mt-0.5"></i>
-                            <span class="text-navy">RTO 45906 &middot; CRICOS 03678G</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="lg:col-span-3">
-                    <form id="enquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
-                        <div class="form-field">
-                            <input id="field-name" type="text" required placeholder=" " class="form-input peer">
-                            <label for="field-name" class="form-label">Full Name</label>
-                        </div>
-                        <div class="grid sm:grid-cols-2 gap-x-6 gap-y-6">
-                            <div class="form-field">
-                                <input id="field-mobile" type="tel" required placeholder=" " class="form-input peer">
-                                <label for="field-mobile" class="form-label">Mobile</label>
-                            </div>
-                            <div class="form-field">
-                                <input id="field-email" type="email" required placeholder=" " class="form-input peer">
-                                <label for="field-email" class="form-label">Email</label>
-                            </div>
-                        </div>
-                        <div class="form-field">
-                            <textarea id="field-message" rows="3" placeholder=" " class="form-input peer"></textarea>
-                            <label for="field-message" class="form-label">Message</label>
-                        </div>
-                        <p id="enquiry-context" class="text-xs text-mutedLight"></p>
-                        <button type="submit" id="enquiry-submit-btn" class="btn-submit relative w-full sm:w-auto bg-ocean hover:bg-oceanDeep text-white font-semibold px-9 py-4 rounded-full text-sm transition-colors focus-ring-on-dark">
-                            <span class="btn-label inline-flex items-center gap-2 transition-opacity">
-                                <span>Submit Enquiry</span>
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </span>
-                            <i class="fa-solid fa-circle-notch btn-spinner absolute inset-0 m-auto"></i>
-                        </button>
-                    </form>
-                    <div id="enquiry-success" class="hidden text-center py-10">
-                        <i class="fa-solid fa-circle-check text-ocean text-4xl mb-4"></i>
-                        <h3 class="font-display font-bold text-xl text-navy mb-2">Enquiry Received</h3>
-                        <p class="text-muted text-sm">Thank you. Our admissions team will be in touch shortly.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="py-14 text-sm bg-navy text-offwhite">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
-                <div>
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-9 h-9 rounded-full bg-offwhite flex items-center justify-center font-display font-bold text-xs text-navy shrink-0">MI</div>
-                        <span class="font-display font-bold">McGill Institute</span>
-                    </div>
-                    <p class="text-offwhite/70 leading-relaxed">A registered training organization and CRICOS provider in Parramatta, Sydney.</p>
-                </div>
-                <div>
-                    <p class="font-semibold uppercase tracking-wider text-[11px] mb-4 text-offwhite/60">Explore</p>
-                    <nav class="flex flex-col gap-2.5 text-offwhite/80">
-                        <a href="#about" class="hover:text-gold w-fit">About</a>
-                        <a href="#courses" class="hover:text-gold w-fit">Courses</a>
-                        <a href="#agents" class="hover:text-gold w-fit">Agents</a>
-                        <a href="#campus" class="hover:text-gold w-fit">Campus &amp; Location</a>
-                        <a href="#students" class="hover:text-gold w-fit">Students</a>
-                        <a href="#brochure" class="hover:text-gold w-fit">Brochure</a>
-                    </nav>
-                </div>
-                <div>
-                    <p class="font-semibold uppercase tracking-wider text-[11px] mb-4 text-offwhite/60">Campus</p>
-                    <p class="text-offwhite/70 leading-relaxed">Level 1, 30 Cowper St<br>Parramatta NSW 2150<br>Australia</p>
-                </div>
-                <div>
-                    <p class="font-semibold uppercase tracking-wider text-[11px] mb-4 text-offwhite/60">Registration</p>
-                    <p class="font-mono text-offwhite/70 leading-relaxed text-xs">RTO 45906<br>CRICOS 03678G<br>ABN 91 835 873 060</p>
-                    <a href="tel:+61296987318" class="block mt-3 text-gold font-semibold hover:text-goldDeep">+61 2 9698 7318</a>
-                </div>
-            </div>
-            <div class="pt-6 border-t border-offwhite/15 flex flex-col sm:flex-row justify-between items-center gap-3 text-offwhite/50 font-mono text-[11px]">
-                <p>&copy; <span id="year"></span> McGill Institute Australia. RTO 45906.</p>
-                <p>Parramatta, NSW, Australia</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ENQUIRY MODAL -->
-    <div id="enquiry-modal" class="fixed inset-0 z-50 bg-navy/70 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-offwhite rounded-2xl w-full max-w-md relative overflow-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-            <div class="bg-navy text-offwhite px-6 py-6 flex items-center justify-between">
-                <h3 id="modal-title" class="font-display font-bold text-lg">Enquiry</h3>
-                <button onclick="closeEnquiryModal()" class="text-offwhite/70 hover:text-offwhite text-xl p-1 focus-ring-on-dark" aria-label="Close">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-            <div class="p-6">
-                <p class="text-sm text-muted mb-5">Leave your details and our admissions team will follow up. You can also use the full enquiry form at the bottom of the page.</p>
-                <form id="modal-form" onsubmit="handleModalSubmit(event)" class="space-y-6">
-                    <div class="form-field">
-                        <input id="modal-field-name" type="text" required placeholder=" " class="form-input peer">
-                        <label for="modal-field-name" class="form-label">Full Name</label>
-                    </div>
-                    <div class="form-field">
-                        <input id="modal-field-email" type="email" required placeholder=" " class="form-input peer">
-                        <label for="modal-field-email" class="form-label">Email Address</label>
-                    </div>
-                    <button type="submit" class="w-full bg-ocean hover:bg-oceanDeep text-white font-semibold py-4 rounded-full text-sm transition-colors focus-ring-on-dark">Submit</button>
-                </form>
-                <div id="modal-success" class="hidden text-center py-6">
-                    <i class="fa-solid fa-circle-check text-ocean text-3xl mb-3"></i>
-                    <p class="font-semibold text-sm text-navy">Thanks, we'll be in touch shortly.</p>
-                    <button onclick="closeEnquiryModal()" class="mt-4 text-xs font-semibold uppercase tracking-wider text-ocean">Close</button>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="hero-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="300" fill="#1E2A5E"/>
+          <circle cx="330" cy="60" r="90" fill="#243270"/>
+          <path d="M0 230 L80 170 L150 210 L230 140 L310 190 L400 150 L400 300 L0 300 Z" fill="#162052"/>
+          <line x1="20" y1="110" x2="380" y2="110" stroke="#D84727" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round"/>
+          <circle cx="20" cy="110" r="8" fill="#D84727"/>
+          <circle cx="140" cy="110" r="8" fill="#E8A33D"/>
+          <circle cx="260" cy="110" r="8" fill="#E8A33D"/>
+          <circle cx="380" cy="110" r="8" fill="#E8A33D"/>
+        </svg>
+      </div>
     </div>
+  </section>
 
-    <script>
-        document.getElementById('year').innerText = new Date().getFullYear();
+  <!-- TRUST STRIP -->
+  <section class="trust-strip" aria-label="Registration details" style="padding-top:1.5rem; padding-bottom:1.5rem;">
+    <div class="container">
+      <div class="trust-items">
+        <div class="trust-item"><span class="label">RTO</span><span class="value">45906</span></div>
+        <div class="trust-item"><span class="label">CRICOS Provider</span><span class="value">03678G</span></div>
+        <div class="trust-item"><span class="label">ABN</span><span class="value">91 835 873 060</span></div>
+      </div>
+      <p class="address">Level 1, 30 Cowper St, Parramatta NSW 2150</p>
+    </div>
+  </section>
 
-        // Mobile menu
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileBtn.addEventListener('click', () => {
-            const isOpen = mobileMenu.classList.toggle('hidden') === false;
-            mobileBtn.setAttribute('aria-expanded', String(isOpen));
-        });
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
-        mobileMenu.querySelectorAll('a[href^="tel:"], button').forEach(el => {
-            el.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileBtn.setAttribute('aria-expanded', 'false');
-            });
-        });
+  <!-- STREAMS (signature transit rail) -->
+  <section id="streams">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Educational Streams</span>
+        <h2>Five streams, one campus.</h2>
+        <p>Pick a stream to jump straight to its courses in the catalogue below.</p>
+      </div>
+      <div class="transit-rail rail-horizontal reveal" role="group" aria-label="Educational streams">
+        <div class="rail-line" aria-hidden="true"></div>
+        <div class="rail-stops">
+          <button class="stream-btn" data-stream="engineering" type="button">
+            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l6-6M14 10l6-6M9 9l6 6M7 17l-2 2 2-6 6-6 4 4-6 6-4 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Engineering</h3>
+            <p>Fabrication trade training.</p>
+          </button>
+          <button class="stream-btn" data-stream="hospitality" type="button">
+            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16M4 11a8 8 0 0016 0M9 4v3M12 4v3M15 4v3M2 20h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Hospitality</h3>
+            <p>Kitchen &amp; hotel management.</p>
+          </button>
+          <button class="stream-btn" data-stream="business" type="button">
+            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Business</h3>
+            <p>Core &amp; advanced business skills.</p>
+          </button>
+          <button class="stream-btn" data-stream="management" type="button">
+            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <h3>Management</h3>
+            <p>Postgraduate leadership training.</p>
+          </button>
+          <button class="stream-btn" data-stream="english" type="button">
+            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 011-1h10l5 5v10a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <h3>English</h3>
+            <p>General English programs.</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Header: frosted-glass state engages only after scrolling
-        const siteHeader = document.getElementById('site-header');
-        function updateHeaderScrollState() {
-            siteHeader.classList.toggle('header-scrolled', window.scrollY > 12);
-        }
-        updateHeaderScrollState();
-        window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
+  <!-- COURSES -->
+  <section id="courses" style="background: var(--bg-dim);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Featured Courses</span>
+        <h2>Find your course</h2>
+        <p>Filter by stream, or browse the full catalogue. Fees, intakes and entry requirements are confirmed directly with our team.</p>
+      </div>
+      <div class="filter-bar reveal" role="group" aria-label="Filter courses by stream">
+        <button class="filter-chip" data-filter="all" aria-pressed="true" type="button">All Courses</button>
+        <button class="filter-chip" data-filter="engineering" aria-pressed="false" type="button">Engineering</button>
+        <button class="filter-chip" data-filter="hospitality" aria-pressed="false" type="button">Hospitality</button>
+        <button class="filter-chip" data-filter="business" aria-pressed="false" type="button">Business</button>
+        <button class="filter-chip" data-filter="management" aria-pressed="false" type="button">Management</button>
+        <button class="filter-chip" data-filter="english" aria-pressed="false" type="button">English</button>
+      </div>
+      <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data --></div>
+    </div>
+  </section>
 
-        // Course discipline filter
-        const filterButtons = document.querySelectorAll('.filter-pill');
-        const courseCards = document.querySelectorAll('.course-card');
-        const noCoursesMsg = document.getElementById('no-courses-msg');
+  <!-- WHY MCGILL -->
+  <section id="why">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Why McGill Institute</span>
+        <h2>Four reasons students choose us</h2>
+      </div>
+      <div class="why-grid reveal">
+        <div class="why-card">
+          <span class="why-num">01</span>
+          <h3>Nationally registered training</h3>
+          <p>We operate as RTO 45906, so our qualifications are nationally recognised training, not an in-house certificate.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">02</span>
+          <h3>CRICOS-registered for international students</h3>
+          <p>As CRICOS provider 03678G, we can support eligible international students through the visa-linked study pathway.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">03</span>
+          <h3>Five streams, one campus</h3>
+          <p>Engineering, Hospitality, Business, Management and English sit under one roof, so you can study, or change direction, without changing institutes.</p>
+        </div>
+        <div class="why-card">
+          <span class="why-num">04</span>
+          <h3>Based in the heart of Parramatta</h3>
+          <p>Our campus on Cowper Street is a short walk from both Parramatta and Harris Park train stations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterButtons.forEach(b => {
-                    b.setAttribute('aria-pressed', 'false');
-                    b.classList.remove('bg-navy', 'text-offwhite', 'border-navy');
-                });
-                btn.setAttribute('aria-pressed', 'true');
-                btn.classList.add('bg-navy', 'text-offwhite', 'border-navy');
-                const filter = btn.dataset.filter;
-                let visibleCount = 0;
-                courseCards.forEach(card => {
-                    const match = filter === 'all' || card.dataset.discipline === filter;
-                    card.style.display = match ? '' : 'none';
-                    if (match) visibleCount++;
-                });
-                noCoursesMsg.classList.toggle('hidden', visibleCount > 0);
-            });
-        });
-        // Initialize default active state
-        document.querySelector('.filter-pill[data-filter="all"]').classList.add('bg-navy', 'text-offwhite', 'border-navy');
+  <!-- STUDENT LIFE / PARRAMATTA -->
+  <section id="student-life" style="background: var(--bg-dim);">
+    <div class="container life-grid">
+      <div class="life-art reveal" aria-hidden="true">
+        <svg viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice">
+          <rect width="300" height="300" fill="#1E2A5E"/>
+          <rect x="30" y="160" width="40" height="110" fill="#243270"/>
+          <rect x="90" y="110" width="40" height="160" fill="#2A3680"/>
+          <rect x="150" y="140" width="40" height="130" fill="#243270"/>
+          <rect x="210" y="90" width="40" height="180" fill="#2A3680"/>
+          <path d="M0 270 Q150 240 300 270 L300 300 L0 300 Z" fill="#D84727" opacity="0.85"/>
+          <circle cx="250" cy="55" r="26" fill="#E8A33D"/>
+        </svg>
+      </div>
+      <div class="life-copy reveal">
+        <span class="section-eyebrow">Study in Parramatta</span>
+        <h2>Campus life in Sydney's second CBD</h2>
+        <p>Parramatta is one of Sydney's fastest-growing commercial and cultural hubs &mdash; the river foreshore, shops and cafes around Cowper Street are all within easy walking distance of campus, and frequent train and light rail services connect you to greater Sydney.</p>
+        <ul>
+          <li>Two train stations within walking distance: Parramatta and Harris Park.</li>
+          <li>A growing precinct of cafes, retail and public spaces around the CBD.</li>
+          <li>A multi-discipline campus community across trades, hospitality, business and English pathways.</li>
+        </ul>
+        <div class="placeholder-chip">Photo placeholder: real campus photography pending</div>
+      </div>
+    </div>
+  </section>
 
-        // Educational Streams tiles: apply the matching course filter, then scroll to the catalogue
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        function goToStream(discipline) {
-            const targetBtn = document.querySelector('.filter-pill[data-filter="' + discipline + '"]');
-            if (targetBtn) targetBtn.click();
-            document.getElementById('courses').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-        }
+  <!-- PATHWAY -->
+  <section id="pathway">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">How to Enrol</span>
+        <h2>Your pathway, step by step</h2>
+      </div>
+      <div class="transit-rail rail-vertical reveal" role="list" aria-label="Enrolment steps">
+        <div class="rail-line" aria-hidden="true"></div>
+        <div class="rail-stops">
+          <div class="rail-stop" role="listitem">
+            <span class="rail-dot" aria-hidden="true">1</span>
+            <div><h3>Explore streams &amp; courses</h3><p>Browse our five streams and find the course that fits your goals.</p></div>
+          </div>
+          <div class="rail-stop" role="listitem">
+            <span class="rail-dot" aria-hidden="true">2</span>
+            <div><h3>Check entry requirements</h3><p>Entry requirements vary by course and are confirmed directly with our team &mdash; get in touch to check yours.</p></div>
+          </div>
+          <div class="rail-stop" role="listitem">
+            <span class="rail-dot" aria-hidden="true">3</span>
+            <div><h3>Submit an enquiry</h3><p>Send us your details using the enquiry form, including the course you're interested in.</p></div>
+          </div>
+          <div class="rail-stop" role="listitem">
+            <span class="rail-dot" aria-hidden="true">4</span>
+            <div><h3>Speak with our team</h3><p>We'll walk you through fees, intake dates and anything else you need to know.</p></div>
+          </div>
+          <div class="rail-stop" role="listitem">
+            <span class="rail-dot" aria-hidden="true">5</span>
+            <div><h3>Confirm your enrolment</h3><p>Once everything is confirmed, you're ready to start your course.</p></div>
+          </div>
+        </div>
+      </div>
+      <p class="pathway-note">Fees, intake dates and entry requirements are confirmed directly with our team and are not published here &mdash; <a href="#enquiry" style="color:var(--coral-text); font-weight:600;">enquire now</a> for current details.</p>
+    </div>
+  </section>
 
-        // Enquiry modal
-        const enquiryModal = document.getElementById('enquiry-modal');
-        const enquiryDialog = enquiryModal.querySelector('[role="dialog"]');
-        const enquiryContext = document.getElementById('enquiry-context');
-        let modalTriggerEl = null;
+  <!-- AGENTS -->
+  <section id="agents" class="agents-band">
+    <div class="container agents-grid">
+      <div class="reveal">
+        <span class="section-eyebrow">For Education Agents</span>
+        <h2>Partner with McGill Institute Australia</h2>
+        <p>We work with education agents to support international students through enrolment, from initial enquiry to visa-related documentation as a CRICOS-registered provider.</p>
+        <ul class="agent-list">
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Direct contact with our enrolment team</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>CRICOS-registered pathway for international students</li>
+          <li><svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Courses across five streams to match a range of student goals</li>
+        </ul>
+        <a href="#enquiry" class="btn btn-ghost-inverse">Enquire as an Agent</a>
+      </div>
+      <div class="reveal" aria-hidden="true" style="aspect-ratio:4/3; border-radius:24px; overflow:hidden; background:#162052;">
+        <svg viewBox="0 0 300 220" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+          <rect width="300" height="220" fill="#162052"/>
+          <g stroke="#D84727" stroke-width="2" opacity="0.8">
+            <line x1="40" y1="180" x2="120" y2="60"/>
+            <line x1="120" y1="60" x2="200" y2="140"/>
+            <line x1="200" y1="140" x2="260" y2="40"/>
+          </g>
+          <circle cx="40" cy="180" r="7" fill="#E8A33D"/>
+          <circle cx="120" cy="60" r="7" fill="#E8A33D"/>
+          <circle cx="200" cy="140" r="7" fill="#E8A33D"/>
+          <circle cx="260" cy="40" r="7" fill="#D84727"/>
+        </svg>
+      </div>
+    </div>
+  </section>
 
-        function getFocusableIn(dialogEl) {
-            return Array.from(dialogEl.querySelectorAll('button, [href], input, select, textarea'))
-                .filter(el => !el.disabled && el.offsetParent !== null);
-        }
+  <!-- CAMPUS -->
+  <section id="campus">
+    <div class="container campus-grid">
+      <div class="reveal">
+        <span class="section-eyebrow">Campus &amp; Location</span>
+        <h2>Find us in Parramatta</h2>
+        <div class="map-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-7.5 7-12.5A7 7 0 005 9.5C5 14.5 12 22 12 22z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+          <p style="margin:0;">Map embed placeholder. This will be replaced with a live map once an embed source is confirmed.</p>
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
+        </div>
+      </div>
+      <div class="campus-facts reveal">
+        <h3 style="font-size:1.2rem;">Campus details</h3>
+        <dl>
+          <dt>Address</dt><dd>Level 1, 30 Cowper St, Parramatta NSW 2150</dd>
+          <dt>Nearest stations</dt><dd>Parramatta &amp; Harris Park</dd>
+          <dt>Phone</dt><dd><span class="placeholder-chip">[PHONE]</span></dd>
+          <dt>Email</dt><dd><span class="placeholder-chip">[EMAIL]</span></dd>
+        </dl>
+        <p style="font-size:0.88rem; color:var(--text-muted);">Contact details above are placeholders pending confirmation &mdash; use the enquiry form to reach us in the meantime.</p>
+      </div>
+    </div>
+  </section>
 
-        function openEnquiryModal(context) {
-            modalTriggerEl = document.activeElement;
-            document.getElementById('modal-form').classList.remove('hidden');
-            document.getElementById('modal-success').classList.add('hidden');
-            enquiryModal.classList.remove('hidden');
-            enquiryModal.classList.add('flex');
-            if (enquiryContext) enquiryContext.textContent = 'Regarding: ' + context;
-            const f = getFocusableIn(enquiryDialog);
-            if (f.length) f[0].focus();
-        }
-        function closeEnquiryModal() {
-            enquiryModal.classList.add('hidden');
-            enquiryModal.classList.remove('flex');
-            if (modalTriggerEl) modalTriggerEl.focus();
-        }
-        function handleModalSubmit(event) {
-            event.preventDefault();
-            document.getElementById('modal-form').classList.add('hidden');
-            document.getElementById('modal-success').classList.remove('hidden');
-        }
-        enquiryModal.addEventListener('click', (e) => { if (e.target === enquiryModal) closeEnquiryModal(); });
-        document.addEventListener('keydown', (e) => {
-            if (enquiryModal.classList.contains('hidden')) return;
-            if (e.key === 'Escape') { closeEnquiryModal(); return; }
-            if (e.key !== 'Tab') return;
-            const focusable = getFocusableIn(enquiryDialog);
-            if (!focusable.length) return;
-            const first = focusable[0], last = focusable[focusable.length - 1];
-            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-        });
+  <!-- FAQ -->
+  <section id="faq" style="background: var(--bg-dim);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">FAQ</span>
+        <h2>Common questions</h2>
+      </div>
+      <div class="faq-list reveal">
+        <details class="faq-item">
+          <summary>Is McGill Institute Australia part of McGill University in Canada?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">No. McGill Institute Australia is an independent registered training organisation in Parramatta, NSW, and is not affiliated with McGill University in Canada.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What do RTO 45906 and CRICOS 03678G mean?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">RTO 45906 is our registered training organisation number, confirming we deliver nationally recognised qualifications. CRICOS 03678G is our registration to enrol international students.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Can international students study here?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Yes. As a CRICOS-registered provider, we welcome eligible international students, and we work with education agents to support enrolment.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How much do courses cost?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Fees vary by course and are confirmed directly with our enrolment team &mdash; submit an enquiry and we'll send you current pricing.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>When can I start?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Intake dates vary by course. Enquire and our team will confirm the next available start date for your chosen course.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need to meet entry requirements?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Entry requirements differ by course and student type (domestic or international). Our team will confirm what applies to you during your enquiry.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I enrol?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Submit an enquiry below with your course of interest. Our team will guide you through entry requirements, fees and enrolment from there &mdash; see the "How to Enrol" section above for the full pathway.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
 
-        // Main contact form
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const btn = document.getElementById('enquiry-submit-btn');
-            btn.setAttribute('data-state', 'sending');
-            btn.disabled = true;
-            setTimeout(() => {
-                document.getElementById('enquiry-form').classList.add('hidden');
-                document.getElementById('enquiry-success').classList.remove('hidden');
-                btn.removeAttribute('data-state');
-                btn.disabled = false;
-            }, 650);
-        }
-    </script>
+  <!-- ENQUIRY -->
+  <section id="enquiry">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-eyebrow">Get in Touch</span>
+        <h2>Enquire now</h2>
+        <p>Tell us a little about yourself and we'll be in touch. This form does not submit anywhere yet; see the code comment for the backend TODO.</p>
+      </div>
+      <!-- TODO: backend hookup needed. This form is front-end only and does not transmit data anywhere. -->
+      <form class="form-card reveal" id="enquiry-form" novalidate>
+        <div class="form-row">
+          <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+          <input type="text" id="f-name" name="name" required autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+          <input type="email" id="f-email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="f-phone">Phone</label>
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+        </div>
+        <div class="form-row">
+          <label for="f-course">Course of interest</label>
+          <select id="f-course" name="course">
+            <option value="">Select a course</option>
+            <option>Certificate III in Engineering (Fabrication Trade)</option>
+            <option>Certificate IV in Kitchen Management</option>
+            <option>Diploma of Hospitality Management</option>
+            <option>Certificate IV in Business</option>
+            <option>Diploma of Business</option>
+            <option>Graduate Diploma of Management (Learning)</option>
+            <option>General English Programs</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="f-message" name="message" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+        <p class="form-note">* Required fields. We'll respond to your enquiry as soon as possible.</p>
+      </form>
+      <div class="form-card" id="enquiry-success" role="status" aria-live="polite" tabindex="-1">
+        <h3 style="margin-bottom:0.5rem;">Thanks! Your enquiry has been noted.</h3>
+        <p style="margin-bottom:0;">This is a front-end-only demo form, so nothing was actually sent. Once a backend is connected, your message will reach our enrolment team directly.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-name" style="color:var(--paper);">McGill Institute<small style="color:var(--muted-light);">RTO 45906</small></span>
+        <p>Accredited vocational training in Parramatta, NSW.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#streams">Streams</a></li>
+          <li><a href="#courses">Courses</a></li>
+          <li><a href="#agents">For Agents</a></li>
+          <li><a href="#campus">Campus</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#privacy-notice">Privacy Policy</a></li>
+          <li><a href="#terms-notice">Terms of Use</a></li>
+          <li><a href="#disclaimer-notice">Disclaimer</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Level 1, 30 Cowper St</li>
+          <li>Parramatta NSW 2150</li>
+          <li><span class="placeholder-chip">[PHONE]</span></li>
+          <li><span class="placeholder-chip">[EMAIL]</span></li>
+        </ul>
+      </div>
+    </div>
+    <p id="disclaimer-notice" style="font-size:0.85rem; max-width:70ch;">McGill Institute Australia is not affiliated with, and should not be confused with, McGill University in Canada.</p>
+    <p id="privacy-notice" style="font-size:0.85rem; max-width:70ch;"><strong>Privacy Policy:</strong> placeholder. A full privacy policy will be published here once confirmed with the institute.</p>
+    <p id="terms-notice" style="font-size:0.85rem; max-width:70ch;"><strong>Terms of Use:</strong> placeholder. Full terms of use will be published here once confirmed with the institute.</p>
+    <div class="footer-bottom">
+      <span class="reg-codes">RTO 45906 &middot; CRICOS 03678G &middot; ABN 91 835 873 060</span>
+      <span>&copy; <span id="year"></span> McGill Institute Australia</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Course detail modal -->
+<div class="modal-backdrop" id="course-modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" id="course-modal">
+    <div class="modal-head">
+      <div>
+        <span class="tag" id="modal-tag">Tag</span>
+        <h3 id="modal-title" style="margin-top:0.5rem;">Course title</h3>
+      </div>
+      <button class="modal-close" id="modal-close" type="button" aria-label="Close course details">&times;</button>
+    </div>
+    <p id="modal-desc"></p>
+    <div class="modal-meta">
+      <div class="row"><span>Course code</span><strong id="modal-code"></strong></div>
+      <div class="row"><span>Fees</span><strong>On enquiry</strong></div>
+      <div class="row"><span>Duration</span><strong>To be confirmed</strong></div>
+      <div class="row"><span>Next intake</span><strong>To be confirmed</strong></div>
+    </div>
+    <a href="#enquiry" class="btn btn-primary" id="modal-enquire">Enquire about this course</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Theme toggle (session only, no storage per external rules) ---------- */
+  var root = document.documentElement;
+  var themeToggle = document.getElementById('theme-toggle');
+  var themeIcon = document.getElementById('theme-icon');
+  function systemPrefersDark() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  var currentTheme = systemPrefersDark() ? 'dark' : 'light';
+  function applyTheme(mode) {
+    currentTheme = mode;
+    root.setAttribute('data-theme', mode);
+    themeIcon.innerHTML = mode === 'dark' ? '&#9790;' : '&#9728;';
+    themeToggle.setAttribute('aria-pressed', mode === 'dark' ? 'true' : 'false');
+  }
+  applyTheme(currentTheme);
+  themeToggle.addEventListener('click', function () {
+    applyTheme(currentTheme === 'dark' ? 'light' : 'dark');
+  });
+
+  /* ---------- Mobile nav ---------- */
+  var navToggle = document.getElementById('nav-toggle');
+  var mobileNav = document.getElementById('mobile-nav');
+  navToggle.addEventListener('click', function () {
+    var isOpen = mobileNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  document.querySelectorAll('.mnav-link').forEach(function (link) {
+    link.addEventListener('click', function () {
+      mobileNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ---------- Course data ---------- */
+  var COURSES = [
+    { id: 'mem31922', code: 'MEM31922', name: 'Certificate III in Engineering (Fabrication Trade)', stream: 'engineering', tagLabel: 'Engineering', desc: 'Hands-on trade training in metal fabrication, welding, and workshop safety, building the practical skills needed for a career on the shop floor.' },
+    { id: 'sit40521', code: 'SIT40521', name: 'Certificate IV in Kitchen Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Kitchen operations and supervision training covering food safety, menu planning, and leading a commercial kitchen team.' },
+    { id: 'sit50422', code: 'SIT50422', name: 'Diploma of Hospitality Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Broader hospitality leadership training across food and beverage, accommodation, and guest service operations, for supervisory and management roles.' },
+    { id: 'bsb40120', code: 'BSB40120', name: 'Certificate IV in Business', stream: 'business', tagLabel: 'Business', desc: 'Core business skills training in communication, administration, and workplace operations for roles across any industry.' },
+    { id: 'bsb50120', code: 'BSB50120', name: 'Diploma of Business', stream: 'business', tagLabel: 'Business', desc: 'Advanced business training in planning, operations, and leadership, for graduates moving into coordination or management roles.' },
+    { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate-level management training focused on leading learning and development within an organisation.' },
+    { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', stream: 'english', tagLabel: 'English', desc: 'English language training for students building the language skills needed for further study or daily life in Australia.' }
+  ];
+
+  var grid = document.getElementById('course-grid');
+  COURSES.forEach(function (c) {
+    var card = document.createElement('article');
+    card.className = 'course-card';
+    card.id = 'course-' + c.id;
+    card.setAttribute('data-stream', c.stream);
+    card.innerHTML =
+      '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
+      '<h3>' + c.name + '</h3>' +
+      '<p class="course-code mono">' + c.code + '</p>' +
+      '<p>' + c.desc + '</p>' +
+      '<div class="course-meta"><span><strong>Fees:</strong> On enquiry</span><span><strong>Intake:</strong> TBC</span></div>' +
+      '<button type="button" class="btn btn-outline" data-course-id="' + c.id + '">View details</button>';
+    grid.appendChild(card);
+  });
+
+  /* ---------- Filter ---------- */
+  var filterChips = document.querySelectorAll('.filter-chip');
+  function applyFilter(stream) {
+    document.querySelectorAll('.course-card').forEach(function (card) {
+      var match = stream === 'all' || card.getAttribute('data-stream') === stream;
+      card.style.display = match ? '' : 'none';
+    });
+    filterChips.forEach(function (chip) {
+      chip.setAttribute('aria-pressed', chip.getAttribute('data-filter') === stream ? 'true' : 'false');
+    });
+  }
+  filterChips.forEach(function (chip) {
+    chip.addEventListener('click', function () { applyFilter(chip.getAttribute('data-filter')); });
+  });
+
+  /* ---------- Stream rail -> scroll + filter ---------- */
+  document.querySelectorAll('.stream-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var stream = btn.getAttribute('data-stream');
+      applyFilter(stream);
+      var target = document.getElementById('courses');
+      target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+
+  /* ---------- Course modal ---------- */
+  var modalBackdrop = document.getElementById('course-modal-backdrop');
+  var modal = document.getElementById('course-modal');
+  var modalTitle = document.getElementById('modal-title');
+  var modalTag = document.getElementById('modal-tag');
+  var modalDesc = document.getElementById('modal-desc');
+  var modalCode = document.getElementById('modal-code');
+  var modalClose = document.getElementById('modal-close');
+  var lastFocused = null;
+
+  function openModal(courseId) {
+    var c = COURSES.filter(function (x) { return x.id === courseId; })[0];
+    if (!c) return;
+    modalTitle.textContent = c.name;
+    modalTag.textContent = c.tagLabel;
+    modalTag.className = 'tag tag-' + c.stream;
+    modalDesc.textContent = c.desc;
+    modalCode.textContent = c.code;
+    lastFocused = document.activeElement;
+    modalBackdrop.classList.add('open');
+    modalClose.focus();
+    document.addEventListener('keydown', onModalKeydown);
+  }
+  function closeModal() {
+    modalBackdrop.classList.remove('open');
+    document.removeEventListener('keydown', onModalKeydown);
+    if (lastFocused) lastFocused.focus();
+  }
+  function onModalKeydown(e) {
+    if (e.key === 'Escape') { closeModal(); return; }
+    if (e.key === 'Tab') {
+      var focusable = modal.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  grid.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-course-id]');
+    if (btn) openModal(btn.getAttribute('data-course-id'));
+  });
+  modalClose.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', function (e) { if (e.target === modalBackdrop) closeModal(); });
+  document.getElementById('modal-enquire').addEventListener('click', closeModal);
+
+  /* ---------- Enquiry form (front-end only) ---------- */
+  var form = document.getElementById('enquiry-form');
+  var success = document.getElementById('enquiry-success');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    form.style.display = 'none';
+    success.classList.add('show');
+    success.focus();
+  });
+
+  /* ---------- Scroll reveal ---------- */
+  if ('IntersectionObserver' in window && !prefersReducedMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in-view'); });
+  }
+})();
+</script>
 </body>
 </html>
