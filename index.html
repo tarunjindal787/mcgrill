@@ -478,29 +478,91 @@
   }
   .btn-ghost-small:hover { color: var(--coral-text); }
 
-  /* ============ Why McGill: asymmetrical Bento grid ============ */
+  /* ============ Why McGill: staggered asymmetric grid ============ */
+  #why { position: relative; overflow: hidden; }
+  #why::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 55% at 50% 15%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 55% at 50% 15%, #000 0%, transparent 75%);
+  }
+  #why .container { position: relative; z-index: 1; }
+
   .why-grid { display: grid; gap: 1.25rem; }
   .why-card {
-    display: flex; flex-direction: column; gap: 0.75rem; justify-content: flex-end;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 1rem; justify-content: flex-end;
     background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
     padding: var(--space-md); transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   }
   .why-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -18px rgba(20,23,43,0.25); border-color: var(--coral-text); }
+  .why-card-top { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; position: relative; z-index: 1; }
   .why-num { font-family: var(--font-display); font-size: 2.25rem; font-weight: 700; color: var(--coral-text); line-height: 1; }
+  .why-card-body { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 0.6rem; }
   .why-card h3 { font-size: 1.15rem; margin-bottom: 0; }
   .why-card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0; }
+
+  /* Glowing glass badge: white-glass on dark surfaces, tinted-glass on light */
+  .why-badge {
+    display: inline-flex; align-items: center; font-family: var(--font-mono); font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1;
+    padding: 0.5rem 0.9rem; border-radius: var(--radius-pill); white-space: nowrap;
+    background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.35); color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 0 22px -6px rgba(199,63,34,0.55);
+  }
+  .why-badge--tint {
+    background: rgba(199,63,34,0.08); border-color: rgba(199,63,34,0.22); color: var(--coral-text);
+    box-shadow: 0 0 0 1px rgba(199,63,34,0.05) inset, 0 0 20px -8px rgba(199,63,34,0.45);
+  }
+
+  /* Card 01: featured, rust-orange-to-brown gradient */
+  .why-card--feature {
+    background: linear-gradient(160deg, var(--coral) 0%, var(--coral-deep) 100%);
+    border-color: transparent; box-shadow: 0 30px 60px -32px rgba(92,31,17,0.55);
+  }
+  .why-card--feature .why-num, .why-card--feature h3, .why-card--feature p { color: #fff; }
+  .why-card--feature .why-num { font-size: 3.25rem; opacity: 0.92; }
+  .why-card--feature h3 { font-size: 1.4rem; }
+  .why-card--feature:hover { border-color: transparent; }
+  .why-card-seal {
+    position: absolute; top: -8%; right: -12%; width: 62%; aspect-ratio: 1; opacity: 0.14;
+    pointer-events: none; z-index: 0;
+  }
+  .why-card-seal svg { width: 100%; height: 100%; display: block; }
+  .why-learn-more {
+    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.25rem;
+    color: #fff; font-weight: 600; font-size: 0.9rem; text-decoration: none; width: fit-content;
+    border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 0.1rem;
+  }
+  .why-learn-more svg { transition: transform 0.2s ease; }
+  .why-learn-more:hover { border-color: #fff; }
+  .why-learn-more:hover svg { transform: translateX(4px); }
+
+  /* Decorative art: crisp geometric SVGs, not photographic */
+  .why-card-art { color: var(--coral-text); opacity: 0.9; flex-shrink: 0; }
+  .why-card-art svg { display: block; width: 100%; height: 100%; }
+  .why-card-art--globe { width: 72px; height: 72px; align-self: flex-end; }
+  .why-card-art--branch { position: absolute; top: 1.25rem; right: 1.25rem; width: 76px; height: 76px; z-index: 0; opacity: 0.8; }
+  .why-card-art--pin { position: absolute; top: 1.1rem; right: 1.1rem; width: 60px; height: 60px; z-index: 0; }
+
   @media (min-width: 760px) {
-    .why-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(130px, auto); }
-    .why-card:nth-child(1) { grid-column: span 2; grid-row: span 2; padding: var(--space-lg); background: linear-gradient(160deg, var(--coral) 0%, var(--coral-deep) 100%); border-color: transparent; }
-    .why-card:nth-child(1) .why-num,
-    .why-card:nth-child(1) h3,
-    .why-card:nth-child(1) p { color: #fff; }
-    .why-card:nth-child(1) .why-num { font-size: 3.5rem; opacity: 0.85; }
-    .why-card:nth-child(1) h3 { font-size: 1.5rem; }
-    .why-card:nth-child(1):hover { border-color: transparent; }
-    .why-card:nth-child(2) { grid-column: span 2; grid-row: span 1; }
-    .why-card:nth-child(3) { grid-column: span 1; grid-row: span 1; }
-    .why-card:nth-child(4) { grid-column: span 1; grid-row: span 1; }
+    .why-grid {
+      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-template-rows: minmax(190px, auto) minmax(220px, auto);
+    }
+    .why-card:nth-child(1) { grid-column: 1; grid-row: 1 / 3; padding: var(--space-lg); }
+    .why-card:nth-child(2) {
+      grid-column: 2 / 4; grid-row: 1;
+      flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem;
+    }
+    .why-card:nth-child(2) .why-card-body { flex: 1; }
+    .why-card:nth-child(3) { grid-column: 2; grid-row: 2; }
+    .why-card:nth-child(4) { grid-column: 3; grid-row: 2; }
   }
 
   /* ============ Student life ============ */
@@ -539,7 +601,7 @@
 
   /* ============ FAQ ============ */
   .faq-list { display: grid; gap: 0.9rem; max-width: 760px; }
-  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); overflow: hidden; }
+  .faq-item { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); overflow: hidden; scroll-margin-top: calc(var(--header-h) + 16px); }
   .faq-item summary {
     cursor: pointer; list-style: none; padding: 1.1rem 1.4rem; font-weight: 600; display: flex;
     align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px;
@@ -829,26 +891,102 @@
         <h2>Four reasons students choose us</h2>
       </div>
       <div class="why-grid reveal">
-        <div class="why-card tilt-card">
-          <span class="why-num">01</span>
-          <h3>Nationally registered training</h3>
-          <p>We operate as RTO 45906, so our qualifications are nationally recognised training, not an in-house certificate.</p>
+
+        <div class="why-card why-card--feature tilt-card">
+          <div class="why-card-seal" aria-hidden="true">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="92" stroke="#fff" stroke-width="2"/>
+              <circle cx="100" cy="100" r="74" stroke="#fff" stroke-width="2"/>
+              <circle cx="100" cy="100" r="56" stroke="#fff" stroke-width="1.5" stroke-dasharray="2 7"/>
+              <circle cx="100" cy="100" r="10" fill="#fff"/>
+              <g stroke="#fff" stroke-width="2">
+                <line x1="192" y1="100" x2="180" y2="100"/>
+                <line x1="180" y1="146" x2="169" y2="140"/>
+                <line x1="146" y1="180" x2="140" y2="169"/>
+                <line x1="100" y1="192" x2="100" y2="180"/>
+                <line x1="54" y1="180" x2="60" y2="169"/>
+                <line x1="20" y1="146" x2="31" y2="140"/>
+                <line x1="8" y1="100" x2="20" y2="100"/>
+                <line x1="20" y1="54" x2="31" y2="60"/>
+                <line x1="54" y1="20" x2="60" y2="31"/>
+                <line x1="100" y1="8" x2="100" y2="20"/>
+                <line x1="146" y1="20" x2="140" y2="31"/>
+                <line x1="180" y1="54" x2="169" y2="60"/>
+              </g>
+            </svg>
+          </div>
+          <div class="why-card-body">
+            <div class="why-card-top">
+              <span class="why-num">01</span>
+              <span class="why-badge">RTO 45906</span>
+            </div>
+            <h3>Nationally registered training</h3>
+            <p>We operate as RTO 45906, so our qualifications are nationally recognised training, not an in-house certificate.</p>
+            <a href="#faq-rto" class="why-learn-more">Learn more
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
         </div>
+
         <div class="why-card tilt-card">
-          <span class="why-num">02</span>
-          <h3>CRICOS-registered for international students</h3>
-          <p>As CRICOS provider 03678G, we can support eligible international students through the visa-linked study pathway.</p>
+          <div class="why-card-body">
+            <div class="why-card-top">
+              <span class="why-num">02</span>
+              <span class="why-badge why-badge--tint">CRICOS 03678G</span>
+            </div>
+            <h3>CRICOS-registered for international students</h3>
+            <p>As CRICOS provider 03678G, we can support eligible international students through the visa-linked study pathway.</p>
+          </div>
+          <div class="why-card-art why-card-art--globe" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="38" cy="50" r="27" stroke="currentColor" stroke-width="2"/>
+              <ellipse cx="38" cy="50" rx="27" ry="10.5" stroke="currentColor" stroke-width="1.4"/>
+              <ellipse cx="38" cy="50" rx="10.5" ry="27" stroke="currentColor" stroke-width="1.4"/>
+              <line x1="11" y1="50" x2="65" y2="50" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M46 27 Q80 16 90 46" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 5" fill="none"/>
+              <path d="M90 46 l-9 -3 l2 6 l-10 1 l3 5 l13 -1 z" fill="currentColor"/>
+            </svg>
+          </div>
         </div>
+
         <div class="why-card tilt-card">
-          <span class="why-num">03</span>
-          <h3>Five streams, one campus</h3>
-          <p>Engineering, Hospitality, Business, Management and English sit under one roof, so you can study, or change direction, without changing institutes.</p>
+          <div class="why-card-art why-card-art--branch" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="15" r="7" fill="currentColor"/>
+              <path d="M50 22 L20 56" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M50 22 L37 66" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M50 22 L50 71" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M50 22 L63 66" stroke="currentColor" stroke-width="1.6"/>
+              <path d="M50 22 L80 56" stroke="currentColor" stroke-width="1.6"/>
+              <circle cx="20" cy="58" r="5.5" fill="currentColor" opacity="0.85"/>
+              <circle cx="37" cy="68" r="5.5" fill="currentColor" opacity="0.85"/>
+              <circle cx="50" cy="73" r="5.5" fill="currentColor" opacity="0.85"/>
+              <circle cx="63" cy="68" r="5.5" fill="currentColor" opacity="0.85"/>
+              <circle cx="80" cy="58" r="5.5" fill="currentColor" opacity="0.85"/>
+            </svg>
+          </div>
+          <div class="why-card-body">
+            <span class="why-num">03</span>
+            <h3>Five streams, one campus</h3>
+            <p>Engineering, Hospitality, Business, Management and English sit under one roof, so you can study, or change direction, without changing institutes.</p>
+          </div>
         </div>
+
         <div class="why-card tilt-card">
-          <span class="why-num">04</span>
-          <h3>Based in the heart of Parramatta</h3>
-          <p>Our campus on Cowper Street is a short walk from both Parramatta and Harris Park train stations.</p>
+          <div class="why-card-art why-card-art--pin" aria-hidden="true">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 10C33 10 20 23.5 20 40c0 22 30 50 30 50s30-28 30-50c0-16.5-13-30-30-30Z" fill="var(--coral)"/>
+              <circle cx="50" cy="40" r="13" fill="#fff"/>
+              <circle cx="50" cy="40" r="6" fill="var(--amber)"/>
+            </svg>
+          </div>
+          <div class="why-card-body">
+            <span class="why-num">04</span>
+            <h3>Based in the heart of Parramatta</h3>
+            <p>Our campus on Cowper Street is a short walk from both Parramatta and Harris Park train stations.</p>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -968,7 +1106,7 @@
           <summary>Is McGill Institute Australia part of McGill University in Canada?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><p style="margin:0;">No. McGill Institute Australia is an independent registered training organisation in Parramatta, NSW, and is not affiliated with McGill University in Canada.</p></div>
         </details>
-        <details class="faq-item">
+        <details class="faq-item" id="faq-rto">
           <summary>What do RTO 45906 and CRICOS 03678G mean?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><p style="margin:0;">RTO 45906 is our registered training organisation number, confirming we deliver nationally recognised qualifications. CRICOS 03678G is our registration to enrol international students.</p></div>
         </details>
@@ -1301,6 +1439,16 @@
     window.addEventListener('resize', syncHeaderHeight);
     window.addEventListener('load', syncHeaderHeight);
   }
+
+  /* ---------- Deep-link to a specific FAQ item (e.g. "Learn more" from Why McGill) ---------- */
+  var openFaqFromHash = function () {
+    var id = window.location.hash.slice(1);
+    if (!id) return;
+    var target = document.getElementById(id);
+    if (target && target.tagName === 'DETAILS') target.open = true;
+  };
+  openFaqFromHash();
+  window.addEventListener('hashchange', openFaqFromHash);
 
   /* ---------- Mobile nav ---------- */
   var navToggle = document.getElementById('nav-toggle');
