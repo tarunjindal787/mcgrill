@@ -195,14 +195,20 @@
     border: 2px solid transparent;
     cursor: pointer;
     text-decoration: none;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, backdrop-filter 0.15s ease;
   }
   .btn-primary { background: var(--coral); color: #fff; }
-  .btn-primary:hover { background: var(--coral-deep); transform: translateY(-2px); box-shadow: 0 10px 20px -8px rgba(15,17,30,0.35); }
+  .btn-primary:hover {
+    background: var(--coral-deep); transform: translateY(-3px);
+    box-shadow: 0 14px 30px -10px rgba(15,17,30,0.4), 0 0 28px -4px rgba(199,63,34,0.55);
+  }
   .btn-outline { background: transparent; border-color: var(--border); color: var(--text); }
   .btn-outline:hover { border-color: var(--coral-text); color: var(--coral-text); transform: translateY(-2px); }
-  .btn-ghost-inverse { background: transparent; border-color: rgba(255,255,255,0.35); color: var(--white); }
-  .btn-ghost-inverse:hover { background: var(--coral); border-color: var(--coral); color: #fff; }
+  .btn-ghost-inverse { background: transparent; border-color: rgba(255,255,255,0.4); color: var(--white); }
+  .btn-ghost-inverse:hover {
+    background: rgba(255,255,255,0.14); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border-color: #fff; color: #fff; transform: translateY(-2px);
+  }
   .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
 
   /* Magnetic-pull + cursor light-flare, applied to .btn-primary via JS on fine-pointer devices */
@@ -280,28 +286,32 @@
   .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
   .hero-slide::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.15) 70%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.24) 68%, transparent 100%);
   }
   .hero-content {
     position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
     padding: 4rem 1.5rem clamp(5rem, 8vw, 7rem);
     color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 55%, transparent 100%);
+    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
   }
   .hero-content > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
-  .hero-disclaimer {
+  .hero-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.1rem; margin-bottom: 1.5rem; }
+  .hero-badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    font-size: 0.78rem; color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.3);
-    border-radius: var(--radius-pill); padding: 0.4rem 0.9rem 0.4rem 0.6rem; margin-bottom: 1.5rem;
-    background: rgba(255,255,255,0.05); backdrop-filter: blur(8px);
+    font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #fff; border: 1px solid rgba(255,255,255,0.3);
+    border-radius: var(--radius-pill); padding: 0.45rem 1rem 0.45rem 0.65rem;
+    background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
   }
-  .hero-disclaimer .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral-bright); flex-shrink: 0; }
+  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral-bright); flex-shrink: 0; }
+  .hero-disclaimer { font-size: 0.78rem; color: rgba(255,255,255,0.78); max-width: 42ch; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
   .hero h1 {
     font-size: var(--fs-hero); max-width: 16ch; color: #fff; letter-spacing: -0.01em;
-    text-shadow: 0 2px 16px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 16px rgba(0,0,0,0.6);
   }
   .hero h1 em { font-style: normal; font-weight: 800; color: var(--coral-bright); }
-  .hero-lede { font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 46ch; text-shadow: 0 1px 8px rgba(0,0,0,0.5); }
+  .hero-lede { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.95); max-width: 600px; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
 
   /* Kinetic text reveal: each hero text element fades/tracks in; replayed on slide change via JS toggling .kinetic-play */
@@ -658,7 +668,10 @@
       </div>
     </div>
     <div class="hero-content" id="hero-content">
-      <p class="hero-disclaimer hero-kinetic"><span class="dot" aria-hidden="true"></span>McGill Institute Australia is not affiliated with McGill University, Canada.</p>
+      <div class="hero-badge-row hero-kinetic">
+        <span class="hero-badge"><span class="dot" aria-hidden="true"></span>RTO 45906 &middot; CRICOS 03678G &middot; PARRAMATTA NSW</span>
+        <p class="hero-disclaimer">Not affiliated with McGill University, Canada.</p>
+      </div>
       <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
       <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English. Our campus is a short walk from Parramatta and Harris Park stations.</p>
       <div class="hero-ctas hero-kinetic">
