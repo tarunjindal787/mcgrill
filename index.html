@@ -110,6 +110,8 @@
     --radius-pill: 999px;
     --radius-focus: 6px;
 
+    --header-h: 88px; /* synced to the real header height via JS; this is the pre-JS fallback */
+
     /* Default (base) page tokens -- used only by chrome that isn't part of
        the alternating sequence (header/nav, modals). Content sections set
        their own fixed --bg/--text/--surface/--border via .tone-dark/.tone-light. */
@@ -231,6 +233,7 @@
     max-width: 1200px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     padding: 0.7rem 1.1rem;
+    min-height: calc(var(--header-h) - 1rem);
     background: rgba(11,15,23,0.55);
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: var(--radius-pill);
@@ -238,6 +241,9 @@
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     box-shadow: 0 8px 32px -12px rgba(0,0,0,0.4);
     transition: background 0.3s ease;
+  }
+  @media (max-width: 480px) {
+    :root { --header-h: 80px; }
   }
   .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
   .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--coral); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -289,13 +295,17 @@
     background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.24) 68%, transparent 100%);
   }
   .hero-content {
-    position: absolute; left: 0; right: 0; bottom: 0; z-index: 5;
-    padding: 4rem 1.5rem clamp(5rem, 8vw, 7rem);
+    position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 5;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow-y: auto;
+  }
+  .hero-content-inner {
+    padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(5rem, 8vw, 7rem);
     color: #fff;
     background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 55%, transparent 100%);
     backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
   }
-  .hero-content > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
+  .hero-content-inner > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
   .hero-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.1rem; margin-bottom: 1.5rem; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -668,15 +678,17 @@
       </div>
     </div>
     <div class="hero-content" id="hero-content">
-      <div class="hero-badge-row hero-kinetic">
-        <span class="hero-badge"><span class="dot" aria-hidden="true"></span>RTO 45906 &middot; CRICOS 03678G &middot; PARRAMATTA NSW</span>
-        <p class="hero-disclaimer">Not affiliated with McGill University, Canada.</p>
-      </div>
-      <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
-      <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English. Our campus is a short walk from Parramatta and Harris Park stations.</p>
-      <div class="hero-ctas hero-kinetic">
-        <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
-        <a href="#courses" class="btn btn-ghost-inverse">Explore Courses</a>
+      <div class="hero-content-inner">
+        <div class="hero-badge-row hero-kinetic">
+          <span class="hero-badge"><span class="dot" aria-hidden="true"></span>RTO 45906 &middot; CRICOS 03678G &middot; PARRAMATTA NSW</span>
+          <p class="hero-disclaimer">Not affiliated with McGill University, Canada.</p>
+        </div>
+        <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
+        <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English. Our campus is a short walk from Parramatta and Harris Park stations.</p>
+        <div class="hero-ctas hero-kinetic">
+          <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
+          <a href="#courses" class="btn btn-ghost-inverse">Explore Courses</a>
+        </div>
       </div>
     </div>
     <div class="hero-progress" id="hero-progress" role="group" aria-label="Slide selection">
@@ -1273,6 +1285,17 @@
   }
   if (fineHover && !prefersReducedMotion) {
     document.querySelectorAll('.why-card.tilt-card').forEach(attachTilt);
+  }
+
+  /* ---------- Header height sync (keeps hero content clear of the fixed header) ---------- */
+  var siteHeader = document.querySelector('.site-header');
+  if (siteHeader) {
+    var syncHeaderHeight = function () {
+      document.documentElement.style.setProperty('--header-h', siteHeader.offsetHeight + 'px');
+    };
+    syncHeaderHeight();
+    window.addEventListener('resize', syncHeaderHeight);
+    window.addEventListener('load', syncHeaderHeight);
   }
 
   /* ---------- Mobile nav ---------- */
