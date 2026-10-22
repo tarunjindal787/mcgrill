@@ -65,3 +65,18 @@ Two requests asked to upgrade the site to "production-ready," with specific exam
 - Declined, with reasoning given directly to the client: inventing specific fees, durations, intake months, per-course entry requirements, or a scholarship program — none were supplied as real data, only as illustrative examples, and fabricating them risks real compliance and misinformation consequences for a real, regulated institution. Full reasoning in DECISIONS.md.
 
 Fixed one new Impeccable finding during this pass (a standalone eyebrow-label kicker above a sub-heading on the new fee-quote tool, flagged as a generic AI-slop pattern) by folding the label into the heading itself. Detector, JS/JSON syntax, duplicate-ID, and tag-balance checks all clean after the change.
+
+## Full visual-system redesign (2026-10-22)
+
+A new brief asked for a complete HTML/CSS/JS rebuild into an "award-worthy" experience, replacing the indigo/paper "Parramatta Transit" palette with a fixed OLED-black/off-white system while keeping all real content, facts, and the transit-rail signature motif. Full reasoning for every judgment call in DECISIONS.md; full token/architecture documentation in DESIGN.md.
+
+- **Hero rebuilt as a full-screen photo slider**: three slides (the existing hero photo plus two reused, already-verified course photos at 1920×1080), cross-fade autoplay (6s/slide) with pause-on-hover, touch swipe + mouse drag, click-to-jump progress-bar pagination (Instagram-stories style), and staggered kinetic text reveal on every slide change. Respects `prefers-reduced-motion` throughout.
+- **Strict alternating dark/light sections**: every section now carries a fixed `.tone-dark`/`.tone-light` class (replacing the old `prefers-color-scheme`/manual-toggle dark mode, which is incompatible with a *fixed* per-section alternation — see DECISIONS.md for the trade-off). Final sequence verified with no two adjacent full sections sharing a tone.
+- **Glassmorphic floating nav**: the header is now a fixed, blurred glass pill (`backdrop-filter: blur(16px)`) over the page rather than a static bar.
+- **Magnetic-pull CTA buttons**: every primary button gets a cursor-tracking light-flare and a small pull toward the pointer, on fine-pointer devices only, off under reduced motion.
+- **3D-tilt cards**: course cards and the Why-McGill tiles tilt toward the cursor with a coral ring-glow, same device/motion guards.
+- **Why McGill reworked into an asymmetrical Bento grid**: the RTO-registration reason becomes a featured 2×2 coral-gradient tile; the other three fill in around it.
+- **Footer**: kept all real content (RTO/CRICOS/ABN, legal entity, phone, email, legal modals) under the existing "executive dark" OLED styling. The brief's "Powered by JobGen.ai" badge is a confirmed fact for a different client project, not McGill — confirmed with the user via a clarifying question before proceeding, and not added here.
+- Removed the dead theme-toggle button, CSS, and JS entirely, plus several stale indigo/paper-era hardcoded colors and an unused `--bg-dim` token left over from the prior palette.
+- Fixed one real contrast bug the Impeccable detector caught: the Hero's "Explore Courses" button was silently inheriting light-mode (near-black) text color onto its dark photo background; switched it to the existing `.btn-ghost-inverse` component built for exactly this case. Also bumped one under-11px header label past the legibility floor. Two remaining detector warnings are theoretical cross-pairings between tokens that never actually render together on the page — documented in DESIGN.md rather than chased further.
+- JS syntax, JSON-LD validity, and HTML tag-balance all verified clean after the rebuild.

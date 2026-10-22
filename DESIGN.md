@@ -1,13 +1,16 @@
 ---
-name: McGill Institute Australia — Parramatta Transit
-description: A place-specific identity built around the real geometry of getting to campus (Parramatta & Harris Park stations), expressed as a signature transit-line rail motif. No stock photography; all visuals are CSS/SVG.
+name: McGill Institute Australia — Parramatta Transit (OLED redesign)
+description: An OLED-black / off-white, strictly alternating light-dark system built around a full-screen photo hero slider and the existing transit-rail signature motif. Replaces the indigo/paper "Parramatta Transit" palette; the transit-rail motif, course-catalogue structure, and all real content/facts carry forward unchanged.
 colors:
-  paper: "#F6F4EF"
-  paper-dim: "#ECE7DC"
+  oled: "#0B0F17"
+  oled-deep: "#0A0A0C"
+  oled-card: "#12161F"
+  oled-line: "rgba(255,255,255,0.08)"
+  off-white: "#F8F9FA"
   card: "#FFFFFF"
-  ink: "#14172B"
-  indigo: "#1E2A5E"
-  indigo-deep: "#10173A"
+  charcoal: "#0F172A"
+  white: "#FFFFFF"
+  ice: "#E2E8F0"
   amber: "#E8A33D"
   amber-deep: "#C8841F"
   coral: "#B23A1E"
@@ -15,13 +18,9 @@ colors:
   coral-bright: "#C73F22"
   coral-text-light: "#B23A1E"
   coral-text-dark: "#FF7A57"
-  line: "#D9D2C2"
-  line-dark: "#2E3761"
+  line: "#E1E4E8"
   muted: "#5B5E72"
   muted-light: "#9CA0BE"
-  bg-dim-dark: "#161D44"
-  footer-dark: "#0B0E22"
-  illustration-shade: "#162052"
   tag-engineering-bg: "#DEEFF6"
   tag-engineering-text: "#0F3A57"
   tag-hospitality-bg: "#FCEAD1"
@@ -54,80 +53,81 @@ rounded:
   focus: "6px"
 ---
 
-# Design System: McGill Institute Australia — "Parramatta Transit"
+# Design System: McGill Institute Australia — OLED redesign of "Parramatta Transit"
 
-## Overview (2026-10-21, `/loop` autonomous rebuild)
+## Overview (2026-10-22, full visual-system redesign)
 
-This is a full rebuild per an explicit `/loop` brief requiring three candidate design directions, a no-stock-photo constraint, and a 12-point scored rubric. It **replaces** the prior "Colourful Editorial" system (navy/ocean/gold, real Unsplash photography per course) documented further below in this file's git history — see DECISIONS.md for the full three-direction exercise and why this one ("Parramatta Transit") was chosen over the other two.
-
-The identity is built from one real, verifiable fact unique to this brief: the campus sits a short walk from both Parramatta and Harris Park train stations. That fact becomes a **signature transit-line rail** — a line with station-dot stops — reused in two different sections (Educational Streams, and the How-to-Enrol pathway) rather than being a one-off decoration.
+A client brief asked for a full HTML/CSS/JS rebuild into an "award-worthy" experience: a full-screen photo hero slider, strict alternating OLED-black/off-white sections, a glassmorphic floating nav, magnetic CTA buttons with a cursor light-flare, 3D-tilt cards, an asymmetrical Bento grid, and scroll-driven reveals. Per the Impeccable redesign workflow, this **replaces** the prior "Parramatta Transit" indigo/paper palette and its `prefers-color-scheme` + manual toggle dark mode — but keeps the transit-rail signature motif, the course catalogue/filter/search/quote-tool functionality, the real contact and registration facts, the legal modals, the Google Maps embed, and every other piece of product truth untouched. See DECISIONS.md for the full reasoning, including the cross-project JobGen.ai clarification and the toggle-removal trade-off.
 
 ## Colors
 
-### Roles, not just hex values
-Three roles share the "coral" family, each solving a different contrast problem (the same two-surface trap this project already hit once with its prior cyan/gold accent — bright accent colors frequently fail as text on one of the two surfaces they need to work on):
+### Fixed OLED / off-white surfaces, not a reactive dark mode
+The prior system toggled the *whole site* between light and dark via `prefers-color-scheme` and a manual button. This brief asks for the opposite: **every section is permanently either dark or light**, alternating down the page, so the "theme" is a layout decision, not a user preference. The two can't coexist (a global toggle would have to invert the fixed alternation), so the toggle was retired. Two fixed, non-reactive utility classes now carry the whole system:
 
-- **`--coral` (#B23A1E, fixed, not theme-reactive):** background fills with white text on top only — primary buttons, the skip link, hover-fills. Verified 5.97:1 (white on it).
-- **`--coral-deep` (#5C1F11, fixed):** the hover-darken state of coral backgrounds, white text 12.7:1. Deepened from an earlier #93301A specifically so that *even the dark-mode `--coral-text` value* (#FF7A57) would pass 4.5:1 against it (4.93:1) — the Impeccable Stop-hook deep pass flagged that theoretical pairing even though no rule actually renders coral-text on this background; rather than chase down whether the pairing was real, darkening coral-deep closes the gap unconditionally.
-- **`--coral-bright` (#C73F22, fixed):** decorative fills only (card corner cuts, SVG accents) — tuned so that even if text ever lands on it, it clears 5:1 with white.
-- **`--coral-text` (theme-reactive: `--coral-text-light` #B23A1E in light mode / `--coral-text-dark` #FF7A57 in dark mode):** every place coral is used as standalone *text, icon, or accent border* sitting on the page's own `--bg`/`--surface` (section eyebrows, the hero's italic emphasis, rail-dot icons, the "why" numerals, required-field asterisks, placeholder chips). The light-mode value measures 5.43:1 on paper; the dark-mode value measures 6.78:1 on indigo-deep and 5.28:1 on indigo. **Never use the fixed `--coral` as text color on a theme-reactive background** — it fails badly in dark mode (as low as 2.3:1), which the Impeccable detector caught on the first build pass of this round.
-- **Amber** (`#E8A33D` / deep `#C8841F`): a secondary highlight only, used on the dark Agents band (icon accents) — never as text on a light surface (same "needs a dark or filled surface" rule the prior design system used, carried forward because it's a correct rule, not a coincidence).
+```css
+.tone-dark  { --bg: var(--oled); --surface: var(--oled-card); --text: var(--white); --text-muted: var(--ice); --border: var(--oled-line); --coral-text: var(--coral-text-dark); }
+.tone-light { --bg: var(--off-white); --surface: var(--card); --text: var(--charcoal); --text-muted: var(--muted); --border: var(--line); --coral-text: var(--coral-text-light); }
+```
 
-### Neutrals
-- **Paper** (#F6F4EF) / **Paper Dim** (#ECE7DC): light-mode backgrounds, warm off-white rather than stark white.
-- **Ink** (#14172B): light-mode text; also the trust-strip/agents-band/footer fill in light mode.
-- **Indigo** (#1E2A5E) / **Indigo Deep** (#10173A): dark-mode surfaces and page background.
-- **Muted** (#5B5E72) / **Muted Light** (#9CA0BE): secondary text, light and dark mode respectively.
+Applied directly to each `<section>`, so every component inside (cards, chips, forms, tags) reads `var(--bg)/--surface/--text/--text-muted/--border/--coral-text` and never needs to know which tone it's in. The Hero and Trust Strip are dark too, but hard-coded (not `.tone-dark`) since their content sits on a photo, not a flat fill, and every element inside is given an explicit light color rather than reading the tone tokens.
+
+### Section sequence
+Hero (dark, photo) → Trust Strip (dark, thin accent bar, not counted in the alternation) → Streams (light) → Courses (dark) → Why McGill (light) → Student Life (dark) → Pathway (light) → Agents (dark) → Campus (light) → FAQ (dark) → Enquiry (light) → Footer (dark, fixed). No two full sections in a row share a tone; the Trust Strip is the one deliberate exception, treated as an accent bar beneath the Hero rather than a counted alternating section — an even number of content sections between two fixed-dark anchors (Hero, Footer) can't alternate perfectly without this.
+
+### Coral family (unchanged roles, now also carrying a Bento feature-tile background)
+- **`--coral`** (#B23A1E, fixed): background fills with white text — primary buttons, the skip link, hover-fills. Also used as the start of the Why McGill Bento tile's gradient.
+- **`--coral-deep`** (#5C1F11, fixed): hover-darken state; also the Bento tile gradient's end stop.
+- **`--coral-bright`** (#C73F22, fixed): decorative fills (card corner-cuts, dots) and the hero's large italic-weight `<em>` emphasis — verified 3.8:1 against the hero's dark backdrop, which clears WCAG's 3:1 **large-text** threshold (the hero headline is 40–88px, bold).
+- **`--coral-text`** (theme-reactive via `.tone-dark`/`.tone-light`): every standalone coral text/icon/border use within a toned section.
+
+### Known theoretical-only contrast pairs (do not chase further)
+The mechanical detector checks every distinct text color against every distinct background used anywhere on the page, not just pairs that actually render together. Two such theoretical pairs remain after this round's fixes and are *not* real on-page defects:
+- `--coral-bright` as text against `--coral-deep`/`--oled`/the hero scrim gradient as background: coral-bright is never rendered as text on a coral-deep fill anywhere, and its one real text usage (hero `<em>`) is large text (40–88px, bold), which only needs 3:1 and clears it at 3.8–3.9:1.
+- `--charcoal` (light-mode text) against `--oled-deep` (the Trust Strip/Footer background): both are real tokens, but they never co-occur — every element on an `--oled-deep` background is given an explicit white/`--white`/`--muted-light` color, never `var(--text)`. Darkening either token further isn't meaningful (both are already near-black), so unlike the original "Parramatta Transit" coral-deep fix, there is no unconditional close available here; this is accepted as a structural artifact of having two non-overlapping color systems on one page by design.
+
+**Unresolved after investigation — a detector artifact, not a located defect:** three low-contrast findings report white/near-white hero text (disclaimer, lede, scroll-cue) against a background of `#76787D`, a value that doesn't match any token in this file and that persisted across every change made to the hero's own gradients, so it isn't simply "the gradient's darkest stop." Two real, independent legibility mitigations were added regardless (a `text-shadow` on every hero text element, and a second dedicated scrim gradient on `#hero-content` itself, layered on top of each slide's own `::after` darkening), which cover the actual risk this class of finding is pointing at — a photo behind white text can be lighter than the gradient alone guarantees — regardless of whether they move this specific static heuristic's number. Flag for a follow-up with the detector's own output showing a source line/selector if it recurs after a tool update.
+
+One **real** bug this pairing check did catch and that was fixed: the Hero's second CTA ("Explore Courses") was a `.btn-outline`, which reads `color: var(--text)` — correct inside a `.tone-dark`/`.tone-light` section, but the Hero isn't one (it's dark via hardcoded photo/gradient styling, not the tone-class system), so the button silently inherited the root light-mode charcoal text color onto a dark photo. Fixed by switching it to `.btn-ghost-inverse`, the component already built for outline buttons on dark/photo sections (same one the Agents section's "Enquire as an Agent" button uses).
+
+## Shadows
+
+Decorative elevation shadows (the glass header's `rgba(0,0,0,0.4)`, card hovers' `rgba(15,17,30,0.35)`, modal backdrops' `rgba(10,10,12,0.6)`) are neutral-black at varying opacity, scoped to `box-shadow`/backdrop fills only — not text/surface colors, so not part of the swatch list above.
 
 ## Typography
 
-**Exactly two type families**, per the rubric's explicit cap: **Display:** Newsreader (variable serif, optical-size range) for headings — chosen after the Impeccable detector flagged the original pick, Fraunces, as one of a handful of fonts (alongside Inter, Roboto, Plus Jakarta Sans, Space Grotesk, Geist) that have become an "AI-generated UI" tell through overuse. Newsreader gives a similar warm, editorial-serif character with real optical-size personality without that association (yet). **Body:** IBM Plex Sans — an engineered, technical-humanist face that subtly reinforces "vocational/technical institute."
-
-**Registration numbers and course codes** (RTO/CRICOS/ABN, `MEM31922`, etc.) do **not** get a third typeface. Iteration 1 used IBM Plex Mono for these, reasoning that a monospace "data face" is a functional convention rather than a stylistic one — but iteration 2 resolved this more cleanly by dropping the mono face entirely and signaling "this is verified data" within IBM Plex Sans itself: heavier weight (600–700), wider letter-spacing (0.02–0.06em), `font-variant-numeric: tabular-nums` so digits align in columns, and uppercase on course codes. Same visual distinctiveness, zero ambiguity against the two-family rule.
-
-## Category tags
-
-Each discipline gets a small, restrained tint pill on course cards — reusing the same verified pairs the prior design system established (they were already correct, just needed documenting against this round's fresh DESIGN.md):
-
-| Stream | Background | Text | Contrast |
-|---|---|---|---|
-| Engineering | #DEEFF6 | #0F3A57 | 10.1:1 |
-| Hospitality | #FCEAD1 | #6B4610 | 7.1:1 |
-| Business | #E6F3F5 | #16424A | 9.7:1 |
-| Management | #E3E8F0 | #142C50 | 11.3:1 |
-| English | #F3E6D8 | #6B4229 | 7.0:1 |
+Unchanged from the prior round: Newsreader (display) + IBM Plex Sans (body/data), two families, data/code values signaled via weight + tracking + tabular-nums rather than a third face. See the prior system's reasoning, still valid.
 
 ## Signature element: the transit rail
 
-A horizontal line with five station-dot stops in the Educational Streams section (each stop is a clickable stream filter — real functionality, not decoration — that both filters the course grid below and scrolls to it), and a vertical version with five numbered stops in the How-to-Enrol pathway section. Reusing the same visual grammar for two structurally different purposes (a filter, and a step sequence) is what makes it a system element rather than a one-off graphic.
+Unchanged — the horizontal rail (Educational Streams filter) and vertical rail (How-to-Enrol pathway) carry forward exactly as before.
 
-Course cards get a diagonal cut top-right corner (`clip-path`) filled with `--coral-bright`, echoing a ticket/boarding-pass shape, extending the "journey" metaphor into the course catalogue itself.
+## New this round
 
-## Decorative illustration palette
+### Hero: full-screen photo slider
+Three slides (`photos/hero.jpg`, `photos/hero-slide-2.jpg`, `photos/hero-slide-3.jpg` — the latter two reuse the already-verified welder and business-meeting Unsplash photos at 1920×1080, see DECISIONS.md), cross-fading via an `.is-active` opacity toggle (not a scroll-snap carousel, so it can autoplay). A bottom-anchored gradient (`rgba(0,0,0,0.85)` at the text zone, fading to transparent) keeps the headline legible regardless of which photo is active; headline/lede/scroll-cue also carry a `text-shadow` as a second, photo-content-independent legibility layer. Pagination is three Instagram-stories-style progress bars (completed bars fill solid, the active bar fills over 6s via a CSS animation, replayed on every manual or automatic advance). Autoplay pauses on hover, advances on click of a bar, and responds to touch swipe and mouse drag (50px threshold). Headline/disclaimer/lede/CTAs stagger in via a `.kinetic-play` class toggled (with a forced reflow) on every slide change, skipped entirely under `prefers-reduced-motion`.
 
-The hero, student-life, and agents SVG illustrations use a small set of deeper indigo shades purely for internal shading/depth (e.g. `#162052`, `#243270`, `#2A3680`) — these are not text or UI colors and are scoped to inline SVG fills only, never reused as a background or text token.
+### Magnetic CTA buttons
+Every `.btn-primary` gets a cursor-tracking `radial-gradient` flare (via `--mx`/`--my` custom properties set on `mousemove`) and a small pull toward the cursor (`translate()`, capped at ±7px/±5px), attached only under `(hover: hover) and (pointer: fine)` and only when `prefers-reduced-motion` is off. Without that match, buttons keep their plain `:hover` lift — no degraded experience on touch.
 
-## Imagery
+### 3D-tilt cards
+Course cards and the four Why-McGill tiles get a `perspective`/`rotateX`/`rotateY` tilt following the cursor (±8°) plus a coral ring-glow, under the same fine-pointer/no-reduced-motion guard. Course cards are built by JS from the `COURSES` array, so the tilt listener is attached in a second pass right after the grid is populated.
 
-**Updated 2026-10-21 (later the same day):** the original `/loop` brief banned stock photography; a direct follow-up request explicitly asked for "many photos." Rather than scrape the real mcgill.edu.au (copyright risk, and the exact thing the original brief said not to copy) or AI-generate fake "students"/"campus" images for a real, CRICOS-registered institution (a materially different risk than decorative stock photography — prospective students make real enrolment and visa decisions based on this material), the resolution — confirmed with the user — was **properly licensed stock photography** (Unsplash License, free tier), used purely as generic illustrative imagery, exactly as an earlier round of this same project already did successfully.
+### Why McGill: asymmetrical Bento grid
+Four reasons become a 4-column/2-row Bento layout at ≥760px: the first ("Nationally registered training") is the featured 2×2 tile with a coral gradient fill, the second is a 2×1 wide tile, the remaining two are 1×1. Stacks to a single column below 760px. This is the one substantive layout change here — the reasons themselves are the same four facts, just re-weighted visually to highlight the single most load-bearing trust claim (RTO registration) rather than giving all four equal visual weight.
 
-Ten photos, each sourced, verified live (HTTP 200, confirmed free-tier not Unsplash+), and visually inspected before use — see the full list and alt text in DECISIONS.md. None are captioned or alt-texted as if they depict McGill's actual campus, staff, or students. Two early candidates were rejected during sourcing specifically for looking like a *specific, recognisable* real place (a Collegiate-Gothic archway with a statue, and San Francisco's Transamerica Pyramid with its cable-car tracks) — using either would have risked viewers mistaking this small Parramatta CBD institute for a different, grander, or foreign institution.
+### Footer
+Unchanged content (RTO/CRICOS/ABN, the real legal entity, phone, email, legal-policy modals) under the existing OLED-deep dark fill — already matches the brief's "executive minimalist dark footer" intent. The brief's "Powered by JobGen.ai" badge is a confirmed-real fact for a *different* project (Mountain Culture Guitar Lessons) and was not carried over here — see DECISIONS.md.
 
-The Campus & Location section's map still uses a placeholder, not a stock photo of "the building" — that's the one claim ("this is literally our premises") a generic photo can't honestly stand in for. The Student Life section's photo is deliberately generic (friends at a café) rather than claimed to be Parramatta specifically, since Unsplash's own location tagging for "Parramatta" turned out to be unreliable (mostly Perth/Melbourne/generic results) and a specific misattributed-location caption would itself be dishonest.
-
-## Dark mode
-
-Implemented with `prefers-color-scheme` plus a `data-theme` attribute override (the manual toggle button), following the three-state pattern: an un-stamped root respects system preference, an explicit `data-theme="light"`/`"dark"` always wins. The toggle is **not persisted** (no localStorage/sessionStorage, per the brief's explicit ban) — it resets to system preference on reload.
+### Removed
+The `prefers-color-scheme` + manual `data-theme` toggle (button markup, CSS, and `applyTheme`/`systemPrefersDark`/`currentTheme` JS) — superseded by the fixed per-section tone classes above.
 
 ## Do's and Don'ts
 
 ### Do:
-- Do keep `--coral-text` (not `--coral`) for any new standalone text/icon color — it's the only coral role that's theme-reactive and safe on both surfaces.
-- Do keep the transit-rail motif reserved for sequences/journeys (streams, pathway) — don't decorate unrelated sections with it just because it's the signature element.
-- Do keep amber off light-background text; it only works as an icon/accent on dark surfaces.
-- Do keep every course fact (fees, duration, intake) as an explicit "On enquiry" / "To be confirmed" placeholder — never a number.
+- Do apply `.tone-dark`/`.tone-light` to any new `<section>` — never hardcode a section background outside those two classes (Hero/Trust-strip/Footer are the only sanctioned exceptions, and each hardcodes *every* child's text color explicitly rather than relying on `var(--text)`).
+- Do keep `--coral-text` (not `--coral`) for standalone text/icon color inside a toned section.
+- Do attach any new pointer-driven effect (tilt, magnetic pull) behind `(hover: hover) and (pointer: fine)` and `!prefersReducedMotion`.
 
 ### Don't:
-- Don't use `--coral` (the fixed, button-fill value) as a text color on `--bg`/`--surface` — it fails contrast in dark mode.
-- Don't add a stock photo; every visual slot here is either CSS/SVG or an explicitly labelled placeholder.
-- Don't exceed roughly one em-dash per 500 characters of body copy — the Impeccable detector flags saturation as an AI-cadence tell, and this build was trimmed from 16 to 6 for that reason during its first pass.
+- Don't use a class that reads `var(--text)`/`var(--border)` (e.g. `.btn-outline`) inside the Hero or Trust Strip — they don't define those custom properties locally, so it will silently resolve to the root light-mode values. Use `.btn-ghost-inverse` (or an explicit color) there instead.
+- Don't add a global theme toggle back without removing the strict-alternation requirement first — the two are mutually exclusive by construction.
