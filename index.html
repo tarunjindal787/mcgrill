@@ -278,11 +278,13 @@
 
   /* ============ Hero: full-screen photo slider ============ */
   .hero {
-    position: relative; height: 100svh; min-height: 560px; overflow: hidden;
+    position: relative; display: flex; flex-direction: column;
+    min-height: 560px; min-height: max(560px, 100svh);
+    overflow: hidden;
     background: var(--oled); scroll-snap-type: x mandatory;
   }
   .hero-track {
-    position: relative; width: 100%; height: 100%;
+    position: absolute; inset: 0;
   }
   .hero-slide {
     position: absolute; inset: 0; opacity: 0; visibility: hidden;
@@ -294,10 +296,12 @@
     content: ""; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.24) 68%, transparent 100%);
   }
+  /* In normal flow (not absolutely positioned) and pinned to the bottom via
+     margin-top: auto, so if its content ever needs more room than the
+     viewport-height slider provides, .hero itself grows taller rather than
+     the content overflowing upward behind the fixed header. */
   .hero-content {
-    position: absolute; left: 0; right: 0; top: 0; bottom: 0; z-index: 5;
-    display: flex; flex-direction: column; justify-content: flex-end;
-    overflow-y: auto;
+    position: relative; z-index: 5; margin-top: auto;
   }
   .hero-content-inner {
     padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(5rem, 8vw, 7rem);
