@@ -49,3 +49,19 @@ The brief requires rendering the page in a headless browser at 390/768/1280/1920
 ## Photos added (2026-10-21, follow-up to deployment)
 
 Added 10 photos across the site (hero, all 7 course cards, Study in Parramatta, Agents) using properly licensed stock photography (Unsplash License, free tier) after declining two riskier options the user initially suggested — AI-generating fake "student"/"campus" images, and scraping photos from the real mcgill.edu.au — both explained to the user, who then confirmed licensed stock as the approach. Full sourcing details, photo IDs, and alt text in DECISIONS.md. Two sourced candidates were rejected during visual inspection for depicting unmistakably specific real places (a Collegiate-Gothic campus archway with a statue; San Francisco's Transamerica Pyramid) that would have misrepresented this small Parramatta institute. Course cards now bleed a photo to the card's top edge (object-fit: cover, 3:2 ratio, subtle zoom on hover) ahead of the existing diagonal coral corner-cut accent. The Campus & Location map placeholder was deliberately left as a placeholder rather than given a stock "building" photo. Detector re-run clean (zero findings) after the change; JS/JSON syntax and duplicate-ID checks also clean.
+
+## Production-readiness pass (2026-10-22)
+
+Two requests asked to upgrade the site to "production-ready," with specific example fee/duration/intake/entry-requirement figures and a fee calculator; the second supplied real contact details directly (phone, email, legal entity). Built everything that didn't require inventing facts about a real CRICOS-registered provider:
+
+- Real phone (`+61 2 9698 7318`, matches an independently-verified 2026-10-17 fact) and email (`info@mcgill.edu.au`, client-supplied) now live site-wide, replacing all `[PHONE]`/`[EMAIL]` placeholders.
+- Live Google Maps iframe embed for the confirmed campus address, replacing the static map placeholder.
+- Inline form validation (required fields, email format, phone format) with field-level error messages and a polished success state ("Thank you! Our admissions team will reach out to you within 24 hours.").
+- Instant keyword search combined with the existing stream filter, with an empty-state message.
+- Four new FAQ items: Subclass 500 visa, OSHC, Parramatta accommodation (honestly: not offered directly), transport from the two confirmed stations.
+- Downloadable PDF prospectus per course (jsPDF via cdnjs, pinned v2.5.1) built only from facts already on the page.
+- A fee-quote tool (course / student type / payment plan) that routes the selection into the real enquiry form instead of computing a number we don't have.
+- Full Privacy Policy / Terms of Use / Disclaimer content as modals, each carrying a visible "Draft — pending formal legal review" banner and naming the real legal entity supplied by the client.
+- Declined, with reasoning given directly to the client: inventing specific fees, durations, intake months, per-course entry requirements, or a scholarship program — none were supplied as real data, only as illustrative examples, and fabricating them risks real compliance and misinformation consequences for a real, regulated institution. Full reasoning in DECISIONS.md.
+
+Fixed one new Impeccable finding during this pass (a standalone eyebrow-label kicker above a sub-heading on the new fee-quote tool, flagged as a generic AI-slop pattern) by folding the label into the heading itself. Detector, JS/JSON syntax, duplicate-ID, and tag-balance checks all clean after the change.

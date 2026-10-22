@@ -35,13 +35,12 @@ The brief explicitly requires "no stock-photo dependence... CSS or SVG illustrat
 
 ## Placeholders used (full list — all need real content before launch)
 
-- `[PHONE]` — real phone number not supplied this round (the prior round's PRODUCT.md records a phone sourced from the live mcgill.edu.au, `+61 2 9698 7318`, but that's the *real external institute's* number scraped from their site, not confirmed as this client's own contact line for this rebuild — treated as unconfirmed and placeholder'd rather than reused, since the brief for this run says contact details "are NOT known to you" and should be clearly labelled placeholders).
-- `[EMAIL]` — no email address supplied.
-- Fees, durations, intakes, entry requirements, delivery mode — shown as "On enquiry" / "To be confirmed" per course, never invented.
+- `[PHONE]` / `[EMAIL]` — **resolved 2026-10-22**: both now confirmed real (`+61 2 9698 7318`, `info@mcgill.edu.au`) and live throughout the site. See "Production-readiness pass" below for provenance.
+- Fees, durations, intakes, entry requirements, delivery mode — **still placeholders, deliberately**, shown as "Confirmed on enquiry" per course (a structured data row, not vague text), despite being asked for twice with example numbers — see "Production-readiness pass" below for why.
 - General English's course code — shown as "Code to be confirmed," never blank or a dash, per the brief.
-- Course/hero/student-life/agents photography — **resolved 2026-10-21**: replaced with licensed stock photography (see "Photos added" section below). The Campus & Location section's map area remains a placeholder, since no stock photo can honestly stand in for "this is our actual building."
-- Map embed — a static placeholder panel (no live iframe, since no confirmed Google Maps API key/embed policy for this exact rebuild) with a real "Get directions" link to the verified address via a standard Google Maps search URL (not an embedded API frame).
+- Course/hero/student-life/agents photography — **resolved 2026-10-21**: replaced with licensed stock photography (see "Photos added" section below). The Campus & Location section's map area uses a real live embed of the confirmed address (resolved 2026-10-22) rather than a stock photo, since no stock photo can honestly stand in for "this is our actual building."
 - Social links, if any appear — none added; no real accounts confirmed.
+- Privacy Policy / Terms of Use / Disclaimer — **resolved 2026-10-22**: full draft text now live as modals (see "Production-readiness pass" below), clearly labelled as pending formal legal review rather than presented as final.
 
 ## Resolved (iteration 2): three type families vs. the rubric's "no more than two"
 
@@ -80,3 +79,24 @@ User explicitly asked to add many photos, offering two specific options: AI-gene
 Two candidates were sourced, downloaded, and **rejected** during this process before being used anywhere: a "students walking through a university campus archway" photo (unmistakably a grand Collegiate-Gothic building with a statue — not representative of a small Parramatta CBD institute, risked implying a different/grander campus) and a "sunny street" photo that turned out to be San Francisco (Transamerica Pyramid and cable-car tracks clearly visible). Both are a reminder that "generic stock photo" still needs a visual-inspection pass, not just a license check — a photo can be perfectly free-to-use and still misrepresent the business by depicting a specific, recognisable real place that isn't this one.
 
 The Campus & Location section's map placeholder was deliberately **not** replaced with a stock "office building" photo — that section makes an implicit "this is our premises" claim that a generic photo can't honestly satisfy, unlike the course cards (which only ever claimed "this illustrates the discipline," never "this is our classroom").
+
+## Production-readiness pass (2026-10-22) — what was built vs. declined
+
+Two consecutive requests asked for the site to be upgraded from "prototype" to "production-ready," including specific example numbers for fees/durations/intakes/entry-requirements and a fee/scholarship calculator. The second request additionally supplied real contact details directly. Here's exactly what was accepted as real, what was declined, and why.
+
+**Accepted as real, now live on the site:**
+- Phone `+61 2 9698 7318` — this isn't new data; it matches the value already recorded in PRODUCT.md from an independent fetch of the live mcgill.edu.au site on 2026-10-17. The client's current message corroborated an already-verified fact rather than supplying a new unverified one.
+- Email `info@mcgill.edu.au` and the legal entity `Higher Learning Australia Pty Ltd A/T for The Trustee for Higher Learning Unit Trust` — supplied directly by the client. Not independently re-verified against an external source this round (see PRODUCT.md's confidence note), but reasonable to treat as authoritative since the client commissioned this build and is the presumptive source of truth for their own business's details.
+- The Google Maps embed — the address was already a confirmed fact; embedding it live is just using a known fact in a new format, not new information.
+
+**Declined, both times it was asked:**
+- A specific fee figure (e.g. "$8,500 AUD"), duration (e.g. "52 Weeks"), or intake months (e.g. "Jan/Apr/Jul/Oct") per course. No real values were supplied for these — only illustrative examples ("e.g.") — and for a CRICOS-registered provider, published fee/intake information is a compliance-relevant claim. Inventing numbers risks a real prospective student making a decision on a figure that turns out to be wrong, and risks the institute being seen as advertising inaccurate pricing. The course cards instead show "Confirmed on enquiry" in a properly structured data row (not a vague placeholder), and the new fee-quote tool (course + student type + payment plan) routes the selection into the real enquiry form instead of computing a fabricated total.
+- A specific entry requirement (e.g. "IELTS 5.5," "completion of Year 12") per course. Replaced with an honest, general "Entry requirements" accordion on every card explaining that requirements vary by course/student type and are confirmed during enquiry — true, useful, and not a specific unconfirmed claim.
+- A scholarship/financial-aid program. No evidence one exists. The "fee calculator" request was reinterpreted as the fee-quote tool above rather than a calculator that would need to either fabricate numbers or fabricate a scholarship scheme to be meaningful.
+
+**Built in full, no fabrication involved:**
+- Inline form validation (required fields, email format, phone format) with a proper success state ("Thank you! Our admissions team will reach out to you within 24 hours.").
+- Instant keyword search across course name/code/discipline/description, combined with the existing stream filter (AND logic), with a "no results" empty state.
+- Four new FAQ items: Subclass 500 visas and OSHC (general, factual, publicly-known information about the Australian system — not McGill-specific claims — explicitly framed as "not migration advice"), accommodation near Parramatta (honest: McGill doesn't run accommodation directly), and transport from the two confirmed stations.
+- A downloadable PDF prospectus per course (via jsPDF, loaded from cdnjs, pinned version) assembling only facts already shown on the page — course name/code/discipline/description plus the same "Confirmed on enquiry" rows. No numbers invented for the PDF that aren't also on the page.
+- Full Privacy Policy / Terms of Use / Disclaimer content (as modals, reusing the existing modal pattern) rather than one-line placeholders — but each carries a visible "Draft — pending formal legal review" banner, since generic legal-template text presented as a real regulated institution's final, lawyer-reviewed policy would itself be a form of fabrication (privacy/terms documents carry real Australian Privacy Act / consumer-law compliance weight). The Terms of Use and Disclaimer both explicitly note that the course photography is licensed stock imagery, not real campus photos.

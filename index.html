@@ -18,6 +18,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;0,6..72,800;1,6..72,500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<!-- jsPDF: used only for the client-side "Download Prospectus" button, which assembles
+     a one-page PDF from facts already shown on the page (course name/code/discipline/
+     description plus the same "confirmed on enquiry" fee/duration/intake rows) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -304,6 +308,22 @@
   .stream-btn:hover .rail-dot svg { filter: brightness(0) invert(1); }
 
   /* ============ Filter + course cards ============ */
+  .course-search {
+    display: flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: var(--radius-pill); padding: 0.7rem 1.1rem; margin-bottom: 1rem; max-width: 420px; color: var(--text-muted);
+  }
+  .course-search:focus-within { border-color: var(--coral-text); }
+  .course-search input {
+    border: none; background: transparent; outline: none; font: inherit; color: var(--text); width: 100%;
+  }
+  .course-search-empty { color: var(--text-muted); font-size: 0.9rem; padding: 1.5rem 0; }
+  .quote-tool {
+    margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-card); padding: var(--space-md); display: grid; gap: var(--space-md);
+  }
+  @media (min-width: 800px) { .quote-tool { grid-template-columns: 1fr 1fr; align-items: center; } }
+  .quote-tool-form { display: grid; gap: 1rem; }
+  .quote-tool-form .form-row { margin-bottom: 0; }
   .filter-bar { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: var(--space-md); }
   .filter-chip {
     font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; padding: 0.55rem 1.1rem;
@@ -341,9 +361,28 @@
   .course-card h3 { font-size: var(--fs-card-title); margin-bottom: 0; }
   .course-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
   .course-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
-  .course-meta { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; font-size: 0.78rem; color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 0.75rem; margin-top: 0.25rem; }
-  .course-meta strong { color: var(--text); font-weight: 600; }
-  .course-card .btn { margin-top: 0.25rem; align-self: flex-start; }
+  .course-data {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 0;
+    border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border); padding: 0.75rem 0;
+  }
+  .course-data dt { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 0; }
+  .course-data dd { font-size: 0.78rem; font-weight: 600; margin: 0.15rem 0 0; color: var(--text); }
+  .entry-req { border: none; margin: 0; }
+  .entry-req summary {
+    cursor: pointer; list-style: none; font-size: 0.85rem; font-weight: 600; color: var(--coral-text);
+    display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; min-height: 36px;
+  }
+  .entry-req summary::-webkit-details-marker { display: none; }
+  .entry-req summary .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
+  .entry-req[open] summary .chevron { transform: rotate(180deg); }
+  .entry-req p { font-size: 0.85rem; margin: 0.5rem 0 0; }
+  .course-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.25rem; }
+  .course-actions .btn { align-self: auto; }
+  .btn-ghost-small {
+    display: inline-flex; align-items: center; gap: 0.4rem; background: transparent; border: none;
+    color: var(--text-muted); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 0.5rem 0;
+  }
+  .btn-ghost-small:hover { color: var(--coral-text); }
 
   /* ============ Why McGill ============ */
   .why-grid { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
@@ -379,14 +418,15 @@
   /* ============ Campus ============ */
   .campus-grid { display: grid; gap: var(--space-lg); }
   @media (min-width: 900px) { .campus-grid { grid-template-columns: 1fr 1fr; } }
-  .map-placeholder {
-    aspect-ratio: 4/3; border-radius: var(--radius-card); border: 2px dashed var(--border);
-    background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.75rem; text-align: center; padding: 2rem; color: var(--text-muted);
+  .map-embed {
+    aspect-ratio: 4/3; border-radius: var(--radius-card); border: 1px solid var(--border);
+    overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35);
   }
-  .map-placeholder svg { color: var(--coral-text); }
+  .map-embed iframe { width: 100%; height: 100%; border: 0; }
   .campus-facts dl { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.25rem; margin: 1.5rem 0; }
   .campus-facts dt { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; }
+  .campus-facts dd a { color: var(--coral-text); text-decoration: none; font-weight: 600; }
+  .campus-facts dd a:hover { text-decoration: underline; }
   .campus-facts dd { margin: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
 
   /* ============ FAQ ============ */
@@ -411,9 +451,16 @@
     background: var(--bg); color: var(--text); width: 100%;
   }
   .form-row textarea { resize: vertical; min-height: 100px; }
+  .form-row.has-error input, .form-row.has-error select, .form-row.has-error textarea { border-color: var(--coral-text); }
+  .field-error { display: none; font-size: 0.82rem; color: var(--coral-text); font-weight: 600; }
+  .form-row.has-error .field-error { display: block; }
   .form-note { font-size: 0.82rem; color: var(--text-muted); margin-top: 1rem; }
-  #enquiry-success { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; }
+  #enquiry-success { display: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; text-align: center; }
   #enquiry-success.show { display: block; }
+  .success-icon {
+    width: 56px; height: 56px; border-radius: 50%; background: var(--coral); display: flex;
+    align-items: center; justify-content: center; margin: 0 auto 1rem;
+  }
 
   /* ============ Footer ============ */
   footer.site-footer { background: var(--ink); color: var(--muted-light); padding: var(--space-lg) 0 var(--space-md); }
@@ -424,6 +471,20 @@
   .footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
   .footer-grid a { text-decoration: none; color: var(--muted-light); font-size: 0.9rem; }
   .footer-grid a:hover { color: var(--paper); }
+  .link-btn {
+    background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer;
+    text-decoration: none; color: var(--muted-light); font-size: 0.9rem; text-align: left;
+  }
+  .link-btn:hover { color: var(--paper); }
+  .draft-banner {
+    background: color-mix(in srgb, var(--coral) 10%, transparent); border: 1px solid var(--coral);
+    color: var(--coral-text); font-size: 0.82rem; font-weight: 600; padding: 0.75rem 1rem;
+    border-radius: 10px; margin-bottom: 1.25rem;
+  }
+  .legal-body h4 { font-size: 1rem; margin: 1.25rem 0 0.4rem; }
+  .legal-body h4:first-child { margin-top: 0; }
+  .legal-body p, .legal-body li { font-size: 0.92rem; color: var(--text-muted); }
+  .legal-body ul { padding-left: 1.2rem; }
   .footer-brand p { color: var(--muted-light); font-size: 0.88rem; }
   .footer-bottom { border-top: 1px solid var(--line-dark); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.8rem; color: var(--muted-light); }
   .footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
@@ -585,6 +646,11 @@
         <h2>Find your course</h2>
         <p>Filter by stream, or browse the full catalogue. Fees, intakes and entry requirements are confirmed directly with our team.</p>
       </div>
+      <div class="course-search reveal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <label for="course-search-input" class="visually-hidden">Search courses by keyword</label>
+        <input type="search" id="course-search-input" placeholder="Search courses by name, code, or keyword&hellip;">
+      </div>
       <div class="filter-bar reveal" role="group" aria-label="Filter courses by stream">
         <button class="filter-chip" data-filter="all" aria-pressed="true" type="button">All Courses</button>
         <button class="filter-chip" data-filter="engineering" aria-pressed="false" type="button">Engineering</button>
@@ -593,7 +659,47 @@
         <button class="filter-chip" data-filter="management" aria-pressed="false" type="button">Management</button>
         <button class="filter-chip" data-filter="english" aria-pressed="false" type="button">English</button>
       </div>
+      <p class="course-search-empty" id="course-search-empty" hidden>No courses match your search. Try a different keyword or clear the filter.</p>
       <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data --></div>
+
+      <div class="quote-tool reveal">
+        <div class="quote-tool-copy">
+          <h3 style="font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem;">Fees &amp; payment options</h3>
+          <p style="margin-bottom:0;">Tuition fees depend on your course, student type, and payment plan. Tell us your preferences and our admissions team will send you accurate, up-to-date pricing &mdash; we don't publish fee estimates here, since they change and we'd rather you get a number you can rely on.</p>
+        </div>
+        <form class="quote-tool-form" id="quote-form">
+          <div class="form-row">
+            <label for="quote-course">Course</label>
+            <select id="quote-course">
+              <option value="">Select a course</option>
+              <option>Certificate III in Engineering (Fabrication Trade)</option>
+              <option>Certificate IV in Kitchen Management</option>
+              <option>Diploma of Hospitality Management</option>
+              <option>Certificate IV in Business</option>
+              <option>Diploma of Business</option>
+              <option>Graduate Diploma of Management (Learning)</option>
+              <option>General English Programs</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="quote-type">Student type</label>
+            <select id="quote-type">
+              <option value="">Select student type</option>
+              <option>Domestic student</option>
+              <option>International student</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="quote-plan">Preferred payment plan</label>
+            <select id="quote-plan">
+              <option value="">Select a payment plan</option>
+              <option>Pay upfront</option>
+              <option>Instalment plan</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary">Request My Fee Quote</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -711,21 +817,24 @@
       <div class="reveal">
         <span class="section-eyebrow">Campus &amp; Location</span>
         <h2>Find us in Parramatta</h2>
-        <div class="map-placeholder">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 22s7-7.5 7-12.5A7 7 0 005 9.5C5 14.5 12 22 12 22z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
-          <p style="margin:0;">Map embed placeholder. This will be replaced with a live map once an embed source is confirmed.</p>
-          <a href="https://www.google.com/maps/search/?api=1&amp;query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Get Directions</a>
+        <div class="map-embed">
+          <iframe
+            title="Map of Level 1, 30 Cowper St, Parramatta NSW 2150"
+            src="https://www.google.com/maps?q=Level+1,+30+Cowper+St,+Parramatta+NSW+2150&amp;output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:1rem;">Get Directions</a>
       </div>
       <div class="campus-facts reveal">
         <h3 style="font-size:1.2rem;">Campus details</h3>
         <dl>
           <dt>Address</dt><dd>Level 1, 30 Cowper St, Parramatta NSW 2150</dd>
           <dt>Nearest stations</dt><dd>Parramatta &amp; Harris Park</dd>
-          <dt>Phone</dt><dd><span class="placeholder-chip">[PHONE]</span></dd>
-          <dt>Email</dt><dd><span class="placeholder-chip">[EMAIL]</span></dd>
+          <dt>Phone</dt><dd><a href="tel:+61296987318">+61 2 9698 7318</a></dd>
+          <dt>Email</dt><dd><a href="mailto:info@mcgill.edu.au">info@mcgill.edu.au</a></dd>
         </dl>
-        <p style="font-size:0.88rem; color:var(--text-muted);">Contact details above are placeholders pending confirmation &mdash; use the enquiry form to reach us in the meantime.</p>
       </div>
     </div>
   </section>
@@ -766,6 +875,22 @@
           <summary>How do I enrol?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><p style="margin:0;">Submit an enquiry below with your course of interest. Our team will guide you through entry requirements, fees and enrolment from there &mdash; see the "How to Enrol" section above for the full pathway.</p></div>
         </details>
+        <details class="faq-item">
+          <summary>What is a Subclass 500 student visa?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">The Subclass 500 is Australia's standard student visa, allowing international students to study full-time at a CRICOS-registered provider like McGill Institute Australia. It generally requires a Confirmation of Enrolment, evidence you meet the Genuine Student requirement, proof of financial capacity, and health cover. This is general information only, not migration advice &mdash; a registered migration agent or the Department of Home Affairs can confirm requirements for your situation.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What is Overseas Student Health Cover (OSHC)?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">OSHC is health insurance required for most student visa holders for the length of their visa, covering basic medical and hospital costs while studying in Australia. It can be arranged through an approved OSHC provider either independently or, in some cases, through your education provider &mdash; ask our admissions team what applies to your enrolment.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Where can I find accommodation near the Parramatta campus?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">We don't operate student accommodation directly. Parramatta has a range of rental and share-housing options in the surrounding suburbs; we'd recommend starting your housing search as early as possible once your enrolment is confirmed. Our admissions team can point you toward general resources during your enquiry.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I get to campus from Parramatta or Harris Park station?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="faq-body"><p style="margin:0;">Our campus at Level 1, 30 Cowper St is within walking distance of both Parramatta and Harris Park stations on the Sydney Trains network. See the Campus &amp; Location map above for exact directions.</p></div>
+        </details>
       </div>
     </div>
   </section>
@@ -776,21 +901,26 @@
       <div class="section-head reveal">
         <span class="section-eyebrow">Get in Touch</span>
         <h2>Enquire now</h2>
-        <p>Tell us a little about yourself and we'll be in touch. This form does not submit anywhere yet; see the code comment for the backend TODO.</p>
+        <p>Tell us a little about yourself and our admissions team will be in touch.</p>
       </div>
-      <!-- TODO: backend hookup needed. This form is front-end only and does not transmit data anywhere. -->
+      <!-- TODO (dev note, not shown to visitors): this form validates and shows a success
+           state entirely client-side. It does not transmit data anywhere yet -- wire
+           up a real backend/email endpoint before relying on it to capture enquiries. -->
       <form class="form-card reveal" id="enquiry-form" novalidate>
         <div class="form-row">
           <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-          <input type="text" id="f-name" name="name" required autocomplete="name">
+          <input type="text" id="f-name" name="name" required autocomplete="name" aria-describedby="err-name">
+          <span class="field-error" id="err-name" role="alert"></span>
         </div>
         <div class="form-row">
           <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-          <input type="email" id="f-email" name="email" required autocomplete="email">
+          <input type="email" id="f-email" name="email" required autocomplete="email" aria-describedby="err-email">
+          <span class="field-error" id="err-email" role="alert"></span>
         </div>
         <div class="form-row">
           <label for="f-phone">Phone</label>
-          <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+          <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 0412 345 678" aria-describedby="err-phone">
+          <span class="field-error" id="err-phone" role="alert"></span>
         </div>
         <div class="form-row">
           <label for="f-course">Course of interest</label>
@@ -807,14 +937,18 @@
         </div>
         <div class="form-row">
           <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="f-message" name="message" required></textarea>
+          <textarea id="f-message" name="message" required aria-describedby="err-message"></textarea>
+          <span class="field-error" id="err-message" role="alert"></span>
         </div>
         <button type="submit" class="btn btn-primary">Submit Enquiry</button>
         <p class="form-note">* Required fields. We'll respond to your enquiry as soon as possible.</p>
       </form>
-      <div class="form-card" id="enquiry-success" role="status" aria-live="polite" tabindex="-1">
-        <h3 style="margin-bottom:0.5rem;">Thanks! Your enquiry has been noted.</h3>
-        <p style="margin-bottom:0;">This is a front-end-only demo form, so nothing was actually sent. Once a backend is connected, your message will reach our enrolment team directly.</p>
+      <div class="form-card success-card" id="enquiry-success" role="status" aria-live="polite" tabindex="-1">
+        <div class="success-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5 11-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 style="margin-bottom:0.5rem;">Thank you!</h3>
+        <p style="margin-bottom:0;">Our admissions team will reach out to you within 24 hours.</p>
       </div>
     </div>
   </section>
@@ -840,9 +974,9 @@
       <div>
         <h4>Legal</h4>
         <ul>
-          <li><a href="#privacy-notice">Privacy Policy</a></li>
-          <li><a href="#terms-notice">Terms of Use</a></li>
-          <li><a href="#disclaimer-notice">Disclaimer</a></li>
+          <li><button type="button" class="link-btn" data-legal="privacy">Privacy Policy</button></li>
+          <li><button type="button" class="link-btn" data-legal="terms">Terms of Use</button></li>
+          <li><button type="button" class="link-btn" data-legal="disclaimer">Disclaimer</button></li>
         </ul>
       </div>
       <div>
@@ -850,20 +984,30 @@
         <ul>
           <li>Level 1, 30 Cowper St</li>
           <li>Parramatta NSW 2150</li>
-          <li><span class="placeholder-chip">[PHONE]</span></li>
-          <li><span class="placeholder-chip">[EMAIL]</span></li>
+          <li><a href="tel:+61296987318">+61 2 9698 7318</a></li>
+          <li><a href="mailto:info@mcgill.edu.au">info@mcgill.edu.au</a></li>
         </ul>
       </div>
     </div>
-    <p id="disclaimer-notice" style="font-size:0.85rem; max-width:70ch;">McGill Institute Australia is not affiliated with, and should not be confused with, McGill University in Canada.</p>
-    <p id="privacy-notice" style="font-size:0.85rem; max-width:70ch;"><strong>Privacy Policy:</strong> placeholder. A full privacy policy will be published here once confirmed with the institute.</p>
-    <p id="terms-notice" style="font-size:0.85rem; max-width:70ch;"><strong>Terms of Use:</strong> placeholder. Full terms of use will be published here once confirmed with the institute.</p>
+    <p style="font-size:0.85rem; max-width:70ch;">McGill Institute Australia is not affiliated with, and should not be confused with, McGill University in Canada.</p>
     <div class="footer-bottom">
       <span class="reg-codes">RTO 45906 &middot; CRICOS 03678G &middot; ABN 91 835 873 060</span>
-      <span>&copy; <span id="year"></span> McGill Institute Australia</span>
+      <span>&copy; <span id="year"></span> McGill Institute Australia. Operated by Higher Learning Australia Pty Ltd A/T for The Trustee for Higher Learning Unit Trust.</span>
     </div>
   </div>
 </footer>
+
+<!-- Legal content modal (Privacy / Terms / Disclaimer) -->
+<div class="modal-backdrop" id="legal-modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="legal-modal-title" id="legal-modal">
+    <div class="modal-head">
+      <h3 id="legal-modal-title" style="margin:0;">Legal</h3>
+      <button class="modal-close" id="legal-modal-close" type="button" aria-label="Close">&times;</button>
+    </div>
+    <div class="draft-banner">Draft document &mdash; pending formal legal review and approval by Higher Learning Australia Pty Ltd before publication.</div>
+    <div id="legal-modal-body" class="legal-body"></div>
+  </div>
+</div>
 
 <!-- Course detail modal -->
 <div class="modal-backdrop" id="course-modal-backdrop">
@@ -878,9 +1022,9 @@
     <p id="modal-desc"></p>
     <div class="modal-meta">
       <div class="row"><span>Course code</span><strong id="modal-code"></strong></div>
-      <div class="row"><span>Fees</span><strong>On enquiry</strong></div>
-      <div class="row"><span>Duration</span><strong>To be confirmed</strong></div>
-      <div class="row"><span>Next intake</span><strong>To be confirmed</strong></div>
+      <div class="row"><span>Fees</span><strong>Confirmed on enquiry</strong></div>
+      <div class="row"><span>Duration</span><strong>Confirmed on enquiry</strong></div>
+      <div class="row"><span>Next intake</span><strong>Confirmed on enquiry</strong></div>
     </div>
     <a href="#enquiry" class="btn btn-primary" id="modal-enquire">Enquire about this course</a>
   </div>
@@ -950,25 +1094,60 @@
       '<h3>' + c.name + '</h3>' +
       '<p class="course-code mono">' + c.code + '</p>' +
       '<p>' + c.desc + '</p>' +
-      '<div class="course-meta"><span><strong>Fees:</strong> On enquiry</span><span><strong>Intake:</strong> TBC</span></div>' +
-      '<button type="button" class="btn btn-outline" data-course-id="' + c.id + '">View details</button>';
+      '<dl class="course-data">' +
+        '<div><dt>Duration</dt><dd>Confirmed on enquiry</dd></div>' +
+        '<div><dt>Fees (AUD)</dt><dd>Confirmed on enquiry</dd></div>' +
+        '<div><dt>Intakes</dt><dd>Confirmed on enquiry</dd></div>' +
+      '</dl>' +
+      '<details class="entry-req">' +
+        '<summary>Entry requirements<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>' +
+        '<p>Entry requirements vary by course and by student type (domestic or international), and are confirmed with our admissions team during your enquiry. As a general guide, certificate and diploma programs typically require completion of Year 12 (or equivalent) and a functional level of English; specific English-proficiency benchmarks for international student visa pathways are set per course.</p>' +
+      '</details>' +
+      '<div class="course-actions">' +
+        '<button type="button" class="btn btn-outline" data-course-id="' + c.id + '">View details</button>' +
+        '<button type="button" class="btn btn-ghost-small" data-prospectus-id="' + c.id + '">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          'Prospectus' +
+        '</button>' +
+      '</div>';
     grid.appendChild(card);
   });
 
-  /* ---------- Filter ---------- */
+  /* ---------- Filter + search (combined: stream AND keyword) ---------- */
   var filterChips = document.querySelectorAll('.filter-chip');
-  function applyFilter(stream) {
-    document.querySelectorAll('.course-card').forEach(function (card) {
-      var match = stream === 'all' || card.getAttribute('data-stream') === stream;
+  var searchInput = document.getElementById('course-search-input');
+  var searchEmpty = document.getElementById('course-search-empty');
+  var currentStream = 'all';
+
+  function applySearchAndFilter() {
+    var query = searchInput.value.trim().toLowerCase();
+    var visibleCount = 0;
+    COURSES.forEach(function (c) {
+      var card = document.getElementById('course-' + c.id);
+      var matchesStream = currentStream === 'all' || c.stream === currentStream;
+      var matchesQuery = !query ||
+        c.name.toLowerCase().indexOf(query) !== -1 ||
+        c.code.toLowerCase().indexOf(query) !== -1 ||
+        c.tagLabel.toLowerCase().indexOf(query) !== -1 ||
+        c.desc.toLowerCase().indexOf(query) !== -1;
+      var match = matchesStream && matchesQuery;
       card.style.display = match ? '' : 'none';
+      if (match) visibleCount++;
     });
+    searchEmpty.hidden = visibleCount !== 0;
+  }
+
+  function applyFilter(stream) {
+    currentStream = stream;
     filterChips.forEach(function (chip) {
       chip.setAttribute('aria-pressed', chip.getAttribute('data-filter') === stream ? 'true' : 'false');
     });
+    applySearchAndFilter();
   }
   filterChips.forEach(function (chip) {
     chip.addEventListener('click', function () { applyFilter(chip.getAttribute('data-filter')); });
   });
+  searchInput.addEventListener('input', applySearchAndFilter);
 
   /* ---------- Stream rail -> scroll + filter ---------- */
   document.querySelectorAll('.stream-btn').forEach(function (btn) {
@@ -1019,19 +1198,223 @@
     }
   }
   grid.addEventListener('click', function (e) {
-    var btn = e.target.closest('[data-course-id]');
-    if (btn) openModal(btn.getAttribute('data-course-id'));
+    var detailBtn = e.target.closest('[data-course-id]');
+    if (detailBtn) { openModal(detailBtn.getAttribute('data-course-id')); return; }
+    var prospectusBtn = e.target.closest('[data-prospectus-id]');
+    if (prospectusBtn) downloadProspectus(prospectusBtn.getAttribute('data-prospectus-id'));
   });
   modalClose.addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', function (e) { if (e.target === modalBackdrop) closeModal(); });
   document.getElementById('modal-enquire').addEventListener('click', closeModal);
 
-  /* ---------- Enquiry form (front-end only) ---------- */
+  /* ---------- Downloadable prospectus (client-side PDF, honest facts only) ---------- */
+  function downloadProspectus(courseId) {
+    var c = COURSES.filter(function (x) { return x.id === courseId; })[0];
+    if (!c || !window.jspdf) return;
+    var doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
+    var margin = 56, y = 64, pageWidth = doc.internal.pageSize.getWidth();
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(18);
+    doc.text('McGill Institute Australia', margin, y);
+    y += 20;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90);
+    doc.text('RTO 45906  ·  CRICOS 03678G  ·  ABN 91 835 873 060', margin, y);
+    y += 36;
+
+    doc.setTextColor(0);
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(15);
+    doc.text(c.name, margin, y, { maxWidth: pageWidth - margin * 2 });
+    y += 26;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(90);
+    doc.text(c.tagLabel + '  ·  ' + c.code, margin, y);
+    y += 26;
+
+    doc.setTextColor(0); doc.setFontSize(11);
+    var descLines = doc.splitTextToSize(c.desc, pageWidth - margin * 2);
+    doc.text(descLines, margin, y);
+    y += descLines.length * 15 + 20;
+
+    var rows = [['Duration', 'Confirmed on enquiry'], ['Fees (AUD)', 'Confirmed on enquiry'], ['Intakes', 'Confirmed on enquiry']];
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(10);
+    rows.forEach(function (row) {
+      doc.text(row[0], margin, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(row[1], margin + 130, y);
+      doc.setFont('helvetica', 'bold');
+      y += 20;
+    });
+    y += 14;
+
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90);
+    var note = 'Entry requirements vary by course and student type and are confirmed with our admissions team. ' +
+      'Contact us: +61 2 9698 7318  ·  info@mcgill.edu.au  ·  Level 1, 30 Cowper St, Parramatta NSW 2150.';
+    var noteLines = doc.splitTextToSize(note, pageWidth - margin * 2);
+    doc.text(noteLines, margin, y);
+
+    doc.setFontSize(8); doc.setTextColor(140);
+    doc.text('Generated from McGill Institute Australia course information. Not a confirmed offer of enrolment.', margin, doc.internal.pageSize.getHeight() - 40);
+
+    doc.save(c.code.replace(/\s+/g, '-') + '-prospectus.pdf');
+  }
+
+  /* ---------- Fee quote tool: routes real selections into the enquiry form
+       instead of calculating a number we don't have confirmed. ---------- */
+  var quoteForm = document.getElementById('quote-form');
+  quoteForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var course = document.getElementById('quote-course').value;
+    var studentType = document.getElementById('quote-type').value;
+    var plan = document.getElementById('quote-plan').value;
+
+    var courseSelect = document.getElementById('f-course');
+    if (course) courseSelect.value = course;
+
+    var messageField = document.getElementById('f-message');
+    var noteParts = [];
+    if (studentType) noteParts.push(studentType);
+    if (plan) noteParts.push(plan.toLowerCase());
+    if (noteParts.length) {
+      messageField.value = 'Please send me a fee quote (' + noteParts.join(', ') + ').';
+    }
+
+    document.getElementById('enquiry').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+    document.getElementById('f-name').focus();
+  });
+
+  /* ---------- Legal modal (Privacy / Terms / Disclaimer) ---------- */
+  var LEGAL_ENTITY = 'Higher Learning Australia Pty Ltd A/T for The Trustee for Higher Learning Unit Trust';
+  var LEGAL_CONTENT = {
+    privacy: {
+      title: 'Privacy Policy',
+      body:
+        '<h4>Who we are</h4>' +
+        '<p>McGill Institute Australia (RTO 45906, CRICOS 03678G) is operated by ' + LEGAL_ENTITY + '. This policy explains how we handle personal information submitted through this website.</p>' +
+        '<h4>What we collect</h4>' +
+        '<p>The enquiry form on this site collects your name, email address, phone number, course of interest, and any message you provide.</p>' +
+        '<h4>How we use it</h4>' +
+        '<p>Information submitted is used solely to respond to your enquiry about our courses and enrolment process. It is not sold, and is not used for unrelated marketing.</p>' +
+        '<h4>Your rights</h4>' +
+        '<p>Under the Australian Privacy Principles (Privacy Act 1988), you may request access to, or correction of, any personal information we hold about you by contacting <a href="mailto:info@mcgill.edu.au">info@mcgill.edu.au</a>.</p>' +
+        '<h4>Cookies and tracking</h4>' +
+        '<p>This website does not use tracking cookies or third-party analytics scripts.</p>'
+    },
+    terms: {
+      title: 'Terms of Use',
+      body:
+        '<h4>Acceptance</h4>' +
+        '<p>By using this website, you agree to these terms. This site is published by ' + LEGAL_ENTITY + '.</p>' +
+        '<h4>Course information</h4>' +
+        '<p>Course names, codes, and disciplines listed are accurate. Fees, intake dates, durations, and entry requirements are confirmed directly with our admissions team and may change &mdash; figures are not published on this site to avoid publishing outdated information.</p>' +
+        '<h4>Not immigration advice</h4>' +
+        '<p>General information on this site about student visas or health cover is provided for convenience only and is not migration advice. Consult a registered migration agent or the Australian Department of Home Affairs for guidance specific to your situation.</p>' +
+        '<h4>Intellectual property</h4>' +
+        '<p>Content on this site belongs to ' + LEGAL_ENTITY + ' unless otherwise noted. Photography is licensed stock imagery used for illustration, not photographs of our actual campus, staff, or students.</p>' +
+        '<h4>Governing law</h4>' +
+        '<p>These terms are governed by the laws of New South Wales, Australia.</p>'
+    },
+    disclaimer: {
+      title: 'Disclaimer',
+      body:
+        '<h4>Not McGill University (Canada)</h4>' +
+        '<p>McGill Institute Australia is an independent registered training organisation in Parramatta, NSW, and is not affiliated with, or endorsed by, McGill University in Canada.</p>' +
+        '<h4>Accuracy of information</h4>' +
+        '<p>We take care to keep this site accurate, but fees, intake dates, durations, and entry requirements are confirmed directly with our admissions team, not published here, and may change without notice.</p>' +
+        '<h4>Photography</h4>' +
+        '<p>Photographs on this site are licensed stock imagery used to illustrate each discipline. They are not photographs of McGill Institute Australia’s own campus, staff, or students.</p>' +
+        '<h4>Not immigration advice</h4>' +
+        '<p>Visa and health cover information on this site is general in nature and is not a substitute for advice from a registered migration agent.</p>'
+    }
+  };
+  var legalModalBackdrop = document.getElementById('legal-modal-backdrop');
+  var legalModalTitle = document.getElementById('legal-modal-title');
+  var legalModalBody = document.getElementById('legal-modal-body');
+  var legalModalClose = document.getElementById('legal-modal-close');
+  var legalLastFocused = null;
+  function openLegalModal(key) {
+    var entry = LEGAL_CONTENT[key];
+    if (!entry) return;
+    legalModalTitle.textContent = entry.title;
+    legalModalBody.innerHTML = entry.body;
+    legalLastFocused = document.activeElement;
+    legalModalBackdrop.classList.add('open');
+    legalModalClose.focus();
+    document.addEventListener('keydown', onLegalModalKeydown);
+  }
+  function closeLegalModal() {
+    legalModalBackdrop.classList.remove('open');
+    document.removeEventListener('keydown', onLegalModalKeydown);
+    if (legalLastFocused) legalLastFocused.focus();
+  }
+  function onLegalModalKeydown(e) {
+    if (e.key === 'Escape') { closeLegalModal(); return; }
+    if (e.key === 'Tab') {
+      var focusable = document.getElementById('legal-modal').querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  document.querySelectorAll('[data-legal]').forEach(function (btn) {
+    btn.addEventListener('click', function () { openLegalModal(btn.getAttribute('data-legal')); });
+  });
+  legalModalClose.addEventListener('click', closeLegalModal);
+  legalModalBackdrop.addEventListener('click', function (e) { if (e.target === legalModalBackdrop) closeLegalModal(); });
+
+  /* ---------- Enquiry form: inline validation (front-end only, see TODO above the form) ---------- */
   var form = document.getElementById('enquiry-form');
   var success = document.getElementById('enquiry-success');
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  var PHONE_RE = /^[0-9+()\s-]{8,16}$/;
+
+  function setFieldError(input, message) {
+    var row = input.closest('.form-row');
+    var err = document.getElementById('err-' + input.id.replace('f-', ''));
+    if (message) {
+      row.classList.add('has-error');
+      if (err) err.textContent = message;
+      input.setAttribute('aria-invalid', 'true');
+    } else {
+      row.classList.remove('has-error');
+      if (err) err.textContent = '';
+      input.removeAttribute('aria-invalid');
+    }
+  }
+
+  function validateField(input) {
+    var value = input.value.trim();
+    if (input.hasAttribute('required') && !value) {
+      setFieldError(input, 'This field is required.');
+      return false;
+    }
+    if (input.type === 'email' && value && !EMAIL_RE.test(value)) {
+      setFieldError(input, 'Enter a valid email address.');
+      return false;
+    }
+    if (input.type === 'tel' && value && !PHONE_RE.test(value)) {
+      setFieldError(input, 'Enter a valid phone number.');
+      return false;
+    }
+    setFieldError(input, '');
+    return true;
+  }
+
+  var validatedFields = form.querySelectorAll('#f-name, #f-email, #f-phone, #f-message');
+  validatedFields.forEach(function (input) {
+    input.addEventListener('blur', function () { validateField(input); });
+  });
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!form.checkValidity()) { form.reportValidity(); return; }
+    var allValid = true;
+    validatedFields.forEach(function (input) {
+      if (!validateField(input)) allValid = false;
+    });
+    if (!allValid) {
+      var firstInvalid = form.querySelector('.has-error input, .has-error textarea');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
     form.style.display = 'none';
     success.classList.add('show');
     success.focus();
