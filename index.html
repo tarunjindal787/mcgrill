@@ -741,7 +741,7 @@
   #enquiry .container { position: relative; z-index: 1; }
   /* The photo wash behind this section isn't guaranteed uniform, so give the heading its
      own opaque backing rather than trusting contrast against whatever's in the photo there. */
-  #enquiry .section-head { background: var(--surface); border-radius: var(--radius-card); padding: 1.5rem 1.75rem; }
+  #enquiry .section-head { background: var(--surface); border-radius: var(--radius-card); padding: 1.5rem 1.75rem; margin-bottom: 1.5rem; }
 
   .quick-ribbon {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem;
@@ -760,10 +760,10 @@
   .quick-ribbon-icon svg { width: 100%; height: 100%; display: block; }
 
   /* ============ Enquiry form ============ */
-  .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; }
+  .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-md); max-width: 640px; }
   .form-grid-2 { display: grid; gap: 0 1.25rem; }
   @media (min-width: 560px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
-  .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-row { margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.35rem; }
   .form-row label { font-weight: 600; font-size: 0.88rem; }
   .form-row .req { color: var(--coral-text); }
   .form-row input, .form-row select, .form-row textarea {
@@ -1520,6 +1520,22 @@
               <option>General English Programs</option>
             </select>
           </div>
+          <div class="form-row">
+            <label for="f-student-type">Student type</label>
+            <select id="f-student-type" name="studentType">
+              <option value="">Select student type</option>
+              <option>Domestic student</option>
+              <option>International student</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="f-payment-plan">Preferred payment plan</label>
+            <select id="f-payment-plan" name="paymentPlan">
+              <option value="">Select a payment plan</option>
+              <option>Pay upfront</option>
+              <option>Instalment plan</option>
+            </select>
+          </div>
         </div>
         <div class="form-row">
           <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
@@ -2151,14 +2167,13 @@
 
     var courseSelect = document.getElementById('f-course');
     if (course) courseSelect.value = course;
+    var studentTypeSelect = document.getElementById('f-student-type');
+    if (studentType && studentTypeSelect) studentTypeSelect.value = studentType;
+    var paymentPlanSelect = document.getElementById('f-payment-plan');
+    if (plan && paymentPlanSelect) paymentPlanSelect.value = plan;
 
     var messageField = document.getElementById('f-message');
-    var noteParts = [];
-    if (studentType) noteParts.push(studentType);
-    if (plan) noteParts.push(plan.toLowerCase());
-    if (noteParts.length) {
-      messageField.value = 'Please send me a fee quote (' + noteParts.join(', ') + ').';
-    }
+    if (!messageField.value) messageField.value = 'Please send me a fee quote.';
 
     document.getElementById('enquiry').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
     document.getElementById('f-name').focus();
