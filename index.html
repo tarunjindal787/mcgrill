@@ -412,26 +412,6 @@
   .stream-btn:hover .rail-dot { background: var(--coral); color: #fff; }
   .stream-btn:hover .rail-dot svg { filter: brightness(0) invert(1); }
 
-  /* ============ Stream comparison matrix ============ */
-  .compare-wrap { margin-top: var(--space-xl); }
-  .compare-heading { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1.25rem; }
-  .compare-table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); padding: 6px; }
-  .compare-table { width: 100%; border-collapse: collapse; min-width: 760px; background: var(--surface); }
-  .compare-table th, .compare-table td { text-align: left; padding: 1rem 1.1rem; font-size: 0.88rem; border-bottom: 1px solid var(--border); vertical-align: top; }
-  .compare-table thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 700; background: var(--bg); }
-  .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: none; }
-  .compare-table td { color: var(--text-muted); }
-  .compare-table th[scope="row"] { white-space: nowrap; }
-  .compare-cards { display: none; }
-  @media (max-width: 759px) {
-    .compare-table-scroll { display: none; }
-    .compare-cards { display: grid; gap: 1rem; }
-    .compare-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem; }
-    .compare-card dl { margin: 0.9rem 0 0; display: grid; gap: 0.7rem; }
-    .compare-card dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 0; }
-    .compare-card dd { font-size: 0.88rem; margin: 0.2rem 0 0; color: var(--text); }
-  }
-
   /* ============ Filter + course cards ============ */
   .course-search {
     display: flex; align-items: center; gap: 0.6rem; background: var(--surface); border: 1.5px solid var(--border);
@@ -883,108 +863,6 @@
             <h3>English</h3>
             <p>General English programs.</p>
           </button>
-        </div>
-      </div>
-
-      <div class="compare-wrap reveal">
-        <h3 class="compare-heading">Compare the 5 streams at a glance</h3>
-        <div class="compare-table-scroll">
-          <table class="compare-table">
-            <thead>
-              <tr>
-                <th scope="col">Stream</th>
-                <th scope="col">Best suited to</th>
-                <th scope="col">Key focus areas</th>
-                <th scope="col">Duration &amp; fees</th>
-                <th scope="col">Where it can lead</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row"><span class="tag tag-engineering">Engineering</span></th>
-                <td>Trade-focused learners entering metal fabrication</td>
-                <td>Metal fabrication, welding and workshop safety</td>
-                <td>Confirmed on enquiry</td>
-                <td>Hands-on trade roles in fabrication and welding workshops</td>
-              </tr>
-              <tr>
-                <th scope="row"><span class="tag tag-hospitality">Hospitality</span></th>
-                <td>Kitchen staff and aspiring hospitality supervisors</td>
-                <td>Commercial kitchen operations, food safety and guest service leadership</td>
-                <td>Confirmed on enquiry</td>
-                <td>Supervisory and management roles across kitchens, food &amp; beverage, and accommodation</td>
-              </tr>
-              <tr>
-                <th scope="row"><span class="tag tag-business">Business</span></th>
-                <td>Admin, coordination and operations-minded learners</td>
-                <td>Workplace communication, administration and business operations</td>
-                <td>Confirmed on enquiry</td>
-                <td>Business administration, coordination and operations roles</td>
-              </tr>
-              <tr>
-                <th scope="row"><span class="tag tag-management">Management</span></th>
-                <td>Postgraduate-level learners moving into leadership</td>
-                <td>Organisational learning &amp; development and executive strategy</td>
-                <td>Confirmed on enquiry</td>
-                <td>Learning &amp; development and senior leadership roles</td>
-              </tr>
-              <tr>
-                <th scope="row"><span class="tag tag-english">English</span></th>
-                <td>Non-native English speakers building language skills</td>
-                <td>Everyday and academic English proficiency</td>
-                <td>Flexible, confirmed on enquiry</td>
-                <td>Further vocational study or confident daily use in Australia</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="compare-cards">
-          <article class="compare-card">
-            <span class="tag tag-engineering">Engineering</span>
-            <dl>
-              <div><dt>Best suited to</dt><dd>Trade-focused learners entering metal fabrication</dd></div>
-              <div><dt>Key focus areas</dt><dd>Metal fabrication, welding and workshop safety</dd></div>
-              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
-              <div><dt>Where it can lead</dt><dd>Hands-on trade roles in fabrication and welding workshops</dd></div>
-            </dl>
-          </article>
-          <article class="compare-card">
-            <span class="tag tag-hospitality">Hospitality</span>
-            <dl>
-              <div><dt>Best suited to</dt><dd>Kitchen staff and aspiring hospitality supervisors</dd></div>
-              <div><dt>Key focus areas</dt><dd>Commercial kitchen operations, food safety and guest service leadership</dd></div>
-              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
-              <div><dt>Where it can lead</dt><dd>Supervisory and management roles across kitchens, food &amp; beverage, and accommodation</dd></div>
-            </dl>
-          </article>
-          <article class="compare-card">
-            <span class="tag tag-business">Business</span>
-            <dl>
-              <div><dt>Best suited to</dt><dd>Admin, coordination and operations-minded learners</dd></div>
-              <div><dt>Key focus areas</dt><dd>Workplace communication, administration and business operations</dd></div>
-              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
-              <div><dt>Where it can lead</dt><dd>Business administration, coordination and operations roles</dd></div>
-            </dl>
-          </article>
-          <article class="compare-card">
-            <span class="tag tag-management">Management</span>
-            <dl>
-              <div><dt>Best suited to</dt><dd>Postgraduate-level learners moving into leadership</dd></div>
-              <div><dt>Key focus areas</dt><dd>Organisational learning &amp; development and executive strategy</dd></div>
-              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
-              <div><dt>Where it can lead</dt><dd>Learning &amp; development and senior leadership roles</dd></div>
-            </dl>
-          </article>
-          <article class="compare-card">
-            <span class="tag tag-english">English</span>
-            <dl>
-              <div><dt>Best suited to</dt><dd>Non-native English speakers building language skills</dd></div>
-              <div><dt>Key focus areas</dt><dd>Everyday and academic English proficiency</dd></div>
-              <div><dt>Duration &amp; fees</dt><dd>Flexible, confirmed on enquiry</dd></div>
-              <div><dt>Where it can lead</dt><dd>Further vocational study or confident daily use in Australia</dd></div>
-            </dl>
-          </article>
         </div>
       </div>
 
