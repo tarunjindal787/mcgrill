@@ -447,6 +447,7 @@
   .quote-tool {
     margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-card); padding: var(--space-md); display: grid; gap: var(--space-md);
+    scroll-margin-top: calc(var(--header-h) + 16px);
   }
   @media (min-width: 800px) { .quote-tool { grid-template-columns: 1fr 1fr; align-items: center; } }
   .quote-tool-form { display: grid; gap: 1rem; }
@@ -697,8 +698,38 @@
   .faq-item[open] summary .chevron { transform: rotate(180deg); }
   .faq-item .faq-body { padding: 0 1.4rem 1.25rem; color: var(--text-muted); font-size: 0.95rem; }
 
+  /* ============ Enquiry: background wash + quick-action ribbon ============ */
+  #enquiry { position: relative; overflow: hidden; }
+  #enquiry::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    /* rgba values mirror --off-white (#F8F9FA) at 80% opacity, washing out a decorative photo underneath */
+    background: linear-gradient(rgba(248,249,250,0.8), rgba(248,249,250,0.8)), url('photos/hero-slide-2.jpg') center/cover;
+  }
+  #enquiry .container { position: relative; z-index: 1; }
+  /* The photo wash behind this section isn't guaranteed uniform, so give the heading its
+     own opaque backing rather than trusting contrast against whatever's in the photo there. */
+  #enquiry .section-head { background: var(--surface); border-radius: var(--radius-card); padding: 1.5rem 1.75rem; }
+
+  .quick-ribbon {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-pill);
+    padding: 0.75rem; margin: -3.5rem auto calc(var(--space-lg) + 1.5rem); max-width: 760px;
+    box-shadow: 0 16px 40px -20px rgba(15,17,30,0.25); position: relative; z-index: 2;
+  }
+  @media (max-width: 640px) { .quick-ribbon { margin-top: -2rem; border-radius: var(--radius-card); } }
+  .quick-ribbon-item {
+    all: unset; cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.85rem; font-weight: 600; color: var(--text); padding: 0.6rem 1rem;
+    border-radius: var(--radius-pill); transition: color 0.2s ease, background 0.2s ease; white-space: nowrap;
+  }
+  .quick-ribbon-item:hover { color: var(--coral-text); background: var(--bg); }
+  .quick-ribbon-icon { display: inline-flex; width: 18px; height: 18px; flex-shrink: 0; color: var(--coral-text); }
+  .quick-ribbon-icon svg { width: 100%; height: 100%; display: block; }
+
   /* ============ Enquiry form ============ */
   .form-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: var(--space-lg); max-width: 640px; }
+  .form-grid-2 { display: grid; gap: 0 1.25rem; }
+  @media (min-width: 560px) { .form-grid-2 { grid-template-columns: 1fr 1fr; } }
   .form-row { margin-bottom: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
   .form-row label { font-weight: 600; font-size: 0.88rem; }
   .form-row .req { color: var(--coral-text); }
@@ -929,7 +960,7 @@
       <p class="course-search-empty" id="course-search-empty" hidden>No courses match your search. Try a different keyword or clear the filter.</p>
       <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data --></div>
 
-      <div class="quote-tool reveal">
+      <div class="quote-tool reveal" id="quote-tool">
         <div class="quote-tool-copy">
           <h3 style="font-family:var(--font-display); font-size:1.4rem; margin-bottom:0.5rem;">Fees &amp; payment options</h3>
           <p style="margin-bottom:0;">Tuition fees depend on your course, student type, and payment plan. Tell us your preferences and our admissions team will send you accurate, up-to-date pricing. We don't publish fee estimates here, since they change and we'd rather you get a number you can rely on.</p>
@@ -1327,6 +1358,26 @@
   <!-- ENQUIRY -->
   <section id="enquiry" class="tone-light">
     <div class="container">
+
+      <div class="quick-ribbon reveal" aria-label="Quick actions">
+        <a href="#quote-tool" class="quick-ribbon-item">
+          <span class="quick-ribbon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h7l-1 8 11-13h-7l1-7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          Fast Fee Quote
+        </a>
+        <a href="#campus" class="quick-ribbon-item">
+          <span class="quick-ribbon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg></span>
+          Parramatta Campus Map
+        </a>
+        <a href="tel:+61296987318" class="quick-ribbon-item">
+          <span class="quick-ribbon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 005 5L14 13l5 2v3a2 2 0 01-2 2A16 16 0 015 7a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+          Call Admissions
+        </a>
+        <button type="button" class="quick-ribbon-item" id="ribbon-prospectus">
+          <span class="quick-ribbon-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Download Prospectus
+        </button>
+      </div>
+
       <div class="section-head reveal">
         <span class="section-eyebrow">Get in Touch</span>
         <h2>Enquire now</h2>
@@ -1336,33 +1387,35 @@
            state entirely client-side. It does not transmit data anywhere yet -- wire
            up a real backend/email endpoint before relying on it to capture enquiries. -->
       <form class="form-card reveal" id="enquiry-form" novalidate>
-        <div class="form-row">
-          <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-          <input type="text" id="f-name" name="name" required autocomplete="name" aria-describedby="err-name">
-          <span class="field-error" id="err-name" role="alert"></span>
-        </div>
-        <div class="form-row">
-          <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-          <input type="email" id="f-email" name="email" required autocomplete="email" aria-describedby="err-email">
-          <span class="field-error" id="err-email" role="alert"></span>
-        </div>
-        <div class="form-row">
-          <label for="f-phone">Phone</label>
-          <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 0412 345 678" aria-describedby="err-phone">
-          <span class="field-error" id="err-phone" role="alert"></span>
-        </div>
-        <div class="form-row">
-          <label for="f-course">Course of interest</label>
-          <select id="f-course" name="course">
-            <option value="">Select a course</option>
-            <option>Certificate III in Engineering (Fabrication Trade)</option>
-            <option>Certificate IV in Kitchen Management</option>
-            <option>Diploma of Hospitality Management</option>
-            <option>Certificate IV in Business</option>
-            <option>Diploma of Business</option>
-            <option>Graduate Diploma of Management (Learning)</option>
-            <option>General English Programs</option>
-          </select>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="f-name" name="name" required autocomplete="name" aria-describedby="err-name">
+            <span class="field-error" id="err-name" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="f-email" name="email" required autocomplete="email" aria-describedby="err-email">
+            <span class="field-error" id="err-email" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 0412 345 678" aria-describedby="err-phone">
+            <span class="field-error" id="err-phone" role="alert"></span>
+          </div>
+          <div class="form-row">
+            <label for="f-course">Course of interest</label>
+            <select id="f-course" name="course">
+              <option value="">Select a course</option>
+              <option>Certificate III in Engineering (Fabrication Trade)</option>
+              <option>Certificate IV in Kitchen Management</option>
+              <option>Diploma of Hospitality Management</option>
+              <option>Certificate IV in Business</option>
+              <option>Diploma of Business</option>
+              <option>Graduate Diploma of Management (Learning)</option>
+              <option>General English Programs</option>
+            </select>
+          </div>
         </div>
         <div class="form-row">
           <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
@@ -1921,6 +1974,67 @@
 
     doc.save(c.code.replace(/\s+/g, '-') + '-prospectus.pdf');
   }
+
+  /* ---------- Full catalogue prospectus (quick-action ribbon) ---------- */
+  function downloadFullProspectus() {
+    if (!window.jspdf) return;
+    var doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
+    var margin = 56, pageWidth = doc.internal.pageSize.getWidth(), pageHeight = doc.internal.pageSize.getHeight();
+    var y = 64;
+
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(18); doc.setTextColor(0);
+    doc.text('McGill Institute Australia', margin, y);
+    y += 20;
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90);
+    doc.text('RTO 45906  ·  CRICOS 03678G  ·  ABN 91 835 873 060', margin, y);
+    y += 18;
+    doc.text('Level 1, 30 Cowper St, Parramatta NSW 2150', margin, y);
+    y += 36;
+    doc.setFont('helvetica', 'bold'); doc.setFontSize(13); doc.setTextColor(0);
+    doc.text('Course catalogue', margin, y);
+    y += 28;
+
+    COURSES.forEach(function (c) {
+      var descLines = doc.splitTextToSize(c.desc, pageWidth - margin * 2);
+      var needed = 22 + 20 + descLines.length * 15 + 14 + 3 * 16 + 20;
+      if (y + needed > pageHeight - 70) { doc.addPage(); y = 64; }
+
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.setTextColor(0);
+      doc.text(c.name, margin, y, { maxWidth: pageWidth - margin * 2 });
+      y += 22;
+      doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90);
+      doc.text(c.tagLabel + '  ·  ' + c.code, margin, y);
+      y += 20;
+      doc.setTextColor(0); doc.setFontSize(10.5);
+      doc.text(descLines, margin, y);
+      y += descLines.length * 15 + 14;
+
+      var rows = [['Duration', 'Confirmed on enquiry'], ['Fees (AUD)', 'Confirmed on enquiry'], ['Intakes', 'Confirmed on enquiry']];
+      doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5);
+      rows.forEach(function (row) {
+        doc.text(row[0], margin, y);
+        doc.setFont('helvetica', 'normal');
+        doc.text(row[1], margin + 110, y);
+        doc.setFont('helvetica', 'bold');
+        y += 16;
+      });
+      y += 20;
+    });
+
+    if (y > pageHeight - 90) { doc.addPage(); y = 64; }
+    doc.setFont('helvetica', 'normal'); doc.setFontSize(10); doc.setTextColor(90);
+    var note = 'Entry requirements vary by course and student type and are confirmed with our admissions team. ' +
+      'Contact us: +61 2 9698 7318  ·  info@mcgill.edu.au.';
+    var noteLines = doc.splitTextToSize(note, pageWidth - margin * 2);
+    doc.text(noteLines, margin, y);
+
+    doc.setFontSize(8); doc.setTextColor(140);
+    doc.text('Generated from McGill Institute Australia course information. Not a confirmed offer of enrolment.', margin, pageHeight - 40);
+
+    doc.save('McGill-Institute-Australia-Prospectus.pdf');
+  }
+  var ribbonProspectus = document.getElementById('ribbon-prospectus');
+  if (ribbonProspectus) ribbonProspectus.addEventListener('click', downloadFullProspectus);
 
   /* ---------- Fee quote tool: routes real selections into the enquiry form
        instead of calculating a number we don't have confirmed. ---------- */
