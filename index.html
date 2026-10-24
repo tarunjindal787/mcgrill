@@ -608,11 +608,27 @@
   /* ============ Pathway ============ */
   #pathway { padding: 4rem 0; }
   #pathway .section-head { margin-bottom: 2.25rem; }
-  #pathway .transit-rail { max-width: 800px; }
   #pathway .rail-stops { gap: 1.5rem; }
   #pathway .rail-stop > div { max-width: 62ch; }
   #pathway .readiness { max-width: 800px; }
   .pathway-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
+
+  .pathway-split { display: grid; gap: var(--space-lg); margin-bottom: var(--space-lg); }
+  @media (min-width: 900px) { .pathway-split { grid-template-columns: 7fr 5fr; align-items: start; } }
+  .pathway-side {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+    padding: var(--space-md);
+  }
+  @media (min-width: 900px) { .pathway-side { position: sticky; top: calc(var(--header-h) + 1.5rem); } }
+  .pathway-side-photo {
+    margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) 1.25rem;
+    aspect-ratio: 16/10; overflow: hidden; border-radius: var(--radius-card) var(--radius-card) 0 0;
+  }
+  .pathway-side-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pathway-side h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .pathway-side p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+  .pathway-side-ctas { display: flex; flex-direction: column; gap: 0.75rem; }
+  .pathway-side-ctas .btn { width: 100%; justify-content: center; }
 
   .rail-more { margin-top: 0.4rem; }
   .rail-more summary {
@@ -627,6 +643,7 @@
   .readiness {
     margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-card); padding: var(--space-md);
+    scroll-margin-top: calc(var(--header-h) + 16px);
   }
   .readiness h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
   .readiness > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
@@ -1087,6 +1104,8 @@
         <span class="section-eyebrow">How to Enrol</span>
         <h2>Your pathway, step by step</h2>
       </div>
+      <div class="pathway-split">
+      <div class="pathway-steps">
       <div class="transit-rail rail-vertical reveal" role="list" aria-label="Enrolment steps">
         <div class="rail-line" aria-hidden="true"></div>
         <div class="rail-stops">
@@ -1148,6 +1167,21 @@
         </div>
       </div>
       <p class="pathway-note">Fees, intake dates and entry requirements are confirmed directly with our team and are not published here. <a href="#enquiry" style="color:var(--coral-text); font-weight:600;">Enquire now</a> for current details.</p>
+      </div>
+
+      <div class="pathway-side reveal">
+        <div class="pathway-side-photo">
+          <img src="photos/hero-slide-3.jpg" alt="Students in a meeting discussing their study plans" loading="lazy">
+        </div>
+        <h3>Need help getting started, or with visa documents?</h3>
+        <p>Our Parramatta admissions team walks domestic and international students through every step, from entry requirements to your Confirmation of Enrolment (CoE).</p>
+        <div class="pathway-side-ctas">
+          <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
+          <a href="#readiness" class="btn btn-outline">Check Pre-Enrolment Checklist</a>
+        </div>
+      </div>
+
+      </div>
 
       <div class="readiness reveal" id="readiness">
         <h3>Not sure if you're ready? Check now</h3>
