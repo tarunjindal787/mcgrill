@@ -283,16 +283,9 @@
     overflow: hidden;
     background: var(--oled); scroll-snap-type: x mandatory;
   }
-  .hero-track {
-    position: absolute; inset: 0;
-  }
-  .hero-slide {
-    position: absolute; inset: 0; opacity: 0; visibility: hidden;
-    transition: opacity 1s ease; scroll-snap-align: start;
-  }
-  .hero-slide.is-active { opacity: 1; visibility: visible; z-index: 1; }
-  .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-slide::after {
+  .hero-video-wrap { position: absolute; inset: 0; background: var(--oled); }
+  #hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-video-wrap::after {
     content: ""; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.24) 68%, transparent 100%);
   }
@@ -319,6 +312,8 @@
     background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
   }
   .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral-bright); flex-shrink: 0; }
+  .hero-segment-icon { display: inline-flex; width: 14px; height: 14px; flex-shrink: 0; color: var(--coral-bright); }
+  .hero-segment-icon svg { width: 100%; height: 100%; display: block; }
   .hero-disclaimer { font-size: 0.78rem; color: rgba(255,255,255,0.78); max-width: 42ch; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
   .hero h1 {
     font-size: var(--fs-hero); max-width: 16ch; color: #fff; letter-spacing: -0.01em;
@@ -357,11 +352,9 @@
   }
   .hero-progress-bar span {
     display: block; height: 100%; width: 0%; background: #fff; border-radius: 2px;
+    transition: width 0.15s linear;
   }
-  .hero-progress-bar.is-active span { animation: heroProgressFill 6s linear forwards; }
-  .hero-progress-bar.is-done span { width: 100%; }
-  @keyframes heroProgressFill { from { width: 0%; } to { width: 100%; } }
-  @media (prefers-reduced-motion: reduce) { .hero-progress-bar.is-active span { animation: none; width: 100%; } }
+  @media (prefers-reduced-motion: reduce) { .hero-progress-bar span { transition: none; } }
 
   .hero-scroll-cue {
     position: absolute; right: 2rem; bottom: 50%; transform: translateY(50%) rotate(90deg); transform-origin: right bottom;
@@ -810,35 +803,34 @@
 
   <!-- HERO: full-screen photo slider -->
   <section class="hero" id="top" aria-roledescription="carousel" aria-label="McGill Institute highlights">
-    <div class="hero-track" id="hero-track">
-      <div class="hero-slide is-active" data-slide="0">
-        <img src="photos/hero.jpg" alt="Students collaborating around a laptop in a bright classroom" width="1600" height="900" fetchpriority="high">
-      </div>
-      <div class="hero-slide" data-slide="1">
-        <img src="photos/hero-slide-2.jpg" alt="Engineering student operating fabrication equipment, sparks flying" width="1920" height="1080" loading="lazy">
-      </div>
-      <div class="hero-slide" data-slide="2">
-        <img src="photos/hero-slide-3.jpg" alt="Business students in a professional meeting discussing a strategy" width="1920" height="1080" loading="lazy">
-      </div>
+    <div class="hero-video-wrap" id="hero-track">
+      <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="photos/hero.jpg" aria-hidden="true">
+        <source src="videos/hero-loop.mp4" type="video/mp4">
+      </video>
     </div>
     <div class="hero-content" id="hero-content">
       <div class="hero-content-inner">
         <div class="hero-badge-row hero-kinetic">
           <span class="hero-badge"><span class="dot" aria-hidden="true"></span>RTO 45906 &middot; CRICOS 03678G &middot; PARRAMATTA NSW</span>
+          <span class="hero-badge hero-badge-segment" id="hero-segment-badge">
+            <span class="hero-segment-icon" id="hero-segment-icon" aria-hidden="true"></span>
+            <span id="hero-segment-text">Parramatta Campus, Sydney</span>
+          </span>
           <p class="hero-disclaimer">Not affiliated with McGill University, Canada.</p>
         </div>
-        <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
-        <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English. Our campus is a short walk from Parramatta and Harris Park stations.</p>
+        <h1 class="hero-kinetic" id="hero-heading">Quality education creates <em>great careers</em>.</h1>
+        <p class="hero-lede hero-kinetic" id="hero-lede">Step into your future with nationally accredited courses tailored for your success.</p>
         <div class="hero-ctas hero-kinetic">
           <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
-          <a href="#courses" class="btn btn-ghost-inverse">Explore Courses</a>
+          <a href="#courses" class="btn btn-ghost-inverse" id="hero-segment-cta" data-stream="all">Explore All Courses</a>
         </div>
       </div>
     </div>
-    <div class="hero-progress" id="hero-progress" role="group" aria-label="Slide selection">
-      <button class="hero-progress-bar is-active" type="button" aria-current="true" aria-label="Go to slide 1"><span></span></button>
-      <button class="hero-progress-bar" type="button" aria-current="false" aria-label="Go to slide 2"><span></span></button>
-      <button class="hero-progress-bar" type="button" aria-current="false" aria-label="Go to slide 3"><span></span></button>
+    <div class="hero-progress" id="hero-progress" role="group" aria-label="Stream spotlight selection">
+      <button class="hero-progress-bar is-active" type="button" aria-current="true" aria-label="Campus life"><span></span></button>
+      <button class="hero-progress-bar" type="button" aria-current="false" aria-label="Hospitality and culinary"><span></span></button>
+      <button class="hero-progress-bar" type="button" aria-current="false" aria-label="Engineering and trades"><span></span></button>
+      <button class="hero-progress-bar" type="button" aria-current="false" aria-label="Business and management"><span></span></button>
     </div>
     <div class="hero-scroll-cue" aria-hidden="true">Scroll</div>
   </section>
@@ -1548,18 +1540,60 @@
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------- Hero: full-screen slider (autoplay, pause-on-hover, swipe/drag, kinetic text) ---------- */
+  /* ---------- Hero: 20s background video loop with 4 synced content segments ----------
+       Primary sync source is the video's own currentTime (self-correcting, no drift).
+       If the video can't play (blocked autoplay, missing file), an independent timer
+       takes over so the hero stays interactive -- the poster photo just stays static. ---------- */
   (function () {
-    var slides = document.querySelectorAll('#hero-track .hero-slide');
+    var video = document.getElementById('hero-video');
     var bars = document.querySelectorAll('#hero-progress .hero-progress-bar');
     var heroContent = document.getElementById('hero-content');
     var heroEl = document.querySelector('.hero');
-    if (!slides.length || !bars.length || !heroContent || !heroEl) return;
+    var headingEl = document.getElementById('hero-heading');
+    var ledeEl = document.getElementById('hero-lede');
+    var segmentText = document.getElementById('hero-segment-text');
+    var segmentIcon = document.getElementById('hero-segment-icon');
+    var segmentCta = document.getElementById('hero-segment-cta');
+    if (!video || !bars.length || !heroContent || !heroEl || !headingEl || !segmentCta) return;
 
-    var current = 0;
-    var AUTOPLAY_MS = 6000;
-    var timer = null;
-    var paused = false;
+    var SEGMENT_SECONDS = 5;
+    var ICONS = {
+      pin: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>',
+      chef: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="15" width="10" height="5" rx="1" stroke="currentColor" stroke-width="1.6"/><path d="M7 15c-1.7 0-3-1.3-3-3 0-1.5 1.1-2.7 2.5-2.9C6.7 7.3 8.2 6 10 6c.7 0 1.4.2 2 .6.5-1 1.6-1.6 2.8-1.6 1.8 0 3.2 1.4 3.2 3.2v.1c1.1.3 2 1.3 2 2.6 0 1.7-1.3 3-3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      gear: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20l6-6M14 10l6-6M9 9l6 6M7 17l-2 2 2-6 6-6 4 4-6 6-4 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+      chart: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+    };
+    var SEGMENTS = [
+      {
+        icon: 'pin', badge: 'Parramatta Campus, Sydney',
+        heading: 'Quality education creates <em>great careers</em>.',
+        lede: 'Step into your future with nationally accredited courses tailored for your success.',
+        ctaLabel: 'Explore All Courses', stream: 'all'
+      },
+      {
+        icon: 'chef', badge: 'Culinary &amp; Hospitality Stream',
+        heading: 'Master the art of <em>kitchen management</em>.',
+        lede: 'Gain hands-on experience in commercial kitchens, building real skills for a career in hospitality and hotel management.',
+        ctaLabel: 'View Hospitality Courses', stream: 'hospitality'
+      },
+      {
+        icon: 'gear', badge: 'Engineering &amp; Trades Stream',
+        heading: 'Build your future with <em>precision trades</em>.',
+        lede: 'Equip yourself with practical skills and industry-standard training for high-demand engineering roles.',
+        ctaLabel: 'View Engineering Courses', stream: 'engineering'
+      },
+      {
+        icon: 'chart', badge: 'Business &amp; Management Stream',
+        heading: 'Lead with <em>vision and strategy</em>.',
+        lede: 'Develop critical business acumen and leadership capabilities to thrive in the modern corporate world.',
+        ctaLabel: 'View Business Courses', stream: 'business'
+      }
+    ];
+
+    var current = -1;
+    var usingFallback = false;
+    var fallbackTimer = null;
+    var hoverPaused = false;
 
     function playKinetic() {
       heroContent.classList.remove('kinetic-play');
@@ -1567,46 +1601,100 @@
       heroContent.classList.add('kinetic-play');
     }
 
+    function setBarFill(i, pct) {
+      var span = bars[i] && bars[i].querySelector('span');
+      if (span) span.style.width = (pct * 100) + '%';
+    }
+
     function updateBars() {
       bars.forEach(function (bar, i) {
-        bar.classList.remove('is-active', 'is-done');
+        bar.classList.toggle('is-active', i === current);
+        bar.classList.toggle('is-done', i < current);
         bar.setAttribute('aria-current', i === current ? 'true' : 'false');
-        if (i < current) bar.classList.add('is-done');
+        if (i !== current) setBarFill(i, i < current ? 1 : 0);
       });
     }
 
-    function restartTimer() {
-      if (timer) { clearTimeout(timer); timer = null; }
-      var activeBar = bars[current];
-      activeBar.classList.remove('is-active');
-      void activeBar.offsetWidth;
-      activeBar.classList.add('is-active');
-      if (!paused && !prefersReducedMotion) {
-        timer = setTimeout(function () { goTo(current + 1); }, AUTOPLAY_MS);
-      }
-    }
-
-    function goTo(index) {
-      index = (index + slides.length) % slides.length;
-      slides[current].classList.remove('is-active');
-      slides[index].classList.add('is-active');
+    function showSegment(index) {
+      if (index === current) return;
       current = index;
+      var s = SEGMENTS[index];
+      headingEl.innerHTML = s.heading;
+      if (ledeEl) ledeEl.textContent = s.lede;
+      if (segmentText) segmentText.innerHTML = s.badge;
+      if (segmentIcon) segmentIcon.innerHTML = ICONS[s.icon];
+      segmentCta.textContent = s.ctaLabel;
+      segmentCta.setAttribute('data-stream', s.stream);
       updateBars();
       playKinetic();
-      restartTimer();
+    }
+
+    segmentCta.addEventListener('click', function (e) {
+      e.preventDefault();
+      var stream = segmentCta.getAttribute('data-stream') || 'all';
+      if (typeof applyFilter === 'function') applyFilter(stream);
+      var coursesEl = document.getElementById('courses');
+      if (coursesEl) coursesEl.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+    });
+
+    function restartFallbackTimer() {
+      if (fallbackTimer) clearInterval(fallbackTimer);
+      var start = Date.now();
+      var startIndex = current < 0 ? 0 : current;
+      fallbackTimer = setInterval(function () {
+        if (hoverPaused) return;
+        var elapsed = (Date.now() - start) / 1000;
+        var index = (startIndex + Math.floor(elapsed / SEGMENT_SECONDS)) % SEGMENTS.length;
+        showSegment(index);
+        setBarFill(index, (elapsed % SEGMENT_SECONDS) / SEGMENT_SECONDS);
+      }, 100);
+    }
+
+    function startFallback() {
+      if (usingFallback) return;
+      usingFallback = true;
+      if (current < 0) showSegment(0);
+      restartFallbackTimer();
+    }
+
+    function onTimeUpdate() {
+      usingFallback = false;
+      if (fallbackTimer) { clearInterval(fallbackTimer); fallbackTimer = null; }
+      var total = SEGMENT_SECONDS * SEGMENTS.length;
+      var t = video.currentTime % total;
+      var index = Math.floor(t / SEGMENT_SECONDS) % SEGMENTS.length;
+      showSegment(index);
+      setBarFill(index, (t % SEGMENT_SECONDS) / SEGMENT_SECONDS);
     }
 
     bars.forEach(function (bar, i) {
-      bar.addEventListener('click', function () { goTo(i); });
+      bar.addEventListener('click', function () {
+        try { video.currentTime = i * SEGMENT_SECONDS; } catch (err) {}
+        showSegment(i);
+        if (usingFallback) restartFallbackTimer();
+      });
     });
 
+    video.addEventListener('timeupdate', onTimeUpdate);
+    video.addEventListener('error', startFallback);
+    showSegment(0);
+
+    if (prefersReducedMotion) {
+      video.pause();
+      try { video.currentTime = 0; } catch (err) {}
+    } else {
+      setTimeout(function () {
+        if (!usingFallback && video.paused) startFallback();
+      }, 1800);
+    }
+
     heroEl.addEventListener('mouseenter', function () {
-      paused = true;
-      if (timer) { clearTimeout(timer); timer = null; }
+      hoverPaused = true;
+      if (!prefersReducedMotion) video.pause();
     });
     heroEl.addEventListener('mouseleave', function () {
-      paused = false;
-      restartTimer();
+      hoverPaused = false;
+      if (!prefersReducedMotion) video.play().catch(function () {});
     });
 
     var dragStartX = null;
@@ -1618,17 +1706,16 @@
       isDragging = false;
       dragStartX = null;
       if (Math.abs(delta) < 50) return;
-      goTo(current + (delta < 0 ? 1 : -1));
+      var next = (current + (delta < 0 ? 1 : -1) + SEGMENTS.length) % SEGMENTS.length;
+      try { video.currentTime = next * SEGMENT_SECONDS; } catch (err) {}
+      showSegment(next);
+      if (usingFallback) restartFallbackTimer();
     }
     heroEl.addEventListener('touchstart', function (e) { dragStart(e.touches[0].clientX); }, { passive: true });
     heroEl.addEventListener('touchend', function (e) { dragEnd(e.changedTouches[0].clientX); });
     heroEl.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
     heroEl.addEventListener('mouseup', function (e) { dragEnd(e.clientX); });
     heroEl.addEventListener('dragstart', function (e) { e.preventDefault(); });
-
-    updateBars();
-    playKinetic();
-    restartTimer();
   })();
 
   /* ---------- Magnetic-pull CTA buttons with cursor light-flare (fine-pointer only) ---------- */
