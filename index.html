@@ -389,15 +389,13 @@
     .advisory-ctas { grid-column: auto; justify-self: end; }
   }
 
-  /* ============ Transit rail (signature element) ============ */
+  /* ============ Transit rail (signature element; vertical variant = Pathway) ============ */
   .transit-rail { position: relative; }
   .transit-rail .rail-line {
     position: absolute; background: var(--border); z-index: 0;
   }
-  .rail-horizontal .rail-line { top: 28px; left: 28px; right: 28px; height: 3px; }
   .rail-vertical .rail-line { left: 28px; top: 28px; bottom: 28px; width: 3px; }
   .rail-stops { position: relative; z-index: 1; display: grid; gap: var(--space-md); }
-  .rail-horizontal .rail-stops { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
   .rail-stop { display: flex; flex-direction: column; gap: 0.75rem; }
   .rail-vertical .rail-stop { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
   .rail-vertical .rail-stop > div { flex: 1; min-width: 0; }
@@ -409,9 +407,32 @@
   .rail-dot svg { width: 26px; height: 26px; }
   .rail-stop h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
   .rail-stop p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
-  .stream-btn { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 0.75rem; border-radius: var(--radius-card); padding: 0.5rem; margin: -0.5rem; }
-  .stream-btn:hover .rail-dot { background: var(--coral); color: #fff; }
-  .stream-btn:hover .rail-dot svg { filter: brightness(0) invert(1); }
+
+  /* ============ Streams: asymmetric split + stream card grid ============ */
+  .streams-split { display: grid; gap: var(--space-lg); }
+  @media (min-width: 900px) { .streams-split { grid-template-columns: 1fr 1.7fr; align-items: start; } }
+  .streams-intro { max-width: 46ch; }
+  .stream-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; }
+  .stream-card {
+    all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 0.6rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+    padding: 1.25rem; transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .stream-card:hover {
+    border-color: var(--coral-text); transform: translateY(-3px);
+    box-shadow: 0 16px 32px -20px rgba(20,23,43,0.25);
+  }
+  .stream-card:hover .rail-dot { background: var(--coral); color: #fff; }
+  .stream-card:hover .rail-dot svg { filter: brightness(0) invert(1); }
+  .stream-card-badge {
+    align-self: flex-start; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted);
+    background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-pill);
+    padding: 0.25rem 0.6rem; transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .stream-card:hover .stream-card-badge { color: var(--coral-text); border-color: var(--coral-text); background: var(--surface); }
+  .stream-card h3 { font-size: 1.05rem; margin-bottom: 0; }
+  .stream-card p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0; }
 
   /* ============ Filter + course cards ============ */
   .course-search {
@@ -838,43 +859,44 @@
 
   <!-- STREAMS (signature transit rail) -->
   <section id="streams" class="tone-light">
-    <div class="container">
-      <div class="section-head reveal">
+    <div class="container streams-split">
+      <div class="streams-intro reveal">
         <span class="section-eyebrow">Educational Streams</span>
         <h2>Five streams, one campus.</h2>
         <p>Pick a stream to jump straight to its courses in the catalogue below.</p>
       </div>
-      <div class="transit-rail rail-horizontal reveal" role="group" aria-label="Educational streams">
-        <div class="rail-line" aria-hidden="true"></div>
-        <div class="rail-stops">
-          <button class="stream-btn" data-stream="engineering" type="button">
-            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l6-6M14 10l6-6M9 9l6 6M7 17l-2 2 2-6 6-6 4 4-6 6-4 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>Engineering</h3>
-            <p>Fabrication trade training.</p>
-          </button>
-          <button class="stream-btn" data-stream="hospitality" type="button">
-            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16M4 11a8 8 0 0016 0M9 4v3M12 4v3M15 4v3M2 20h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>Hospitality</h3>
-            <p>Kitchen &amp; hotel management.</p>
-          </button>
-          <button class="stream-btn" data-stream="business" type="button">
-            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            <h3>Business</h3>
-            <p>Core &amp; advanced business skills.</p>
-          </button>
-          <button class="stream-btn" data-stream="management" type="button">
-            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            <h3>Management</h3>
-            <p>Postgraduate leadership training.</p>
-          </button>
-          <button class="stream-btn" data-stream="english" type="button">
-            <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 011-1h10l5 5v10a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-            <h3>English</h3>
-            <p>General English programs.</p>
-          </button>
-        </div>
+      <div class="stream-grid reveal" role="group" aria-label="Educational streams">
+        <button class="stream-card" data-stream="engineering" type="button">
+          <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20l6-6M14 10l6-6M9 9l6 6M7 17l-2 2 2-6 6-6 4 4-6 6-4 0z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stream-card-badge">1 Qualification</span>
+          <h3>Engineering</h3>
+          <p>Fabrication trade training.</p>
+        </button>
+        <button class="stream-card" data-stream="hospitality" type="button">
+          <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 11h16M4 11a8 8 0 0016 0M9 4v3M12 4v3M15 4v3M2 20h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stream-card-badge">2 Qualifications</span>
+          <h3>Hospitality</h3>
+          <p>Kitchen &amp; hotel management.</p>
+        </button>
+        <button class="stream-card" data-stream="business" type="button">
+          <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M21 20H3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="stream-card-badge">2 Qualifications</span>
+          <h3>Business</h3>
+          <p>Core &amp; advanced business skills.</p>
+        </button>
+        <button class="stream-card" data-stream="management" type="button">
+          <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="stream-card-badge">1 Qualification</span>
+          <h3>Management</h3>
+          <p>Postgraduate leadership training.</p>
+        </button>
+        <button class="stream-card" data-stream="english" type="button">
+          <span class="rail-dot" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V5a1 1 0 011-1h10l5 5v10a1 1 0 01-1 1H5a1 1 0 01-1-1z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8 10h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+          <span class="stream-card-badge">General English</span>
+          <h3>English</h3>
+          <p>General English programs.</p>
+        </button>
       </div>
-
     </div>
   </section>
 
@@ -1775,8 +1797,8 @@
   });
   searchInput.addEventListener('input', applySearchAndFilter);
 
-  /* ---------- Stream rail -> scroll + filter ---------- */
-  document.querySelectorAll('.stream-btn').forEach(function (btn) {
+  /* ---------- Stream cards -> scroll + filter ---------- */
+  document.querySelectorAll('.stream-card').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var stream = btn.getAttribute('data-stream');
       applyFilter(stream);
