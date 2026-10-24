@@ -380,6 +380,22 @@
   .trust-item .value { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--white); }
   .trust-strip .address { font-size: 0.85rem; color: var(--muted-light); max-width: 32ch; margin: 0; }
 
+  /* ============ Advisory CTA band (accent band, not part of the tone alternation) ============ */
+  .advisory-band { background: linear-gradient(135deg, var(--coral) 0%, var(--coral-deep) 100%); padding: var(--space-lg) 0; }
+  .advisory-inner { display: grid; gap: var(--space-md); align-items: center; grid-template-columns: auto 1fr; }
+  .advisory-icon {
+    width: 64px; height: 64px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .advisory-icon svg { width: 36px; height: 36px; }
+  .advisory-copy h2 { font-size: 1.5rem; color: #fff; margin-bottom: 0.4rem; }
+  .advisory-copy p { color: rgba(255,255,255,0.9); margin-bottom: 0; max-width: 56ch; }
+  .advisory-ctas { display: flex; flex-wrap: wrap; gap: 1rem; grid-column: 1 / -1; }
+  @media (min-width: 760px) {
+    .advisory-inner { grid-template-columns: auto 1fr auto; }
+    .advisory-ctas { grid-column: auto; justify-self: end; }
+  }
+
   /* ============ Transit rail (signature element) ============ */
   .transit-rail { position: relative; }
   .transit-rail .rail-line {
@@ -402,6 +418,26 @@
   .stream-btn { all: unset; cursor: pointer; display: flex; flex-direction: column; gap: 0.75rem; border-radius: var(--radius-card); padding: 0.5rem; margin: -0.5rem; }
   .stream-btn:hover .rail-dot { background: var(--coral); color: #fff; }
   .stream-btn:hover .rail-dot svg { filter: brightness(0) invert(1); }
+
+  /* ============ Stream comparison matrix ============ */
+  .compare-wrap { margin-top: var(--space-xl); }
+  .compare-heading { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 1.25rem; }
+  .compare-table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius-card); padding: 6px; }
+  .compare-table { width: 100%; border-collapse: collapse; min-width: 760px; background: var(--surface); }
+  .compare-table th, .compare-table td { text-align: left; padding: 1rem 1.1rem; font-size: 0.88rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .compare-table thead th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); font-weight: 700; background: var(--bg); }
+  .compare-table tbody tr:last-child th, .compare-table tbody tr:last-child td { border-bottom: none; }
+  .compare-table td { color: var(--text-muted); }
+  .compare-table th[scope="row"] { white-space: nowrap; }
+  .compare-cards { display: none; }
+  @media (max-width: 759px) {
+    .compare-table-scroll { display: none; }
+    .compare-cards { display: grid; gap: 1rem; }
+    .compare-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem; }
+    .compare-card dl { margin: 0.9rem 0 0; display: grid; gap: 0.7rem; }
+    .compare-card dt { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 0; }
+    .compare-card dd { font-size: 0.88rem; margin: 0.2rem 0 0; color: var(--text); }
+  }
 
   /* ============ Filter + course cards ============ */
   .course-search {
@@ -455,6 +491,19 @@
   .course-card h3 { font-size: var(--fs-card-title); margin-bottom: 0; }
   .course-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
   .course-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
+  .course-journey { list-style: none; display: flex; margin: 0.2rem 0 0; padding: 0; }
+  .course-journey li {
+    flex: 1; position: relative; text-align: center; padding-top: 16px;
+    font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted);
+  }
+  .course-journey li::before {
+    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 8px; height: 8px; border-radius: 50%; background: var(--coral-text); z-index: 1;
+  }
+  .course-journey li::after {
+    content: ""; position: absolute; top: 3.5px; left: -50%; width: 100%; height: 1.5px; background: var(--border);
+  }
+  .course-journey li:first-child::after { display: none; }
   .course-data {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 0;
     border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border); padding: 0.75rem 0;
@@ -578,6 +627,32 @@
   #pathway .section-head { margin-bottom: 2.25rem; }
   #pathway .rail-stops { gap: 1.5rem; }
   .pathway-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
+
+  .rail-more { margin-top: 0.4rem; }
+  .rail-more summary {
+    cursor: pointer; list-style: none; font-size: 0.82rem; font-weight: 600; color: var(--coral-text);
+    display: inline-flex; align-items: center; gap: 0.35rem;
+  }
+  .rail-more summary::-webkit-details-marker { display: none; }
+  .rail-more summary .chevron { transition: transform 0.2s ease; }
+  .rail-more[open] summary .chevron { transform: rotate(180deg); }
+  .rail-more p { font-size: 0.85rem; margin: 0.5rem 0 0; }
+
+  .readiness {
+    margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-card); padding: var(--space-md);
+  }
+  .readiness h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .readiness > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
+  .readiness-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.75rem; }
+  .readiness-list label {
+    display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.95rem;
+  }
+  .readiness-list input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.1rem; accent-color: var(--coral); }
+  .readiness-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+  .readiness-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--border); overflow: hidden; }
+  .readiness-bar span { display: block; height: 100%; width: 0%; background: var(--coral); border-radius: 999px; transition: width 0.3s ease; }
+  .readiness-progress span#readiness-count { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 
   /* ============ Agents ============ */
   .agents-band .section-eyebrow { color: var(--amber); }
@@ -818,6 +893,109 @@
           </button>
         </div>
       </div>
+
+      <div class="compare-wrap reveal">
+        <h3 class="compare-heading">Compare the 5 streams at a glance</h3>
+        <div class="compare-table-scroll">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th scope="col">Stream</th>
+                <th scope="col">Best suited to</th>
+                <th scope="col">Key focus areas</th>
+                <th scope="col">Duration &amp; fees</th>
+                <th scope="col">Where it can lead</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><span class="tag tag-engineering">Engineering</span></th>
+                <td>Trade-focused learners entering metal fabrication</td>
+                <td>Metal fabrication, welding and workshop safety</td>
+                <td>Confirmed on enquiry</td>
+                <td>Hands-on trade roles in fabrication and welding workshops</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="tag tag-hospitality">Hospitality</span></th>
+                <td>Kitchen staff and aspiring hospitality supervisors</td>
+                <td>Commercial kitchen operations, food safety and guest service leadership</td>
+                <td>Confirmed on enquiry</td>
+                <td>Supervisory and management roles across kitchens, food &amp; beverage, and accommodation</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="tag tag-business">Business</span></th>
+                <td>Admin, coordination and operations-minded learners</td>
+                <td>Workplace communication, administration and business operations</td>
+                <td>Confirmed on enquiry</td>
+                <td>Business administration, coordination and operations roles</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="tag tag-management">Management</span></th>
+                <td>Postgraduate-level learners moving into leadership</td>
+                <td>Organisational learning &amp; development and executive strategy</td>
+                <td>Confirmed on enquiry</td>
+                <td>Learning &amp; development and senior leadership roles</td>
+              </tr>
+              <tr>
+                <th scope="row"><span class="tag tag-english">English</span></th>
+                <td>Non-native English speakers building language skills</td>
+                <td>Everyday and academic English proficiency</td>
+                <td>Flexible, confirmed on enquiry</td>
+                <td>Further vocational study or confident daily use in Australia</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="compare-cards">
+          <article class="compare-card">
+            <span class="tag tag-engineering">Engineering</span>
+            <dl>
+              <div><dt>Best suited to</dt><dd>Trade-focused learners entering metal fabrication</dd></div>
+              <div><dt>Key focus areas</dt><dd>Metal fabrication, welding and workshop safety</dd></div>
+              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
+              <div><dt>Where it can lead</dt><dd>Hands-on trade roles in fabrication and welding workshops</dd></div>
+            </dl>
+          </article>
+          <article class="compare-card">
+            <span class="tag tag-hospitality">Hospitality</span>
+            <dl>
+              <div><dt>Best suited to</dt><dd>Kitchen staff and aspiring hospitality supervisors</dd></div>
+              <div><dt>Key focus areas</dt><dd>Commercial kitchen operations, food safety and guest service leadership</dd></div>
+              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
+              <div><dt>Where it can lead</dt><dd>Supervisory and management roles across kitchens, food &amp; beverage, and accommodation</dd></div>
+            </dl>
+          </article>
+          <article class="compare-card">
+            <span class="tag tag-business">Business</span>
+            <dl>
+              <div><dt>Best suited to</dt><dd>Admin, coordination and operations-minded learners</dd></div>
+              <div><dt>Key focus areas</dt><dd>Workplace communication, administration and business operations</dd></div>
+              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
+              <div><dt>Where it can lead</dt><dd>Business administration, coordination and operations roles</dd></div>
+            </dl>
+          </article>
+          <article class="compare-card">
+            <span class="tag tag-management">Management</span>
+            <dl>
+              <div><dt>Best suited to</dt><dd>Postgraduate-level learners moving into leadership</dd></div>
+              <div><dt>Key focus areas</dt><dd>Organisational learning &amp; development and executive strategy</dd></div>
+              <div><dt>Duration &amp; fees</dt><dd>Confirmed on enquiry</dd></div>
+              <div><dt>Where it can lead</dt><dd>Learning &amp; development and senior leadership roles</dd></div>
+            </dl>
+          </article>
+          <article class="compare-card">
+            <span class="tag tag-english">English</span>
+            <dl>
+              <div><dt>Best suited to</dt><dd>Non-native English speakers building language skills</dd></div>
+              <div><dt>Key focus areas</dt><dd>Everyday and academic English proficiency</dd></div>
+              <div><dt>Duration &amp; fees</dt><dd>Flexible, confirmed on enquiry</dd></div>
+              <div><dt>Where it can lead</dt><dd>Further vocational study or confident daily use in Australia</dd></div>
+            </dl>
+          </article>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1025,27 +1203,79 @@
         <div class="rail-stops">
           <div class="rail-stop" role="listitem">
             <span class="rail-dot" aria-hidden="true">1</span>
-            <div><h3>Explore streams &amp; courses</h3><p>Browse our five streams and find the course that fits your goals.</p></div>
+            <div>
+              <h3>Explore streams &amp; courses</h3>
+              <p>Browse our five streams and find the course that fits your goals.</p>
+              <details class="rail-more">
+                <summary>More detail<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <p>Use the stream rail or the course filters above to narrow things down to the right qualification for you.</p>
+              </details>
+            </div>
           </div>
           <div class="rail-stop" role="listitem">
             <span class="rail-dot" aria-hidden="true">2</span>
-            <div><h3>Check entry requirements</h3><p>Entry requirements vary by course and are confirmed directly with our team. Get in touch to check yours.</p></div>
+            <div>
+              <h3>Check entry requirements</h3>
+              <p>Entry requirements vary by course and are confirmed directly with our team. Get in touch to check yours.</p>
+              <details class="rail-more">
+                <summary>More detail<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <p>Each course card lists its entry requirements. As a general guide, most programs expect Year 12 (or equivalent) and functional English, with specific benchmarks confirmed by our team. Try the <a href="#readiness">pre-enrolment checklist</a> below to see where you stand.</p>
+              </details>
+            </div>
           </div>
           <div class="rail-stop" role="listitem">
             <span class="rail-dot" aria-hidden="true">3</span>
-            <div><h3>Submit an enquiry</h3><p>Send us your details using the enquiry form, including the course you're interested in.</p></div>
+            <div>
+              <h3>Submit an enquiry</h3>
+              <p>Send us your details using the enquiry form, including the course you're interested in.</p>
+              <details class="rail-more">
+                <summary>More detail<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <p>Use the enquiry form below, or request a fee quote from the Courses section above, and our team will follow up directly.</p>
+              </details>
+            </div>
           </div>
           <div class="rail-stop" role="listitem">
             <span class="rail-dot" aria-hidden="true">4</span>
-            <div><h3>Speak with our team</h3><p>We'll walk you through fees, intake dates and anything else you need to know.</p></div>
+            <div>
+              <h3>Speak with our team</h3>
+              <p>We'll walk you through fees, intake dates and anything else you need to know.</p>
+              <details class="rail-more">
+                <summary>More detail<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <p>This is also a good time to ask about studying at our Parramatta campus, our course streams, or anything specific to your situation as a domestic or international student.</p>
+              </details>
+            </div>
           </div>
           <div class="rail-stop" role="listitem">
             <span class="rail-dot" aria-hidden="true">5</span>
-            <div><h3>Confirm your enrolment</h3><p>Once everything is confirmed, you're ready to start your course.</p></div>
+            <div>
+              <h3>Confirm your enrolment</h3>
+              <p>Once everything is confirmed, you're ready to start your course.</p>
+              <details class="rail-more">
+                <summary>More detail<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+                <p>Our admissions team will guide you through the paperwork needed to confirm your place, including any visa documentation if you're an international student.</p>
+              </details>
+            </div>
           </div>
         </div>
       </div>
       <p class="pathway-note">Fees, intake dates and entry requirements are confirmed directly with our team and are not published here. <a href="#enquiry" style="color:var(--coral-text); font-weight:600;">Enquire now</a> for current details.</p>
+
+      <div class="readiness reveal" id="readiness">
+        <h3>Not sure if you're ready? Check now</h3>
+        <p>Tick what applies to you. This is a quick self-check, not a formal assessment. Your actual eligibility is always confirmed by our admissions team.</p>
+        <ul class="readiness-list">
+          <li><label><input type="checkbox" class="readiness-check" data-label="Completed Year 12 or equivalent qualification"> Completed Year 12 or equivalent qualification</label></li>
+          <li><label><input type="checkbox" class="readiness-check" data-label="Functional English proficiency"> Functional English proficiency (specific level confirmed with our team)</label></li>
+          <li><label><input type="checkbox" class="readiness-check" data-label="Valid photo ID and a USI"> Valid photo ID and a Unique Student Identifier (USI)</label></li>
+          <li><label><input type="checkbox" class="readiness-check" data-label="Relevant prior work or study experience"> Relevant prior work or study experience (may support recognition of prior learning)</label></li>
+        </ul>
+        <div class="readiness-progress">
+          <div class="readiness-bar" role="progressbar" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0" id="readiness-bar"><span id="readiness-fill"></span></div>
+          <span id="readiness-count">0 of 4 ready</span>
+        </div>
+        <button type="button" class="btn btn-primary" id="readiness-cta">Speak with admissions to fill the gaps</button>
+      </div>
+
     </div>
   </section>
 
@@ -1149,6 +1379,27 @@
           <summary>How do I get to campus from Parramatta or Harris Park station?<svg class="chevron" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
           <div class="faq-body"><p style="margin:0;">Our campus at Level 1, 30 Cowper St is within walking distance of both Parramatta and Harris Park stations on the Sydney Trains network. See the Campus &amp; Location map above for exact directions.</p></div>
         </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVISORY CTA (compact accent band, not part of the tone-dark/tone-light alternation -- see Trust Strip) -->
+  <section class="advisory-band" aria-label="Personalised support">
+    <div class="container advisory-inner">
+      <div class="advisory-icon" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="30" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+          <circle cx="32" cy="25" r="9" fill="#fff"/>
+          <path d="M14 52c2-10 9-16 18-16s16 6 18 16" stroke="#fff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <div class="advisory-copy">
+        <h2>Not sure which stream or entry pathway fits your goals?</h2>
+        <p>Speak directly with our Parramatta team to confirm current fees, intake dates, and visa requirements for international students.</p>
+      </div>
+      <div class="advisory-ctas">
+        <a href="#enquiry" class="btn btn-primary" id="advisory-quote-cta">Request a personalised fee quote</a>
+        <a href="#enquiry" class="btn btn-ghost-inverse" id="advisory-tour-cta">Ask about visiting our campus</a>
       </div>
     </div>
   </section>
@@ -1490,6 +1741,11 @@
       '<h3>' + c.name + '</h3>' +
       '<p class="course-code mono">' + c.code + '</p>' +
       '<p>' + c.desc + '</p>' +
+      '<ul class="course-journey">' +
+        '<li>Enrol &amp; start</li>' +
+        '<li>Hands-on training</li>' +
+        '<li>Qualify &amp; progress</li>' +
+      '</ul>' +
       '<dl class="course-data">' +
         '<div><dt>Duration</dt><dd>Confirmed on enquiry</dd></div>' +
         '<div><dt>Fees (AUD)</dt><dd>Confirmed on enquiry</dd></div>' +
@@ -1679,6 +1935,63 @@
     document.getElementById('enquiry').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
     document.getElementById('f-name').focus();
   });
+
+  function scrollToEnquiryWithNote(note) {
+    var messageField = document.getElementById('f-message');
+    if (!messageField.value) messageField.value = note;
+    document.getElementById('enquiry').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+    document.getElementById('f-name').focus();
+  }
+
+  /* ---------- Pre-enrolment readiness checklist (self-check, not a formal assessment) ---------- */
+  var readinessChecks = document.querySelectorAll('.readiness-check');
+  if (readinessChecks.length) {
+    var readinessFill = document.getElementById('readiness-fill');
+    var readinessBar = document.getElementById('readiness-bar');
+    var readinessCount = document.getElementById('readiness-count');
+    var readinessCta = document.getElementById('readiness-cta');
+    var updateReadiness = function () {
+      var checked = document.querySelectorAll('.readiness-check:checked').length;
+      var total = readinessChecks.length;
+      readinessFill.style.width = (checked / total * 100) + '%';
+      readinessBar.setAttribute('aria-valuenow', String(checked));
+      readinessCount.textContent = checked + ' of ' + total + ' ready';
+      readinessCta.textContent = checked === total
+        ? "You're ready. Start your enquiry"
+        : 'Speak with admissions to fill the gaps';
+    };
+    readinessChecks.forEach(function (c) { c.addEventListener('change', updateReadiness); });
+    readinessCta.addEventListener('click', function () {
+      var checkedBoxes = document.querySelectorAll('.readiness-check:checked');
+      var total = readinessChecks.length;
+      var note;
+      if (checkedBoxes.length === total) {
+        note = "I've completed the pre-enrolment checklist and I'm ready to enquire.";
+      } else {
+        var missing = [];
+        readinessChecks.forEach(function (c) { if (!c.checked) missing.push(c.getAttribute('data-label')); });
+        note = 'I checked the pre-enrolment checklist (' + checkedBoxes.length + ' of ' + total + '). Still need: ' + missing.join(', ') + '.';
+      }
+      scrollToEnquiryWithNote(note);
+    });
+    updateReadiness();
+  }
+
+  /* ---------- Advisory CTA band ---------- */
+  var advisoryQuoteCta = document.getElementById('advisory-quote-cta');
+  if (advisoryQuoteCta) {
+    advisoryQuoteCta.addEventListener('click', function (e) {
+      e.preventDefault();
+      scrollToEnquiryWithNote("I'd like a personalised fee quote and help choosing the right stream.");
+    });
+  }
+  var advisoryTourCta = document.getElementById('advisory-tour-cta');
+  if (advisoryTourCta) {
+    advisoryTourCta.addEventListener('click', function (e) {
+      e.preventDefault();
+      scrollToEnquiryWithNote("I'd like to arrange a visit to the Parramatta campus.");
+    });
+  }
 
   /* ---------- Legal modal (Privacy / Terms / Disclaimer) ---------- */
   var LEGAL_ENTITY = 'Higher Learning Australia Pty Ltd A/T for The Trustee for Higher Learning Unit Trust';
