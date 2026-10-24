@@ -400,6 +400,7 @@
   .rail-horizontal .rail-stops { grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
   .rail-stop { display: flex; flex-direction: column; gap: 0.75rem; }
   .rail-vertical .rail-stop { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
+  .rail-vertical .rail-stop > div { flex: 1; min-width: 0; }
   .rail-dot {
     width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 3px solid var(--coral-text);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
@@ -598,7 +599,10 @@
   /* ============ Pathway ============ */
   #pathway { padding: 4rem 0; }
   #pathway .section-head { margin-bottom: 2.25rem; }
+  #pathway .transit-rail { max-width: 800px; }
   #pathway .rail-stops { gap: 1.5rem; }
+  #pathway .rail-stop > div { max-width: 62ch; }
+  #pathway .readiness { max-width: 800px; }
   .pathway-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
 
   .rail-more { margin-top: 0.4rem; }
@@ -637,10 +641,15 @@
   .agent-list svg { flex-shrink: 0; margin-top: 0.2rem; color: var(--amber); }
 
   /* ============ Campus ============ */
-  .campus-grid { display: grid; gap: var(--space-lg); }
+  .campus-grid { display: grid; gap: var(--space-lg); align-items: stretch; }
   @media (min-width: 900px) { .campus-grid { grid-template-columns: 1fr 1fr; } }
+  .campus-facts {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+    padding: var(--space-md); display: flex; flex-direction: column;
+  }
+  .campus-facts .btn { margin-top: auto; align-self: flex-start; }
   .map-embed {
-    aspect-ratio: 4/3; border-radius: var(--radius-card); border: 1px solid var(--border);
+    height: 100%; min-height: 320px; border-radius: var(--radius-card); border: 1px solid var(--border);
     overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35);
   }
   .map-embed iframe { width: 100%; height: 100%; border: 0; }
@@ -1172,27 +1181,24 @@
   <!-- CAMPUS -->
   <section id="campus" class="tone-light">
     <div class="container campus-grid">
-      <div class="reveal">
+      <div class="campus-facts reveal">
         <span class="section-eyebrow">Campus &amp; Location</span>
         <h2>Find us in Parramatta</h2>
-        <div class="map-embed">
-          <iframe
-            title="Map of Level 1, 30 Cowper St, Parramatta NSW 2150"
-            src="https://www.google.com/maps?q=Level+1,+30+Cowper+St,+Parramatta+NSW+2150&amp;output=embed"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
-        </div>
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="margin-top:1rem;">Get Directions</a>
-      </div>
-      <div class="campus-facts reveal">
-        <h3 style="font-size:1.2rem;">Campus details</h3>
         <dl>
           <dt>Address</dt><dd>Level 1, 30 Cowper St, Parramatta NSW 2150</dd>
           <dt>Nearest stations</dt><dd>Parramatta &amp; Harris Park</dd>
           <dt>Phone</dt><dd><a href="tel:+61296987318">+61 2 9698 7318</a></dd>
           <dt>Email</dt><dd><a href="mailto:info@mcgill.edu.au">info@mcgill.edu.au</a></dd>
         </dl>
+        <a href="https://www.google.com/maps/search/?api=1&amp;query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Get Directions</a>
+      </div>
+      <div class="map-embed reveal">
+        <iframe
+          title="Map of Level 1, 30 Cowper St, Parramatta NSW 2150"
+          src="https://www.google.com/maps?q=Level+1,+30+Cowper+St,+Parramatta+NSW+2150&amp;output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
   </section>
