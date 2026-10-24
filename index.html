@@ -478,33 +478,20 @@
   .course-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease; }
   @media (prefers-reduced-motion: reduce) { .course-card:hover .course-photo img { transform: none; } }
   .tag { display: inline-flex; align-self: flex-start; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.3rem 0.7rem; border-radius: var(--radius-pill); }
+  .course-photo .tag { position: absolute; top: 0.85rem; left: 0.85rem; z-index: 3; box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
   .tag-engineering { background: var(--tag-engineering-bg); color: var(--tag-engineering-text); }
   .tag-hospitality { background: var(--tag-hospitality-bg); color: var(--tag-hospitality-text); }
   .tag-business { background: var(--tag-business-bg); color: var(--tag-business-text); }
   .tag-management { background: var(--tag-management-bg); color: var(--tag-management-text); }
   .tag-english { background: var(--tag-english-bg); color: var(--tag-english-text); }
   .course-card h3 { font-size: var(--fs-card-title); margin-bottom: 0; }
-  .course-code { font-family: var(--font-mono); font-weight: 600; font-size: 0.78rem; color: var(--text-muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .course-code {
+    display: inline-flex; align-self: flex-start; font-family: var(--font-mono); font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--coral-text); background: rgba(199,63,34,0.08); border: 1px solid rgba(199,63,34,0.22);
+    border-radius: var(--radius-pill); padding: 0.3rem 0.75rem;
+  }
   .course-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
-  .course-journey { list-style: none; display: flex; margin: 0.2rem 0 0; padding: 0; }
-  .course-journey li {
-    flex: 1; position: relative; text-align: center; padding-top: 16px;
-    font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; color: var(--text-muted);
-  }
-  .course-journey li::before {
-    content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    width: 8px; height: 8px; border-radius: 50%; background: var(--coral-text); z-index: 1;
-  }
-  .course-journey li::after {
-    content: ""; position: absolute; top: 3.5px; left: -50%; width: 100%; height: 1.5px; background: var(--border);
-  }
-  .course-journey li:first-child::after { display: none; }
-  .course-data {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 0;
-    border-top: 1px dashed var(--border); border-bottom: 1px dashed var(--border); padding: 0.75rem 0;
-  }
-  .course-data dt { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin: 0; }
-  .course-data dd { font-size: 0.78rem; font-weight: 600; margin: 0.15rem 0 0; color: var(--text); }
   .entry-req { border: none; margin: 0; }
   .entry-req summary {
     cursor: pointer; list-style: none; font-size: 0.85rem; font-weight: 600; color: var(--coral-text);
@@ -513,6 +500,7 @@
   .entry-req summary::-webkit-details-marker { display: none; }
   .entry-req summary .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
   .entry-req[open] summary .chevron { transform: rotate(180deg); }
+  .entry-req-note { font-weight: 500; color: var(--text-muted); font-size: 0.78rem; }
   .entry-req p { font-size: 0.85rem; margin: 0.5rem 0 0; }
   .course-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.25rem; }
   .course-actions .btn { align-self: auto; }
@@ -1713,13 +1701,13 @@
 
   /* ---------- Course data ---------- */
   var COURSES = [
-    { id: 'mem31922', code: 'MEM31922', name: 'Certificate III in Engineering (Fabrication Trade)', stream: 'engineering', tagLabel: 'Engineering', desc: 'Hands-on trade training in metal fabrication, welding, and workshop safety, building the practical skills needed for a career on the shop floor.', img: 'photos/course-engineering.jpg', imgAlt: 'A welder working on a metal fabrication project in a workshop' },
-    { id: 'sit40521', code: 'SIT40521', name: 'Certificate IV in Kitchen Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Kitchen operations and supervision training covering food safety, menu planning, and leading a commercial kitchen team.', img: 'photos/course-hospitality-kitchen.jpg', imgAlt: 'A chef preparing food in a commercial kitchen' },
-    { id: 'sit50422', code: 'SIT50422', name: 'Diploma of Hospitality Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Broader hospitality leadership training across food and beverage, accommodation, and guest service operations, for supervisory and management roles.', img: 'photos/course-hospitality-service.jpg', imgAlt: 'A waiter serving a plate of food at an outdoor café' },
-    { id: 'bsb40120', code: 'BSB40120', name: 'Certificate IV in Business', stream: 'business', tagLabel: 'Business', desc: 'Core business skills training in communication, administration, and workplace operations for roles across any industry.', img: 'photos/course-business-notes.jpg', imgAlt: 'Colleagues taking notes during a business meeting' },
-    { id: 'bsb50120', code: 'BSB50120', name: 'Diploma of Business', stream: 'business', tagLabel: 'Business', desc: 'Advanced business training in planning, operations, and leadership, for graduates moving into coordination or management roles.', img: 'photos/course-business-diploma.jpg', imgAlt: 'A presenter discussing a sales chart to colleagues in an office' },
-    { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate-level management training focused on leading learning and development within an organisation.', img: 'photos/course-management.jpg', imgAlt: 'A group of colleagues in a discussion around a meeting table' },
-    { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', stream: 'english', tagLabel: 'English', desc: 'English language training for students building the language skills needed for further study or daily life in Australia.', img: 'photos/course-english.jpg', imgAlt: 'A student smiling in a lecture hall' }
+    { id: 'mem31922', code: 'MEM31922', name: 'Certificate III in Engineering (Fabrication Trade)', stream: 'engineering', tagLabel: 'Engineering', desc: 'Hands-on trade training in metal fabrication, welding, and workshop safety.', img: 'photos/course-engineering.jpg', imgAlt: 'A welder working on a metal fabrication project in a workshop' },
+    { id: 'sit40521', code: 'SIT40521', name: 'Certificate IV in Kitchen Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Kitchen operations and supervision training covering food safety, menu planning, and team leadership.', img: 'photos/course-hospitality-kitchen.jpg', imgAlt: 'A chef preparing food in a commercial kitchen' },
+    { id: 'sit50422', code: 'SIT50422', name: 'Diploma of Hospitality Management', stream: 'hospitality', tagLabel: 'Hospitality', desc: 'Hospitality leadership training across food and beverage, accommodation, and guest service operations.', img: 'photos/course-hospitality-service.jpg', imgAlt: 'A waiter serving a plate of food at an outdoor café' },
+    { id: 'bsb40120', code: 'BSB40120', name: 'Certificate IV in Business', stream: 'business', tagLabel: 'Business', desc: 'Core business skills in communication, administration, and workplace operations.', img: 'photos/course-business-notes.jpg', imgAlt: 'Colleagues taking notes during a business meeting' },
+    { id: 'bsb50120', code: 'BSB50120', name: 'Diploma of Business', stream: 'business', tagLabel: 'Business', desc: 'Advanced training in business planning, operations, and leadership.', img: 'photos/course-business-diploma.jpg', imgAlt: 'A presenter discussing a sales chart to colleagues in an office' },
+    { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate management training focused on leading learning and development.', img: 'photos/course-management.jpg', imgAlt: 'A group of colleagues in a discussion around a meeting table' },
+    { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', stream: 'english', tagLabel: 'English', desc: 'English language training for further study or daily life in Australia.', img: 'photos/course-english.jpg', imgAlt: 'A student smiling in a lecture hall' }
   ];
 
   var grid = document.getElementById('course-grid');
@@ -1729,24 +1717,19 @@
     card.id = 'course-' + c.id;
     card.setAttribute('data-stream', c.stream);
     card.innerHTML =
-      '<div class="course-photo"><img src="' + c.img + '" alt="' + c.imgAlt + '" width="900" height="600" loading="lazy"></div>' +
-      '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
+      '<div class="course-photo">' +
+        '<img src="' + c.img + '" alt="' + c.imgAlt + '" width="900" height="600" loading="lazy">' +
+        '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
+      '</div>' +
+      '<span class="course-code mono">' + c.code + '</span>' +
       '<h3>' + c.name + '</h3>' +
-      '<p class="course-code mono">' + c.code + '</p>' +
       '<p>' + c.desc + '</p>' +
-      '<ul class="course-journey">' +
-        '<li>Enrol &amp; start</li>' +
-        '<li>Hands-on training</li>' +
-        '<li>Qualify &amp; progress</li>' +
-      '</ul>' +
-      '<dl class="course-data">' +
-        '<div><dt>Duration</dt><dd>Confirmed on enquiry</dd></div>' +
-        '<div><dt>Fees (AUD)</dt><dd>Confirmed on enquiry</dd></div>' +
-        '<div><dt>Intakes</dt><dd>Confirmed on enquiry</dd></div>' +
-      '</dl>' +
       '<details class="entry-req">' +
-        '<summary>Entry requirements<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>' +
-        '<p>Entry requirements vary by course and by student type (domestic or international), and are confirmed with our admissions team during your enquiry. As a general guide, certificate and diploma programs typically require completion of Year 12 (or equivalent) and a functional level of English; specific English-proficiency benchmarks for international student visa pathways are set per course.</p>' +
+        '<summary>' +
+          '<span>Entry: Year 12 or equivalent, functional English <span class="entry-req-note">(confirmed at enquiry)</span></span>' +
+          '<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '</summary>' +
+        '<p>Entry requirements vary by course and by student type (domestic or international). Specific English-proficiency benchmarks for international student visa pathways are set per course and confirmed with our admissions team.</p>' +
       '</details>' +
       '<div class="course-actions">' +
         '<button type="button" class="btn btn-outline" data-course-id="' + c.id + '">View details</button>' +
