@@ -284,26 +284,27 @@
     background: var(--oled); scroll-snap-type: x mandatory;
   }
   .hero-video-wrap { position: absolute; inset: 0; background: var(--oled); }
+  /* Video itself carries no filter/blur -- stays crisp. A lighter gradient (not a backdrop-blur)
+     is the only thing between it and the viewer, just enough for white text to stay legible. */
   #hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-video-wrap::after {
     content: ""; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.58) 42%, rgba(0,0,0,0.24) 68%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 42%, rgba(0,0,0,0.12) 68%, transparent 100%);
   }
-  /* In normal flow (not absolutely positioned) and pinned to the bottom via
-     margin-top: auto, so if its content ever needs more room than the
-     viewport-height slider provides, .hero itself grows taller rather than
-     the content overflowing upward behind the fixed header. */
+  /* In normal flow (not absolutely positioned), vertically centered via auto margins on both
+     sides -- if content ever needs more room than the viewport-height video provides, the auto
+     margins shrink to 0 and .hero itself grows taller, rather than content overflowing upward
+     behind the fixed header. padding-top below is a second, independent guarantee of that same
+     clearance regardless of how the centering resolves. */
   .hero-content {
-    position: relative; z-index: 5; margin-top: auto;
+    position: relative; z-index: 5; margin: auto 0;
   }
   .hero-content-inner {
-    padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(5rem, 8vw, 7rem);
+    padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(4rem, 7vw, 6rem);
     color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 55%, transparent 100%);
-    backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+    background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.22) 55%, transparent 100%);
   }
   .hero-content-inner > * { max-width: 1200px; margin-left: auto; margin-right: auto; }
-  .hero-badge-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1.1rem; margin-bottom: 1.5rem; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 0.5rem;
     font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
@@ -311,8 +312,6 @@
     border-radius: var(--radius-pill); padding: 0.45rem 1rem 0.45rem 0.65rem;
     background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
   }
-  .hero-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral-bright); flex-shrink: 0; }
-  .hero-disclaimer { font-size: 0.78rem; color: rgba(255,255,255,0.78); max-width: 42ch; margin: 0; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
   .hero-ai-disclosure { font-size: 0.78rem; color: rgba(255,255,255,0.78); max-width: 52ch; margin: 1.25rem 0 0; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
   .hero h1 {
     font-size: var(--fs-hero); max-width: 16ch; color: #fff; letter-spacing: -0.01em;
@@ -402,15 +401,6 @@
     display: none;
   }
   @media (min-width: 960px) { .hero-scroll-cue { display: block; } }
-
-  /* ============ Trust strip ============ */
-  .trust-strip { background: var(--oled-deep); color: var(--white); padding: 1.1rem 0; border-top: 1px solid var(--oled-line); }
-  .trust-strip .container { display: flex; flex-wrap: wrap; gap: 1.25rem 2.5rem; align-items: center; justify-content: space-between; }
-  .trust-items { display: flex; flex-wrap: wrap; gap: 1.5rem 2.5rem; }
-  .trust-item { display: flex; flex-direction: column; gap: 0.15rem; }
-  .trust-item .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-light); }
-  .trust-item .value { font-family: var(--font-mono); font-weight: 700; font-size: 1rem; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--white); }
-  .trust-strip .address { font-size: 0.85rem; color: var(--muted-light); max-width: 32ch; margin: 0; }
 
   /* ============ Advisory CTA band (accent band, not part of the tone alternation) ============ */
   .advisory-band { background: linear-gradient(135deg, var(--coral) 0%, var(--coral-deep) 100%); padding: var(--space-lg) 0; }
@@ -928,10 +918,6 @@
     </div>
     <div class="hero-content" id="hero-content">
       <div class="hero-content-inner">
-        <div class="hero-badge-row hero-kinetic">
-          <span class="hero-badge"><span class="dot" aria-hidden="true"></span>RTO 45906 &middot; CRICOS 03678G &middot; PARRAMATTA NSW</span>
-          <p class="hero-disclaimer">Not affiliated with McGill University, Canada.</p>
-        </div>
         <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
         <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English.</p>
 
@@ -973,17 +959,6 @@
   </section>
 
   <!-- TRUST STRIP -->
-  <section class="trust-strip" aria-label="Registration details" style="padding-top:1.5rem; padding-bottom:1.5rem;">
-    <div class="container">
-      <div class="trust-items">
-        <div class="trust-item"><span class="label">RTO</span><span class="value">45906</span></div>
-        <div class="trust-item"><span class="label">CRICOS Provider</span><span class="value">03678G</span></div>
-        <div class="trust-item"><span class="label">ABN</span><span class="value">91 835 873 060</span></div>
-      </div>
-      <p class="address">Level 1, 30 Cowper St, Parramatta NSW 2150</p>
-    </div>
-  </section>
-
   <!-- STREAMS (signature transit rail) -->
   <section id="streams" class="tone-light">
     <div class="container streams-split">
