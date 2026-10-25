@@ -131,7 +131,7 @@ New in this pass:
 - **`.why-learn-more`** on tile 1 only: a real link (not decorative), `href="#faq-rto"`, deep-linking to the existing "What do RTO 45906 and CRICOS 03678G mean?" FAQ answer. A small `hashchange`/on-load JS handler auto-opens that `<details>` so the link's promise ("learn more") is actually kept, not just a scroll. Required adding `id="faq-rto"` to that FAQ item and `scroll-margin-top` to `.faq-item` so the deep link doesn't land the answer under the fixed header.
 
 ### Footer
-Unchanged content (RTO/CRICOS/ABN, the real legal entity, phone, email, legal-policy modals) under the existing OLED-deep dark fill — already matches the brief's "executive minimalist dark footer" intent. The brief's "Powered by JobGen.ai" badge is a confirmed-real fact for a *different* project (Mountain Culture Guitar Lessons) and was not carried over here — see DECISIONS.md.
+Unchanged content (RTO/CRICOS/ABN, the real legal entity, phone, email, legal-policy modals) under the existing OLED-deep dark fill — already matches the brief's "executive minimalist dark footer" intent. A "Powered by JobGen.ai" badge was initially held back (round 1) since it was, at the time, only a confirmed fact for a *different* project (Mountain Culture Guitar Lessons) — see DECISIONS.md. **Added 2026-10-25:** the client explicitly confirmed, when asked directly a second time, that JobGen.AI is genuinely involved in this build too, not just the other project; added as a plain-text credit in `.footer-bottom` alongside the reg-codes and copyright line.
 
 ### Removed
 The `prefers-color-scheme` + manual `data-theme` toggle (button markup, CSS, and `applyTheme`/`systemPrefersDark`/`currentTheme` JS) — superseded by the fixed per-section tone classes above.
