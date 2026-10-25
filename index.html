@@ -246,9 +246,8 @@
     :root { --header-h: 80px; }
   }
   .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
-  .brand-mark { width: 36px; height: 36px; border-radius: 10px; background: var(--coral); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .brand-name { font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: #fff; line-height: 1.1; }
-  .brand-name small { display: block; font-family: var(--font-mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+  .brand-logo { height: 34px; width: auto; display: block; flex-shrink: 0; }
+  .brand-subtext { font-family: var(--font-mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
   nav.main-nav { display: none; }
   nav.main-nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
   nav.main-nav a { text-decoration: none; font-weight: 500; font-size: 0.9rem; color: rgba(255,255,255,0.85); padding: 0.4rem 0; border-bottom: 2px solid transparent; }
@@ -875,6 +874,7 @@
   .legal-body h4:first-child { margin-top: 0; }
   .legal-body p, .legal-body li { font-size: 0.92rem; color: var(--text-muted); }
   .legal-body ul { padding-left: 1.2rem; }
+  .footer-brand .brand-logo { margin-bottom: 0.9rem; }
   .footer-brand p { color: var(--muted-light); font-size: 0.88rem; }
   .footer-bottom { border-top: 1px solid var(--oled-line); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.8rem; color: var(--muted-light); }
   .footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
@@ -913,10 +913,8 @@
 <header class="site-header">
   <div class="container header-inner">
     <a href="#top" class="brand">
-      <span class="brand-mark" aria-hidden="true">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 15V6l3.5 5L10 6v9M11 15V6l3.5 5L18 6v9" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-      <span class="brand-name">McGill Institute<small>RTO 45906 &middot; Parramatta NSW</small></span>
+      <img src="photos/logo.png" alt="McGill Institute Australia" class="brand-logo">
+      <small class="brand-subtext">RTO 45906 &middot; Parramatta NSW</small>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <ul>
@@ -1647,7 +1645,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand-name" style="color:var(--white);">McGill Institute<small style="color:var(--muted-light);">RTO 45906</small></span>
+        <img src="photos/logo.png" alt="McGill Institute Australia" class="brand-logo">
         <p>Accredited vocational training in Parramatta, NSW.</p>
       </div>
       <div>
