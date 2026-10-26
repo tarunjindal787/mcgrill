@@ -320,44 +320,6 @@
   .hero-lede { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.95); max-width: 600px; text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
   .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.75rem; }
 
-  /* Bento-style focus dashboard: 3 cards synced to the 10s background video */
-  .hero-focus-dashboard { margin-top: 2rem; max-width: 780px; }
-  .hero-focus-progress { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
-  .hero-focus-progress-seg { height: 3px; background: rgba(255,255,255,0.25); border-radius: 2px; overflow: hidden; }
-  .hero-focus-progress-seg[data-seg="0"] { flex: 3; }
-  .hero-focus-progress-seg[data-seg="1"] { flex: 3; }
-  .hero-focus-progress-seg[data-seg="2"] { flex: 4; }
-  .hero-focus-progress-seg i {
-    display: block; height: 100%; width: 0%; background: #fff; border-radius: 2px;
-    font-style: normal; transition: width 0.15s linear;
-  }
-  @media (prefers-reduced-motion: reduce) { .hero-focus-progress-seg i { transition: none; } }
-  .hero-focus-cards { display: flex; gap: 0.9rem; flex-wrap: wrap; }
-  .hero-focus-card {
-    all: unset; cursor: pointer; box-sizing: border-box; flex: 1 1 200px; min-width: 200px;
-    background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius-card);
-    padding: 1rem 1.1rem; transition: flex-grow 0.3s cubic-bezier(0.16,1,0.3,1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    display: flex; flex-direction: column; gap: 0.35rem;
-  }
-  .hero-focus-card:hover { border-color: rgba(255,255,255,0.4); }
-  .hero-focus-card.is-active {
-    flex-grow: 2.2; background: rgba(199,63,34,0.22); border-color: var(--coral-bright);
-    box-shadow: 0 0 40px -10px rgba(199,63,34,0.6);
-  }
-  .hero-focus-tag {
-    align-self: flex-start; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral-bright);
-    background: rgba(255,255,255,0.12); border-radius: var(--radius-pill); padding: 0.25rem 0.6rem;
-  }
-  .hero-focus-card h2 { font-size: 1rem; color: #fff; margin-bottom: 0; }
-  .hero-focus-card p { font-size: 0.82rem; color: rgba(255,255,255,0.85); margin-bottom: 0; }
-  .hero-focus-card:not(.is-active) h3, .hero-focus-card:not(.is-active) p { opacity: 0.75; }
-  @media (max-width: 640px) {
-    .hero-focus-cards { flex-direction: column; }
-    .hero-focus-card.is-active { flex-grow: 1; }
-  }
-
   /* Kinetic text reveal: each hero text element fades/tracks in; replayed on slide change via JS toggling .kinetic-play */
   .hero-kinetic { opacity: 0; transform: translateY(24px); }
   .hero-content.kinetic-play .hero-kinetic {
@@ -918,11 +880,11 @@
     </a>
     <nav class="main-nav" aria-label="Primary">
       <ul>
+        <li><a href="#top">Home</a></li>
         <li><a href="#streams">Streams</a></li>
         <li><a href="#courses">Courses</a></li>
         <li><a href="#why">Why McGill</a></li>
         <li><a href="#pathway">How to Enrol</a></li>
-        <li><a href="#agents">Agents</a></li>
         <li><a href="#campus">Campus</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
@@ -936,11 +898,11 @@
   </div>
   <nav id="mobile-nav" aria-label="Mobile">
     <ul>
+      <li><a href="#top" class="mnav-link">Home</a></li>
       <li><a href="#streams" class="mnav-link">Streams</a></li>
       <li><a href="#courses" class="mnav-link">Courses</a></li>
       <li><a href="#why" class="mnav-link">Why McGill</a></li>
       <li><a href="#pathway" class="mnav-link">How to Enrol</a></li>
-      <li><a href="#agents" class="mnav-link">Agents</a></li>
       <li><a href="#campus" class="mnav-link">Campus</a></li>
       <li><a href="#faq" class="mnav-link">FAQ</a></li>
       <li><a href="#enquiry" class="mnav-link btn btn-primary" style="margin:0.75rem 1.5rem; width:calc(100% - 3rem); justify-content:center;">Enquire Now</a></li>
@@ -959,38 +921,12 @@
     </div>
     <div class="hero-content" id="hero-content">
       <div class="hero-content-inner">
-        <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>, right in Parramatta.</h1>
-        <p class="hero-lede hero-kinetic">McGill Institute Australia is a registered training organisation offering accredited courses across Engineering, Hospitality, Business, Management and English.</p>
-
-        <div class="hero-focus-dashboard hero-kinetic" id="hero-focus-dashboard" role="group" aria-label="Campus highlights, synced to the background video">
-          <div class="hero-focus-progress" id="hero-focus-progress" aria-hidden="true">
-            <span class="hero-focus-progress-seg" data-seg="0"><i></i></span>
-            <span class="hero-focus-progress-seg" data-seg="1"><i></i></span>
-            <span class="hero-focus-progress-seg" data-seg="2"><i></i></span>
-          </div>
-          <div class="hero-focus-cards">
-            <button type="button" class="hero-focus-card is-active" data-seg="0">
-              <span class="hero-focus-tag">Community &amp; Culture</span>
-              <h2>Diverse Campus Life</h2>
-              <p>Multicultural engagement in Parramatta</p>
-            </button>
-            <button type="button" class="hero-focus-card" data-seg="1">
-              <span class="hero-focus-tag">Culinary Arts</span>
-              <h2>Hospitality &amp; Culinary Focus</h2>
-              <p>State-of-the-art commercial training kitchens</p>
-            </button>
-            <button type="button" class="hero-focus-card" data-seg="2">
-              <span class="hero-focus-tag">Core Engineering</span>
-              <h2>Engineering &amp; Fabrication Focus</h2>
-              <p>Advanced workshops &amp; metal fabrication</p>
-            </button>
-          </div>
-        </div>
+        <h1 class="hero-kinetic">Vocational training built for <em>real careers</em>.</h1>
+        <p class="hero-lede hero-kinetic">Right in Parramatta. Practical qualifications across engineering, hospitality, business, management and English.</p>
 
         <div class="hero-ctas hero-kinetic">
           <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
-          <a href="#courses" class="btn btn-ghost-inverse" id="hero-explore-cta">Explore Interactive Curriculum</a>
-          <a href="#enquiry" class="btn btn-ghost-inverse" id="hero-tour-cta">Arrange a Campus Visit</a>
+          <a href="#courses" class="btn btn-ghost-inverse" id="hero-explore-cta">Explore Courses</a>
         </div>
 
         <p class="hero-ai-disclosure hero-kinetic">Background video is AI-generated and illustrative only, not actual footage of our campus, students or facilities.</p>
@@ -1726,145 +1662,22 @@
   var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-  /* ---------- Hero: 10s background video loop with a 3-card focus dashboard ----------
-       Primary sync source is the video's own currentTime (self-correcting, no drift).
-       If the video can't play (blocked autoplay, missing file), an independent timer
-       takes over so the dashboard stays interactive -- the poster photo just stays static.
-       The surrounding headline/lede/CTAs are constant now (not swapped per segment), so the
-       kinetic entrance animation plays once on load, not on every segment change. ---------- */
+  /* ---------- Hero: plain looping background video (no sync dashboard) ----------
+       The video just autoplays/loops on its own; the only JS here is the one-time
+       kinetic entrance for the headline/subtext/CTAs, and pausing the video under
+       prefers-reduced-motion (muted background motion still counts as motion). ---------- */
   (function () {
     var video = document.getElementById('hero-video');
     var heroContent = document.getElementById('hero-content');
-    var heroEl = document.querySelector('.hero');
-    var dashboard = document.getElementById('hero-focus-dashboard');
-    var cards = document.querySelectorAll('.hero-focus-card');
-    var progressSegs = document.querySelectorAll('.hero-focus-progress-seg');
-    if (!video || !heroContent || !heroEl || !dashboard || !cards.length) return;
-
-    var SEGMENTS = [
-      { start: 0, end: 3 },
-      { start: 3, end: 6 },
-      { start: 6, end: 10 }
-    ];
-    var LOOP_SECONDS = SEGMENTS[SEGMENTS.length - 1].end;
-
-    var current = -1;
-    var usingFallback = false;
-    var fallbackTimer = null;
-    var hoverPaused = false;
-
-    function playKinetic() {
-      heroContent.classList.remove('kinetic-play');
-      void heroContent.offsetWidth;
-      heroContent.classList.add('kinetic-play');
-    }
-
-    function segmentIndexForTime(t) {
-      for (var i = 0; i < SEGMENTS.length; i++) {
-        if (t >= SEGMENTS[i].start && t < SEGMENTS[i].end) return i;
-      }
-      return SEGMENTS.length - 1;
-    }
-
-    function setFill(index, pct) {
-      var bar = progressSegs[index] && progressSegs[index].querySelector('i');
-      if (bar) bar.style.width = (pct * 100) + '%';
-    }
-
-    function showSegment(index) {
-      if (index === current) return;
-      current = index;
-      cards.forEach(function (c, i) { c.classList.toggle('is-active', i === index); });
-      progressSegs.forEach(function (seg, i) {
-        if (i < index) setFill(i, 1);
-        else if (i > index) setFill(i, 0);
-      });
-    }
-
-    cards.forEach(function (card, i) {
-      card.addEventListener('click', function () {
-        try { video.currentTime = SEGMENTS[i].start; } catch (err) {}
-        showSegment(i);
-        if (usingFallback) restartFallbackTimer();
-      });
-    });
-
-    function restartFallbackTimer() {
-      if (fallbackTimer) clearInterval(fallbackTimer);
-      var start = Date.now();
-      var startOffset = SEGMENTS[current < 0 ? 0 : current].start;
-      fallbackTimer = setInterval(function () {
-        if (hoverPaused) return;
-        var t = ((Date.now() - start) / 1000 + startOffset) % LOOP_SECONDS;
-        var index = segmentIndexForTime(t);
-        showSegment(index);
-        var seg = SEGMENTS[index];
-        setFill(index, (t - seg.start) / (seg.end - seg.start));
-      }, 100);
-    }
-
-    function startFallback() {
-      if (usingFallback) return;
-      usingFallback = true;
-      if (current < 0) showSegment(0);
-      restartFallbackTimer();
-    }
-
-    function onTimeUpdate() {
-      usingFallback = false;
-      if (fallbackTimer) { clearInterval(fallbackTimer); fallbackTimer = null; }
-      var t = video.currentTime % LOOP_SECONDS;
-      var index = segmentIndexForTime(t);
-      showSegment(index);
-      var seg = SEGMENTS[index];
-      setFill(index, (t - seg.start) / (seg.end - seg.start));
-    }
-
-    video.addEventListener('timeupdate', onTimeUpdate);
-    video.addEventListener('error', startFallback);
-    showSegment(0);
-    playKinetic();
-
-    if (prefersReducedMotion) {
+    if (!heroContent) return;
+    heroContent.classList.add('kinetic-play');
+    if (prefersReducedMotion && video) {
       video.pause();
       try { video.currentTime = 0; } catch (err) {}
-    } else {
-      setTimeout(function () {
-        if (!usingFallback && video.paused) startFallback();
-      }, 1800);
     }
-
-    dashboard.addEventListener('mouseenter', function () {
-      hoverPaused = true;
-      if (!prefersReducedMotion) video.pause();
-    });
-    dashboard.addEventListener('mouseleave', function () {
-      hoverPaused = false;
-      if (!prefersReducedMotion) video.play().catch(function () {});
-    });
-
-    var dragStartX = null;
-    var isDragging = false;
-    function dragStart(x) { dragStartX = x; isDragging = true; }
-    function dragEnd(x) {
-      if (!isDragging || dragStartX === null) return;
-      var delta = x - dragStartX;
-      isDragging = false;
-      dragStartX = null;
-      if (Math.abs(delta) < 50) return;
-      var next = (current + (delta < 0 ? 1 : -1) + SEGMENTS.length) % SEGMENTS.length;
-      try { video.currentTime = SEGMENTS[next].start; } catch (err) {}
-      showSegment(next);
-      if (usingFallback) restartFallbackTimer();
-    }
-    heroEl.addEventListener('touchstart', function (e) { dragStart(e.touches[0].clientX); }, { passive: true });
-    heroEl.addEventListener('touchend', function (e) { dragEnd(e.changedTouches[0].clientX); });
-    heroEl.addEventListener('mousedown', function (e) { dragStart(e.clientX); });
-    heroEl.addEventListener('mouseup', function (e) { dragEnd(e.clientX); });
-    heroEl.addEventListener('dragstart', function (e) { e.preventDefault(); });
   })();
 
-  /* ---------- Hero CTAs: explore curriculum (real filter) + arrange a visit (real enquiry) ---------- */
+  /* ---------- Hero CTA: Explore Courses (real filter + scroll) ---------- */
   var heroExploreCta = document.getElementById('hero-explore-cta');
   if (heroExploreCta) {
     heroExploreCta.addEventListener('click', function (e) {
@@ -1872,13 +1685,6 @@
       if (typeof applyFilter === 'function') applyFilter('all');
       var coursesEl = document.getElementById('courses');
       if (coursesEl) coursesEl.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
-    });
-  }
-  var heroTourCta = document.getElementById('hero-tour-cta');
-  if (heroTourCta) {
-    heroTourCta.addEventListener('click', function (e) {
-      e.preventDefault();
-      scrollToEnquiryWithNote("I'd like to arrange a visit to the Parramatta campus.");
     });
   }
 
