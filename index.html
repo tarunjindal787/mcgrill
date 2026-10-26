@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -656,76 +656,107 @@
         </button>
       </div>
 
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Get in Touch</span>
-        <h2>Enquire now</h2>
-        <p>Tell us a little about yourself and our admissions team will be in touch.</p>
-      </div>
-      <!-- TODO (dev note, not shown to visitors): this form validates and shows a success
-           state entirely client-side. It does not transmit data anywhere yet -- wire
-           up a real backend/email endpoint before relying on it to capture enquiries. -->
-      <form class="form-card reveal" id="enquiry-form" novalidate>
-        <div class="form-grid-2">
-          <div class="form-row">
-            <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
-            <input type="text" id="f-name" name="name" required autocomplete="name" aria-describedby="err-name">
-            <span class="field-error" id="err-name" role="alert"></span>
+      <!-- Two-column split card -->
+      <div class="enquiry-split reveal">
+
+        <!-- LEFT: info panel -->
+        <div class="enquiry-info">
+          <span class="section-eyebrow">Get in Touch</span>
+          <h2>Enquire Now</h2>
+          <p>Tell us a little about yourself and our admissions team will be in touch within one business day.</p>
+
+          <div class="enquiry-info-contacts">
+            <a href="tel:+61296987318">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 005 5L14 13l5 2v3a2 2 0 01-2 2A16 16 0 015 7a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              +61 2 9698 7318
+            </a>
+            <a href="mailto:info@mcgill.edu.au">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M2 8l10 7 10-7" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              info@mcgill.edu.au
+            </a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Level+1%2C+30+Cowper+St%2C+Parramatta+NSW+2150" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s7-7.5 7-12a7 7 0 10-14 0c0 4.5 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+              Level 1, 30 Cowper St, Parramatta
+            </a>
           </div>
-          <div class="form-row">
-            <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-            <input type="email" id="f-email" name="email" required autocomplete="email" aria-describedby="err-email">
-            <span class="field-error" id="err-email" role="alert"></span>
-          </div>
-          <div class="form-row">
-            <label for="f-phone">Phone</label>
-            <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 0412 345 678" aria-describedby="err-phone">
-            <span class="field-error" id="err-phone" role="alert"></span>
-          </div>
-          <div class="form-row">
-            <label for="f-course">Course of interest</label>
-            <select id="f-course" name="course">
-              <option value="">Select a course</option>
-              <option>Certificate III in Engineering (Fabrication Trade)</option>
-              <option>Certificate IV in Kitchen Management</option>
-              <option>Diploma of Hospitality Management</option>
-              <option>Certificate IV in Business</option>
-              <option>Diploma of Business</option>
-              <option>Graduate Diploma of Management (Learning)</option>
-              <option>General English Programs</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="f-student-type">Student type</label>
-            <select id="f-student-type" name="studentType">
-              <option value="">Select student type</option>
-              <option>Domestic student</option>
-              <option>International student</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="f-payment-plan">Preferred payment plan</label>
-            <select id="f-payment-plan" name="paymentPlan">
-              <option value="">Select a payment plan</option>
-              <option>Pay upfront</option>
-              <option>Instalment plan</option>
-            </select>
+
+          <div class="enquiry-info-pills">
+            <span class="enquiry-pill">RTO 45906</span>
+            <span class="enquiry-pill">CRICOS 03678G</span>
+            <span class="enquiry-pill">Parramatta NSW</span>
           </div>
         </div>
-        <div class="form-row">
-          <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
-          <textarea id="f-message" name="message" required aria-describedby="err-message"></textarea>
-          <span class="field-error" id="err-message" role="alert"></span>
+
+        <!-- RIGHT: form panel -->
+        <div class="enquiry-form-panel">
+          <!-- TODO (dev note, not shown to visitors): this form validates and shows a success
+               state entirely client-side. It does not transmit data anywhere yet -- wire
+               up a real backend/email endpoint before relying on it to capture enquiries. -->
+          <form class="form-card" id="enquiry-form" novalidate>
+            <div class="form-grid-2">
+              <div class="form-row">
+                <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="f-name" name="name" required autocomplete="name" aria-describedby="err-name">
+                <span class="field-error" id="err-name" role="alert"></span>
+              </div>
+              <div class="form-row">
+                <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+                <input type="email" id="f-email" name="email" required autocomplete="email" aria-describedby="err-email">
+                <span class="field-error" id="err-email" role="alert"></span>
+              </div>
+              <div class="form-row">
+                <label for="f-phone">Phone</label>
+                <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="e.g. 0412 345 678" aria-describedby="err-phone">
+                <span class="field-error" id="err-phone" role="alert"></span>
+              </div>
+              <div class="form-row">
+                <label for="f-course">Course of interest</label>
+                <select id="f-course" name="course">
+                  <option value="">Select a course</option>
+                  <option>Certificate III in Engineering (Fabrication Trade)</option>
+                  <option>Certificate IV in Kitchen Management</option>
+                  <option>Diploma of Hospitality Management</option>
+                  <option>Certificate IV in Business</option>
+                  <option>Diploma of Business</option>
+                  <option>Graduate Diploma of Management (Learning)</option>
+                  <option>General English Programs</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="f-student-type">Student type</label>
+                <select id="f-student-type" name="studentType">
+                  <option value="">Select student type</option>
+                  <option>Domestic student</option>
+                  <option>International student</option>
+                </select>
+              </div>
+              <div class="form-row">
+                <label for="f-payment-plan">Preferred payment plan</label>
+                <select id="f-payment-plan" name="paymentPlan">
+                  <option value="">Select a payment plan</option>
+                  <option>Pay upfront</option>
+                  <option>Instalment plan</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-message" name="message" required aria-describedby="err-message"></textarea>
+              <span class="field-error" id="err-message" role="alert"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Enquiry</button>
+            <p class="form-note">* Required fields. We'll respond to your enquiry as soon as possible.</p>
+          </form>
+          <div class="form-card success-card" id="enquiry-success" role="status" aria-live="polite" tabindex="-1">
+            <div class="success-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5 11-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 style="margin-bottom:0.5rem;">Thank you!</h3>
+            <p style="margin-bottom:0;">We'll respond to your enquiry as soon as possible.</p>
+          </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Enquiry</button>
-        <p class="form-note">* Required fields. We'll respond to your enquiry as soon as possible.</p>
-      </form>
-      <div class="form-card success-card" id="enquiry-success" role="status" aria-live="polite" tabindex="-1">
-        <div class="success-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5 11-11" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 style="margin-bottom:0.5rem;">Thank you!</h3>
-        <p style="margin-bottom:0;">We'll respond to your enquiry as soon as possible.</p>
-      </div>
+
+      </div><!-- /.enquiry-split -->
     </div>
   </section>
 
