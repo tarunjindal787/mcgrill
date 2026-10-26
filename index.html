@@ -225,32 +225,31 @@
   .btn-primary.magnet-active { transition: transform 0.12s ease-out; }
 
   /* ============ Header: floating glassmorphic nav ============ */
+  /* Floating transparent header: no background, border, radius, blur, or shadow on
+     the bar or its inner wrapper -- the wrapper controls alignment (max-width,
+     flex layout, padding) only. Legibility against the hero video comes from
+     text-shadow on the nav/brand text itself, not from a backing panel. */
   header.site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 1rem 1.25rem 0;
+    padding: 1.75rem 1.25rem 0;
   }
   .header-inner {
-    max-width: 1200px; margin: 0 auto;
+    max-width: 1280px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    padding: 0.7rem 1.1rem;
-    min-height: calc(var(--header-h) - 1rem);
-    background: rgba(11,15,23,0.55);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: var(--radius-pill);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    box-shadow: 0 8px 32px -12px rgba(0,0,0,0.4);
-    transition: background 0.3s ease;
+    min-height: calc(var(--header-h) - 1.75rem);
   }
   @media (max-width: 480px) {
     :root { --header-h: 80px; }
   }
   .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
-  .brand-logo { height: 34px; width: auto; display: block; flex-shrink: 0; }
-  .brand-subtext { font-family: var(--font-mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; }
+  .brand-logo { height: 34px; width: auto; display: block; flex-shrink: 0; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.5)); }
+  .brand-subtext { font-family: var(--font-mono); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); text-transform: uppercase; text-shadow: 0 1px 6px rgba(0,0,0,0.65); }
   nav.main-nav { display: none; }
   nav.main-nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
-  nav.main-nav a { text-decoration: none; font-weight: 500; font-size: 0.9rem; color: rgba(255,255,255,0.85); padding: 0.4rem 0; border-bottom: 2px solid transparent; }
+  nav.main-nav a {
+    text-decoration: none; font-weight: 500; font-size: 0.9rem; color: rgba(255,255,255,0.85);
+    padding: 0.4rem 0; border-bottom: 2px solid transparent; text-shadow: 0 1px 6px rgba(0,0,0,0.65);
+  }
   nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   .header-actions { display: flex; align-items: center; gap: 0.75rem; }
   .nav-toggle {
@@ -265,7 +264,7 @@
   }
 
   #mobile-nav {
-    display: none; max-width: 1200px; margin: 0.5rem auto 0;
+    display: none; max-width: 1280px; margin: 0.5rem auto 0;
     border-radius: 20px; background: rgba(11,15,23,0.9); backdrop-filter: blur(16px);
     border: 1px solid rgba(255,255,255,0.12);
   }
