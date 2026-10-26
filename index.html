@@ -414,11 +414,30 @@
 
   /* ============ Streams: premium image-card grid ============ */
   #streams { padding-top: var(--space-lg); }
+  .streams-head { position: relative; }
+  .streams-head::before {
+    content: ""; display: block; width: 56px; height: 3px; border-radius: 2px;
+    background: var(--coral); margin-bottom: 1.25rem;
+  }
+  /* Oversized outlined numeral -- a small editorial flourish tying the intro to the five
+     streams below. Decorative only (aria-hidden), so no loss of information if it never
+     renders; -webkit-text-stroke degrades to its low-opacity fill where unsupported. */
+  .streams-head-mark {
+    display: none; position: absolute; top: -0.25rem; right: 0; z-index: 0;
+    font-family: var(--font-display); font-weight: 600; line-height: 1;
+    font-size: clamp(3.5rem, 2.2rem + 5vw, 7rem);
+    color: rgba(15,23,42,0.05); /* mirrors --charcoal (#0F172A) at low opacity */
+    -webkit-text-stroke: 1px rgba(15,23,42,0.16);
+    pointer-events: none; user-select: none;
+  }
+  @media (min-width: 760px) { .streams-head-mark { display: block; } }
+  .streams-head .section-eyebrow, .streams-head h2, .streams-head p { position: relative; z-index: 1; }
   .stream-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
   @media (min-width: 640px) { .stream-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 980px) {
-    .stream-grid { grid-template-columns: repeat(3, 1fr); }
+    .stream-grid { grid-template-columns: repeat(4, 1fr); }
     .stream-card--feature { grid-column: span 2; }
+    .stream-card--wide { grid-column: span 2; }
   }
   .stream-card {
     all: unset; cursor: pointer; box-sizing: border-box; display: flex; flex-direction: column;
@@ -444,7 +463,13 @@
     background: #fff; border-radius: var(--radius-pill); padding: 0.3rem 0.7rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.18);
   }
+  .stream-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
   .stream-card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left; }
+  .stream-card-index {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--coral-text);
+  }
+  .stream-card-index::after { content: " / 05"; color: var(--text-muted); font-weight: 600; }
   .stream-card h3 { font-size: 1.2rem; margin-bottom: 0; }
   .stream-card--feature h3 { font-size: 1.5rem; }
   .stream-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
@@ -455,6 +480,14 @@
   .stream-card-cta svg { transition: transform 0.2s ease; flex-shrink: 0; }
   .stream-card:hover .stream-card-cta svg { transform: translateX(4px); }
   @media (prefers-reduced-motion: reduce) { .stream-card:hover .stream-card-cta svg { transform: none; } }
+  /* Per-card stagger on top of the shared .reveal/IntersectionObserver mechanism (unchanged) --
+     a short, rhythmic cascade rather than all five cards fading in at once. */
+  #streams .stream-card.reveal:nth-child(1) { transition-delay: 0s; }
+  #streams .stream-card.reveal:nth-child(2) { transition-delay: 0.08s; }
+  #streams .stream-card.reveal:nth-child(3) { transition-delay: 0.16s; }
+  #streams .stream-card.reveal:nth-child(4) { transition-delay: 0.24s; }
+  #streams .stream-card.reveal:nth-child(5) { transition-delay: 0.32s; }
+  @media (prefers-reduced-motion: reduce) { #streams .stream-card.reveal { transition-delay: 0s; } }
 
   /* ============ Filter + course cards ============ */
   .course-search {
@@ -959,62 +992,68 @@
   <!-- STREAMS (signature transit rail) -->
   <section id="streams" class="tone-light">
     <div class="container">
-      <div class="section-head reveal">
-        <span class="section-eyebrow">Educational Streams</span>
-        <h2>Find your stream.</h2>
-        <p>Practical training. Real-world skills. New opportunities.</p>
+      <div class="section-head streams-head reveal">
+        <span class="streams-head-mark" aria-hidden="true">05</span>
+        <span class="section-eyebrow">Explore Your Possibilities</span>
+        <h2>Your future starts with a choice.</h2>
+        <p>Discover practical learning pathways and build skills for your next career step.</p>
       </div>
-      <div class="stream-grid reveal" role="group" aria-label="Educational streams">
-        <button class="stream-card stream-card--feature" data-stream="engineering" type="button">
+      <div class="stream-grid" role="group" aria-label="Educational streams">
+        <button class="stream-card stream-card--feature reveal" data-stream="engineering" type="button">
           <span class="stream-card-photo">
             <img src="photos/course-engineering.jpg" alt="A welder working on a metal fabrication project in a workshop" loading="lazy">
             <span class="stream-card-badge">1 Qualification</span>
           </span>
           <span class="stream-card-body">
+            <span class="stream-card-index">01</span>
             <h3>Engineering</h3>
             <p>Fabrication trade training.</p>
             <span class="stream-card-cta">Explore courses<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </button>
-        <button class="stream-card" data-stream="hospitality" type="button">
+        <button class="stream-card reveal" data-stream="hospitality" type="button">
           <span class="stream-card-photo">
             <img src="photos/course-hospitality-kitchen.jpg" alt="A chef preparing food in a commercial kitchen" loading="lazy">
             <span class="stream-card-badge">2 Qualifications</span>
           </span>
           <span class="stream-card-body">
+            <span class="stream-card-index">02</span>
             <h3>Hospitality</h3>
             <p>Kitchen &amp; hotel management.</p>
             <span class="stream-card-cta">Explore courses<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </button>
-        <button class="stream-card" data-stream="business" type="button">
+        <button class="stream-card reveal" data-stream="business" type="button">
           <span class="stream-card-photo">
             <img src="photos/course-business-diploma.jpg" alt="A presenter discussing a sales chart to colleagues in an office" loading="lazy">
             <span class="stream-card-badge">2 Qualifications</span>
           </span>
           <span class="stream-card-body">
+            <span class="stream-card-index">03</span>
             <h3>Business</h3>
             <p>Core &amp; advanced business skills.</p>
             <span class="stream-card-cta">Explore courses<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </button>
-        <button class="stream-card" data-stream="management" type="button">
+        <button class="stream-card stream-card--wide reveal" data-stream="management" type="button">
           <span class="stream-card-photo">
             <img src="photos/course-management.jpg" alt="A group of colleagues in a discussion around a meeting table" loading="lazy">
             <span class="stream-card-badge">1 Qualification</span>
           </span>
           <span class="stream-card-body">
+            <span class="stream-card-index">04</span>
             <h3>Management</h3>
             <p>Postgraduate leadership training.</p>
             <span class="stream-card-cta">Explore courses<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </span>
         </button>
-        <button class="stream-card" data-stream="english" type="button">
+        <button class="stream-card stream-card--wide reveal" data-stream="english" type="button">
           <span class="stream-card-photo">
             <img src="photos/course-english.jpg" alt="A student smiling in a lecture hall" loading="lazy">
             <span class="stream-card-badge">General English</span>
           </span>
           <span class="stream-card-body">
+            <span class="stream-card-index">05</span>
             <h3>English</h3>
             <p>General English programs.</p>
             <span class="stream-card-cta">Explore courses<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -1023,6 +1062,7 @@
       </div>
     </div>
   </section>
+  <noscript><style>#streams .reveal { opacity: 1; transform: none; transition: none; }</style></noscript>
 
   <!-- COURSES -->
   <section id="courses" class="tone-dark">
