@@ -232,6 +232,15 @@
   header.site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 1.75rem 1.25rem 0;
+    background-color: transparent; box-shadow: none; border-bottom: 1px solid transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  /* Solid once scrolled past the hero top -- same padding/height as the transparent
+     state (no shift/jump), only background/shadow/border-color change. */
+  header.site-header.is-scrolled {
+    background-color: var(--oled);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    border-bottom-color: rgba(255,255,255,0.08);
   }
   .header-inner {
     max-width: 1280px; margin: 0 auto;
@@ -1779,6 +1788,16 @@
     syncHeaderHeight();
     window.addEventListener('resize', syncHeaderHeight);
     window.addEventListener('load', syncHeaderHeight);
+
+    /* ---------- Header: solid background once scrolled past the hero top ----------
+         Padding/height are identical in both states (set once above, never touched
+         here) so this never shifts hero content or re-triggers syncHeaderHeight. ---------- */
+    var SCROLL_THRESHOLD = 70;
+    var updateHeaderScrolledState = function () {
+      siteHeader.classList.toggle('is-scrolled', window.scrollY > SCROLL_THRESHOLD);
+    };
+    updateHeaderScrolledState();
+    window.addEventListener('scroll', updateHeaderScrolledState, { passive: true });
   }
 
   /* ---------- Deep-link to a specific FAQ item (e.g. "Learn more" from Why McGill) ---------- */
