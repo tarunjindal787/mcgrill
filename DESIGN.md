@@ -79,7 +79,7 @@ Hero (dark, video) → Streams (light) → Courses (dark) → Why McGill (light)
 ### Coral family (unchanged roles, now also carrying a Bento feature-tile background)
 - **`--coral`** (#B23A1E, fixed): background fills with white text — primary buttons, the skip link, hover-fills. Also used as the start of the Why McGill Bento tile's gradient.
 - **`--coral-deep`** (#5C1F11, fixed): hover-darken state; also the Bento tile gradient's end stop.
-- **`--coral-bright`** (#C73F22, fixed): decorative fills (card corner-cuts, dots) and the hero's large italic-weight `<em>` emphasis — verified 3.8:1 against the hero's dark backdrop, which clears WCAG's 3:1 **large-text** threshold (the hero headline is 40–88px, bold).
+- **`--coral-bright`** (#C73F22, fixed): decorative fills (card corner-cuts, dots) and the hero's `<em>` emphasis — ~3.8:1 against the hero's dark backdrop, which clears WCAG's 3:1 **large-text** threshold when the `<em>` sits in the h1 (40–88px, bold). **Since 2026-10-26**, the emphasised phrase moved to the hero subtext (`.hero-lede`, ~18.4px/800-weight) when the client restructured the hero to headline="McGill Institute Australia" + subtext carrying the value prop — that size sits just under WCAG's 14pt/18.66px bold large-text cutoff, so the 3.8:1 figure is no longer a clean pass on its own. Added a dedicated, stronger `text-shadow` on `.hero-lede em` as the same defensive margin already used elsewhere on hero text, rather than picking a new color.
 - **`--coral-text`** (theme-reactive via `.tone-dark`/`.tone-light`): every standalone coral text/icon/border use within a toned section.
 
 ### Known theoretical-only contrast pairs (do not chase further)
