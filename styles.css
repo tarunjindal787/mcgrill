@@ -358,32 +358,47 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .rail-stop p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
 
 /* ============ Streams: premium image-card grid ============ */
-#streams { padding-top: var(--space-lg); }
-.streams-head { position: relative; }
-.streams-head::before {
+/* Wider, shallower section: a dedicated content width (not the sitewide 1200px
+   .container, which every other section keeps) plus a soft gradient + two large,
+   low-opacity blurred coral blobs stand in for the previous flat ivory fill. */
+#streams {
+  position: relative; overflow: hidden;
+  padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); padding-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  background: linear-gradient(180deg, #FFFDF8 0%, var(--off-white) 55%, #FBF4EE 100%);
+}
+#streams::before, #streams::after {
+  content: ""; position: absolute; z-index: 0; border-radius: 50%; pointer-events: none;
+  filter: blur(70px);
+}
+#streams::before { width: 30rem; height: 30rem; top: -14rem; right: -8rem; background: radial-gradient(circle, rgba(178,58,30,0.09), transparent 70%); }
+#streams::after { width: 26rem; height: 26rem; bottom: -13rem; left: -9rem; background: radial-gradient(circle, rgba(178,58,30,0.06), transparent 70%); }
+#streams .container { max-width: 1400px; position: relative; z-index: 1; }
+.streams-head {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem;
+  max-width: none; margin-bottom: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+}
+.streams-head-text { max-width: 62ch; }
+.streams-head-text::before {
   content: ""; display: block; width: 56px; height: 3px; border-radius: 2px;
   background: var(--coral); margin-bottom: 1.25rem;
 }
-/* Oversized outlined numeral -- a small editorial flourish tying the intro to the five
-   streams below. Decorative only (aria-hidden), so no loss of information if it never
-   renders; -webkit-text-stroke degrades to its low-opacity fill where unsupported. */
+/* Oversized outlined numeral -- an editorial flourish that now fills the extra width the
+   wider container opens up beside the heading, rather than overlapping it. Decorative
+   only (aria-hidden), so no loss of information if it never renders; -webkit-text-stroke
+   degrades to its low-opacity fill where unsupported. */
 .streams-head-mark {
-  display: none; position: absolute; top: -0.25rem; right: 0; z-index: 0;
-  font-family: var(--font-display); font-weight: 600; line-height: 1;
-  font-size: clamp(3.5rem, 2.2rem + 5vw, 7rem);
+  display: none; flex-shrink: 0; line-height: 1;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(4.5rem, 2rem + 9vw, 10rem);
   color: rgba(15,23,42,0.05); /* mirrors --charcoal (#0F172A) at low opacity */
-  -webkit-text-stroke: 1px rgba(15,23,42,0.16);
+  -webkit-text-stroke: 1.5px rgba(178,58,30,0.22);
   pointer-events: none; user-select: none;
 }
 @media (min-width: 760px) { .streams-head-mark { display: block; } }
-.streams-head .section-eyebrow, .streams-head h2, .streams-head p { position: relative; z-index: 1; }
 .stream-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .stream-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) {
-  .stream-grid { grid-template-columns: repeat(4, 1fr); }
-  .stream-card--feature { grid-column: span 2; }
-  .stream-card--wide { grid-column: span 2; }
-}
+@media (min-width: 980px) { .stream-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1360px) { .stream-grid { grid-template-columns: repeat(5, 1fr); gap: 1.25rem; } }
 .stream-card {
   all: unset; cursor: pointer; box-sizing: border-box; display: flex; flex-direction: column;
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
@@ -397,7 +412,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .stream-card[data-stream="management"]:hover { border-color: var(--tag-management-text); }
 .stream-card[data-stream="english"]:hover { border-color: var(--tag-english-text); }
 .stream-card-photo { position: relative; aspect-ratio: 4/3; overflow: hidden; }
-.stream-card--feature .stream-card-photo { aspect-ratio: 16/9; }
 .stream-card-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
 .stream-card:hover .stream-card-photo img { transform: scale(1.06); }
 @media (prefers-reduced-motion: reduce) { .stream-card:hover .stream-card-photo img { transform: none; } }
@@ -409,17 +423,16 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   box-shadow: 0 4px 12px rgba(0,0,0,0.18);
 }
 .stream-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
-.stream-card-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left; }
+.stream-card-body { padding: 1.35rem; display: flex; flex-direction: column; gap: 0.5rem; text-align: left; flex: 1; }
 .stream-card-index {
   font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
   color: var(--coral-text);
 }
 .stream-card-index::after { content: " / 05"; color: var(--text-muted); font-weight: 600; }
-.stream-card h3 { font-size: 1.2rem; margin-bottom: 0; }
-.stream-card--feature h3 { font-size: 1.5rem; }
-.stream-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
+.stream-card h3 { font-size: 1.15rem; margin-bottom: 0; }
+.stream-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
 .stream-card-cta {
-  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.4rem;
+  display: inline-flex; align-items: center; gap: 0.4rem; margin-top: auto; padding-top: 0.4rem;
   color: var(--coral-text); font-weight: 600; font-size: 0.9rem; width: fit-content;
 }
 .stream-card-cta svg { transition: transform 0.2s ease; flex-shrink: 0; }
