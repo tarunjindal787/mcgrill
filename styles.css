@@ -733,23 +733,75 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .agent-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--muted-light); font-size: 0.95rem; }
 .agent-list svg { flex-shrink: 0; margin-top: 0.2rem; color: var(--amber); }
 
-/* ============ Campus: warm ivory band + elegant contact card + large map ============ */
-/* Same soft-gradient-plus-blurred-blob technique already used on #streams, recolored
-   toward peach/terracotta and repositioned so the two sections don't read as copies. */
+/* ============ Campus: warm ivory-to-peach band, decorative curves, a glow, and a real
+   Parramatta skyline photograph ============ */
+/* Explicit client-specified palette for this section only (close to but distinct from
+   --coral/--off-white, used here verbatim rather than redefining those sitewide tokens):
+   #FFF8EF warm ivory base, #FCE5D5 soft peach, #D94F2B terracotta accent. */
 #campus {
   position: relative; overflow: hidden;
-  background: linear-gradient(170deg, #FFF8F2 0%, var(--off-white) 50%, #FDF0E6 100%);
+  background: linear-gradient(165deg, #FFF8EF 0%, #FCE5D5 58%, #FFF8EF 100%);
 }
-#campus::before, #campus::after {
-  content: ""; position: absolute; z-index: 0; border-radius: 50%; pointer-events: none; filter: blur(80px);
+/* Upper-right curve: sits behind/around the skyline photo so the photo reads as part of
+   the same decorative composition rather than a pasted-on rectangle. Verified at this
+   exact size/opacity/blur via a rendered composite before shipping -- an earlier, much
+   fainter pass (0.18/0.16 opacity, 80px blur) matched the client's own complaint that the
+   background looked plain, so this intentionally reads as a bold, clearly visible curve. */
+#campus::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
+  width: 40rem; height: 40rem; top: -13rem; right: -10rem;
+  background: radial-gradient(circle, rgba(217,79,43,0.34) 0%, rgba(217,79,43,0.1) 55%, transparent 75%);
+  filter: blur(14px);
 }
-#campus::before { width: 28rem; height: 28rem; top: -10rem; left: -10rem; background: radial-gradient(circle, rgba(199,63,34,0.08), transparent 70%); }
-#campus::after { width: 24rem; height: 24rem; bottom: -12rem; right: -8rem; background: radial-gradient(circle, rgba(178,58,30,0.07), transparent 70%); }
-#campus .container { position: relative; z-index: 1; }
+/* Lower-left curve: the bolder of the two, since this corner carries no photo. */
+#campus::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
+  width: 36rem; height: 36rem; bottom: -13rem; left: -12rem;
+  background: radial-gradient(circle, rgba(217,79,43,0.3) 0%, rgba(217,79,43,0.08) 55%, transparent 75%);
+  filter: blur(18px);
+}
+#campus .container { position: relative; z-index: 2; }
 
-.campus-grid { display: grid; gap: var(--space-md); align-items: stretch; }
-.campus-intro { grid-column: 1 / -1; max-width: 62ch; margin-bottom: 0.25rem; }
-.campus-intro h2 em { font-style: normal; color: var(--coral-text); }
+/* Real Parramatta skyline photograph (photos/campus-parramatta-skyline.jpg, CC BY-SA 3.0,
+   credited in its caption) -- desktop only; on tablet/mobile the gradient + curves alone
+   carry the background so a narrow viewport never risks the photo crowding the heading
+   or the stacked card/map below it. */
+.campus-photo { display: none; }
+@media (min-width: 900px) {
+  .campus-photo {
+    display: block; position: absolute; z-index: 1; top: 0; right: 0; margin: 0;
+    width: clamp(280px, 34vw, 460px); aspect-ratio: 1400 / 656;
+    border-radius: 0 0 0 28px; overflow: hidden;
+    box-shadow: 0 20px 48px -26px rgba(109,47,20,0.35);
+  }
+}
+.campus-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.campus-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(115deg, #FFF8EF 0%, transparent 45%),
+    linear-gradient(0deg, #FFF8EF 0%, transparent 40%);
+}
+.campus-photo-credit {
+  position: absolute; z-index: 1; bottom: 0.5rem; right: 0.65rem; margin: 0;
+  font-size: 0.62rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  background: rgba(15,17,30,0.32); padding: 0.15rem 0.55rem; border-radius: var(--radius-pill);
+}
+
+.campus-grid { position: relative; display: grid; gap: var(--space-md); align-items: stretch; }
+/* Soft glow behind the card + map, plus a translucent outlined ring for extra depth. */
+.campus-grid::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; inset: -5% -4%; border-radius: 56px;
+  background: radial-gradient(60% 65% at 48% 58%, rgba(217,79,43,0.12), transparent 72%);
+  filter: blur(32px);
+}
+.campus-grid::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
+  width: 20rem; height: 20rem; right: -3rem; top: -2rem;
+  border: 1px solid rgba(217,79,43,0.2); background: rgba(252,229,213,0.3);
+}
+.campus-intro { position: relative; z-index: 1; grid-column: 1 / -1; max-width: 62ch; margin-bottom: 0.25rem; }
+.campus-intro h2 em { font-style: normal; color: #D94F2B; }
 .campus-intro p { color: var(--text-muted); margin-bottom: 0; }
 @media (min-width: 900px) {
   .campus-grid { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
@@ -759,9 +811,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 }
 
 .campus-facts {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+  position: relative; z-index: 1;
+  background: var(--surface); border: 1px solid rgba(217,79,43,0.16); border-radius: var(--radius-card);
   padding: var(--space-md); display: flex; flex-direction: column;
-  box-shadow: 0 24px 56px -32px rgba(15,17,30,0.22);
+  box-shadow: 0 24px 56px -32px rgba(109,47,20,0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 .campus-facts:hover { transform: translateY(-3px); box-shadow: 0 28px 64px -28px rgba(15,17,30,0.28); }
@@ -784,6 +837,7 @@ a.campus-fact-link:hover { color: var(--coral-text); text-decoration: underline;
 .campus-closing { margin: 1rem 0 0; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
 
 .map-embed {
+  position: relative; z-index: 1;
   height: 100%; min-height: 360px; border-radius: calc(var(--radius-card) + 6px); border: 1px solid var(--border);
   overflow: hidden; box-shadow: 0 24px 56px -32px rgba(15,17,30,0.3);
   transition: box-shadow 0.25s ease;
