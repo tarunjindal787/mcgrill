@@ -85,7 +85,15 @@
         <button class="filter-chip" data-filter="management" aria-pressed="false" type="button">Management</button>
         <button class="filter-chip" data-filter="english" aria-pressed="false" type="button">English</button>
       </div>
-      <p class="course-search-empty" id="course-search-empty" hidden>No courses match your search. Try a different keyword or clear the filter.</p>
+      <div class="filter-bar filter-bar--level reveal" role="group" aria-label="Filter courses by qualification level">
+        <button class="filter-chip" data-level="all" aria-pressed="true" type="button">All Levels</button>
+        <button class="filter-chip" data-level="Certificate III" aria-pressed="false" type="button">Certificate III</button>
+        <button class="filter-chip" data-level="Certificate IV" aria-pressed="false" type="button">Certificate IV</button>
+        <button class="filter-chip" data-level="Diploma" aria-pressed="false" type="button">Diploma</button>
+        <button class="filter-chip" data-level="Graduate Diploma" aria-pressed="false" type="button">Graduate Diploma</button>
+        <button type="button" class="btn-ghost-small filter-clear" id="filter-clear" hidden>Clear filters</button>
+      </div>
+      <p class="course-search-empty" id="course-search-empty" hidden>No courses match your search and filters. Try different keywords or clear the filters.</p>
       <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data (courses-data.js) --></div>
 
       <div class="quote-tool reveal" id="quote-tool">
@@ -196,13 +204,26 @@
       </div>
       <button class="modal-close" id="modal-close" type="button" aria-label="Close course details">&times;</button>
     </div>
+
+    <h4 class="modal-section-label">Overview</h4>
     <p id="modal-desc"></p>
+
+    <h4 class="modal-section-label">Course details</h4>
     <div class="modal-meta">
       <div class="row"><span>Course code</span><strong id="modal-code"></strong></div>
-      <div class="row"><span>Fees</span><strong>Confirmed on enquiry</strong></div>
+      <div class="row" id="modal-level-row"><span>Qualification level</span><strong id="modal-level"></strong></div>
+      <div class="row"><span>Campus</span><strong>Parramatta</strong></div>
+      <div class="row"><span>Study mode</span><strong>Contact us for details</strong></div>
       <div class="row"><span>Duration</span><strong>Confirmed on enquiry</strong></div>
+      <div class="row"><span>Fees</span><strong>Confirmed on enquiry</strong></div>
       <div class="row"><span>Next intake</span><strong>Confirmed on enquiry</strong></div>
     </div>
+
+    <h4 class="modal-section-label">Entry requirements</h4>
+    <p class="modal-entry-req">Year 12 or equivalent, functional English. Specific requirements vary by course and by student type (domestic or international) and are confirmed with our admissions team.</p>
+
+    <h4 class="modal-section-label">How to apply</h4>
+    <p class="modal-apply-note">Enquire below and our admissions team will guide you through the application steps for this course.</p>
     <a href="index.html#enquiry" class="btn btn-primary" id="modal-enquire">Enquire about this course</a>
   </div>
 </div>
@@ -224,9 +245,13 @@
         '<img src="' + c.img + '" alt="' + c.imgAlt + '" width="900" height="600" loading="lazy">' +
         '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
       '</div>' +
-      '<span class="course-code mono">' + c.code + '</span>' +
+      '<div class="course-pills">' +
+        '<span class="course-code mono">' + c.code + '</span>' +
+        (c.level ? '<span class="course-level">' + c.level + '</span>' : '') +
+      '</div>' +
       '<h3>' + c.name + '</h3>' +
       '<p>' + c.desc + '</p>' +
+      '<p class="course-campus">Parramatta campus &middot; Fees and intakes confirmed on enquiry</p>' +
       '<details class="entry-req">' +
         '<summary>' +
           '<span>Entry: Year 12 or equivalent, functional English <span class="entry-req-note">(confirmed at enquiry)</span></span>' +
@@ -247,11 +272,14 @@
     document.querySelectorAll('.course-card.tilt-card').forEach(attachTilt);
   }
 
-  /* ---------- Filter + search (combined: stream AND keyword) ---------- */
-  var filterChips = document.querySelectorAll('.filter-chip');
+  /* ---------- Filter + search (combined: stream AND qualification level AND keyword) ---------- */
+  var streamChips = document.querySelectorAll('.filter-chip[data-filter]');
+  var levelChips = document.querySelectorAll('.filter-chip[data-level]');
+  var filterClear = document.getElementById('filter-clear');
   var searchInput = document.getElementById('course-search-input');
   var searchEmpty = document.getElementById('course-search-empty');
   var currentStream = 'all';
+  var currentLevel = 'all';
 
   function applySearchAndFilter() {
     var query = searchInput.value.trim().toLowerCase();
@@ -259,29 +287,46 @@
     COURSES.forEach(function (c) {
       var card = document.getElementById('course-' + c.id);
       var matchesStream = currentStream === 'all' || c.stream === currentStream;
+      var matchesLevel = currentLevel === 'all' || c.level === currentLevel;
       var matchesQuery = !query ||
         c.name.toLowerCase().indexOf(query) !== -1 ||
         c.code.toLowerCase().indexOf(query) !== -1 ||
         c.tagLabel.toLowerCase().indexOf(query) !== -1 ||
         c.desc.toLowerCase().indexOf(query) !== -1;
-      var match = matchesStream && matchesQuery;
+      var match = matchesStream && matchesLevel && matchesQuery;
       card.style.display = match ? '' : 'none';
       if (match) visibleCount++;
     });
     searchEmpty.hidden = visibleCount !== 0;
+    filterClear.hidden = currentStream === 'all' && currentLevel === 'all' && !query;
   }
 
   function applyFilter(stream) {
     currentStream = stream;
-    filterChips.forEach(function (chip) {
+    streamChips.forEach(function (chip) {
       chip.setAttribute('aria-pressed', chip.getAttribute('data-filter') === stream ? 'true' : 'false');
     });
     applySearchAndFilter();
   }
-  filterChips.forEach(function (chip) {
+  function applyLevelFilter(level) {
+    currentLevel = level;
+    levelChips.forEach(function (chip) {
+      chip.setAttribute('aria-pressed', chip.getAttribute('data-level') === level ? 'true' : 'false');
+    });
+    applySearchAndFilter();
+  }
+  streamChips.forEach(function (chip) {
     chip.addEventListener('click', function () { applyFilter(chip.getAttribute('data-filter')); });
   });
+  levelChips.forEach(function (chip) {
+    chip.addEventListener('click', function () { applyLevelFilter(chip.getAttribute('data-level')); });
+  });
   searchInput.addEventListener('input', applySearchAndFilter);
+  filterClear.addEventListener('click', function () {
+    searchInput.value = '';
+    applyFilter('all');
+    applyLevelFilter('all');
+  });
 
   /* ---------- Deep link from the homepage's stream cards: ?stream=engineering etc. ---------- */
   var VALID_STREAMS = ['engineering', 'hospitality', 'business', 'management', 'english'];
@@ -295,6 +340,9 @@
   var modalTag = document.getElementById('modal-tag');
   var modalDesc = document.getElementById('modal-desc');
   var modalCode = document.getElementById('modal-code');
+  var modalLevel = document.getElementById('modal-level');
+  var modalLevelRow = document.getElementById('modal-level-row');
+  var modalEnquire = document.getElementById('modal-enquire');
   var modalClose = document.getElementById('modal-close');
   var lastFocused = null;
 
@@ -306,6 +354,9 @@
     modalTag.className = 'tag tag-' + c.stream;
     modalDesc.textContent = c.desc;
     modalCode.textContent = c.code;
+    if (c.level) { modalLevel.textContent = c.level; modalLevelRow.hidden = false; }
+    else { modalLevelRow.hidden = true; }
+    modalEnquire.href = 'index.html?qcourse=' + encodeURIComponent(c.name) + '#enquiry';
     lastFocused = document.activeElement;
     modalBackdrop.classList.add('open');
     modalClose.focus();

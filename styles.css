@@ -532,6 +532,14 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   border-radius: var(--radius-pill); padding: 0.3rem 0.75rem;
 }
 .course-card p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
+.course-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.course-level {
+  display: inline-flex; align-self: flex-start; font-family: var(--font-mono); font-weight: 700;
+  font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--text); background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: 0.3rem 0.75rem;
+}
+.course-card .course-campus { font-size: 0.8rem; color: var(--text-muted); }
 .entry-req { border: none; margin: 0; }
 .entry-req summary {
   cursor: pointer; list-style: none; font-size: 0.85rem; font-weight: 600; color: var(--coral-text);
@@ -542,13 +550,15 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .entry-req[open] summary .chevron { transform: rotate(180deg); }
 .entry-req-note { font-weight: 500; color: var(--text-muted); font-size: 0.78rem; }
 .entry-req p { font-size: 0.85rem; margin: 0.5rem 0 0; }
-.course-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 0.25rem; }
+.course-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: auto; padding-top: 0.25rem; }
 .course-actions .btn { align-self: auto; }
 .btn-ghost-small {
   display: inline-flex; align-items: center; gap: 0.4rem; background: transparent; border: none;
   color: var(--text-muted); font: inherit; font-size: 0.85rem; font-weight: 600; cursor: pointer; padding: 0.5rem 0;
 }
 .btn-ghost-small:hover { color: var(--coral-text); }
+.filter-bar--level { margin-top: -0.75rem; align-items: center; }
+.filter-clear { margin-left: 0.25rem; }
 
 /* ============ Why McGill: staggered asymmetric grid ============ */
 #why { position: relative; overflow: hidden; }
@@ -1012,7 +1022,13 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 .modal-close { background: transparent; border: 1px solid var(--border); border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: var(--text); flex-shrink: 0; }
 .modal-meta { display: grid; gap: 0.6rem; margin: 1.25rem 0; }
 .modal-meta .row { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.9rem; border-bottom: 1px dashed var(--border); padding-bottom: 0.6rem; }
-.modal-meta .row strong { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
+.modal-meta .row strong { font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; text-align: right; }
+.modal-section-label {
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--coral-text); margin: 1.5rem 0 0.5rem;
+}
+.modal-section-label:first-of-type { margin-top: 0; }
+#course-modal .modal-entry-req, #course-modal .modal-apply-note { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
 
 /* ============ Courses page: header-clearance for the catalogue as the page's first section ============ */
 /* On index.html, #courses used to sit well below the hero, so the header was always
