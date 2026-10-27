@@ -733,24 +733,63 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .agent-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--muted-light); font-size: 0.95rem; }
 .agent-list svg { flex-shrink: 0; margin-top: 0.2rem; color: var(--amber); }
 
-/* ============ Campus ============ */
-.campus-grid { display: grid; gap: var(--space-lg); align-items: stretch; }
-@media (min-width: 900px) { .campus-grid { grid-template-columns: 1fr 1fr; } }
+/* ============ Campus: warm ivory band + elegant contact card + large map ============ */
+/* Same soft-gradient-plus-blurred-blob technique already used on #streams, recolored
+   toward peach/terracotta and repositioned so the two sections don't read as copies. */
+#campus {
+  position: relative; overflow: hidden;
+  background: linear-gradient(170deg, #FFF8F2 0%, var(--off-white) 50%, #FDF0E6 100%);
+}
+#campus::before, #campus::after {
+  content: ""; position: absolute; z-index: 0; border-radius: 50%; pointer-events: none; filter: blur(80px);
+}
+#campus::before { width: 28rem; height: 28rem; top: -10rem; left: -10rem; background: radial-gradient(circle, rgba(199,63,34,0.08), transparent 70%); }
+#campus::after { width: 24rem; height: 24rem; bottom: -12rem; right: -8rem; background: radial-gradient(circle, rgba(178,58,30,0.07), transparent 70%); }
+#campus .container { position: relative; z-index: 1; }
+
+.campus-grid { display: grid; gap: var(--space-md); align-items: stretch; }
+.campus-intro { grid-column: 1 / -1; max-width: 62ch; margin-bottom: 0.25rem; }
+.campus-intro h2 em { font-style: normal; color: var(--coral-text); }
+.campus-intro p { color: var(--text-muted); margin-bottom: 0; }
+@media (min-width: 900px) {
+  .campus-grid { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
+  .campus-intro { grid-column: 1 / -1; }
+  .campus-facts { grid-column: 1; }
+  .map-embed { grid-column: 2; }
+}
+
 .campus-facts {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
   padding: var(--space-md); display: flex; flex-direction: column;
+  box-shadow: 0 24px 56px -32px rgba(15,17,30,0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
-.campus-facts .btn { margin-top: auto; align-self: flex-start; }
+.campus-facts:hover { transform: translateY(-3px); box-shadow: 0 28px 64px -28px rgba(15,17,30,0.28); }
+.campus-facts .btn { margin-top: 1.75rem; align-self: flex-start; }
+.campus-fact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.campus-fact-list li { display: flex; align-items: flex-start; gap: 1rem; }
+.campus-fact-icon {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 50%; background: rgba(199,63,34,0.1); color: var(--coral-text);
+}
+.campus-fact-body { display: flex; flex-direction: column; gap: 0.2rem; }
+.campus-fact-label { font-weight: 600; color: var(--text-muted); font-size: 0.82rem; }
+.campus-fact-value { font-weight: 600; font-size: 0.98rem; letter-spacing: 0.01em; }
+a.campus-fact-link { color: var(--text); text-decoration: none; }
+a.campus-fact-link:hover { color: var(--coral-text); text-decoration: underline; }
+.campus-directions { display: inline-flex; align-items: center; gap: 0.5rem; }
+.campus-directions svg { transition: transform 0.2s ease; flex-shrink: 0; }
+.campus-directions:hover svg { transform: translateX(4px); }
+@media (prefers-reduced-motion: reduce) { .campus-directions:hover svg { transform: none; } }
+.campus-closing { margin: 1rem 0 0; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
+
 .map-embed {
-  height: 100%; min-height: 320px; border-radius: var(--radius-card); border: 1px solid var(--border);
-  overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35);
+  height: 100%; min-height: 360px; border-radius: calc(var(--radius-card) + 6px); border: 1px solid var(--border);
+  overflow: hidden; box-shadow: 0 24px 56px -32px rgba(15,17,30,0.3);
+  transition: box-shadow 0.25s ease;
 }
-.map-embed iframe { width: 100%; height: 100%; border: 0; }
-.campus-facts dl { display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.25rem; margin: 1.5rem 0; }
-.campus-facts dt { font-weight: 600; color: var(--text-muted); font-size: 0.85rem; }
-.campus-facts dd a { color: var(--coral-text); text-decoration: none; font-weight: 600; }
-.campus-facts dd a:hover { text-decoration: underline; }
-.campus-facts dd { margin: 0; font-family: var(--font-mono); font-weight: 600; font-size: 0.9rem; letter-spacing: 0.03em; font-variant-numeric: tabular-nums; }
+.map-embed:hover { box-shadow: 0 28px 64px -28px rgba(15,17,30,0.36); }
+.map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* ============ FAQ ============ */
 .faq-list { display: grid; gap: 0.9rem; max-width: 760px; }
