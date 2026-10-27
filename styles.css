@@ -357,51 +357,77 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .rail-stop h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
 .rail-stop p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
 
-/* ============ Streams: premium image-card grid ============ */
-/* Wider, shallower section: a dedicated content width (not the sitewide 1200px
-   .container, which every other section keeps) plus a soft gradient + two large,
-   low-opacity blurred coral blobs stand in for the previous flat ivory fill. */
+/* ============ Streams: premium cream-to-peach band + elegant card grid ============ */
+/* Explicit client-specified palette for this section only (close to but distinct from
+   --coral/--off-white, used here verbatim rather than redefining those sitewide tokens):
+   #FFF8EF warm ivory, #FCE5D5 soft peach, #10243A deep navy, #D94F2B terracotta accent.
+   `isolation: isolate` gives this section its own stacking context so the decorative
+   layers below are guaranteed to stay within it -- paired with non-negative z-index
+   throughout (0 for decoration, 1 for real content) rather than z-index:-1, which can
+   otherwise escape the section's own stacking context and render behind the page. */
 #streams {
-  position: relative; overflow: hidden;
+  position: relative; overflow: hidden; isolation: isolate;
   padding-top: clamp(2.5rem, 2rem + 2vw, 3.5rem); padding-bottom: clamp(2.5rem, 2rem + 2vw, 3.5rem);
-  background: linear-gradient(180deg, #FFFDF8 0%, var(--off-white) 55%, #FBF4EE 100%);
+  background: linear-gradient(165deg, #FFF8EF 0%, #FCE5D5 55%, #FFF8EF 100%);
 }
-#streams::before, #streams::after {
-  content: ""; position: absolute; z-index: 0; border-radius: 50%; pointer-events: none;
-  filter: blur(70px);
+/* Upper-right: a bold glow with the oversized outlined "05" (five streams) centered in
+   it -- combines the brief's "curved shape" and "outlined 05" into one decorative layer.
+   Verified visible (not just theoretically present) by rendering this at these exact
+   size/opacity/blur values before shipping -- see DESIGN.md. */
+#streams::before {
+  content: "05"; position: absolute; z-index: 0; pointer-events: none; user-select: none;
+  top: -10rem; right: -8rem; width: 34rem; height: 34rem; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-weight: 600; line-height: 1;
+  font-size: clamp(7rem, 4rem + 11vw, 15rem);
+  color: rgba(16,36,58,0.07); -webkit-text-stroke: 1.5px rgba(217,79,43,0.32);
+  background: radial-gradient(circle, rgba(217,79,43,0.3) 0%, rgba(217,79,43,0.08) 55%, transparent 75%);
+  filter: blur(1px);
 }
-#streams::before { width: 30rem; height: 30rem; top: -14rem; right: -8rem; background: radial-gradient(circle, rgba(178,58,30,0.09), transparent 70%); }
-#streams::after { width: 26rem; height: 26rem; bottom: -13rem; left: -9rem; background: radial-gradient(circle, rgba(178,58,30,0.06), transparent 70%); }
+/* Lower-left: the matching bold curve, no numeral. */
+#streams::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
+  width: 34rem; height: 34rem; bottom: -15rem; left: -13rem;
+  background: radial-gradient(circle, rgba(217,79,43,0.28) 0%, rgba(217,79,43,0.07) 55%, transparent 75%);
+  filter: blur(20px);
+}
 #streams .container { max-width: 1400px; position: relative; z-index: 1; }
-.streams-head {
-  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem 2rem;
-  max-width: none; margin-bottom: clamp(1.75rem, 1.4rem + 1.5vw, 2.5rem);
+
+.streams-head { position: relative; z-index: 1; max-width: none; margin-bottom: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem); }
+/* Soft radial glow behind the heading -- the brief's "glow behind the heading", separate
+   from the two corner curves above. */
+.streams-head::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; inset: -20% -6% -35%;
+  background: radial-gradient(55% 70% at 15% 40%, rgba(217,79,43,0.1), transparent 72%);
+  filter: blur(26px);
 }
-.streams-head-text { max-width: 62ch; }
+.streams-head-text { position: relative; z-index: 1; max-width: 62ch; }
 .streams-head-text::before {
   content: ""; display: block; width: 56px; height: 3px; border-radius: 2px;
-  background: var(--coral); margin-bottom: 1.25rem;
+  background: #D94F2B; margin-bottom: 1.25rem;
 }
-/* Oversized outlined numeral -- an editorial flourish that now fills the extra width the
-   wider container opens up beside the heading, rather than overlapping it. Decorative
-   only (aria-hidden), so no loss of information if it never renders; -webkit-text-stroke
-   degrades to its low-opacity fill where unsupported. */
-.streams-head-mark {
-  display: none; flex-shrink: 0; line-height: 1;
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(4.5rem, 2rem + 9vw, 10rem);
-  color: rgba(15,23,42,0.05); /* mirrors --charcoal (#0F172A) at low opacity */
-  -webkit-text-stroke: 1.5px rgba(178,58,30,0.22);
-  pointer-events: none; user-select: none;
+.streams-head-text h2 em { font-style: normal; color: #D94F2B; }
+
+.stream-grid { position: relative; z-index: 1; display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+/* Soft glow behind the card row, plus a thin translucent ring for extra depth -- the
+   brief's "glow behind the cards" and "thin translucent orange curves or rings". */
+.stream-grid::before {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; inset: -6% -4%; border-radius: 56px;
+  background: radial-gradient(60% 65% at 50% 45%, rgba(217,79,43,0.1), transparent 72%);
+  filter: blur(30px);
 }
-@media (min-width: 760px) { .streams-head-mark { display: block; } }
-.stream-grid { display: grid; gap: 1.5rem; grid-template-columns: 1fr; }
+.stream-grid::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
+  width: 18rem; height: 18rem; top: -3.5rem; left: 10%;
+  border: 1px solid rgba(217,79,43,0.22); background: rgba(252,229,213,0.2);
+}
 @media (min-width: 640px) { .stream-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .stream-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1360px) { .stream-grid { grid-template-columns: repeat(5, 1fr); gap: 1.25rem; } }
 .stream-card {
   all: unset; cursor: pointer; box-sizing: border-box; display: flex; flex-direction: column;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+  position: relative; z-index: 1;
+  background: var(--surface); border: 1px solid rgba(217,79,43,0.14); border-radius: var(--radius-card);
   overflow: hidden; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 .stream-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px rgba(20,23,43,0.3); }
