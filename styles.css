@@ -338,24 +338,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   .advisory-ctas { grid-column: auto; justify-self: end; }
 }
 
-/* ============ Transit rail (signature element; vertical variant = Pathway) ============ */
-.transit-rail { position: relative; }
-.transit-rail .rail-line {
-  position: absolute; background: var(--border); z-index: 0;
-}
-.rail-vertical .rail-line { left: 28px; top: 28px; bottom: 28px; width: 3px; }
-.rail-stops { position: relative; z-index: 1; display: grid; gap: var(--space-md); }
-.rail-stop { display: flex; flex-direction: column; gap: 0.75rem; }
-.rail-vertical .rail-stop { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
-.rail-vertical .rail-stop > div { flex: 1; min-width: 0; }
-.rail-dot {
-  width: 56px; height: 56px; border-radius: 50%; background: var(--surface); border: 3px solid var(--coral-text);
-  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  font-family: var(--font-mono); font-weight: 700; letter-spacing: 0.02em; color: var(--coral-text);
-}
-.rail-dot svg { width: 26px; height: 26px; }
-.rail-stop h3 { font-size: 1.1rem; margin-bottom: 0.3rem; }
-.rail-stop p { font-size: 0.92rem; color: var(--text-muted); margin-bottom: 0; }
 
 /* ============ Streams: premium cream-to-peach band + elegant card grid ============ */
 /* Explicit client-specified palette for this section only (close to but distinct from
@@ -708,57 +690,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
 .life-copy li { color: var(--text-muted); }
 
-/* ============ Pathway ============ */
-#pathway { padding: 4rem 0; }
-#pathway .section-head { margin-bottom: 2.25rem; }
-#pathway .rail-stops { gap: 1.5rem; }
-#pathway .rail-stop > div { max-width: 62ch; }
-#pathway .readiness { max-width: 800px; }
-.pathway-note { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
-
-.pathway-split { display: grid; gap: var(--space-lg); margin-bottom: var(--space-lg); }
-@media (min-width: 900px) { .pathway-split { grid-template-columns: 7fr 5fr; align-items: start; } }
-.pathway-side {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
-  padding: var(--space-md);
-}
-@media (min-width: 900px) { .pathway-side { position: sticky; top: calc(var(--header-h) + 1.5rem); } }
-.pathway-side-photo {
-  margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) 1.25rem;
-  aspect-ratio: 16/10; overflow: hidden; border-radius: var(--radius-card) var(--radius-card) 0 0;
-}
-.pathway-side-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.pathway-side h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem; }
-.pathway-side p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
-.pathway-side-ctas { display: flex; flex-direction: column; gap: 0.75rem; }
-.pathway-side-ctas .btn { width: 100%; justify-content: center; }
-
-.rail-more { margin-top: 0.4rem; }
-.rail-more summary {
-  cursor: pointer; list-style: none; font-size: 0.82rem; font-weight: 600; color: var(--coral-text);
-  display: inline-flex; align-items: center; gap: 0.35rem;
-}
-.rail-more summary::-webkit-details-marker { display: none; }
-.rail-more summary .chevron { transition: transform 0.2s ease; }
-.rail-more[open] summary .chevron { transform: rotate(180deg); }
-.rail-more p { font-size: 0.85rem; margin: 0.5rem 0 0; }
-
-.readiness {
-  margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius-card); padding: var(--space-md);
-  scroll-margin-top: calc(var(--header-h) + 16px);
-}
-.readiness h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
-.readiness > p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.25rem; }
-.readiness-list { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.75rem; }
-.readiness-list label {
-  display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer; font-size: 0.95rem;
-}
-.readiness-list input[type="checkbox"] { width: 20px; height: 20px; flex-shrink: 0; margin-top: 0.1rem; accent-color: var(--coral); }
-.readiness-progress { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-.readiness-bar { flex: 1; height: 8px; border-radius: 999px; background: var(--border); overflow: hidden; }
-.readiness-bar span { display: block; height: 100%; width: 0%; background: var(--coral); border-radius: 999px; transition: width 0.3s ease; }
-.readiness-progress span#readiness-count { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
 
 /* ============ Agents ============ */
 .agents-band .section-eyebrow { color: var(--amber); }
