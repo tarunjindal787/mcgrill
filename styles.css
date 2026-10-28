@@ -682,21 +682,11 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 /* Scoped literal palette, deliberately not unified with the sitewide --coral tokens --
    this brief specified its own values explicitly (same family as the Student
    Testimonials palette just below: #ED762D orange, #101C32 navy, #69717D muted text).
-   See DESIGN.md. All custom classes are prefixed `student-experience-`/`student-life-`
-   and scoped under their own section IDs. */
-#student-experience, #student-life { background: #F7F0E5; }
-#student-experience .section-eyebrow, #student-life .section-eyebrow { color: #ED762D; margin-bottom: 1rem; }
-#student-experience .container, #student-life .container { max-width: 1440px; }
-
-/* Student Experience and Student Life share one background and read as a single
-   continuous block (the brief's own framing: Student Life is a nested subsection
-   of the same "experience", not a separate one) -- so the seam between them gets
-   a small, deliberate gap instead of the sitewide 96px top+96px bottom stacking
-   into an unexplained ~192px blank strip of identical cream. Each section keeps
-   its own full padding on the *outer* edge, where the neighbour is genuinely a
-   different section (Why McGill above, the dark Settling-in section below). */
-#student-experience { padding-bottom: 1rem; }
-#student-life { padding-top: 0.75rem; }
+   See DESIGN.md. All custom classes are prefixed `student-experience-` and scoped
+   under this section's own ID. */
+#student-experience { background: #F7F0E5; }
+#student-experience .section-eyebrow { color: #ED762D; margin-bottom: 1rem; }
+#student-experience .container { max-width: 1440px; }
 
 .student-experience-grid { display: grid; gap: 2rem; }
 @media (min-width: 900px) { .student-experience-grid { grid-template-columns: 0.75fr 1fr; align-items: center; } }
@@ -719,17 +709,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .student-experience-feature-icon svg { width: 19px; height: 19px; }
 .student-experience-feature h3 { font-size: 1.05rem; margin: 0; color: #101C32; }
 .student-experience-feature p { font-size: 0.9rem; color: #69717D; margin: 0; }
-
-.student-experience-cta {
-  display: inline-flex; align-items: center; gap: 0.6rem; height: 52px; padding: 0 1.75rem;
-  background: #ED762D; color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none;
-  border-radius: 10px; transition: background 0.2s ease, transform 0.2s ease;
-}
-.student-experience-cta:hover { background: #D4621E; transform: translateY(-3px); }
-.student-experience-cta:focus-visible { outline: 3px solid #101C32; outline-offset: 3px; }
-.student-experience-cta svg { transition: transform 0.2s ease; }
-.student-experience-cta:hover svg { transform: translateX(3px); }
-@media (prefers-reduced-motion: reduce) { .student-experience-cta:hover { transform: none; } }
 
 /* Three-image collage: a large main photo spans the full height of the right
    column, which stacks two supporting photos beside it. */
@@ -757,24 +736,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
     grid-column: 1; grid-row: auto; aspect-ratio: 4 / 3;
   }
 }
-
-.student-life-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
-@media (min-width: 640px) { .student-life-grid { grid-template-columns: 1fr 1fr; } }
-@media (min-width: 1100px) { .student-life-grid { grid-template-columns: repeat(4, 1fr); } }
-.student-life-card {
-  background: #FFFDF9; border: 1px solid #E9DED0; border-radius: 16px; overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.student-life-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -18px rgba(16,28,50,0.25); }
-@media (prefers-reduced-motion: reduce) { .student-life-card:hover { transform: none; } }
-.student-life-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
-.student-life-card-body { padding: 1.1rem 1.25rem 1.4rem; }
-.student-life-card-label {
-  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
-  font-size: 0.72rem; font-weight: 700; color: #ED762D;
-}
-.student-life-card-body h3 { font-size: 1.1rem; margin: 0.35rem 0 0.4rem; color: #101C32; }
-.student-life-card-body p { font-size: 0.9rem; color: #69717D; margin: 0; }
 
 /* ============ Student testimonials (marquee) ============ */
 /* Scoped literal palette for this section only, per its own brief: #101C32 navy,
