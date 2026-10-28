@@ -548,8 +548,13 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    reasoning as those two: each brief gave its own exact hex values independently).
    #FBF6EE ivory bg, #FFFDF9 card bg, #101C32 navy, #252B36 charcoal, #687080 muted,
    #ED762D orange, #F3A184 peach, #E9DED0 border. See DESIGN.md. */
-.why-section { position: relative; overflow: hidden; background: #FBF6EE; }
-.why-section .container { position: relative; z-index: 1; }
+/* Overrides the sitewide `section { padding: var(--space-xl) 0 }` (96px) -- this
+   section's own compact spacing brief replaces it outright, rather than stacking
+   on top of it via extra padding on the inner grids (that stacking was the actual
+   cause of the reported excess space above the heading: 96px + 40px of redundant
+   .why-intro-grid padding-top before any text even started). */
+.why-section { position: relative; overflow: hidden; background: #FBF6EE; padding: 2.5rem 0; }
+.why-section .container { position: relative; z-index: 1; max-width: 1320px; }
 
 /* Oversized, low-contrast decorative blob -- purely atmospheric, never obscures content */
 .why-shape {
@@ -558,8 +563,8 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   border-radius: 50%; pointer-events: none; z-index: 0;
 }
 
-.why-intro-grid { display: grid; gap: 2.5rem; padding: 2.5rem 0 1.25rem; }
-@media (min-width: 900px) { .why-intro-grid { grid-template-columns: 2fr 3fr; align-items: center; gap: 3.5rem; } }
+.why-intro-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 900px) { .why-intro-grid { grid-template-columns: 0.72fr 1fr; align-items: center; } }
 
 .why-eyebrow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 1.1rem; }
 .why-eyebrow-text { margin-bottom: 0; color: #ED762D; }
@@ -586,9 +591,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   width: 100%; aspect-ratio: 1.82 / 1; object-fit: cover; object-position: center;
   border-radius: 16px; display: block;
 }
+@media (min-width: 900px) { .why-intro-media img { aspect-ratio: unset; height: 350px; } }
 .why-handwritten {
-  position: absolute; top: -34px; right: 6%; margin: 0; text-align: center; line-height: 1.15;
-  font-family: 'Caveat', cursive; font-size: 2.1rem; color: #8A929D; transform: rotate(-4deg);
+  position: absolute; top: -28px; right: 6%; margin: 0; text-align: center; line-height: 1.15;
+  font-family: 'Caveat', cursive; font-size: 1.85rem; color: #8A929D; transform: rotate(-4deg);
   pointer-events: none;
 }
 .why-handwritten::after {
@@ -597,31 +603,31 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 }
 @media (max-width: 899px) { .why-handwritten { display: none; } }
 
-.why-cards-grid { display: grid; grid-template-columns: 1fr; gap: 19px; padding: 1.25rem 0 3.5rem; }
+.why-cards-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin-top: 1.25rem; }
 @media (min-width: 480px) { .why-cards-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1200px) { .why-cards-grid { grid-template-columns: repeat(4, 1fr); } }
 
 .why-feature-card {
   display: flex; flex-direction: column; background: #FFFDF9; border: 1px solid #E9DED0;
-  border-radius: 14px; overflow: hidden; padding: 22px 22px 0;
+  border-radius: 13px; overflow: hidden; padding: 20px 20px 0;
 }
 .why-feature-icon {
-  width: 66px; height: 66px; border-radius: 50%; flex-shrink: 0; margin-bottom: 1rem;
+  width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; margin-bottom: 0.85rem;
   background: rgba(243,161,132,0.16); border: 1px solid rgba(237,118,45,0.3); color: #ED762D;
   display: flex; align-items: center; justify-content: center;
 }
-.why-feature-icon svg { width: 33px; height: 33px; }
-.why-feature-card h3 { font-size: 1.4rem; line-height: 1.2; color: #101C32; margin-bottom: 0.5rem; }
-.why-feature-card > p { color: #687080; font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.9rem; flex: 1; }
+.why-feature-icon svg { width: 30px; height: 30px; }
+.why-feature-card h3 { font-size: 1.4rem; line-height: 1.2; color: #101C32; margin-bottom: 0.45rem; }
+.why-feature-card > p { color: #687080; font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.8rem; flex: 1; }
 .why-feature-link {
-  display: inline-flex; align-items: center; gap: 0.4rem; width: fit-content; margin-bottom: 1.1rem;
+  display: inline-flex; align-items: center; gap: 0.4rem; width: fit-content; margin-bottom: 0.95rem;
   color: #ED762D; font-weight: 600; font-size: 0.98rem; text-decoration: none;
 }
 .why-feature-link svg { transition: transform 0.2s ease; }
 .why-feature-link:hover svg { transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) { .why-feature-link:hover svg { transform: none; } }
-.why-feature-photo { margin: 0 -22px 0; }
-.why-feature-photo img { display: block; width: 100%; height: 198px; object-fit: cover; transition: transform 0.3s ease; }
+.why-feature-photo { margin: 0 -20px 0; }
+.why-feature-photo img { display: block; width: 100%; height: 160px; object-fit: cover; transition: transform 0.3s ease; }
 .why-feature-card:hover .why-feature-photo img { transform: scale(1.03); }
 @media (prefers-reduced-motion: reduce) { .why-feature-card:hover .why-feature-photo img { transform: none; } }
 
