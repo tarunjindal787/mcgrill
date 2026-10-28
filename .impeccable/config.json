@@ -92,6 +92,15 @@
         ],
         "createdAt": "2026-10-26T11:07:00.165Z",
         "reason": "Agent: #courses { padding-top: calc(var(--header-h) + 2rem) } in styles.css gives over 100px top clearance, well above the 8-16px threshold -- verified directly in source, likely a static-analysis gap reading the ID override"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-10-28T06:46:48.593Z",
+        "reason": "User confirmed: requested this exact continuous-marquee testimonial pattern in two separate, highly detailed messages, specifying hover-pause, focus-pause, a real pause/resume button, and a full prefers-reduced-motion static fallback with all content still reachable -- the standard objections to marquees (no user control, content hidden) are explicitly mitigated per the user's own spec, not overlooked"
       }
     ]
   }

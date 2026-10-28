@@ -402,6 +402,48 @@
     </div>
   </section>
 
+  <!-- STUDENT TESTIMONIALS -->
+  <!-- Content note (not shown to visitors): the 5 testimonials below are placeholder/
+       example content only, per the brief that requested this section -- real quotes
+       about guitar lessons, not McGill's own Engineering/Hospitality/Business/
+       Management/English programs. Kept verbatim as instructed (exact wording, no
+       invented details, no "verified" claim on the 5.0 rating) and clearly marked here
+       so nobody mistakes them for genuine McGill feedback. Replace the TESTIMONIALS
+       array in the script below with real, approved student testimonials before this
+       section goes live for real, and update or remove the rating badge once a real,
+       verifiable rating exists. -->
+  <section id="student-testimonials" class="tone-light" aria-labelledby="testimonials-heading">
+    <div class="container student-testimonials__head">
+      <div class="student-testimonials__intro section-head reveal">
+        <span class="section-eyebrow">Student Stories</span>
+        <h2 id="testimonials-heading">Good words from real students.</h2>
+        <p>Discover what students and families have to say about their learning experiences.</p>
+      </div>
+      <div class="student-testimonials__rating reveal">
+        <span class="student-testimonials__rating-value">5.0</span>
+        <span class="student-testimonials__stars" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
+        </span>
+        <span class="student-testimonials__rating-label">Example rating<br>pending verified reviews</span>
+      </div>
+    </div>
+
+    <div class="student-testimonials__viewport-row container">
+      <button type="button" class="student-testimonials__toggle" id="testimonials-toggle" aria-pressed="false">
+        <svg class="student-testimonials__icon-pause" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1" fill="currentColor"/><rect x="14" y="5" width="4" height="14" rx="1" fill="currentColor"/></svg>
+        <svg class="student-testimonials__icon-play" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" hidden><path d="M7 5l12 7-12 7V5z" fill="currentColor"/></svg>
+        <span id="testimonials-toggle-label">Pause scrolling</span>
+      </button>
+    </div>
+    <div class="student-testimonials__viewport" id="testimonials-viewport" role="region" aria-label="Student testimonials, scrolling automatically">
+      <div class="student-testimonials__track" id="testimonials-track"><!-- populated by JS from TESTIMONIALS data --></div>
+    </div>
+  </section>
+
   <!-- AGENTS -->
   <section id="agents" class="agents-band tone-dark">
     <div class="container agents-grid">
@@ -965,6 +1007,79 @@
     var nameField = document.getElementById('f-name');
     if (nameField) nameField.focus();
   })();
+
+  /* ---------- Student testimonials marquee ----------
+     Centralized data array (see the HTML comment above this section for why these are
+     placeholder content, not real McGill feedback). Cards are built from this array, not
+     hand-duplicated markup, so updating content later means editing one array. The loop
+     is seamless because every card (including the last one in each copy) carries its own
+     trailing margin instead of a flex `gap` on the track -- two identical copies of N
+     cards-with-margin are then exactly half the track's total width each, so
+     translateX(-50%) always lands precisely at the start of the second copy, regardless
+     of card count, width, or gap value. Reduced motion gets a single, non-duplicated,
+     horizontally scrollable set instead of the animation, per prefersReducedMotion
+     (already computed in common.js). ---------- */
+  var TESTIMONIALS = [
+    { name: 'James D.', role: 'Student', quote: 'Within 4 weeks I was playing my favourite classic rock riffs!' },
+    { name: 'Michelle C.', role: 'Parent', quote: 'My daughter has progressed immensely. Worth every cent.' },
+    { name: 'Ben H.', role: 'Student', quote: 'Great focus on technique without getting bogged down in boring drills.' },
+    { name: 'James Mitchell', role: 'Student', quote: 'Great lessons! Very patient, friendly, and makes learning really enjoyable. Highly recommend!' },
+    { name: 'Emily Parker', role: 'Student', quote: 'I started with very little experience, and the whole learning process was made so much easier.' }
+  ];
+
+  function testimonialInitials(name) {
+    var parts = name.replace(/\./g, '').trim().split(/\s+/);
+    var first = parts[0] ? parts[0].charAt(0) : '';
+    var last = parts.length > 1 ? parts[parts.length - 1].charAt(0) : '';
+    return (first + last).toUpperCase();
+  }
+
+  function testimonialCardHTML(t, hidden) {
+    return (
+      '<article class="student-testimonials__card"' + (hidden ? ' aria-hidden="true"' : '') + '>' +
+        '<svg class="student-testimonials__quote" width="34" height="26" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V14.56Q0 7.28 3.78 3.64 7.56 0 13.44 0v5.6Q9.52 5.6 7.56 8.26 5.6 10.92 5.6 14.56H13.44V26H0ZM19.6 26V14.56Q19.6 7.28 23.38 3.64 27.16 0 33.04 0v5.6Q29.12 5.6 27.16 8.26 25.2 10.92 25.2 14.56H33.04V26H19.6Z"/></svg>' +
+        '<p class="student-testimonials__quote-text">' + t.quote + '</p>' +
+        '<div class="student-testimonials__profile">' +
+          '<span class="student-testimonials__avatar" aria-hidden="true">' + testimonialInitials(t.name) + '</span>' +
+          '<span class="student-testimonials__who">' +
+            '<span class="student-testimonials__name">' + t.name + '</span>' +
+            '<span class="student-testimonials__role">' + t.role + '</span>' +
+          '</span>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  var testimonialsTrack = document.getElementById('testimonials-track');
+  var testimonialsViewport = document.getElementById('testimonials-viewport');
+  var testimonialsToggle = document.getElementById('testimonials-toggle');
+  if (testimonialsTrack && testimonialsViewport) {
+    var cardsHTML = TESTIMONIALS.map(function (t) { return testimonialCardHTML(t, false); }).join('');
+    if (prefersReducedMotion) {
+      testimonialsTrack.innerHTML = cardsHTML;
+      testimonialsViewport.classList.add('student-testimonials__viewport--static');
+      if (testimonialsToggle) testimonialsToggle.hidden = true;
+    } else {
+      var dupHTML = TESTIMONIALS.map(function (t) { return testimonialCardHTML(t, true); }).join('');
+      testimonialsTrack.innerHTML = cardsHTML + dupHTML;
+      testimonialsViewport.classList.add('student-testimonials__viewport--animated');
+
+      if (testimonialsToggle) {
+        var pauseIcon = testimonialsToggle.querySelector('.student-testimonials__icon-pause');
+        var playIcon = testimonialsToggle.querySelector('.student-testimonials__icon-play');
+        var toggleLabel = document.getElementById('testimonials-toggle-label');
+        var paused = false;
+        testimonialsToggle.addEventListener('click', function () {
+          paused = !paused;
+          testimonialsViewport.classList.toggle('is-paused', paused);
+          testimonialsToggle.setAttribute('aria-pressed', paused ? 'true' : 'false');
+          pauseIcon.hidden = paused;
+          playIcon.hidden = !paused;
+          toggleLabel.textContent = paused ? 'Resume scrolling' : 'Pause scrolling';
+        });
+      }
+    }
+  }
 
 })();
 </script>
