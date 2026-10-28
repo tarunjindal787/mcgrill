@@ -631,51 +631,117 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .why-feature-card:hover .why-feature-photo img { transform: scale(1.03); }
 @media (prefers-reduced-motion: reduce) { .why-feature-card:hover .why-feature-photo img { transform: none; } }
 
-/* ============ Say Good Day to Australia: accordion + services grid ============ */
-.say-good-day { margin-top: var(--space-xl); }
-.study-tabs { display: grid; gap: 0.9rem; max-width: 820px; margin-bottom: var(--space-lg); }
-.study-tab {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border); border-radius: var(--radius-card); overflow: hidden;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
-}
-.study-tab:hover { border-color: var(--coral-text); background: rgba(255,255,255,0.08); transform: translateY(-2px); box-shadow: 0 16px 32px -20px rgba(0,0,0,0.5); }
-.study-tab[open] { border-color: var(--coral-text); }
-.study-tab summary {
-  cursor: pointer; list-style: none; padding: 1.1rem 1.4rem; font-weight: 700; font-size: 1.02rem; color: var(--text);
-  display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px;
-}
-.study-tab summary::-webkit-details-marker { display: none; }
-.study-tab summary .chevron { transition: transform 0.2s ease; flex-shrink: 0; color: var(--coral-text); }
-.study-tab[open] summary .chevron { transform: rotate(180deg); }
-.study-tab-body { padding: 0 1.4rem 1.4rem; }
-.study-tab-body p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 0.9rem; }
-.study-tab-badge { margin-bottom: 0.9rem; }
-.study-tab-link {
-  display: inline-flex; align-items: center; gap: 0.4rem; color: var(--coral-text); font-weight: 600;
-  font-size: 0.92rem; text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s ease;
-}
-.study-tab-link:hover { border-color: var(--coral-text); }
+/* ============ Say Good Day to Australia / Practical Guidance ============ */
+/* Scoped literal palette, per this brief's own exact table -- a refined dark
+   navy distinct from the sitewide OLED tokens (#0B0F17 etc), same reasoning as
+   every other section's own literal palette in this project: the brief gave
+   exact hex values, so they're used as given rather than forced onto the
+   existing dark tokens. #0D1520 main bg, #111D2A secondary bg, #141F2D card/
+   panel bg, #F6F3EE main text, #B7C0CB secondary text, #8995A4 muted text,
+   #F47732 accent, #FF8A45 hover accent. See DESIGN.md. */
+#settling-in { background: #0D1520; color: #F6F3EE; padding: 3.5rem 0 1rem; }
+#practical-guidance { background: #111D2A; color: #F6F3EE; border-top: 1px solid rgba(222,231,241,0.14); padding: 2.25rem 0 2.75rem; }
+#settling-in .container, #practical-guidance .container { max-width: 1360px; }
+#settling-in p, #practical-guidance p { color: #B7C0CB; }
 
-.services-grid { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.service-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
-  padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+.settling-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 900px) { .settling-grid { grid-template-columns: 1.17fr 1fr; align-items: start; } }
+
+.settling-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
+.settling-eyebrow { color: #F47732; margin-bottom: 0; }
+.settling-eyebrow-line { width: 48px; height: 2px; background: #F47732; flex-shrink: 0; }
+
+#settling-in-heading {
+  font-size: clamp(2.375rem, 1.3rem + 4.2vw, 4.75rem); line-height: 1.05; color: #F6F3EE; margin-bottom: 1.1rem;
 }
-.service-card:hover {
-  transform: translateY(-4px); border-color: var(--coral-text);
-  box-shadow: 0 16px 32px -18px rgba(0,0,0,0.5);
+#settling-in-heading em { color: #F47732; font-style: normal; }
+.settling-copy > p { font-size: 1.15rem; line-height: 1.5; max-width: 500px; margin-bottom: 1.75rem; }
+
+.settling-panel {
+  display: flex; align-items: center; gap: 1.1rem; background: #141F2D;
+  border: 1px solid rgba(222,231,241,0.16); border-radius: 16px; padding: 1.4rem;
+  box-shadow: 0 16px 32px -24px rgba(0,0,0,0.6);
+  transition: transform 0.25s ease; transform-style: preserve-3d; will-change: transform;
 }
-.service-card-icon {
-  width: 44px; height: 44px; border-radius: 50%; background: rgba(199,63,34,0.12);
-  display: flex; align-items: center; justify-content: center; color: var(--coral-text); flex-shrink: 0;
-  transition: transform 0.25s ease, background 0.25s ease;
+.settling-panel-icon {
+  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; color: #F47732;
+  background: rgba(244,119,50,0.12); display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 14px -6px rgba(244,119,50,0.4), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform 0.2s ease;
 }
-.service-card:hover .service-card-icon { transform: scale(1.1); background: var(--coral); color: #fff; }
-.service-card-icon svg { width: 22px; height: 22px; }
-.service-card h3 { font-size: 1.05rem; margin-bottom: 0; color: var(--text); }
-.service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
+.settling-panel-icon svg { width: 26px; height: 26px; }
+.settling-panel:hover .settling-panel-icon { transform: translateY(-2px); }
+@media (prefers-reduced-motion: reduce) { .settling-panel:hover .settling-panel-icon { transform: none; } }
+.settling-panel-body { flex: 1; min-width: 0; }
+.settling-panel-body h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: #F6F3EE; }
+.settling-panel-body p { font-size: 0.9rem; margin-bottom: 0.6rem; }
+.settling-panel-cta {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; color: #F47732;
+  border: 1px solid rgba(244,119,50,0.38); display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.settling-panel-cta:hover { background: #F47732; color: #0D1520; transform: translateX(2px); }
+.settling-panel-cta:focus-visible { outline: 3px solid #F47732; outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { .settling-panel-cta:hover { transform: none; } }
+
+.settling-resources { display: flex; flex-direction: column; }
+@media (min-width: 900px) { .settling-resources { border-left: 1px solid rgba(222,231,241,0.14); padding-left: 2rem; } }
+.settling-resource {
+  display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 1rem;
+  padding: 1.5rem 0; border-bottom: 1px solid rgba(222,231,241,0.14);
+  text-decoration: none; color: inherit; transition: background 0.2s ease;
+}
+.settling-resource:last-child { border-bottom: none; }
+.settling-resource:hover { background: rgba(244,119,50,0.04); }
+.settling-resource:focus-visible { outline: 3px solid #F47732; outline-offset: -3px; }
+.settling-resource-num { font-family: var(--font-mono); font-weight: 700; font-size: 0.8rem; color: #F47732; }
+.settling-resource-icon {
+  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; color: #F47732;
+  background: rgba(244,119,50,0.12); display: flex; align-items: center; justify-content: center;
+}
+.settling-resource-icon svg { width: 22px; height: 22px; }
+.settling-resource-body h3 {
+  font-size: 1.35rem; margin-bottom: 0.2rem; color: #F6F3EE; transition: color 0.2s ease;
+}
+.settling-resource-body p { font-size: 0.95rem; margin-bottom: 0; }
+.settling-resource:hover .settling-resource-body h3 { color: #FF8A45; }
+.settling-resource-arrow {
+  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; color: #F47732;
+  border: 1px solid rgba(244,119,50,0.38); display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s ease;
+}
+.settling-resource-arrow svg { transition: transform 0.2s ease; }
+.settling-resource:hover .settling-resource-arrow svg { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .settling-resource:hover .settling-resource-arrow svg { transform: none; } }
+
+.practical-guidance-head { margin-bottom: 2rem; }
+.practical-guidance-eyebrow { color: #F47732; }
+#practical-guidance-heading { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.125rem); line-height: 1.1; color: #F6F3EE; margin-bottom: 0; }
+#practical-guidance-heading em { color: #F47732; font-style: normal; }
+
+.practical-guidance-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 760px) { .practical-guidance-grid { grid-template-columns: repeat(3, 1fr); gap: 0; } }
+.practical-guidance-item {
+  display: block; text-decoration: none; color: inherit; padding: 0 0 0 0;
+}
+@media (min-width: 760px) {
+  .practical-guidance-item { padding: 0 2rem; }
+  .practical-guidance-item:not(:first-child) { border-left: 1px solid rgba(222,231,241,0.14); }
+}
+.practical-guidance-icon {
+  width: 52px; height: 52px; border-radius: 50%; margin-bottom: 1rem; color: #F47732;
+  background: rgba(244,119,50,0.12); display: flex; align-items: center; justify-content: center;
+}
+.practical-guidance-icon svg { width: 24px; height: 24px; }
+.practical-guidance-item h3 { font-size: 1.2rem; margin-bottom: 0.4rem; color: #F6F3EE; transition: color 0.2s ease; }
+.practical-guidance-item p { font-size: 0.95rem; margin-bottom: 0; }
+.practical-guidance-item:hover h3 { color: #FF8A45; }
+
+@media (max-width: 899px) {
+  .settling-panel { flex-wrap: wrap; }
+  .settling-resource { grid-template-columns: auto auto 1fr; }
+  .settling-resource-arrow { display: none; }
+}
 
 
 /* ============ Student Experience & Student Life ============ */
@@ -1328,12 +1394,6 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
   min-height: 44px;
 }
 .faq-toggle:hover { background: var(--coral); color: #fff; border-color: var(--coral); transform: translateY(-1px); }
-
-/* ── Service cards on dark background ───────────────────────── */
-.service-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); }
-.service-card h3 { color: var(--white); }
-.service-card p { color: rgba(255,255,255,0.72); }
-.service-card-icon { background: rgba(199,63,34,0.18); color: var(--coral-text-dark); }
 
 /* ── Footer: Powered by JobGen.AI ───────────────────────────── */
 .powered-by {

@@ -63,6 +63,29 @@ function attachTilt(card) {
   });
 }
 
+/* ---------- Restrained pointer-tilt (fine-pointer only) ----------
+   Deliberately not attachTilt above: this is for a single informational panel,
+   not a hover card, so it needs a much smaller max rotation (2deg, not 4), no
+   lift/glow class, and a steeper perspective (1000px) per the brief it was
+   built for. Caller passes the element and its own max-degree cap. */
+function attachSubtleTilt(el, maxDeg) {
+  maxDeg = maxDeg || 2;
+  var bounds = null;
+  el.addEventListener('mouseenter', function () { bounds = el.getBoundingClientRect(); });
+  el.addEventListener('mousemove', function (e) {
+    if (!bounds) bounds = el.getBoundingClientRect();
+    var px = (e.clientX - bounds.left) / bounds.width;
+    var py = (e.clientY - bounds.top) / bounds.height;
+    var rotateX = (0.5 - py) * (maxDeg * 2);
+    var rotateY = (px - 0.5) * (maxDeg * 2);
+    el.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+  });
+  el.addEventListener('mouseleave', function () {
+    el.style.transform = '';
+    bounds = null;
+  });
+}
+
 /* ---------- Header height sync (keeps page content clear of the fixed header) ---------- */
 var siteHeader = document.querySelector('.site-header');
 if (siteHeader) {
