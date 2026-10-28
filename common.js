@@ -68,8 +68,9 @@ function attachTilt(card) {
    not a hover card, so it needs a much smaller max rotation (2deg, not 4), no
    lift/glow class, and a steeper perspective (1000px) per the brief it was
    built for. Caller passes the element and its own max-degree cap. */
-function attachSubtleTilt(el, maxDeg) {
+function attachSubtleTilt(el, maxDeg, liftPx) {
   maxDeg = maxDeg || 2;
+  var lift = liftPx ? ' translateY(-' + liftPx + 'px)' : '';
   var bounds = null;
   el.addEventListener('mouseenter', function () { bounds = el.getBoundingClientRect(); });
   el.addEventListener('mousemove', function (e) {
@@ -78,7 +79,7 @@ function attachSubtleTilt(el, maxDeg) {
     var py = (e.clientY - bounds.top) / bounds.height;
     var rotateX = (0.5 - py) * (maxDeg * 2);
     var rotateY = (px - 0.5) * (maxDeg * 2);
-    el.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+    el.style.transform = 'perspective(1000px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)' + lift;
   });
   el.addEventListener('mouseleave', function () {
     el.style.transform = '';

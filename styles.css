@@ -154,6 +154,12 @@ section { padding: var(--space-xl) 0; scroll-margin-top: calc(var(--header-h) + 
   text-decoration: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, border-color 0.15s ease, backdrop-filter 0.15s ease;
 }
+/* Generic arrow-hover for any .btn that contains an icon -- previously reinvented per
+   component (.why-cta svg, .campus-directions svg, etc.); consolidated here so every
+   button gets the same small, consistent arrow translation without needing its own rule. */
+.btn svg { transition: transform 0.2s ease; }
+.btn:hover svg { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .btn:hover svg { transform: none; } }
 .btn-primary { background: var(--coral); color: #fff; }
 .btn-primary:hover {
   background: var(--coral-deep); transform: translateY(-3px);
@@ -213,6 +219,7 @@ nav.main-nav ul { display: flex; gap: 1.5rem; list-style: none; margin: 0; paddi
 nav.main-nav a {
   text-decoration: none; font-weight: 500; font-size: 0.9rem; color: rgba(255,255,255,0.85);
   padding: 0.4rem 0; border-bottom: 2px solid transparent; text-shadow: 0 1px 6px rgba(0,0,0,0.65);
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .header-actions { display: flex; align-items: center; gap: 0.75rem; }
@@ -245,7 +252,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   overflow: hidden;
   background: var(--oled); scroll-snap-type: x mandatory;
 }
-.hero-video-wrap { position: absolute; inset: 0; background: var(--oled); }
+.hero-video-wrap {
+  position: absolute; inset: 0; background: var(--oled);
+  transition: transform 0.3s ease; will-change: transform;
+}
 /* Video itself carries no filter/blur -- stays crisp. A lighter gradient (not a backdrop-blur)
    is the only thing between it and the viewer, just enough for white text to stay legible. */
 #hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -276,7 +286,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   border-radius: var(--radius-pill); padding: 0.45rem 1rem 0.45rem 0.65rem;
   background: rgba(255,255,255,0.08); backdrop-filter: blur(8px);
 }
-.hero-ai-disclosure { font-size: 0.78rem; color: rgba(255,255,255,0.78); max-width: 52ch; margin: 1.25rem 0 0; text-shadow: 0 1px 6px rgba(0,0,0,0.6); }
 .hero h1 {
   font-size: var(--fs-hero); max-width: 16ch; color: #fff; letter-spacing: -0.01em;
   text-shadow: 0 2px 16px rgba(0,0,0,0.6);

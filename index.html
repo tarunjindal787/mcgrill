@@ -61,7 +61,6 @@
   <div class="container header-inner">
     <a href="#top" class="brand">
       <img src="photos/logo.png" alt="McGill Institute Australia" class="brand-logo">
-      <small class="brand-subtext">RTO 45906 &middot; Parramatta NSW</small>
     </a>
     <nav class="main-nav" aria-label="Primary">
       <ul>
@@ -110,11 +109,15 @@
         <p class="hero-lede hero-kinetic">Vocational training built for <em>real careers</em>. Right in Parramatta.</p>
 
         <div class="hero-ctas hero-kinetic">
-          <a href="#enquiry" class="btn btn-primary">Enquire Now</a>
-          <a href="courses.html" class="btn btn-ghost-inverse" id="hero-explore-cta">Explore Courses</a>
+          <a href="#enquiry" class="btn btn-primary">
+            Enquire Now
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="courses.html" class="btn btn-ghost-inverse" id="hero-explore-cta">
+            Explore Courses
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
         </div>
-
-        <p class="hero-ai-disclosure hero-kinetic">Background video is AI-generated and illustrative only, not actual footage of our campus, students or facilities.</p>
       </div>
     </div>
     <div class="hero-scroll-cue" aria-hidden="true">Scroll</div>
@@ -815,6 +818,44 @@
   if (fineHover && !prefersReducedMotion) {
     var settlingPanel = document.getElementById('settling-panel');
     if (settlingPanel) attachSubtleTilt(settlingPanel, 2);
+  }
+
+  /* ---------- Hero video: restrained pointer depth (fine-pointer only) ----------
+     A small baseline scale (1.035) is baked into the same transform as the tilt --
+     without it, rotating a full-bleed, edge-to-edge element by even 1-2deg reveals
+     a sliver of the section background at the corners, since rotation doesn't grow
+     the element to match. The scale keeps it always slightly larger than its own
+     box so .hero's overflow:hidden has something to clip regardless of angle. Not
+     attachSubtleTilt (that helper has no scale option, and the distinction matters
+     specifically for a full-bleed element like this one, not a bounded card/panel). */
+  if (fineHover && !prefersReducedMotion) {
+    var heroTrack = document.getElementById('hero-track');
+    if (heroTrack) {
+      var heroTiltBounds = null;
+      heroTrack.addEventListener('mouseenter', function () { heroTiltBounds = heroTrack.getBoundingClientRect(); });
+      heroTrack.addEventListener('mousemove', function (e) {
+        if (!heroTiltBounds) heroTiltBounds = heroTrack.getBoundingClientRect();
+        var px = (e.clientX - heroTiltBounds.left) / heroTiltBounds.width;
+        var py = (e.clientY - heroTiltBounds.top) / heroTiltBounds.height;
+        var rotateX = (0.5 - py) * 2.4;
+        var rotateY = (px - 0.5) * 2.4;
+        heroTrack.style.transform = 'perspective(1000px) scale(1.035) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg)';
+      });
+      heroTrack.addEventListener('mouseleave', function () {
+        heroTrack.style.transform = '';
+        heroTiltBounds = null;
+      });
+    }
+  }
+
+  /* ---------- Stream cards: subtle tilt layered onto the existing hover lift ----------
+     Selected as the one card grid that gets this treatment, per the brief's own "a few
+     appropriate elements, not every component" -- it's the first and most prominent card
+     grid on the homepage. The 4px lift is baked into the same transform string as the
+     tilt (not left to the existing CSS :hover rule) so the two don't fight over the
+     transform property while the pointer is moving; CSS still applies with no JS. */
+  if (fineHover && !prefersReducedMotion) {
+    document.querySelectorAll('.stream-card').forEach(function (card) { attachSubtleTilt(card, 1.5, 4); });
   }
 
   /* ---------- Deep-link to a specific FAQ item (e.g. "Learn more" from Why McGill) ---------- */
