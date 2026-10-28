@@ -103,7 +103,17 @@ a { color: inherit; }
 h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; line-height: 1.1; margin: 0 0 0.5em; color: var(--text); }
 p { margin: 0 0 1em; max-width: 68ch; color: var(--text); }
 .mono { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.06em; font-variant-numeric: tabular-nums; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+/* Single shared container width/padding for every section -- previously 1200px
+   with several sections overriding it to their own value (1320/1360/1400/1440px),
+   which is exactly the "inconsistent container widths" misalignment an explicit
+   sitewide audit asked to fix. 1360px sits in the middle of the sections that
+   already used it; the few sections that had their own override were brought
+   down/up to match instead of keeping a second value. Padding now scales with
+   viewport (desktop ~48-56px, tablet ~29-36px, mobile ~18px) rather than a flat
+   24px everywhere, per the same audit's explicit desktop/tablet/mobile targets. */
+.container { max-width: 1360px; margin: 0 auto; padding: 0 1.25rem; }
+@media (min-width: 640px) { .container { padding: 0 2rem; } }
+@media (min-width: 1024px) { .container { padding: 0 3.5rem; } }
 section { padding: var(--space-xl) 0; scroll-margin-top: calc(var(--header-h) + 16px); }
 .section-eyebrow { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75rem; font-weight: 700; color: var(--coral-text); display: inline-block; margin-bottom: 0.75rem; }
 .section-head { max-width: 62ch; margin-bottom: var(--space-lg); }
@@ -241,13 +251,9 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 #hero-video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-video-wrap::after {
   content: ""; position: absolute; inset: 0;
-  /* Extra corner shadow absorbs the source video's small AI-provenance glyph into the
-     existing bottom gradient rather than altering the video file itself. */
-  background:
-    radial-gradient(ellipse clamp(100px, 14vw, 150px) clamp(90px, 13vw, 135px)
-      at calc(100% - clamp(75px, 9.5vw, 125px)) calc(100% - clamp(70px, 9.5vw, 120px)),
-      rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.92) 45%, rgba(0,0,0,0) 100%),
-    linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 42%, rgba(0,0,0,0.12) 68%, transparent 100%);
+  /* Legibility scrim only, for the hero text sitting over the video -- see DESIGN.md
+     for why the corner-masking radial gradient that used to live here was removed. */
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 42%, rgba(0,0,0,0.12) 68%, transparent 100%);
 }
 /* In normal flow (not absolutely positioned), vertically centered via auto margins on both
    sides -- if content ever needs more room than the viewport-height video provides, the auto
@@ -373,7 +379,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   background: radial-gradient(circle, rgba(217,79,43,0.28) 0%, rgba(217,79,43,0.07) 55%, transparent 75%);
   filter: blur(20px);
 }
-#streams .container { max-width: 1400px; position: relative; z-index: 1; }
+#streams .container { position: relative; z-index: 1; }
 
 .streams-head { position: relative; z-index: 1; max-width: none; margin-bottom: clamp(1.5rem, 1.1rem + 1.5vw, 2.25rem); }
 /* Soft radial glow behind the heading -- the brief's "glow behind the heading", separate
@@ -554,7 +560,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    cause of the reported excess space above the heading: 96px + 40px of redundant
    .why-intro-grid padding-top before any text even started). */
 .why-section { position: relative; overflow: hidden; background: #FBF6EE; padding: 2.5rem 0; }
-.why-section .container { position: relative; z-index: 1; max-width: 1320px; }
+.why-section .container { position: relative; z-index: 1; }
 
 /* Oversized, low-contrast decorative blob -- purely atmospheric, never obscures content */
 .why-shape {
@@ -641,7 +647,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    #F47732 accent, #FF8A45 hover accent. See DESIGN.md. */
 #settling-in { background: #0D1520; color: #F6F3EE; padding: 3.5rem 0 1rem; }
 #practical-guidance { background: #111D2A; color: #F6F3EE; border-top: 1px solid rgba(222,231,241,0.14); padding: 2.25rem 0 2.75rem; }
-#settling-in .container, #practical-guidance .container { max-width: 1360px; }
 #settling-in p, #practical-guidance p { color: #B7C0CB; }
 
 .settling-grid { display: grid; gap: 2.5rem; }
@@ -752,7 +757,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    under this section's own ID. */
 #student-experience { background: #F7F0E5; }
 #student-experience .section-eyebrow { color: #ED762D; margin-bottom: 1rem; }
-#student-experience .container { max-width: 1440px; }
 
 .student-experience-grid { display: grid; gap: 2rem; }
 @media (min-width: 900px) { .student-experience-grid { grid-template-columns: 0.75fr 1fr; align-items: center; } }
@@ -905,132 +909,52 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .agent-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--muted-light); font-size: 0.95rem; }
 .agent-list svg { flex-shrink: 0; margin-top: 0.2rem; color: var(--amber); }
 
-/* ============ Campus: warm ivory-to-peach band, decorative curves, a glow, and a real
-   Parramatta skyline photograph ============ */
-/* Explicit client-specified palette for this section only (close to but distinct from
-   --coral/--off-white, used here verbatim rather than redefining those sitewide tokens):
-   #FFF8EF warm ivory base, #FCE5D5 soft peach, #D94F2B terracotta accent. */
-#campus {
-  position: relative; overflow: hidden;
-  background: linear-gradient(165deg, #FFF8EF 0%, #FCE5D5 58%, #FFF8EF 100%);
-}
-/* Upper-right curve: sits behind/around the skyline photo so the photo reads as part of
-   the same decorative composition rather than a pasted-on rectangle. Verified at this
-   exact size/opacity/blur via a rendered composite before shipping -- an earlier, much
-   fainter pass (0.18/0.16 opacity, 80px blur) matched the client's own complaint that the
-   background looked plain, so this intentionally reads as a bold, clearly visible curve. */
-#campus::before {
-  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
-  width: 40rem; height: 40rem; top: -13rem; right: -10rem;
-  background: radial-gradient(circle, rgba(217,79,43,0.34) 0%, rgba(217,79,43,0.1) 55%, transparent 75%);
-  filter: blur(14px);
-}
-/* Lower-left curve: the bolder of the two, since this corner carries no photo. */
-#campus::after {
-  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
-  width: 36rem; height: 36rem; bottom: -13rem; left: -12rem;
-  background: radial-gradient(circle, rgba(217,79,43,0.3) 0%, rgba(217,79,43,0.08) 55%, transparent 75%);
-  filter: blur(18px);
-}
-#campus .container { position: relative; z-index: 2; }
+/* ============ Campus & Location: light cream, restrained orange accents ============ */
+/* The brief this section came from specified a dark navy background; kept light instead
+   on the user's explicit, later instruction to alternate light/dark section-by-section
+   sitewide -- dark navy here would have made five consecutive dark sections (Agents,
+   Campus, FAQ, Enquiry, Footer) with no break, which the same brief's own "don't make
+   every section dark" guidance already warned against. Light here restores a clean
+   dark/light/dark/light/dark run through Agents->Campus->FAQ->Enquiry->Footer. Palette
+   per the brief's own sitewide table for light editorial surfaces: #FBF6EE bg, #101C32
+   headings, #687080 secondary text, #ED762D accent, #E9DED0 border -- all of which read
+   correctly here since they were written for a light surface in the first place. */
+.campus-section { background: #FBF6EE; color: #101C32; }
+.campus-eyebrow { color: #ED762D; }
+.campus-intro p { color: #687080; margin-bottom: 1.75rem; }
+#campus-heading { margin-bottom: 0.9rem; }
 
-/* Real Parramatta skyline photograph (photos/campus-parramatta-skyline.jpg, CC BY-SA 3.0,
-   credited in its caption). A large full-width band pinned to the top of the section --
-   not a small rounded "floating card" -- opaque on the right and fading left into the
-   cream background via its own ::after overlay, so it reads as part of the background
-   itself. Present (shrunk and faded more aggressively) at every width rather than hidden
-   below a breakpoint, per the brief's explicit "reposition or crop, don't hide" mobile
-   instruction; its height stays well clear of the stacked card/map on narrow screens. */
-.campus-photo {
-  position: absolute; z-index: 0; top: 0; left: 0; right: 0; margin: 0; pointer-events: none;
-  height: clamp(220px, 32vw, 440px); overflow: hidden;
-}
-.campus-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 78% center; display: block; }
-.campus-photo::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none;
-  /* Opaque through ~44% of the section's width -- verified by rendering this against the
-     actual heading column width (.campus-intro's 62ch measure) before shipping, so the
-     fade never starts until past where the heading text actually ends. */
-  background:
-    linear-gradient(90deg, #FFF8EF 0%, #FFF8EF 44%, transparent 74%),
-    linear-gradient(180deg, transparent 72%, #FFF8EF 100%);
-}
-@media (max-width: 639px) {
-  /* Mobile heading text can wrap across nearly the full width, so this stays opaque much
-     further right than desktop -- only a thin sliver of photo shows on the far edge. */
-  .campus-photo { height: clamp(150px, 42vw, 210px); }
-  .campus-photo::after {
-    background:
-      linear-gradient(90deg, #FFF8EF 0%, #FFF8EF 70%, transparent 95%),
-      linear-gradient(180deg, transparent 50%, #FFF8EF 100%);
-  }
-}
-.campus-photo-credit {
-  position: absolute; z-index: 1; top: 0.6rem; right: 0.7rem; margin: 0;
-  font-size: 0.62rem; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.6);
-  background: rgba(15,17,30,0.32); padding: 0.15rem 0.55rem; border-radius: var(--radius-pill);
-}
+.campus-grid { display: grid; gap: var(--space-lg); align-items: center; }
+@media (min-width: 900px) { .campus-grid { grid-template-columns: 1fr 1fr; } }
 
-.campus-grid { position: relative; display: grid; gap: var(--space-md); align-items: stretch; }
-/* Soft glow behind the card + map, plus a translucent outlined ring for extra depth. */
-.campus-grid::before {
-  content: ""; position: absolute; z-index: 0; pointer-events: none; inset: -5% -4%; border-radius: 56px;
-  background: radial-gradient(60% 65% at 48% 58%, rgba(217,79,43,0.12), transparent 72%);
-  filter: blur(32px);
+.campus-row-list { list-style: none; margin: 0 0 1.75rem; padding: 0; }
+.campus-row {
+  display: flex; align-items: flex-start; gap: 1rem; padding: 1.1rem 0;
+  border-bottom: 1px solid #E9DED0;
 }
-.campus-grid::after {
-  content: ""; position: absolute; z-index: 0; pointer-events: none; border-radius: 50%;
-  width: 20rem; height: 20rem; right: -3rem; top: -2rem;
-  border: 1px solid rgba(217,79,43,0.2); background: rgba(252,229,213,0.3);
-}
-.campus-intro { position: relative; z-index: 1; grid-column: 1 / -1; max-width: 62ch; margin-bottom: 0.25rem; }
-.campus-intro h2 em { font-style: normal; color: #D94F2B; }
-.campus-intro p { color: var(--text-muted); margin-bottom: 0; }
-@media (min-width: 900px) {
-  .campus-grid { grid-template-columns: 1fr 1fr; gap: var(--space-lg); }
-  .campus-intro { grid-column: 1 / -1; }
-  .campus-facts { grid-column: 1; }
-  .map-embed { grid-column: 2; }
-}
-
-.campus-facts {
-  position: relative; z-index: 1;
-  background: var(--surface); border: 1px solid rgba(217,79,43,0.16); border-radius: var(--radius-card);
-  padding: var(--space-md); display: flex; flex-direction: column;
-  box-shadow: 0 24px 56px -32px rgba(109,47,20,0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.campus-facts:hover { transform: translateY(-3px); box-shadow: 0 28px 64px -28px rgba(15,17,30,0.28); }
-.campus-facts .btn { margin-top: 1.75rem; align-self: flex-start; }
-.campus-fact-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
-.campus-fact-list li { display: flex; align-items: flex-start; gap: 1rem; }
-.campus-fact-icon {
+.campus-row:first-child { padding-top: 0; }
+.campus-row:last-child { border-bottom: none; padding-bottom: 0; }
+.campus-row-icon {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-  width: 42px; height: 42px; border-radius: 50%; background: rgba(217,79,43,0.12); color: #D94F2B;
+  width: 44px; height: 44px; border-radius: 50%; background: rgba(237,118,45,0.12); color: #ED762D;
 }
-.campus-fact-body { display: flex; flex-direction: column; gap: 0.2rem; }
-.campus-fact-label { font-weight: 600; color: var(--text-muted); font-size: 0.82rem; }
-.campus-fact-value { font-weight: 600; font-size: 0.98rem; letter-spacing: 0.01em; }
-a.campus-fact-link { color: var(--text); text-decoration: none; }
-a.campus-fact-link:hover { color: var(--coral-text); text-decoration: underline; }
+.campus-row-icon svg { width: 20px; height: 20px; }
+.campus-row-body h3 { font-size: 1.05rem; margin-bottom: 0.3rem; color: #101C32; }
+.campus-row-body p { font-size: 0.92rem; color: #687080; margin-bottom: 0; }
+.campus-row-detail { display: block; margin-top: 0.3rem; color: #101C32; font-weight: 600; font-size: 0.88rem; }
+
 .campus-directions { display: inline-flex; align-items: center; gap: 0.5rem; }
 .campus-directions svg { transition: transform 0.2s ease; flex-shrink: 0; }
 .campus-directions:hover svg { transform: translateX(4px); }
 @media (prefers-reduced-motion: reduce) { .campus-directions:hover svg { transform: none; } }
-.campus-closing {
-  display: flex; align-items: center; gap: 0.6rem;
-  margin: 1.25rem 0 0; padding-top: 1.1rem; border-top: 1px solid var(--border);
-  font-size: 0.88rem; color: var(--text-muted);
-}
-.campus-closing svg { flex-shrink: 0; color: #D94F2B; }
 
 .map-embed {
-  position: relative; z-index: 1;
-  height: 100%; min-height: 360px; border-radius: calc(var(--radius-card) + 6px); border: 1px solid var(--border);
-  overflow: hidden; box-shadow: 0 24px 56px -32px rgba(15,17,30,0.3);
+  height: 100%; min-height: 360px; border-radius: calc(var(--radius-card) + 6px);
+  border: 1px solid #E9DED0;
+  overflow: hidden; box-shadow: 0 24px 56px -32px rgba(16,28,50,0.2);
   transition: box-shadow 0.25s ease;
 }
-.map-embed:hover { box-shadow: 0 28px 64px -28px rgba(15,17,30,0.36); }
+.map-embed:hover { box-shadow: 0 28px 64px -28px rgba(16,28,50,0.28); }
 .map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 /* ============ FAQ ============ */
@@ -1102,6 +1026,8 @@ a.campus-fact-link:hover { color: var(--coral-text); text-decoration: underline;
   width: 56px; height: 56px; border-radius: 50%; background: var(--coral); display: flex;
   align-items: center; justify-content: center; margin: 0 auto 1rem;
 }
+.success-card a { color: var(--coral-text); font-weight: 600; text-decoration: underline; }
+.success-card a:hover { color: var(--coral-text); text-decoration: none; }
 
 /* ============ Footer ============ */
 footer.site-footer { background: var(--oled-deep); color: var(--muted-light); padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--oled-line); }
@@ -1181,23 +1107,12 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
    ============================================================ */
 
 /* ── Enquiry Section: two-column split card layout ─────────── */
-#enquiry {
-  padding: var(--space-xl) 0;
-  position: relative;
-  overflow: hidden;
-}
-#enquiry::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(rgba(248,249,250,0.88), rgba(248,249,250,0.88)),
-    url('photos/hero-slide-2.jpg') center / cover;
-}
-#enquiry .container { position: relative; z-index: 1; }
-
+/* #enquiry/#enquiry::before/#enquiry .container were previously declared a second
+   time here, duplicating (and in the background-image case, silently overriding)
+   the identical rules above -- removed as dead/conflicting CSS rather than kept.
+   The one real override from this block, the ribbon no longer pulling up to
+   overlap the section above now that it sits over the two-column split card
+   instead, is kept on its own. */
 .quick-ribbon { margin-top: 0; margin-bottom: var(--space-md); }
 
 /* Split wrapper */
