@@ -101,6 +101,15 @@
         ],
         "createdAt": "2026-10-28T06:46:48.593Z",
         "reason": "User confirmed: requested this exact continuous-marquee testimonial pattern in two separate, highly detailed messages, specifying hover-pause, focus-pause, a real pause/resume button, and a full prefers-reduced-motion static fallback with all content still reachable -- the standard objections to marquees (no user control, content hidden) are explicitly mitigated per the user's own spec, not overlooked"
+      },
+      {
+        "rule": "marquee",
+        "value": "*",
+        "files": [
+          "courses.html"
+        ],
+        "createdAt": "2026-10-28T09:30:00.000Z",
+        "reason": "Agent: same shared-styles.css cross-contamination already documented for low-contrast/dark-glow/cramped-padding on this file -- courses.html links the same styles.css, which carries the #student-testimonials marquee keyframes/classes from index.html, but courses.html has no testimonials markup at all (grepped, no match). No marquee renders on this page; the finding is the shared stylesheet's rule being flagged in isolation."
       }
     ]
   }
