@@ -39,10 +39,9 @@ if (fineHover && !prefersReducedMotion) {
   document.querySelectorAll('.btn-primary').forEach(attachMagnet);
 }
 
-/* ---------- 3D-tilt hover for course + feature cards (fine-pointer only) ----------
-   Only the helper lives here -- each page attaches it to its own cards
-   (.why-card.tilt-card on the homepage, .course-card.tilt-card on the courses
-   page, the latter built dynamically after this file runs). */
+/* ---------- 3D-tilt hover for course cards (fine-pointer only) ----------
+   Only the helper lives here -- courses.html attaches it to its own
+   .course-card.tilt-card elements, built dynamically after this file runs. */
 function attachTilt(card) {
   var bounds = null;
   card.addEventListener('mouseenter', function () {
