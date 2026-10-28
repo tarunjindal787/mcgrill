@@ -630,19 +630,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   .why-card:nth-child(4) { grid-column: 3; grid-row: 2; }
 }
 
-/* ============ Student life ============ */
-.life-grid { display: grid; gap: var(--space-lg); align-items: center; }
-@media (min-width: 900px) { .life-grid { grid-template-columns: 0.9fr 1.1fr; } }
-.life-art { aspect-ratio: 4/3; border-radius: 24px; background: var(--oled-card); position: relative; overflow: hidden; box-shadow: 0 20px 40px -20px rgba(15,17,30,0.35); }
-.life-art img { width: 100%; height: 100%; object-fit: cover; }
-.life-feature-list { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; gap: 1rem; }
-.life-feature-list li { display: flex; align-items: flex-start; gap: 0.9rem; }
-.life-feature-icon {
-  width: 38px; height: 38px; border-radius: 50%; background: rgba(199,63,34,0.14);
-  display: flex; align-items: center; justify-content: center; color: var(--coral-text-dark); flex-shrink: 0;
-}
-.life-feature-icon svg { width: 20px; height: 20px; }
-
 /* ============ Say Good Day to Australia: accordion + services grid ============ */
 .say-good-day { margin-top: var(--space-xl); }
 .study-tabs { display: grid; gap: 0.9rem; max-width: 820px; margin-bottom: var(--space-lg); }
@@ -688,8 +675,95 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .service-card-icon svg { width: 22px; height: 22px; }
 .service-card h3 { font-size: 1.05rem; margin-bottom: 0; color: var(--text); }
 .service-card p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0; }
-.life-copy li { color: var(--text-muted); }
 
+
+/* ============ Student Experience & Student Life ============ */
+/* Scoped literal palette, deliberately not unified with the sitewide --coral tokens --
+   this brief specified its own values explicitly (same family as the Student
+   Testimonials palette just below: #ED762D orange, #101C32 navy, #69717D muted text).
+   See DESIGN.md. All custom classes are prefixed `student-experience-`/`student-life-`
+   and scoped under their own section IDs. */
+#student-experience, #student-life { background: #F7F0E5; }
+#student-experience .section-eyebrow, #student-life .section-eyebrow { color: #ED762D; }
+#student-experience .container, #student-life .container { max-width: 1380px; }
+
+.student-experience-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 900px) { .student-experience-grid { grid-template-columns: 0.72fr 1fr; align-items: center; gap: 3.5rem; } }
+
+#student-experience-heading {
+  font-size: clamp(2rem, 1.2rem + 3.2vw, 3.625rem);
+  line-height: 1.05; max-width: 13ch; margin-bottom: 1.1rem; color: #101C32;
+}
+#student-experience-heading em { color: #ED762D; font-style: normal; }
+.student-experience-copy > p { color: #69717D; font-size: 1.05rem; max-width: 48ch; margin-bottom: 0; }
+
+.student-experience-features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2.25rem 0 2.5rem; }
+@media (min-width: 560px) { .student-experience-features { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
+.student-experience-feature { display: flex; flex-direction: column; gap: 0.5rem; }
+.student-experience-feature-icon {
+  width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #ED762D; color: #ED762D;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.student-experience-feature-icon svg { width: 19px; height: 19px; }
+.student-experience-feature h3 { font-size: 1.05rem; margin: 0; color: #101C32; }
+.student-experience-feature p { font-size: 0.9rem; color: #69717D; margin: 0; }
+
+.student-experience-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem; height: 52px; padding: 0 1.75rem;
+  background: #ED762D; color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border-radius: 12px; transition: background 0.2s ease, transform 0.2s ease;
+}
+.student-experience-cta:hover { background: #D4621E; transform: translateY(-3px); }
+.student-experience-cta:focus-visible { outline: 3px solid #101C32; outline-offset: 3px; }
+.student-experience-cta svg { transition: transform 0.2s ease; }
+.student-experience-cta:hover svg { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) { .student-experience-cta:hover { transform: none; } }
+
+/* Asymmetric photo collage: main image spans the two left rows; library/collab
+   stack on the right; city image runs full width underneath. */
+.student-experience-collage {
+  display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr auto; gap: 1rem;
+}
+.collage-item {
+  position: relative; margin: 0; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 14px 30px -18px rgba(16,28,50,0.35);
+}
+.collage-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+.collage-item:hover img { transform: scale(1.05); }
+@media (prefers-reduced-motion: reduce) { .collage-item:hover img { transform: none; } }
+.collage-item figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0; padding: 0.75rem 1rem 0.65rem;
+  font-size: 0.8rem; font-weight: 600; color: #fff;
+  background: linear-gradient(to top, rgba(16,28,50,0.8), transparent);
+}
+.collage-item--main { grid-column: 1; grid-row: 1 / 3; }
+.collage-item--library { grid-column: 2; grid-row: 1; aspect-ratio: 1 / 1; }
+.collage-item--collab { grid-column: 2; grid-row: 2; aspect-ratio: 1 / 1; }
+.collage-item--city { grid-column: 1 / 3; grid-row: 3; aspect-ratio: 21 / 7; }
+@media (max-width: 759px) {
+  .student-experience-collage { grid-template-columns: 1fr; grid-template-rows: none; }
+  .collage-item, .collage-item--main, .collage-item--library, .collage-item--collab, .collage-item--city {
+    grid-column: 1; grid-row: auto; aspect-ratio: 4 / 3;
+  }
+}
+
+.student-life-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 640px) { .student-life-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1100px) { .student-life-grid { grid-template-columns: repeat(4, 1fr); } }
+.student-life-card {
+  background: #FFFDF9; border: 1px solid #E9DED0; border-radius: 16px; overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.student-life-card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px -18px rgba(16,28,50,0.25); }
+@media (prefers-reduced-motion: reduce) { .student-life-card:hover { transform: none; } }
+.student-life-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+.student-life-card-body { padding: 1.1rem 1.25rem 1.4rem; }
+.student-life-card-label {
+  font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.08em;
+  font-size: 0.72rem; font-weight: 700; color: #ED762D;
+}
+.student-life-card-body h3 { font-size: 1.1rem; margin: 0.35rem 0 0.4rem; color: #101C32; }
+.student-life-card-body p { font-size: 0.9rem; color: #69717D; margin: 0; }
 
 /* ============ Student testimonials (marquee) ============ */
 /* Scoped literal palette for this section only, per its own brief: #101C32 navy,
