@@ -685,11 +685,21 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    See DESIGN.md. All custom classes are prefixed `student-experience-`/`student-life-`
    and scoped under their own section IDs. */
 #student-experience, #student-life { background: #F7F0E5; }
-#student-experience .section-eyebrow, #student-life .section-eyebrow { color: #ED762D; }
-#student-experience .container, #student-life .container { max-width: 1380px; }
+#student-experience .section-eyebrow, #student-life .section-eyebrow { color: #ED762D; margin-bottom: 1rem; }
+#student-experience .container, #student-life .container { max-width: 1440px; }
 
-.student-experience-grid { display: grid; gap: 2.5rem; }
-@media (min-width: 900px) { .student-experience-grid { grid-template-columns: 0.72fr 1fr; align-items: center; gap: 3.5rem; } }
+/* Student Experience and Student Life share one background and read as a single
+   continuous block (the brief's own framing: Student Life is a nested subsection
+   of the same "experience", not a separate one) -- so the seam between them gets
+   a small, deliberate gap instead of the sitewide 96px top+96px bottom stacking
+   into an unexplained ~192px blank strip of identical cream. Each section keeps
+   its own full padding on the *outer* edge, where the neighbour is genuinely a
+   different section (Why McGill above, the dark Settling-in section below). */
+#student-experience { padding-bottom: 1rem; }
+#student-life { padding-top: 0.75rem; }
+
+.student-experience-grid { display: grid; gap: 2rem; }
+@media (min-width: 900px) { .student-experience-grid { grid-template-columns: 0.75fr 1fr; align-items: center; } }
 
 #student-experience-heading {
   font-size: clamp(2rem, 1.2rem + 3.2vw, 3.625rem);
@@ -698,11 +708,12 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 #student-experience-heading em { color: #ED762D; font-style: normal; }
 .student-experience-copy > p { color: #69717D; font-size: 1.05rem; max-width: 48ch; margin-bottom: 0; }
 
-.student-experience-features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2.25rem 0 2.5rem; }
+.student-experience-features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0; }
 @media (min-width: 560px) { .student-experience-features { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
 .student-experience-feature { display: flex; flex-direction: column; gap: 0.5rem; }
 .student-experience-feature-icon {
   width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid #ED762D; color: #ED762D;
+  background: rgba(243,161,132,0.16);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .student-experience-feature-icon svg { width: 19px; height: 19px; }
@@ -712,7 +723,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .student-experience-cta {
   display: inline-flex; align-items: center; gap: 0.6rem; height: 52px; padding: 0 1.75rem;
   background: #ED762D; color: #fff; font-weight: 700; font-size: 0.95rem; text-decoration: none;
-  border-radius: 12px; transition: background 0.2s ease, transform 0.2s ease;
+  border-radius: 10px; transition: background 0.2s ease, transform 0.2s ease;
 }
 .student-experience-cta:hover { background: #D4621E; transform: translateY(-3px); }
 .student-experience-cta:focus-visible { outline: 3px solid #101C32; outline-offset: 3px; }
@@ -720,10 +731,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .student-experience-cta:hover svg { transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) { .student-experience-cta:hover { transform: none; } }
 
-/* Asymmetric photo collage: main image spans the two left rows; library/collab
-   stack on the right; city image runs full width underneath. */
+/* Three-image collage: a large main photo spans the full height of the right
+   column, which stacks two supporting photos beside it. */
 .student-experience-collage {
-  display: grid; grid-template-columns: 1.3fr 1fr; grid-template-rows: 1fr 1fr auto; gap: 1rem;
+  display: grid; grid-template-columns: 1.4fr 1fr; grid-template-rows: 1fr 1fr; gap: 1rem;
 }
 .collage-item {
   position: relative; margin: 0; border-radius: 16px; overflow: hidden;
@@ -738,12 +749,11 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   background: linear-gradient(to top, rgba(16,28,50,0.8), transparent);
 }
 .collage-item--main { grid-column: 1; grid-row: 1 / 3; }
-.collage-item--library { grid-column: 2; grid-row: 1; aspect-ratio: 1 / 1; }
-.collage-item--collab { grid-column: 2; grid-row: 2; aspect-ratio: 1 / 1; }
-.collage-item--city { grid-column: 1 / 3; grid-row: 3; aspect-ratio: 21 / 7; }
+.collage-item--library { grid-column: 2; grid-row: 1; aspect-ratio: 4 / 3; }
+.collage-item--city { grid-column: 2; grid-row: 2; aspect-ratio: 4 / 3; }
 @media (max-width: 759px) {
   .student-experience-collage { grid-template-columns: 1fr; grid-template-rows: none; }
-  .collage-item, .collage-item--main, .collage-item--library, .collage-item--collab, .collage-item--city {
+  .collage-item, .collage-item--main, .collage-item--library, .collage-item--city {
     grid-column: 1; grid-row: auto; aspect-ratio: 4 / 3;
   }
 }
