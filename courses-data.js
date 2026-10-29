@@ -1,8 +1,9 @@
 /* ---------- Course data ----------
-   Single source of truth, shared by index.html (the "Download Prospectus" quick-ribbon
-   button, which needs every course for the full-catalogue PDF) and courses.html (the
-   full catalogue: search, filters, cards, modal, per-course PDF). Do not duplicate this
-   array elsewhere -- both pages load this one file.
+   Single source of truth for courses.html (the full catalogue: search, filters, cards,
+   modal, per-course PDF). index.html no longer loads this file -- its enquiry form's
+   course <select> is a small hardcoded list, not populated from this array, and the
+   only index.html feature that did need it (the "Download Prospectus" quick-ribbon
+   button's full-catalogue PDF) was removed. Do not duplicate this array elsewhere.
 
    `level` (2026-10-27): the AQF qualification level, parsed from each course's own real
    name (e.g. "Certificate III in Engineering..." -> "Certificate III") -- not a new fact,

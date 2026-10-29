@@ -104,6 +104,8 @@ The detector flagged this as a "marquee" slop pattern (continuous auto-scroll de
 
 **Enquiry section made more compact**, scoped to `.enquiry-form-panel`/`.enquiry-info` only (the shared sitewide `.form-row` defaults, and the quote-tool form on `courses.html` that also uses them, are untouched): panel padding 2.5rem→1.75rem, field padding 0.75rem/0.9rem→0.6rem/0.8rem, row spacing 1rem→0.7rem, textarea min-height 90px→70px, submit button 48px tall. The two responsive breakpoints for this panel (860px, 560px) had their own padding values, which were *larger* than the new desktop default after this change -- corrected so padding still decreases at each smaller breakpoint instead of momentarily increasing.
 
+**Follow-on cleanup caught by grep, not guessed at:** removing the ribbon's prospectus feature left `<script src="courses-data.js">` on `index.html` loading a file nothing on that page uses anymore (confirmed: no `COURSES` reference left in its inline script; the enquiry form's course `<select>` is a small hardcoded list, not JS-populated) -- removed the now-unnecessary script tag and corrected `courses-data.js`'s own header comment, which still described index.html as a consumer.
+
 ### Visual-review correction pass: real rendering bugs, found and fixed (2026-10-29, later same day)
 
 A detailed visual review (someone actually looking at the rendered page, not just reading source) flagged several specific symptoms. Each had a real, locatable cause -- found by reasoning through the actual CSS/layout math rather than guessing, since no browser was available to screenshot directly.
