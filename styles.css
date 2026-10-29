@@ -278,12 +278,14 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 /* In normal flow (not absolutely positioned), vertically centered via auto margins on both
    sides -- if content ever needs more room than the viewport-height video provides, the auto
    margins shrink to 0 and .hero itself grows taller, rather than content overflowing upward
-   behind the fixed header. The small translateY below nudges the final centered position
-   slightly down from dead-centre without disturbing that auto-grow safety margin (the
-   transform is a paint-time offset, not a layout change, so it can't reintroduce overflow). */
+   behind the fixed header. The translateY below nudges the final centered position down from
+   dead-centre without disturbing that auto-grow safety margin (the transform is a paint-time
+   offset, not a layout change, so it can't reintroduce overflow). Pushed further down (from a
+   2.5rem to a 6rem max) so the text block clears the upper third of the frame, where
+   #hero-video's object-position keeps the subject's face across every scene. */
 .hero-content {
   position: relative; z-index: 5; margin: auto 0;
-  transform: translateY(clamp(0px, 4vh, 2.5rem));
+  transform: translateY(clamp(1rem, 12vh, 6rem));
 }
 .hero-content-inner {
   padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(3rem, 6vw, 5rem);
@@ -817,8 +819,13 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   background: linear-gradient(to top, rgba(16,28,50,0.8), transparent);
 }
 .collage-item--main { grid-column: 1; grid-row: 1 / 3; }
-.collage-item--library { grid-column: 2; grid-row: 1; aspect-ratio: 4 / 3; }
-.collage-item--city { grid-column: 2; grid-row: 2; aspect-ratio: 4 / 3; }
+/* aspect-ratio here is a mobile-stacked fallback only (see the max-width:759px block below) --
+   at the >=760px grid widths above, height:100% gives each item a definite height from its
+   1fr row, which takes priority over aspect-ratio and makes it fill the row exactly. Without
+   it, aspect-ratio derived the height from the column's width instead, which didn't match the
+   row's actual height and left a gap between the library and city cards. */
+.collage-item--library { grid-column: 2; grid-row: 1; aspect-ratio: 4 / 3; height: 100%; }
+.collage-item--city { grid-column: 2; grid-row: 2; aspect-ratio: 4 / 3; height: 100%; }
 @media (max-width: 759px) {
   .student-experience-collage { grid-template-columns: 1fr; grid-template-rows: none; }
   .collage-item, .collage-item--main, .collage-item--library, .collage-item--city {
