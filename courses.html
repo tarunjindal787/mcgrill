@@ -36,7 +36,7 @@
         <li><a href="index.html#streams">Streams</a></li>
         <li><a href="courses.html" aria-current="page">Courses</a></li>
         <li><a href="index.html#why">Why McGill</a></li>
-        <li><a href="index.html#pathway">How to Enrol</a></li>
+        <li><a href="index.html#student-experience">Student Life</a></li>
         <li><a href="index.html#campus">Campus</a></li>
         <li><a href="index.html#faq">FAQ</a></li>
       </ul>
@@ -54,7 +54,7 @@
       <li><a href="index.html#streams" class="mnav-link">Streams</a></li>
       <li><a href="courses.html" class="mnav-link" aria-current="page">Courses</a></li>
       <li><a href="index.html#why" class="mnav-link">Why McGill</a></li>
-      <li><a href="index.html#pathway" class="mnav-link">How to Enrol</a></li>
+      <li><a href="index.html#student-experience" class="mnav-link">Student Life</a></li>
       <li><a href="index.html#campus" class="mnav-link">Campus</a></li>
       <li><a href="index.html#faq" class="mnav-link">FAQ</a></li>
       <li><a href="index.html#enquiry" class="mnav-link btn btn-primary" style="margin:0.75rem 1.5rem; width:calc(100% - 3rem); justify-content:center;">Enquire Now</a></li>
@@ -68,14 +68,14 @@
   <section id="courses" class="tone-dark">
     <div class="container">
       <div class="section-head reveal">
-        <span class="section-eyebrow">Featured Courses</span>
-        <h2>Find your course</h2>
-        <p>Filter by stream, or browse the full catalogue. Fees, intakes and entry requirements are confirmed directly with our team.</p>
+        <span class="section-eyebrow">Find Your Course</span>
+        <h2>Find the right path for you.</h2>
+        <p>Explore available courses and narrow your options using the information that matters to you.</p>
       </div>
       <div class="course-search reveal">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <label for="course-search-input" class="visually-hidden">Search courses by keyword</label>
-        <input type="search" id="course-search-input" placeholder="Search courses by name, code, or keyword&hellip;">
+        <label for="course-search-input" class="visually-hidden">Search courses or qualifications</label>
+        <input type="search" id="course-search-input" placeholder="Search courses or qualifications&hellip;">
       </div>
       <div class="filter-bar reveal" role="group" aria-label="Filter courses by stream">
         <button class="filter-chip" data-filter="all" aria-pressed="true" type="button">All Courses</button>
@@ -93,7 +93,12 @@
         <button class="filter-chip" data-level="Graduate Diploma" aria-pressed="false" type="button">Graduate Diploma</button>
         <button type="button" class="btn-ghost-small filter-clear" id="filter-clear" hidden>Clear filters</button>
       </div>
-      <p class="course-search-empty" id="course-search-empty" hidden>No courses match your search and filters. Try different keywords or clear the filters.</p>
+      <p class="course-result-count" id="course-result-count" aria-live="polite"></p>
+      <div class="course-search-empty" id="course-search-empty" hidden>
+        <h3>No matching courses found</h3>
+        <p>Try changing your search or clearing one of your filters.</p>
+        <button type="button" class="btn-ghost-small" id="empty-state-clear">Clear filters</button>
+      </div>
       <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data (courses-data.js) --></div>
 
       <div class="quote-tool reveal" id="quote-tool">
@@ -278,6 +283,8 @@
   var filterClear = document.getElementById('filter-clear');
   var searchInput = document.getElementById('course-search-input');
   var searchEmpty = document.getElementById('course-search-empty');
+  var resultCount = document.getElementById('course-result-count');
+  var emptyStateClear = document.getElementById('empty-state-clear');
   var currentStream = 'all';
   var currentLevel = 'all';
 
@@ -298,6 +305,7 @@
       if (match) visibleCount++;
     });
     searchEmpty.hidden = visibleCount !== 0;
+    resultCount.textContent = visibleCount === 0 ? '' : (visibleCount + (visibleCount === 1 ? ' course found' : ' courses found'));
     filterClear.hidden = currentStream === 'all' && currentLevel === 'all' && !query;
   }
 
@@ -322,11 +330,13 @@
     chip.addEventListener('click', function () { applyLevelFilter(chip.getAttribute('data-level')); });
   });
   searchInput.addEventListener('input', applySearchAndFilter);
-  filterClear.addEventListener('click', function () {
+  function clearAllFilters() {
     searchInput.value = '';
     applyFilter('all');
     applyLevelFilter('all');
-  });
+  }
+  filterClear.addEventListener('click', clearAllFilters);
+  emptyStateClear.addEventListener('click', clearAllFilters);
 
   /* ---------- Deep link from the homepage's stream cards: ?stream=engineering etc. ---------- */
   var VALID_STREAMS = ['engineering', 'hospitality', 'business', 'management', 'english'];

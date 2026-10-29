@@ -414,24 +414,23 @@
   </section>
 
   <!-- STUDENT TESTIMONIALS -->
-  <!-- Content note (not shown to visitors): the 5 testimonials below are placeholder/
-       example content only, per the brief that requested this section -- real quotes
-       about guitar lessons, not McGill's own Engineering/Hospitality/Business/
-       Management/English programs. Kept verbatim as instructed (exact wording, no
-       invented details, no "verified" claim on the 5.0 rating) and clearly marked here
-       so nobody mistakes them for genuine McGill feedback. Replace the TESTIMONIALS
-       array in the script below with real, approved student testimonials before this
-       section goes live for real, and update or remove the rating badge once a real,
-       verifiable rating exists. -->
+  <!-- Content note (not shown to visitors): the 5 testimonials below are sample/example
+       content only, written for this component during development -- no genuine McGill
+       student feedback has been supplied or verified. Deliberately attributed to a
+       stream ("Engineering Student") rather than an invented personal name, so nothing
+       here reads as a specific, identifiable real person. No rating number is shown
+       (replaced with a plain "Student stories" label + decorative stars) since no
+       verified aggregate rating exists. Replace the TESTIMONIALS array in the script
+       below with real, approved student testimonials -- and add a verified rating only
+       if one actually exists -- before this section is presented as genuine feedback. -->
   <section id="student-testimonials" class="tone-light" aria-labelledby="testimonials-heading">
     <div class="container student-testimonials__head">
       <div class="student-testimonials__intro section-head reveal">
         <span class="section-eyebrow">Student Stories</span>
-        <h2 id="testimonials-heading">Good words from real students.</h2>
-        <p>Discover what students and families have to say about their learning experiences.</p>
+        <h2 id="testimonials-heading">Good words from our students.</h2>
+        <p>Hear about the learning experiences, ambitions and journeys of our student community.</p>
       </div>
       <div class="student-testimonials__rating reveal">
-        <span class="student-testimonials__rating-value">5.0</span>
         <span class="student-testimonials__stars" aria-hidden="true">
           <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
           <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
@@ -439,7 +438,7 @@
           <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
           <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.47 5.18 5.72.68-4.24 3.94 1.15 5.65L10 14.9l-5.1 2.65 1.15-5.65L1.81 7.36l5.72-.68L10 1.5z"/></svg>
         </span>
-        <span class="student-testimonials__rating-label">Example rating<br>pending verified reviews</span>
+        <span class="student-testimonials__rating-label">Student stories</span>
       </div>
     </div>
 
@@ -1062,21 +1061,21 @@
      translateX(-50%) always lands precisely at the start of the second copy, regardless
      of card count, width, or gap value. Reduced motion gets a single, non-duplicated,
      horizontally scrollable set instead of the animation, per prefersReducedMotion
-     (already computed in common.js). ---------- */
-  var TESTIMONIALS = [
-    { name: 'James D.', role: 'Student', quote: 'Within 4 weeks I was playing my favourite classic rock riffs!' },
-    { name: 'Michelle C.', role: 'Parent', quote: 'My daughter has progressed immensely. Worth every cent.' },
-    { name: 'Ben H.', role: 'Student', quote: 'Great focus on technique without getting bogged down in boring drills.' },
-    { name: 'James Mitchell', role: 'Student', quote: 'Great lessons! Very patient, friendly, and makes learning really enjoyable. Highly recommend!' },
-    { name: 'Emily Parker', role: 'Student', quote: 'I started with very little experience, and the whole learning process was made so much easier.' }
-  ];
+     (already computed in common.js).
 
-  function testimonialInitials(name) {
-    var parts = name.replace(/\./g, '').trim().split(/\s+/);
-    var first = parts[0] ? parts[0].charAt(0) : '';
-    var last = parts.length > 1 ? parts[parts.length - 1].charAt(0) : '';
-    return (first + last).toUpperCase();
-  }
+     No invented personal names -- a quote attributed to "James Mitchell" reads as a
+     specific, identifiable real person; one attributed to "Engineering Student" reads as
+     exactly what it is, an example by stream, matching this brief's own category labels
+     verbatim. Avatars are a fixed two-letter stream code (set directly in the data, not
+     derived from the label) rather than name-initials, since English and Engineering
+     would otherwise collide on their first two letters. ---------- */
+  var TESTIMONIALS = [
+    { stream: 'Engineering Student', avatarLabel: 'EG', quote: 'The hands-on workshop sessions gave me real confidence with the tools and techniques I’ll use throughout my career.' },
+    { stream: 'Hospitality Student', avatarLabel: 'HS', quote: 'I’ve learned so much about service and kitchen operations, and I feel so much more confident taking on new challenges.' },
+    { stream: 'Business Student', avatarLabel: 'BU', quote: 'Working on real case studies with my classmates taught me how to apply what I was learning straight away.' },
+    { stream: 'English Student', avatarLabel: 'EN', quote: 'My English has improved so much since starting here, and I finally feel confident speaking up in class.' },
+    { stream: 'Management Student', avatarLabel: 'MG', quote: 'The course gave me new ways of thinking about leadership and helped me set clearer goals for where I want to go next.' }
+  ];
 
   function testimonialCardHTML(t, hidden) {
     return (
@@ -1084,10 +1083,9 @@
         '<svg class="student-testimonials__quote" width="34" height="26" viewBox="0 0 34 26" fill="currentColor" aria-hidden="true"><path d="M0 26V14.56Q0 7.28 3.78 3.64 7.56 0 13.44 0v5.6Q9.52 5.6 7.56 8.26 5.6 10.92 5.6 14.56H13.44V26H0ZM19.6 26V14.56Q19.6 7.28 23.38 3.64 27.16 0 33.04 0v5.6Q29.12 5.6 27.16 8.26 25.2 10.92 25.2 14.56H33.04V26H19.6Z"/></svg>' +
         '<p class="student-testimonials__quote-text">' + t.quote + '</p>' +
         '<div class="student-testimonials__profile">' +
-          '<span class="student-testimonials__avatar" aria-hidden="true">' + testimonialInitials(t.name) + '</span>' +
+          '<span class="student-testimonials__avatar" aria-hidden="true">' + t.avatarLabel + '</span>' +
           '<span class="student-testimonials__who">' +
-            '<span class="student-testimonials__name">' + t.name + '</span>' +
-            '<span class="student-testimonials__role">' + t.role + '</span>' +
+            '<span class="student-testimonials__name">' + t.stream + '</span>' +
           '</span>' +
         '</div>' +
       '</article>'

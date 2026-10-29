@@ -479,7 +479,13 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .course-search input {
   border: none; background: transparent; outline: none; font: inherit; color: var(--text); width: 100%;
 }
-.course-search-empty { color: var(--text-muted); font-size: 0.9rem; padding: 1.5rem 0; }
+.course-result-count { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; margin: 0 0 1rem; min-height: 1.2em; }
+.course-search-empty {
+  text-align: center; padding: var(--space-lg) 1.5rem; background: var(--surface);
+  border: 1px solid var(--border); border-radius: var(--radius-card); margin-bottom: var(--space-md);
+}
+.course-search-empty h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.course-search-empty p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.1rem; }
 .quote-tool {
   margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
   border-radius: var(--radius-card); padding: var(--space-md); display: grid; gap: var(--space-md);
@@ -842,10 +848,9 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   background: #FFFDF9; border: 1px solid rgba(16,28,50,0.1); border-radius: var(--radius-card);
   padding: 0.85rem 1.25rem; flex-shrink: 0;
 }
-.student-testimonials__rating-value { font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: #101C32; }
-.student-testimonials__stars { display: inline-flex; gap: 0.15rem; color: #ED762D; margin-left: 0.4rem; }
+.student-testimonials__stars { display: inline-flex; gap: 0.15rem; color: #ED762D; }
 .student-testimonials__rating-label {
-  font-size: 0.75rem; line-height: 1.3; color: #687080; font-weight: 600;
+  font-size: 0.82rem; line-height: 1.3; color: #101C32; font-weight: 700;
 }
 
 .student-testimonials__viewport-row { display: flex; justify-content: flex-end; margin-bottom: 0.75rem; }
@@ -895,7 +900,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 }
 .student-testimonials__who { display: flex; flex-direction: column; min-width: 0; }
 .student-testimonials__name { font-weight: 700; color: #172033; font-size: 0.95rem; }
-.student-testimonials__role { font-size: 0.82rem; color: #687080; }
 
 @media (min-width: 640px) {
   .student-testimonials__card { width: 360px; margin-right: 24px; }
