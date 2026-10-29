@@ -544,23 +544,26 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .filter-clear { margin-left: 0.25rem; }
 
 /* ============ Why McGill Institute ============ */
-/* Scoped literal palette, per this brief's own exact table (not unified with the
-   Student Experience/Testimonials cream -- close but deliberately distinct, same
-   reasoning as those two: each brief gave its own exact hex values independently).
-   #FBF6EE ivory bg, #FFFDF9 card bg, #101C32 navy, #252B36 charcoal, #687080 muted,
-   #ED762D orange, #F3A184 peach, #E9DED0 border. See DESIGN.md. */
-/* Overrides the sitewide `section { padding: var(--space-xl) 0 }` (96px) -- this
-   section's own compact spacing brief replaces it outright, rather than stacking
-   on top of it via extra padding on the inner grids (that stacking was the actual
-   cause of the reported excess space above the heading: 96px + 40px of redundant
-   .why-intro-grid padding-top before any text even started). */
-.why-section { position: relative; overflow: hidden; background: #FBF6EE; padding: 2.5rem 0; }
+/* Flipped from light cream to dark navy per explicit later request -- reuses the
+   Settling-in section's exact dark palette (#0D1520 bg, #141F2D card, #F6F3EE/#B7C0CB
+   text, #F47732 accent) for consistency with its new neighbour, rather than inventing a
+   fourth distinct dark palette with no brief-given values to justify one. This also
+   happens to resolve a standing, disclosed exception: Streams/Why/Student-Experience
+   were three light sections in a row; Why going dark makes that run alternate properly
+   (light, dark, light) without touching the other two. See DESIGN.md. */
+.why-section { position: relative; overflow: hidden; background: #0D1520; color: #F6F3EE; padding: 2.5rem 0; }
 .why-section .container { position: relative; z-index: 1; }
+.why-section p { color: #B7C0CB; }
 
-/* Oversized, low-contrast decorative blob -- purely atmospheric, never obscures content */
+/* Ambient glow, same peach tone as before but notably lower opacity than the light-bg
+   version (0.22 was tried first, then 0.12) -- the design detector correctly flagged
+   0.22 as a "radial spotlight glow", the classic AI-landing-page cliche of a bright
+   colored haze floating over dark copy. Lowering it further keeps the "subtle ambient
+   glow" this brief asked for while staying below the threshold where it reads as that
+   cliche rather than a quiet atmospheric tint; verified by re-running the detector. */
 .why-shape {
   position: absolute; top: -18%; right: -12%; width: 780px; height: 780px; max-width: 70vw;
-  background: radial-gradient(circle at 50% 50%, rgba(243,161,132,0.4), rgba(243,161,132,0) 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(243,161,132,0.12), rgba(243,161,132,0) 65%);
   border-radius: 50%; pointer-events: none; z-index: 0;
 }
 
@@ -573,10 +576,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 
 #why-heading {
   font-size: clamp(2.125rem, 1.1rem + 3.5vw, 3.75rem); line-height: 1.04; letter-spacing: -0.01em;
-  color: #101C32; margin-bottom: 1.1rem;
+  color: #F6F3EE; margin-bottom: 1.1rem;
 }
 #why-heading em { color: #ED762D; font-style: normal; }
-.why-intro-copy > p { color: #252B36; font-size: 1.05rem; line-height: 1.6; max-width: 540px; margin-bottom: 1.3rem; }
+.why-intro-copy > p { font-size: 1.05rem; line-height: 1.6; max-width: 540px; margin-bottom: 1.3rem; }
 
 .why-cta {
   display: inline-flex; align-items: center; gap: 0.6rem; height: 53px; padding: 0 1.8rem;
@@ -584,7 +587,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   border-radius: 10px; transition: background 0.2s ease, transform 0.2s ease;
 }
 .why-cta:hover { background: #D4621E; transform: translateY(-2px); }
-.why-cta:focus-visible { outline: 3px solid #101C32; outline-offset: 3px; }
+.why-cta:focus-visible { outline: 3px solid #F6F3EE; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .why-cta:hover { transform: none; } }
 
 .why-intro-media { position: relative; }
@@ -595,7 +598,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 @media (min-width: 900px) { .why-intro-media img { aspect-ratio: unset; height: 350px; } }
 .why-handwritten {
   position: absolute; top: -28px; right: 6%; margin: 0; text-align: center; line-height: 1.15;
-  font-family: 'Caveat', cursive; font-size: 1.85rem; color: #8A929D; transform: rotate(-4deg);
+  font-family: 'Caveat', cursive; font-size: 1.85rem; color: #B7C0CB; transform: rotate(-4deg);
   pointer-events: none;
 }
 .why-handwritten::after {
@@ -608,18 +611,33 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 @media (min-width: 480px) { .why-cards-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1200px) { .why-cards-grid { grid-template-columns: repeat(4, 1fr); } }
 
+/* 3D card treatment: a layered shadow (soft ambient + tighter contact shadow), a
+   gradient-highlight border (simulated via a double box-shadow ring rather than an
+   actual gradient border, which can't coexist with border-radius + overflow:hidden
+   cleanly), and a lift-up on hover. The tilt itself is handled in JS (attachSubtleTilt,
+   fine-pointer only, respects reduced-motion) rather than a CSS-only hover transform,
+   since a real pointer-tracked tilt reads as far less gimmicky than a fixed rotate(). */
 .why-feature-card {
-  display: flex; flex-direction: column; background: #FFFDF9; border: 1px solid #E9DED0;
+  display: flex; flex-direction: column; background: #141F2D; border: 1px solid rgba(246,243,238,0.1);
   border-radius: 13px; overflow: hidden; padding: 20px 20px 0;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.05) inset, 0 20px 40px -24px rgba(0,0,0,0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
+.why-feature-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(237,118,45,0.35);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.08) inset, 0 28px 52px -20px rgba(0,0,0,0.7), 0 0 0 1px rgba(237,118,45,0.15);
+}
+@media (prefers-reduced-motion: reduce) { .why-feature-card:hover { transform: none; } }
 .why-feature-icon {
   width: 60px; height: 60px; border-radius: 50%; flex-shrink: 0; margin-bottom: 0.85rem;
-  background: rgba(243,161,132,0.16); border: 1px solid rgba(237,118,45,0.3); color: #ED762D;
+  background: rgba(243,161,132,0.14); border: 1px solid rgba(237,118,45,0.35); color: #ED762D;
   display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 14px -6px rgba(237,118,45,0.35);
 }
 .why-feature-icon svg { width: 30px; height: 30px; }
-.why-feature-card h3 { font-size: 1.4rem; line-height: 1.2; color: #101C32; margin-bottom: 0.45rem; }
-.why-feature-card > p { color: #687080; font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.8rem; flex: 1; }
+.why-feature-card h3 { font-size: 1.4rem; line-height: 1.2; color: #F6F3EE; margin-bottom: 0.45rem; }
+.why-feature-card > p { color: #B7C0CB; font-size: 0.98rem; line-height: 1.5; margin-bottom: 0.8rem; flex: 1; }
 .why-feature-link {
   display: inline-flex; align-items: center; gap: 0.4rem; width: fit-content; margin-bottom: 0.95rem;
   color: #ED762D; font-weight: 600; font-size: 0.98rem; text-decoration: none;

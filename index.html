@@ -191,7 +191,7 @@
   <noscript><style>#streams .reveal { opacity: 1; transform: none; transition: none; }</style></noscript>
 
   <!-- WHY MCGILL -->
-  <section id="why" class="tone-light why-section" aria-labelledby="why-heading">
+  <section id="why" class="tone-dark why-section" aria-labelledby="why-heading">
     <div class="why-shape" aria-hidden="true"></div>
 
     <div class="container why-intro-grid">
@@ -824,6 +824,11 @@
      transform property while the pointer is moving; CSS still applies with no JS. */
   if (fineHover && !prefersReducedMotion) {
     document.querySelectorAll('.stream-card').forEach(function (card) { attachSubtleTilt(card, 1.5, 4); });
+  }
+
+  /* ---------- Why McGill feature cards: same restrained tilt+lift pattern ---------- */
+  if (fineHover && !prefersReducedMotion) {
+    document.querySelectorAll('.why-feature-card').forEach(function (card) { attachSubtleTilt(card, 1.5, 4); });
   }
 
   /* ---------- Deep-link to a specific FAQ item (e.g. "Learn more" from Why McGill) ---------- */
