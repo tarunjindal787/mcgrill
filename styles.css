@@ -117,7 +117,7 @@ p { margin: 0 0 1em; max-width: 68ch; color: var(--text); }
 section { padding: var(--space-xl) 0; scroll-margin-top: calc(var(--header-h) + 16px); }
 .section-eyebrow { font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.14em; font-size: 0.75rem; font-weight: 700; color: var(--coral-text); display: inline-block; margin-bottom: 0.75rem; }
 .section-head { max-width: 62ch; margin-bottom: var(--space-lg); }
-.section-head h2 { font-size: var(--fs-section); }
+.section-head h1, .section-head h2 { font-size: var(--fs-section); }
 
 :focus-visible {
   outline: 3px solid var(--focus);
@@ -484,7 +484,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   text-align: center; padding: var(--space-lg) 1.5rem; background: var(--surface);
   border: 1px solid var(--border); border-radius: var(--radius-card); margin-bottom: var(--space-md);
 }
-.course-search-empty h3 { font-size: 1.15rem; margin-bottom: 0.4rem; }
+.course-search-empty h2 { font-size: 1.15rem; margin-bottom: 0.4rem; }
 .course-search-empty p { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 1.1rem; }
 .quote-tool {
   margin-top: var(--space-lg); background: var(--surface); border: 1px solid var(--border);
@@ -767,7 +767,9 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 /* ============ Student Experience & Student Life ============ */
 /* Scoped literal palette, deliberately not unified with the sitewide --coral tokens --
    this brief specified its own values explicitly (same family as the Student
-   Testimonials palette just below: #ED762D orange, #101C32 navy, #69717D muted text).
+   Testimonials palette just below: #ED762D orange, #101C32 navy, #636B77 muted text --
+   darkened from the brief's own #69717D, which fails WCAG AA body-text contrast
+   (~4.35:1) against this section's #F7F0E5 background; #636B77 passes at ~4.75:1).
    See DESIGN.md. All custom classes are prefixed `student-experience-` and scoped
    under this section's own ID. */
 #student-experience { background: #F7F0E5; }
@@ -781,7 +783,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   line-height: 1.05; max-width: 13ch; margin-bottom: 1.1rem; color: #101C32;
 }
 #student-experience-heading em { color: #ED762D; font-style: normal; }
-.student-experience-copy > p { color: #69717D; font-size: 1.05rem; max-width: 48ch; margin-bottom: 0; }
+.student-experience-copy > p { color: #636B77; font-size: 1.05rem; max-width: 48ch; margin-bottom: 0; }
 
 .student-experience-features { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 1.5rem 0; }
 @media (min-width: 560px) { .student-experience-features { grid-template-columns: 1fr 1fr; column-gap: 2rem; } }
@@ -793,7 +795,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 }
 .student-experience-feature-icon svg { width: 19px; height: 19px; }
 .student-experience-feature h3 { font-size: 1.05rem; margin: 0; color: #101C32; }
-.student-experience-feature p { font-size: 0.9rem; color: #69717D; margin: 0; }
+.student-experience-feature p { font-size: 0.9rem; color: #636B77; margin: 0; }
 
 /* Three-image collage: a large main photo spans the full height of the right
    column, which stacks two supporting photos beside it. */
@@ -970,24 +972,6 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .map-embed:hover { box-shadow: 0 28px 64px -28px rgba(16,28,50,0.28); }
 .map-embed iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-/* ============ FAQ ============ */
-.faq-list { display: grid; gap: 0.9rem; max-width: 760px; }
-.faq-item { border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface); overflow: hidden; scroll-margin-top: calc(var(--header-h) + 16px); }
-.faq-item summary {
-  cursor: pointer; list-style: none; padding: 1.1rem 1.4rem; font-weight: 600; display: flex;
-  align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px;
-}
-.faq-item summary::-webkit-details-marker { display: none; }
-.faq-item summary .chevron { transition: transform 0.2s ease; flex-shrink: 0; }
-.faq-item[open] summary .chevron { transform: rotate(180deg); }
-.faq-item .faq-body { padding: 0 1.4rem 1.25rem; color: var(--text-muted); font-size: 0.95rem; }
-.faq-list:not(.show-all) .faq-extra { display: none; }
-.faq-toggle {
-  all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 0.4rem;
-  margin-top: 1.25rem; color: var(--coral-text); font-weight: 600; font-size: 0.92rem;
-  border-bottom: 1px solid transparent; transition: border-color 0.2s ease; min-height: 44px;
-}
-.faq-toggle:hover { border-color: var(--coral-text); }
 
 /* ============ Enquiry: background wash + quick-action ribbon ============ */
 #enquiry { position: relative; overflow: hidden; }
