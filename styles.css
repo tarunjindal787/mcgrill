@@ -231,7 +231,11 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   flex-shrink: 0;
 }
 @media (min-width: 960px) {
-  nav.main-nav { display: block; }
+  /* margin-left:auto claims all the free space space-between would otherwise have split
+     across all three header-inner children -- keeps the logo pinned to the far left while
+     grouping nav + header-actions together against the right edge, instead of the nav
+     links floating in the middle of the header. */
+  nav.main-nav { display: block; margin-left: auto; }
   .nav-toggle { display: none; }
   #header-cta-desktop { display: inline-flex !important; }
 }
@@ -280,15 +284,21 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    margins shrink to 0 and .hero itself grows taller, rather than content overflowing upward
    behind the fixed header. The translateY below nudges the final centered position down from
    dead-centre without disturbing that auto-grow safety margin (the transform is a paint-time
-   offset, not a layout change, so it can't reintroduce overflow). Pushed further down (from a
-   2.5rem to a 6rem max) so the text block clears the upper third of the frame, where
-   #hero-video's object-position keeps the subject's face across every scene. */
+   offset, not a layout change, so it can't reintroduce overflow). A 6rem max (tried briefly to
+   clear the video's upper-third face framing) combined with hero-content-inner's own header-
+   height-linked top padding below compounded into a visibly oversized gap under the navbar --
+   back to a smaller nudge that still gives some clearance without that empty-space effect. */
 .hero-content {
   position: relative; z-index: 5; margin: auto 0;
-  transform: translateY(clamp(1rem, 12vh, 6rem));
+  transform: translateY(clamp(0px, 5vh, 3rem));
 }
 .hero-content-inner {
-  padding: calc(var(--header-h) + 1.5rem) 1.5rem clamp(3rem, 6vw, 5rem);
+  /* Top padding is a header-overlap safety margin for the rare case where .hero's auto-grow
+     kicks in (tall content / very short viewport) and the auto margins above shrink to 0,
+     not a spacing choice for the normal centered case -- so it only needs to roughly match
+     the real header height, not add a further fixed buffer on top of it (that extra +1.5rem
+     was the other half of the oversized navbar-to-headline gap, alongside the translateY above). */
+  padding: calc(var(--header-h) + 0.5rem) 1.5rem clamp(3rem, 6vw, 5rem);
   color: #fff;
   text-align: center;
 }
