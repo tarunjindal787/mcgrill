@@ -712,7 +712,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   font-size: clamp(2.375rem, 1.3rem + 4.2vw, 4.75rem); line-height: 1.02; letter-spacing: -0.01em;
   color: #F6F3EE; margin-bottom: 1.1rem;
 }
-#settling-in-heading em { color: #F47732; font-style: italic; font-family: var(--font-display); }
+#settling-in-heading em { color: #F47732; font-style: normal; }
 .settling-copy > p { font-size: 1.15rem; line-height: 1.5; max-width: 500px; margin-bottom: 2rem; }
 
 /* Study in Australia feature card: genuine glass -- backdrop-filter over the glow behind it,
@@ -803,7 +803,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .practical-guidance-head { margin-bottom: 2.5rem; position: relative; z-index: 1; }
 .practical-guidance-eyebrow { color: #F47732; }
 #practical-guidance-heading { font-size: clamp(2rem, 1.3rem + 2.6vw, 3.125rem); line-height: 1.1; color: #F6F3EE; margin-bottom: 0; }
-#practical-guidance-heading em { color: #F47732; font-style: italic; font-family: var(--font-display); }
+#practical-guidance-heading em { color: #F47732; font-style: normal; }
 
 /* Three real feature cards (was three plain text columns separated by a divider line) --
    own background, fine border, radius and layered shadow for genuine depth, with a hover
