@@ -1128,21 +1128,74 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .success-card a:hover { color: var(--coral-text); text-decoration: none; }
 
 /* ============ Footer ============ */
-footer.site-footer { background: var(--oled-deep); color: var(--muted-light); padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--oled-line); }
-.footer-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg); }
-.footer-grid h4 { color: var(--white); font-family: var(--font-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
-.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-.footer-grid a { text-decoration: none; color: var(--muted-light); font-size: 0.9rem; }
-.footer-grid a:hover { color: var(--white); }
-.footer-contact-card {
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
-  border-radius: var(--radius-card); padding: 1.25rem 1.4rem;
+/* ============ Footer (index.html + courses.html) ============
+   Own scoped literal palette per this brief's exact hex table -- deep midnight navy /
+   warm cream / coral-orange / muted grey -- same "brief gave exact values, use as given"
+   reasoning as the Settling-in/Practical Guidance and Pathway Explorer sections above,
+   rather than forcing it onto --oled-deep (plain near-black, not navy). */
+:root {
+  --footer-navy: #101C2B;
+  --footer-cream: #FFF1DD;
+  --footer-coral: #FF806B;
+  --footer-muted: #AAB4C0;
 }
-.link-btn {
-  background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer;
-  text-decoration: none; color: var(--muted-light); font-size: 0.9rem; text-align: left;
+footer.site-footer {
+  position: relative; overflow: hidden; background: var(--footer-navy); color: var(--footer-muted);
+  padding: 3.5rem 0 0; border-top: none;
 }
-.link-btn:hover { color: var(--white); }
+/* Subtle coral gradient hairline (was a flat 1px solid line). */
+footer.site-footer::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--footer-coral), transparent);
+  opacity: 0.7;
+}
+/* Two slow-breathing glows (reuses the same pw-glow-breathe keyframe as the Pathway
+   Explorer section for consistency) -- the "subtle animated gradient glow" this brief asked
+   for, kept faint and non-distracting. */
+.footer-glow { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+.footer-glow--coral {
+  top: -10%; left: -8%; width: 480px; height: 480px; max-width: 55vw;
+  background: radial-gradient(circle at 50% 50%, rgba(255,128,107,0.14), rgba(255,128,107,0) 68%);
+  animation: pw-glow-breathe 10s ease-in-out infinite;
+}
+.footer-glow--peach {
+  bottom: -15%; right: -6%; width: 420px; height: 420px; max-width: 50vw;
+  background: radial-gradient(circle at 50% 50%, rgba(231,189,142,0.1), rgba(231,189,142,0) 70%);
+  animation: pw-glow-breathe 12s ease-in-out infinite reverse; animation-delay: -5s;
+}
+@media (prefers-reduced-motion: reduce) { .footer-glow { animation: none; } }
+/* Oversized, low-opacity wordmark as a decorative brand mark near the bottom -- purely
+   typographic, clipped by the footer's own overflow:hidden so it never affects layout or
+   scroll width at any viewport. */
+.footer-wordmark {
+  position: absolute; left: 50%; bottom: -3.5rem; transform: translateX(-50%);
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(5rem, 18vw, 13rem);
+  color: var(--footer-cream); opacity: 0.035; white-space: nowrap; pointer-events: none; z-index: 0;
+  letter-spacing: -0.02em;
+}
+.footer-inner { position: relative; z-index: 1; }
+
+.footer-grid { display: grid; gap: 2.5rem; grid-template-columns: 1.3fr 1fr 1fr 1fr; margin-bottom: 2.5rem; }
+.footer-grid h4 {
+  color: var(--footer-cream); font-family: var(--font-body); font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.1rem;
+}
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+/* Coral hover + an underline that grows from the left on hover/focus, rather than a plain
+   color swap -- the "smooth animated underline on hover" this brief asked for. */
+.footer-grid a, .link-btn {
+  position: relative; display: inline-block; text-decoration: none; color: var(--footer-muted);
+  font-size: 0.9rem; transition: color 0.2s ease;
+}
+.footer-grid a::after, .link-btn::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+  background: var(--footer-coral); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.footer-grid a:hover, .footer-grid a:focus-visible, .link-btn:hover, .link-btn:focus-visible { color: var(--footer-cream); }
+.footer-grid a:hover::after, .footer-grid a:focus-visible::after, .link-btn:hover::after, .link-btn:focus-visible::after { transform: scaleX(1); }
+.link-btn { background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer; text-align: left; }
+
 .draft-banner {
   background: color-mix(in srgb, var(--coral) 10%, transparent); border: 1px solid var(--coral);
   color: var(--coral-text); font-size: 0.82rem; font-weight: 600; padding: 0.75rem 1rem;
@@ -1152,16 +1205,53 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 .legal-body h4:first-child { margin-top: 0; }
 .legal-body p, .legal-body li { font-size: 0.92rem; color: var(--text-muted); }
 .legal-body ul { padding-left: 1.2rem; }
-.footer-brand .brand-logo { margin-bottom: 0.9rem; }
-.footer-brand p { color: var(--muted-light); font-size: 0.88rem; }
-.footer-bottom { border-top: 1px solid var(--oled-line); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.8rem; color: var(--muted-light); }
-.footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
-/* The long copyright/trust sentence between reg-codes and this span forces a wrap at
-   many widths; when JobGen.AI lands alone on its own row, space-between (with nothing
-   else on that row to distribute against) places a single item at the row's start --
-   i.e. the left -- not the right as intended. margin-left:auto keeps it pinned to the
-   right regardless of which row it ends up on. */
+
+.footer-brand .brand-logo { margin-bottom: 1rem; }
+.footer-brand p { color: var(--footer-muted); font-size: 0.88rem; line-height: 1.5; max-width: 34ch; margin-bottom: 1.1rem; }
+.footer-contact-list { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: 0.5rem; font-size: 0.88rem; }
+.footer-contact-list li:first-child { color: var(--footer-muted); }
+.footer-contact-list a { color: var(--footer-cream); text-decoration: none; transition: color 0.2s ease; }
+.footer-contact-list a:hover, .footer-contact-list a:focus-visible { color: var(--footer-coral); }
+/* Social row: minimal rounded buttons, inert (no verified McGill social URLs exist yet --
+   see index.html/courses.html comments) rather than linked to placeholder/unrelated
+   accounts. Coral tint on hover previews the eventual active state. */
+/* .footer-brand .footer-social (not just .footer-social) so this beats the generic
+   `.footer-grid ul { display: grid }` rule above on specificity, not source order --
+   that rule was otherwise stacking these vertically instead of in a row. */
+.footer-brand .footer-social { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.6rem; }
+.footer-social-icon {
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+  border-radius: 50%; border: 1px solid rgba(255,241,221,0.18); color: var(--footer-muted);
+  cursor: default; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.footer-social-icon:hover { border-color: var(--footer-coral); color: var(--footer-coral); background: rgba(255,128,107,0.08); }
+
+.footer-affiliation { font-size: 0.82rem; color: var(--footer-muted); max-width: 70ch; margin: 0 0 1.75rem; }
+.footer-bottom {
+  position: relative; border-top: 1px solid rgba(255,241,221,0.12); padding: 1.5rem 0 2.25rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem 1.5rem; font-size: 0.8rem; color: var(--footer-muted);
+}
+.footer-bottom-left { display: flex; flex-direction: column; gap: 0.3rem; }
+.footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--footer-muted); }
+.footer-bottom-right { display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; }
+.footer-bottom-right .link-btn { font-size: 0.8rem; color: var(--footer-muted); }
+.footer-bottom-right .link-btn:hover { color: var(--footer-cream); }
+/* The long copyright/trust sentence can force a wrap at many widths; when JobGen.AI lands
+   alone on its own row, space-between (with nothing else on that row to distribute against)
+   places a single item at the row's start -- i.e. the left -- not the right as intended.
+   margin-left:auto keeps it pinned to the right regardless of which row it ends up on. */
 .powered-by { margin-left: auto; }
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-social { justify-content: flex-start; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-wordmark { bottom: -2rem; }
+}
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
