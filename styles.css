@@ -1128,21 +1128,74 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .success-card a:hover { color: var(--coral-text); text-decoration: none; }
 
 /* ============ Footer ============ */
-footer.site-footer { background: var(--oled-deep); color: var(--muted-light); padding: var(--space-lg) 0 var(--space-md); border-top: 1px solid var(--oled-line); }
-.footer-grid { display: grid; gap: var(--space-md); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: var(--space-lg); }
-.footer-grid h4 { color: var(--white); font-family: var(--font-body); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
-.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-.footer-grid a { text-decoration: none; color: var(--muted-light); font-size: 0.9rem; }
-.footer-grid a:hover { color: var(--white); }
-.footer-contact-card {
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
-  border-radius: var(--radius-card); padding: 1.25rem 1.4rem;
+/* ============ Footer (index.html + courses.html) ============
+   Own scoped literal palette per this brief's exact hex table -- deep midnight navy /
+   warm cream / coral-orange / muted grey -- same "brief gave exact values, use as given"
+   reasoning as the Settling-in/Practical Guidance and Pathway Explorer sections above,
+   rather than forcing it onto --oled-deep (plain near-black, not navy). */
+:root {
+  --footer-navy: #101C2B;
+  --footer-cream: #FFF1DD;
+  --footer-coral: #FF806B;
+  --footer-muted: #AAB4C0;
 }
-.link-btn {
-  background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer;
-  text-decoration: none; color: var(--muted-light); font-size: 0.9rem; text-align: left;
+footer.site-footer {
+  position: relative; overflow: hidden; background: var(--footer-navy); color: var(--footer-muted);
+  padding: 3.5rem 0 0; border-top: none;
 }
-.link-btn:hover { color: var(--white); }
+/* Subtle coral gradient hairline (was a flat 1px solid line). */
+footer.site-footer::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--footer-coral), transparent);
+  opacity: 0.7;
+}
+/* Two slow-breathing glows (reuses the same pw-glow-breathe keyframe as the Pathway
+   Explorer section for consistency) -- the "subtle animated gradient glow" this brief asked
+   for, kept faint and non-distracting. */
+.footer-glow { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+.footer-glow--coral {
+  top: -10%; left: -8%; width: 480px; height: 480px; max-width: 55vw;
+  background: radial-gradient(circle at 50% 50%, rgba(255,128,107,0.14), rgba(255,128,107,0) 68%);
+  animation: pw-glow-breathe 10s ease-in-out infinite;
+}
+.footer-glow--peach {
+  bottom: -15%; right: -6%; width: 420px; height: 420px; max-width: 50vw;
+  background: radial-gradient(circle at 50% 50%, rgba(231,189,142,0.1), rgba(231,189,142,0) 70%);
+  animation: pw-glow-breathe 12s ease-in-out infinite reverse; animation-delay: -5s;
+}
+@media (prefers-reduced-motion: reduce) { .footer-glow { animation: none; } }
+/* Oversized, low-opacity wordmark as a decorative brand mark near the bottom -- purely
+   typographic, clipped by the footer's own overflow:hidden so it never affects layout or
+   scroll width at any viewport. */
+.footer-wordmark {
+  position: absolute; left: 50%; bottom: -3.5rem; transform: translateX(-50%);
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(5rem, 18vw, 13rem);
+  color: var(--footer-cream); opacity: 0.035; white-space: nowrap; pointer-events: none; z-index: 0;
+  letter-spacing: -0.02em;
+}
+.footer-inner { position: relative; z-index: 1; }
+
+.footer-grid { display: grid; gap: 2.5rem; grid-template-columns: 1.3fr 1fr 1fr 1fr; margin-bottom: 2.5rem; }
+.footer-grid h4 {
+  color: var(--footer-cream); font-family: var(--font-body); font-size: 0.78rem;
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.1rem;
+}
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; }
+/* Coral hover + an underline that grows from the left on hover/focus, rather than a plain
+   color swap -- the "smooth animated underline on hover" this brief asked for. */
+.footer-grid a, .link-btn {
+  position: relative; display: inline-block; text-decoration: none; color: var(--footer-muted);
+  font-size: 0.9rem; transition: color 0.2s ease;
+}
+.footer-grid a::after, .link-btn::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px;
+  background: var(--footer-coral); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.25s ease;
+}
+.footer-grid a:hover, .footer-grid a:focus-visible, .link-btn:hover, .link-btn:focus-visible { color: var(--footer-cream); }
+.footer-grid a:hover::after, .footer-grid a:focus-visible::after, .link-btn:hover::after, .link-btn:focus-visible::after { transform: scaleX(1); }
+.link-btn { background: none; border: none; padding: 0; margin: 0; font: inherit; cursor: pointer; text-align: left; }
+
 .draft-banner {
   background: color-mix(in srgb, var(--coral) 10%, transparent); border: 1px solid var(--coral);
   color: var(--coral-text); font-size: 0.82rem; font-weight: 600; padding: 0.75rem 1rem;
@@ -1152,16 +1205,53 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 .legal-body h4:first-child { margin-top: 0; }
 .legal-body p, .legal-body li { font-size: 0.92rem; color: var(--text-muted); }
 .legal-body ul { padding-left: 1.2rem; }
-.footer-brand .brand-logo { margin-bottom: 0.9rem; }
-.footer-brand p { color: var(--muted-light); font-size: 0.88rem; }
-.footer-bottom { border-top: 1px solid var(--oled-line); padding-top: 1.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; font-size: 0.8rem; color: var(--muted-light); }
-.footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; }
-/* The long copyright/trust sentence between reg-codes and this span forces a wrap at
-   many widths; when JobGen.AI lands alone on its own row, space-between (with nothing
-   else on that row to distribute against) places a single item at the row's start --
-   i.e. the left -- not the right as intended. margin-left:auto keeps it pinned to the
-   right regardless of which row it ends up on. */
+
+.footer-brand .brand-logo { margin-bottom: 1rem; }
+.footer-brand p { color: var(--footer-muted); font-size: 0.88rem; line-height: 1.5; max-width: 34ch; margin-bottom: 1.1rem; }
+.footer-contact-list { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: 0.5rem; font-size: 0.88rem; }
+.footer-contact-list li:first-child { color: var(--footer-muted); }
+.footer-contact-list a { color: var(--footer-cream); text-decoration: none; transition: color 0.2s ease; }
+.footer-contact-list a:hover, .footer-contact-list a:focus-visible { color: var(--footer-coral); }
+/* Social row: minimal rounded buttons, inert (no verified McGill social URLs exist yet --
+   see index.html/courses.html comments) rather than linked to placeholder/unrelated
+   accounts. Coral tint on hover previews the eventual active state. */
+/* .footer-brand .footer-social (not just .footer-social) so this beats the generic
+   `.footer-grid ul { display: grid }` rule above on specificity, not source order --
+   that rule was otherwise stacking these vertically instead of in a row. */
+.footer-brand .footer-social { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.6rem; }
+.footer-social-icon {
+  display: flex; align-items: center; justify-content: center; width: 34px; height: 34px;
+  border-radius: 50%; border: 1px solid rgba(255,241,221,0.18); color: var(--footer-muted);
+  cursor: default; transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.footer-social-icon:hover { border-color: var(--footer-coral); color: var(--footer-coral); background: rgba(255,128,107,0.08); }
+
+.footer-affiliation { font-size: 0.82rem; color: var(--footer-muted); max-width: 70ch; margin: 0 0 1.75rem; }
+.footer-bottom {
+  position: relative; border-top: 1px solid rgba(255,241,221,0.12); padding: 1.5rem 0 2.25rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem 1.5rem; font-size: 0.8rem; color: var(--footer-muted);
+}
+.footer-bottom-left { display: flex; flex-direction: column; gap: 0.3rem; }
+.footer-bottom .reg-codes { font-family: var(--font-mono); font-weight: 600; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; color: var(--footer-muted); }
+.footer-bottom-right { display: flex; align-items: center; gap: 0.6rem; white-space: nowrap; }
+.footer-bottom-right .link-btn { font-size: 0.8rem; color: var(--footer-muted); }
+.footer-bottom-right .link-btn:hover { color: var(--footer-cream); }
+/* The long copyright/trust sentence can force a wrap at many widths; when JobGen.AI lands
+   alone on its own row, space-between (with nothing else on that row to distribute against)
+   places a single item at the row's start -- i.e. the left -- not the right as intended.
+   margin-left:auto keeps it pinned to the right regardless of which row it ends up on. */
 .powered-by { margin-left: auto; }
+
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 640px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-social { justify-content: flex-start; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-wordmark { bottom: -2rem; }
+}
 
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
@@ -1451,8 +1541,8 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
   .enquiry-form-panel { padding: 1.25rem 1rem; }
 }
 
-/* ============ Course Pathway Explorer (courses.html) ============
-   Markup in courses.html, interaction in pathway-explorer.js. Colors/radius/shadow reuse
+/* ============ Course Pathway Explorer (index.html + courses.html) ============
+   Markup in both pages, interaction in pathway-explorer.js. Colors/radius/shadow reuse
    the sitewide tokens (--oled, --coral, --radius-card, --surface, --border, --tag-*) rather
    than inventing a parallel palette -- only the warm-cream background and soft peach accent
    below are new, scoped to this section, since nothing existing covered them. */
@@ -1461,30 +1551,50 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
   --pw-peach: #F7DCC4;
   --pw-peach-deep: #E7BD8E;
 }
-.pathway-explorer { --bg: var(--pw-cream); background: var(--bg); padding-top: var(--space-lg); }
+/* Compact section rhythm (was space-lg/96px top+bottom via the sitewide `section` default) --
+   trimmed to tighten the whole section without crowding any one part of it. position:relative
+   + overflow:hidden contain the two glow blobs below. */
+.pathway-explorer {
+  --bg: var(--pw-cream); background: var(--bg); position: relative; overflow: hidden;
+  padding-top: 2.75rem; padding-bottom: 2.75rem;
+}
+/* Two soft, slow-breathing glow blobs (coral + peach) behind the content -- the "animated
+   background gradients" / "soft coral and peach glow effects" this pass asked for. Kept to a
+   gentle opacity pulse, never moving position, so it reads as ambient light rather than a
+   distracting animation; motion removed entirely under prefers-reduced-motion. */
+.pathway-glow { position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+.pathway-glow--coral {
+  top: -14%; left: -8%; width: 520px; height: 520px; max-width: 55vw;
+  background: radial-gradient(circle at 50% 50%, rgba(178,58,30,0.1), rgba(178,58,30,0) 68%);
+  animation: pw-glow-breathe 9s ease-in-out infinite;
+}
+.pathway-glow--peach {
+  bottom: -20%; right: -10%; width: 460px; height: 460px; max-width: 50vw;
+  background: radial-gradient(circle at 50% 50%, rgba(231,189,142,0.5), rgba(231,189,142,0) 70%);
+  animation: pw-glow-breathe 11s ease-in-out infinite reverse; animation-delay: -4s;
+}
+@keyframes pw-glow-breathe { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+@media (prefers-reduced-motion: reduce) { .pathway-glow { animation: none; } }
+.pathway-explorer > .container { position: relative; z-index: 1; }
 
 /* ---- A. Hero / intro ---- */
 .pathway-intro {
   display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(2rem, 4vw, 4rem);
-  align-items: start; margin-bottom: var(--space-lg);
+  align-items: start; margin-bottom: 2.25rem;
 }
 .pathway-intro-left h2 { font-size: var(--fs-section); margin-top: 0.4rem; }
 .pathway-intro-left h2 em { font-style: italic; font-weight: 500; color: var(--coral-text); }
-.pathway-intro-left > p { font-size: 1.05rem; max-width: 52ch; }
-.pathway-howitworks {
-  display: flex; align-items: flex-start; gap: 0.85rem; margin-top: 1.5rem; padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-.pathway-howitworks-icon {
-  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0;
-  border-radius: 50%; background: var(--pw-peach); color: var(--coral-deep);
-}
-.pathway-howitworks p { margin: 0; font-size: 0.92rem; color: var(--text-muted); max-width: 42ch; }
+.pathway-intro-left > p { font-size: 1.05rem; max-width: 52ch; margin-bottom: 0; }
+/* "How it works" panel: premium glass -- a translucent, blurred surface the two glow blobs
+   show softly through, rather than the previous flat var(--surface) card. */
 .pathway-intro-right {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
-  padding: 1.75rem; box-shadow: 0 20px 40px -28px rgba(15,17,30,0.2);
+  position: relative; background: linear-gradient(165deg, rgba(255,255,255,0.78), rgba(255,255,255,0.4));
+  backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.7); border-radius: var(--radius-card);
+  padding: 1.6rem 1.75rem; box-shadow: 0 24px 44px -28px rgba(15,17,30,0.22), inset 0 1px 0 rgba(255,255,255,0.6);
 }
-.pathway-intro-right h3 { font-size: 1.05rem; margin-bottom: 1.1rem; }
+.pathway-intro-right h3 { font-size: 1.05rem; margin-bottom: 0.6rem; }
+.pathway-howitworks-text { margin: 0 0 1.25rem; font-size: 0.92rem; line-height: 1.5; color: var(--text-muted); padding-bottom: 1.1rem; border-bottom: 1px solid var(--border); }
 .pathway-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
 .pathway-steps li { display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.92rem; color: var(--text-muted); }
 .pathway-step-num {
@@ -1493,19 +1603,37 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 }
 
 /* ---- B. Stream selection + C. Canvas ---- */
-.pathway-section-label { font-size: 1.15rem; margin-bottom: 1.1rem; }
-.pathway-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: stretch; margin-bottom: var(--space-lg); }
+.pathway-section-label { font-size: 1.15rem; margin-bottom: 1rem; }
+.pathway-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: stretch; }
 
 .stream-selector { display: flex; flex-direction: column; gap: 0.85rem; }
+/* Stream cards: same glass treatment as the panel above, plus a softer/longer-eased transition
+   and a coral border-glow on hover (was a flat lift + shadow only). */
 .pw-stream-card {
   display: flex; align-items: center; gap: 0.85rem; position: relative;
-  background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-card);
-  padding: 0.6rem; cursor: grab; text-align: left; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  background: linear-gradient(165deg, rgba(255,255,255,0.8), rgba(255,255,255,0.45));
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.7); border-radius: var(--radius-card);
+  padding: 0.6rem; cursor: grab; text-align: left;
+  transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.pw-stream-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -20px rgba(15,17,30,0.3); }
+.pw-stream-card:hover {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 18px 36px -20px rgba(15,17,30,0.28), 0 0 0 1px rgba(178,58,30,0.14);
+  border-color: rgba(178,58,30,0.3);
+}
 .pw-stream-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .pw-stream-card.is-dragging { opacity: 0.45; cursor: grabbing; }
-.pw-stream-card.is-selected { border-color: var(--oled); box-shadow: 0 0 0 2px var(--oled); }
+.pw-stream-card.is-selected {
+  border-color: var(--oled); box-shadow: 0 0 0 2px var(--oled);
+  animation: pw-select-pulse 0.5s ease;
+}
+@keyframes pw-select-pulse {
+  0% { box-shadow: 0 0 0 2px var(--oled), 0 0 0 0 rgba(15,17,30,0.35); }
+  70% { box-shadow: 0 0 0 2px var(--oled), 0 0 0 12px rgba(15,17,30,0); }
+  100% { box-shadow: 0 0 0 2px var(--oled), 0 0 0 0 rgba(15,17,30,0); }
+}
+@media (prefers-reduced-motion: reduce) { .pw-stream-card, .pw-stream-card:hover { animation: none; transition: border-color 0.2s ease; } }
 .pw-drag-handle {
   display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 20px; color: var(--muted-light);
 }
@@ -1517,28 +1645,45 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 .pw-stream-body p { font-size: 0.8rem; color: var(--text-muted); margin: 0; max-width: 32ch; }
 
 .pathway-canvas {
-  position: relative; min-height: 360px; border-radius: var(--radius-card);
-  border: 2px dashed var(--border); background-color: var(--surface);
-  background-image: radial-gradient(var(--border) 1.4px, transparent 1.4px);
-  background-size: 18px 18px; transition: border-color 0.2s ease, background-color 0.2s ease;
-  display: flex; align-items: center; justify-content: center; padding: 2rem;
+  position: relative; min-height: 300px; border-radius: var(--radius-card);
+  border: 2px dashed var(--border);
+  background-image: linear-gradient(165deg, rgba(255,255,255,0.55), rgba(255,255,255,0.25)),
+    radial-gradient(var(--border) 1.4px, transparent 1.4px);
+  background-size: auto, 18px 18px;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+  display: flex; align-items: center; justify-content: center; padding: 1.75rem;
 }
-.pathway-canvas.is-drag-over { border-color: var(--coral); background-color: var(--pw-peach); }
+.pathway-canvas.is-drag-over { border-color: var(--coral); background-color: var(--pw-peach); box-shadow: 0 0 0 4px rgba(178,58,30,0.1); }
 .pathway-canvas-empty[hidden] { display: none; }
-.pathway-canvas-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem; max-width: 320px; }
+.pathway-canvas-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.6rem; max-width: 320px; }
+/* Animated route: the dashed line "flows" toward the final dot and each dot breathes in
+   sequence -- the "animated connecting lines and pathway dots" this pass asked for. */
 .pathway-route { color: var(--muted-light); }
+.pathway-route path { stroke-dasharray: 5 7; animation: pw-route-flow 2.4s linear infinite; }
+.pathway-route circle { animation: pw-dot-pulse 2.4s ease-in-out infinite; transform-origin: center; transform-box: fill-box; }
+.pathway-route circle:nth-of-type(2) { animation-delay: 0.5s; }
+.pathway-route circle:nth-of-type(3) { animation-delay: 1s; }
+@keyframes pw-route-flow { to { stroke-dashoffset: -24; } }
+@keyframes pw-dot-pulse { 0%, 100% { opacity: 0.55; transform: scale(1); } 50% { opacity: 1; transform: scale(1.35); } }
+@media (prefers-reduced-motion: reduce) { .pathway-route path, .pathway-route circle { animation: none; } }
 .pathway-canvas-icon {
-  display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 50%;
   background: var(--pw-peach); color: var(--coral-deep);
 }
-.pathway-canvas-empty h4 { font-size: 1.1rem; margin: 0.25rem 0 0; }
-.pathway-canvas-empty p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+.pathway-canvas-empty h4 { font-size: 1.05rem; margin: 0.2rem 0 0; }
+.pathway-canvas-empty p { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
 
 /* [hidden] alone would be defeated by the display:flex below (equal specificity, author
    stylesheet beats the UA default) -- state it explicitly so toggling the attribute in
    pathway-explorer.js actually hides this. */
 .pathway-canvas-selected[hidden] { display: none; }
-.pathway-canvas-selected { width: 100%; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.pathway-canvas-selected {
+  width: 100%; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap;
+  animation: pw-selected-in 0.4s cubic-bezier(.22,1,.36,1);
+}
+@keyframes pw-selected-in { from { opacity: 0; transform: scale(0.96) translateY(4px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .pathway-canvas-selected { animation: none; } }
 .pathway-canvas-selected img { width: 72px; height: 72px; border-radius: 14px; object-fit: cover; flex-shrink: 0; }
 .pathway-canvas-selected-text { flex: 1; min-width: 180px; }
 .pathway-canvas-selected-text h4 { font-size: 1.3rem; margin: 0.15rem 0 0.3rem; }
@@ -1556,7 +1701,7 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
 
 /* ---- Responsive ---- */
 @media (max-width: 960px) {
-  .pathway-intro { grid-template-columns: 1fr; }
+  .pathway-intro { grid-template-columns: 1fr; gap: 1.75rem; margin-bottom: 1.75rem; }
   .pathway-layout { grid-template-columns: 1fr; }
   .stream-selector {
     flex-direction: row; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x proximity;
@@ -1565,6 +1710,7 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
   .pathway-canvas { min-height: 220px; }
 }
 @media (max-width: 640px) {
+  .pathway-explorer { padding-top: 2.25rem; padding-bottom: 2.25rem; }
   .pw-stream-body p { display: none; } /* keep mobile cards compact + touch-friendly */
   .pw-stream-card { flex: 0 0 200px; }
   .pathway-canvas-selected { flex-direction: column; align-items: flex-start; }
