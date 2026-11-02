@@ -55,7 +55,7 @@
   --radius-pill: 999px;
   --radius-focus: 6px;
 
-  --header-h: 88px; /* synced to the real header height via JS; this is the pre-JS fallback */
+  --header-h: 72px; /* synced to the real header height via JS; this is the pre-JS fallback */
 
   /* Default (base) page tokens -- used only by chrome that isn't part of
      the alternating sequence (header/nav, modals). Content sections set
@@ -193,7 +193,12 @@ section { padding: var(--space-xl) 0; scroll-margin-top: calc(var(--header-h) + 
    than only the darker ones. */
 header.site-header {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 1.75rem 1.25rem 0;
+  /* Symmetric top/bottom padding -- was 1.75rem top / 0 bottom, which left ~41px of
+     empty space above the logo vs ~13px below it inside the fixed header box, reading
+     as an oversized gap between the true top of the page and the nav. Padding is now
+     equal on both edges and .header-inner below gets an explicit height instead of a
+     calc() that only ever accounted for the (asymmetric) top padding. */
+  padding: 0.75rem 1.25rem;
   background-color: rgba(11,15,23,0.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   box-shadow: none; border-bottom: 1px solid rgba(255,255,255,0.06);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -208,10 +213,10 @@ header.site-header.is-scrolled {
 .header-inner {
   max-width: 1280px; margin: 0 auto;
   display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  min-height: calc(var(--header-h) - 1.75rem);
-}
-@media (max-width: 480px) {
-  :root { --header-h: 80px; }
+  /* Fixed height (was calc(var(--header-h) - 1.75rem), which baked in the old
+     asymmetric padding) -- comfortably fits the 34px logo and ~45px-tall primary
+     button, centered by align-items, at every breakpoint. */
+  min-height: 48px;
 }
 .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; }
 .brand-logo { height: 34px; width: auto; display: block; flex-shrink: 0; filter: drop-shadow(0 1px 6px rgba(0,0,0,0.5)); }
