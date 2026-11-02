@@ -158,15 +158,15 @@
             <span class="pathway-howitworks-icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </span>
-            <p>Drag a stream into the canvas, or simply tap one to select it &mdash; your pathway appears instantly, with no page reload.</p>
+            <p>Drag a stream into the canvas, or simply tap one to select it &mdash; we'll take you straight to its courses, with no extra steps.</p>
           </div>
         </div>
         <div class="pathway-intro-right">
           <h3>How it works</h3>
           <ol class="pathway-steps">
             <li><span class="pathway-step-num">1</span><span>Choose the educational stream you're interested in.</span></li>
-            <li><span class="pathway-step-num">2</span><span>Tell us where you are in your learning journey.</span></li>
-            <li><span class="pathway-step-num">3</span><span>See your qualification pathway, starting from where you are now.</span></li>
+            <li><span class="pathway-step-num">2</span><span>Drag it into the canvas, or just tap to select it.</span></li>
+            <li><span class="pathway-step-num">3</span><span>Its matching courses open right away.</span></li>
           </ol>
         </div>
       </div>
@@ -188,7 +188,7 @@
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
             </span>
             <h4>Choose an educational stream</h4>
-            <p>Select or drag a stream here to explore your learning journey.</p>
+            <p>Select or drag a stream here to open its courses.</p>
           </div>
           <div class="pathway-canvas-selected" id="pathway-canvas-selected" hidden>
             <img id="pathway-canvas-img" src="" alt="" width="64" height="64">
@@ -196,24 +196,11 @@
               <span class="section-eyebrow" id="pathway-canvas-eyebrow"></span>
               <h4 id="pathway-canvas-title"></h4>
               <p id="pathway-canvas-desc"></p>
+              <p class="pathway-canvas-status" id="pathway-canvas-status" aria-hidden="true"></p>
             </div>
-            <button type="button" class="btn-ghost-small" id="pathway-change-stream">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3 12a9 9 0 0 1 15.3-6.4M21 12a9 9 0 0 1-15.3 6.4M15 3v5h-5M9 21v-5h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Change stream
-            </button>
+            <span class="pathway-canvas-spinner" aria-hidden="true"></span>
           </div>
         </div>
-      </div>
-
-      <div class="pathway-journey" id="pathway-journey" hidden>
-        <h3>Your pathway in <span id="pathway-journey-stream"></span></h3>
-        <p class="pathway-journey-q">Where are you in your learning journey?</p>
-        <div class="experience-selector" id="experience-selector" role="group" aria-label="Your experience level">
-          <button type="button" class="experience-chip" data-exp="new" aria-pressed="true">I'm new to this field</button>
-          <button type="button" class="experience-chip" data-exp="some" aria-pressed="false">I have some experience</button>
-          <button type="button" class="experience-chip" data-exp="qualified" aria-pressed="false">I already have a qualification</button>
-        </div>
-        <div class="qualification-timeline" id="qualification-timeline" role="group" aria-label="Qualification pathway"><!-- populated by pathway-explorer.js --></div>
       </div>
 
     </div>

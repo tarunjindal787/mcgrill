@@ -190,6 +190,67 @@
   </section>
   <noscript><style>#streams .reveal { opacity: 1; transform: none; transition: none; }</style></noscript>
 
+  <!-- COURSE PATHWAY EXPLORER -->
+  <section id="pathway-explorer" class="tone-light pathway-explorer">
+    <div class="container">
+
+      <div class="pathway-intro reveal">
+        <div class="pathway-intro-left">
+          <span class="section-eyebrow">Discover Where Your Future Can Take You</span>
+          <h2>See where your next step <em>could take you.</em></h2>
+          <p>Explore your study options, understand your learning journey and discover the career opportunities that could open up with McGill Institute.</p>
+          <div class="pathway-howitworks">
+            <span class="pathway-howitworks-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </span>
+            <p>Drag a stream into the canvas, or simply tap one to select it &mdash; we'll take you straight to its courses, with no extra steps.</p>
+          </div>
+        </div>
+        <div class="pathway-intro-right">
+          <h3>How it works</h3>
+          <ol class="pathway-steps">
+            <li><span class="pathway-step-num">1</span><span>Choose the educational stream you're interested in.</span></li>
+            <li><span class="pathway-step-num">2</span><span>Drag it into the canvas, or just tap to select it.</span></li>
+            <li><span class="pathway-step-num">3</span><span>Its matching courses open right away.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <h3 class="pathway-section-label reveal">Drag the area you want to study</h3>
+
+      <div class="pathway-layout reveal">
+        <div class="stream-selector" id="stream-selector" role="group" aria-label="Educational streams"><!-- populated by pathway-explorer.js from STREAMS/COURSES --></div>
+
+        <div class="pathway-canvas" id="pathway-canvas" aria-live="polite">
+          <div class="pathway-canvas-empty" id="pathway-canvas-empty">
+            <svg class="pathway-route" width="220" height="120" viewBox="0 0 220 120" fill="none" aria-hidden="true">
+              <path d="M14 100 C 60 100, 60 40, 110 40 S 160 100, 206 20" stroke="currentColor" stroke-width="2" stroke-dasharray="5 7" stroke-linecap="round"/>
+              <circle cx="14" cy="100" r="5" fill="currentColor"/>
+              <circle cx="110" cy="40" r="5" fill="currentColor"/>
+              <circle cx="206" cy="20" r="5" fill="currentColor"/>
+            </svg>
+            <span class="pathway-canvas-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.5-7-11a7 7 0 1 1 14 0c0 5.5-7 11-7 11z" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="10" r="2.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            </span>
+            <h4>Choose an educational stream</h4>
+            <p>Select or drag a stream here to open its courses.</p>
+          </div>
+          <div class="pathway-canvas-selected" id="pathway-canvas-selected" hidden>
+            <img id="pathway-canvas-img" src="" alt="" width="64" height="64">
+            <div class="pathway-canvas-selected-text">
+              <span class="section-eyebrow" id="pathway-canvas-eyebrow"></span>
+              <h4 id="pathway-canvas-title"></h4>
+              <p id="pathway-canvas-desc"></p>
+              <p class="pathway-canvas-status" id="pathway-canvas-status" aria-hidden="true"></p>
+            </div>
+            <span class="pathway-canvas-spinner" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- WHY MCGILL -->
   <section id="why" class="tone-dark why-section" aria-labelledby="why-heading">
     <div class="why-shape" aria-hidden="true"></div>
@@ -762,7 +823,9 @@
   </div>
 </div>
 
+<script src="courses-data.js"></script>
 <script src="common.js"></script>
+<script src="pathway-explorer.js"></script>
 <script>
 (function () {
   "use strict";

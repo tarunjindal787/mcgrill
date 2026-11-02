@@ -1,18 +1,16 @@
-/* ---------- Course Pathway Explorer (courses.html only) ----------
-   Reads STREAMS and COURSES (courses-data.js) -- no new data is invented here. Renders five
-   interactive components into the #pathway-explorer markup already in courses.html:
+/* ---------- Course Pathway Explorer (index.html + courses.html) ----------
+   Reads STREAMS and COURSES (courses-data.js) -- no new data is invented here. Renders two
+   interactive components into whichever page includes the #pathway-explorer markup:
 
-     StreamSelector        -> #stream-selector   (drag source + click/tap target, one card per STREAMS entry)
-     PathwayCanvas         -> #pathway-canvas     (drop target; toggles its empty/selected states)
-     ExperienceSelector    -> #experience-selector (segmented control: new / some experience / qualified)
-     QualificationTimeline -> #qualification-timeline (ordered nodes for the selected stream)
-     QualificationCard     -> renderQualificationCard() (one card per course within the timeline)
+     StreamSelector -> #stream-selector  (drag source + click/tap target, one card per STREAMS entry)
+     PathwayCanvas  -> #pathway-canvas   (drop target; toggles its empty/selected/opening states)
 
-   Everything here is client-side state (currentStream / currentExperience) -- selecting a
-   stream or experience level re-renders the timeline in place, no page reload. Duration,
-   fees and career outcomes aren't tracked anywhere in COURSES, so cards point to the site's
-   existing "confirmed on enquiry" course modal (reused via its own View details button --
-   see openCourseModal()) rather than inventing numbers or job titles. */
+   Selecting a stream (drag-drop, click, or Enter/Space) briefly shows it in the canvas, then
+   opens that stream's courses: on courses.html it fires the existing stream filter-chip
+   (instant, no reload, reuses the filter bar's own logic) and scrolls up to the grid; on any
+   other page (index.html) it navigates to courses.html?stream=<id>, which the same filter bar
+   already reads as a deep link. There is deliberately no second "pick your experience level"
+   step in between -- selecting a stream takes you straight to its courses. */
 
 (function () {
   "use strict";
@@ -25,27 +23,12 @@
   var canvasEyebrowEl = document.getElementById('pathway-canvas-eyebrow');
   var canvasTitleEl = document.getElementById('pathway-canvas-title');
   var canvasDescEl = document.getElementById('pathway-canvas-desc');
-  var changeStreamBtn = document.getElementById('pathway-change-stream');
-  var journeyEl = document.getElementById('pathway-journey');
-  var journeyStreamNameEl = document.getElementById('pathway-journey-stream');
-  var experienceSelectorEl = document.getElementById('experience-selector');
-  var timelineEl = document.getElementById('qualification-timeline');
+  var canvasStatusEl = document.getElementById('pathway-canvas-status');
 
   if (!selectorEl || !canvasEl) return; /* explorer markup not on this page */
 
-  /* AQF level ordering -- a student's starting point within a stream is read off this,
-     not invented. General English has no AQF level (`level: null` in COURSES), so it
-     always sorts first/alone. */
-  var LEVEL_ORDER = { 'Certificate III': 1, 'Certificate IV': 2, 'Diploma': 3, 'Graduate Diploma': 4 };
-
-  var currentStream = null;
-  var currentExperience = 'new';
-
-  function coursesForStream(streamId) {
-    return COURSES.filter(function (c) { return c.stream === streamId; })
-      .slice()
-      .sort(function (a, b) { return (LEVEL_ORDER[a.level] || 0) - (LEVEL_ORDER[b.level] || 0); });
-  }
+  var OPEN_DELAY_MS = 450; /* lets the "opening <stream>..." state register before navigating/filtering */
+  var opening = false;
 
   function qualificationCountLabel(streamId) {
     if (streamId === 'english') return 'General English';
@@ -58,7 +41,7 @@
     selectorEl.innerHTML = STREAMS.map(function (s) {
       return (
         '<div class="pw-stream-card" data-stream="' + s.id + '" role="button" tabindex="0" ' +
-          'draggable="true" aria-pressed="false" aria-label="Select ' + s.label + ' as your educational stream">' +
+          'draggable="true" aria-pressed="false" aria-label="Open ' + s.label + ' courses">' +
           '<span class="pw-drag-handle" aria-hidden="true" title="Drag into the canvas">' +
             '<svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="6" r="1.6" fill="currentColor"/><circle cx="16" cy="6" r="1.6" fill="currentColor"/><circle cx="8" cy="12" r="1.6" fill="currentColor"/><circle cx="16" cy="12" r="1.6" fill="currentColor"/><circle cx="8" cy="18" r="1.6" fill="currentColor"/><circle cx="16" cy="18" r="1.6" fill="currentColor"/></svg>' +
           '</span>' +
@@ -83,10 +66,10 @@
 
   /* ---------- PathwayCanvas ---------- */
   function selectStream(streamId) {
+    if (opening) return; /* already mid-transition to that stream's courses */
     var stream = STREAMS.filter(function (s) { return s.id === streamId; })[0];
     if (!stream) return;
-    currentStream = streamId;
-    currentExperience = 'new';
+    opening = true;
 
     canvasEmptyEl.hidden = true;
     canvasSelectedEl.hidden = false;
@@ -95,83 +78,25 @@
     canvasEyebrowEl.textContent = qualificationCountLabel(streamId);
     canvasTitleEl.textContent = stream.label;
     canvasDescEl.textContent = stream.shortDesc;
-
+    canvasStatusEl.textContent = 'Opening ' + stream.label + ' courses…';
     markSelectedStreamCard(streamId);
 
-    journeyStreamNameEl.textContent = stream.label;
-    journeyEl.hidden = false;
-    experienceSelectorEl.querySelectorAll('.experience-chip').forEach(function (chip) {
-      chip.setAttribute('aria-pressed', chip.getAttribute('data-exp') === 'new' ? 'true' : 'false');
-    });
-
-    renderQualificationTimeline();
-    if (!prefersReducedMotion) journeyEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    window.setTimeout(function () { openStreamCourses(streamId); }, prefersReducedMotion ? 0 : OPEN_DELAY_MS);
   }
 
-  function changeStream() {
-    currentStream = null;
-    canvasSelectedEl.hidden = true;
-    canvasEmptyEl.hidden = false;
-    journeyEl.hidden = true;
-    markSelectedStreamCard(null);
-  }
-
-  /* ---------- ExperienceSelector ---------- */
-  function setExperience(level) {
-    currentExperience = level;
-    experienceSelectorEl.querySelectorAll('.experience-chip').forEach(function (chip) {
-      chip.setAttribute('aria-pressed', chip.getAttribute('data-exp') === level ? 'true' : 'false');
-    });
-    renderQualificationTimeline();
-  }
-
-  function startIndexForExperience(count) {
-    if (currentExperience === 'qualified') return count - 1;
-    if (currentExperience === 'some') return Math.min(1, count - 1);
-    return 0; /* 'new' */
-  }
-
-  /* ---------- QualificationCard ---------- */
-  function renderQualificationCard(course, nodeNumber, isStart) {
-    return (
-      '<div class="qualification-item' + (isStart ? ' is-start' : '') + '">' +
-        '<div class="qualification-node-row">' +
-          '<span class="qualification-node">' + nodeNumber + '</span>' +
-          '<span class="qualification-connector" aria-hidden="true"></span>' +
-        '</div>' +
-        '<div class="qualification-card">' +
-          (isStart ? '<span class="pw-start-badge">Your starting point</span>' : '') +
-          '<div class="qualification-card-head">' +
-            (course.level ? '<span class="course-level">' + course.level + '</span>' : '<span class="course-level">General English</span>') +
-            '<h4>' + course.name + '</h4>' +
-          '</div>' +
-          '<p>' + course.desc + '</p>' +
-          '<p class="qualification-card-meta">Duration &amp; fees confirmed on enquiry</p>' +
-          '<button type="button" class="btn-ghost-small" data-view-course="' + course.id + '">' +
-            'View full details' +
-            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-          '</button>' +
-        '</div>' +
-      '</div>'
-    );
-  }
-
-  /* ---------- QualificationTimeline ---------- */
-  function renderQualificationTimeline() {
-    if (!currentStream) { timelineEl.innerHTML = ''; return; }
-    var streamCourses = coursesForStream(currentStream);
-    var startIndex = startIndexForExperience(streamCourses.length);
-    timelineEl.innerHTML = streamCourses.map(function (course, i) {
-      return renderQualificationCard(course, i + 1, i === startIndex);
-    }).join('');
-  }
-
-  /* ---------- Reused course modal (courses.html's own inline script owns it; we just
-       trigger its existing "View details" button for the matching course card instead of
-       re-implementing the modal or re-typing duration/fees/entry-requirement copy). ---------- */
-  function openCourseModal(courseId) {
-    var trigger = document.querySelector('#course-grid [data-course-id="' + courseId + '"]');
-    if (trigger) trigger.click();
+  /* Reuses the existing stream filter-chip + its own click handler (courses.html only) instead
+     of re-implementing filtering here; falls back to a real navigation with the same ?stream=
+     deep link the filter bar already reads on load (index.html, or any other page). */
+  function openStreamCourses(streamId) {
+    var filterChip = document.querySelector('.filter-chip[data-filter="' + streamId + '"]');
+    if (filterChip) {
+      filterChip.click();
+      var coursesSection = document.getElementById('courses');
+      if (coursesSection) coursesSection.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
+      opening = false;
+    } else {
+      window.location.href = 'courses.html?stream=' + encodeURIComponent(streamId) + '#courses';
+    }
   }
 
   /* ---------- Interaction wiring: click/tap (all devices) + native HTML5 drag (fine-pointer
@@ -214,25 +139,7 @@
     if (streamId) selectStream(streamId);
   });
 
-  changeStreamBtn.addEventListener('click', changeStream);
-
-  experienceSelectorEl.addEventListener('click', function (e) {
-    var chip = e.target.closest('.experience-chip');
-    if (chip) setExperience(chip.getAttribute('data-exp'));
-  });
-
-  timelineEl.addEventListener('click', function (e) {
-    var btn = e.target.closest('[data-view-course]');
-    if (btn) openCourseModal(btn.getAttribute('data-view-course'));
-  });
-
   /* ---------- Init ---------- */
   renderStreamSelector();
-
-  /* Same ?stream= deep link the existing filter bar reads, so arriving from the homepage's
-     stream cards (or the filter bar above) pre-selects the explorer too. */
-  var VALID_STREAMS = STREAMS.map(function (s) { return s.id; });
-  var requestedStream = new URLSearchParams(window.location.search).get('stream');
-  if (VALID_STREAMS.indexOf(requestedStream) !== -1) selectStream(requestedStream);
 
 })();
