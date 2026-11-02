@@ -588,7 +588,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .filter-chip[aria-pressed="true"]:hover { transform: none; box-shadow: none; }
 @media (prefers-reduced-motion: reduce) { .filter-chip:hover { transform: none; } }
 .filter-count {
-  font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; line-height: 1;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; line-height: 1;
   background: rgba(255,255,255,0.15); border-radius: var(--radius-pill); padding: 0.2rem 0.4rem;
 }
 .filter-chip:not([aria-pressed="true"]) .filter-count { background: var(--bg); color: var(--text-muted); }
@@ -613,7 +613,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 @media (prefers-reduced-motion: reduce) { .course-featured:hover { transform: none; } }
 .course-featured-label {
   position: absolute; top: 1.1rem; left: 1.1rem; z-index: 2; font-family: var(--font-mono); font-weight: 700;
-  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--coral);
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #fff; background: var(--coral);
   padding: 0.35rem 0.8rem; border-radius: var(--radius-pill); box-shadow: 0 6px 14px -6px rgba(178,58,30,0.5);
 }
 .course-featured-media { position: relative; min-height: 220px; overflow: hidden; background: var(--pw-peach); }
@@ -1804,7 +1804,7 @@ footer.site-footer::before {
 .pw-stream-photo { flex-shrink: 0; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; }
 .pw-stream-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pw-stream-body { min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; }
-.pw-stream-body .tag { margin-bottom: 0.1rem; font-size: 0.65rem; padding: 0.2rem 0.55rem; }
+.pw-stream-body .tag { margin-bottom: 0.1rem; font-size: 0.7rem; padding: 0.2rem 0.55rem; }
 .pw-stream-body h4 { font-size: 0.98rem; margin: 0; }
 .pw-stream-body p { font-size: 0.8rem; color: var(--text-muted); margin: 0; max-width: 32ch; }
 
