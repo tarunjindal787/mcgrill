@@ -119,6 +119,15 @@
         ],
         "createdAt": "2026-10-29T05:34:29.133Z",
         "reason": "Intentional: Caveat (weight 600) is used solely for the decorative 'Your Future Starts Here' handwritten accent beside the Why McGill hero photo -- a deliberate one-off per that section's brief, documented in DESIGN.md, not an undocumented drift. Newsreader/IBM Plex Sans remain the site's two functional typefaces everywhere else."
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "courses.html"
+        ],
+        "createdAt": "2026-11-02T07:42:05.268Z",
+        "reason": "intentional: #pathway-canvas-img is an empty <img> inside hidden #pathway-canvas-selected, filled by pathway-explorer.js with the selected stream's photo before the container is unhidden"
       }
     ]
   }

@@ -1363,3 +1363,161 @@ footer.site-footer { background: var(--oled-deep); color: var(--muted-light); pa
   .enquiry-info { padding: 1.25rem 1rem; }
   .enquiry-form-panel { padding: 1.25rem 1rem; }
 }
+
+/* ============ Course Pathway Explorer (courses.html) ============
+   Markup in courses.html, interaction in pathway-explorer.js. Colors/radius/shadow reuse
+   the sitewide tokens (--oled, --coral, --radius-card, --surface, --border, --tag-*) rather
+   than inventing a parallel palette -- only the warm-cream background and soft peach accent
+   below are new, scoped to this section, since nothing existing covered them. */
+:root {
+  --pw-cream: #FBF7F0;
+  --pw-peach: #F7DCC4;
+  --pw-peach-deep: #E7BD8E;
+}
+.pathway-explorer { --bg: var(--pw-cream); background: var(--bg); padding-top: var(--space-lg); }
+
+/* ---- A. Hero / intro ---- */
+.pathway-intro {
+  display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(2rem, 4vw, 4rem);
+  align-items: start; margin-bottom: var(--space-lg);
+}
+.pathway-intro-left h2 { font-size: var(--fs-section); margin-top: 0.4rem; }
+.pathway-intro-left h2 em { font-style: italic; font-weight: 500; color: var(--coral-text); }
+.pathway-intro-left > p { font-size: 1.05rem; max-width: 52ch; }
+.pathway-howitworks {
+  display: flex; align-items: flex-start; gap: 0.85rem; margin-top: 1.5rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.pathway-howitworks-icon {
+  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0;
+  border-radius: 50%; background: var(--pw-peach); color: var(--coral-deep);
+}
+.pathway-howitworks p { margin: 0; font-size: 0.92rem; color: var(--text-muted); max-width: 42ch; }
+.pathway-intro-right {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+  padding: 1.75rem; box-shadow: 0 20px 40px -28px rgba(15,17,30,0.2);
+}
+.pathway-intro-right h3 { font-size: 1.05rem; margin-bottom: 1.1rem; }
+.pathway-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
+.pathway-steps li { display: flex; align-items: flex-start; gap: 0.85rem; font-size: 0.92rem; color: var(--text-muted); }
+.pathway-step-num {
+  display: flex; align-items: center; justify-content: center; width: 26px; height: 26px; flex-shrink: 0;
+  border-radius: 50%; background: var(--oled); color: #fff; font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem;
+}
+
+/* ---- B. Stream selection + C. Canvas ---- */
+.pathway-section-label { font-size: 1.15rem; margin-bottom: 1.1rem; }
+.pathway-layout { display: grid; grid-template-columns: 300px 1fr; gap: 1.5rem; align-items: stretch; margin-bottom: var(--space-lg); }
+
+.stream-selector { display: flex; flex-direction: column; gap: 0.85rem; }
+.pw-stream-card {
+  display: flex; align-items: center; gap: 0.85rem; position: relative;
+  background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius-card);
+  padding: 0.6rem; cursor: grab; text-align: left; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.pw-stream-card:hover { transform: translateY(-3px); box-shadow: 0 16px 32px -20px rgba(15,17,30,0.3); }
+.pw-stream-card:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.pw-stream-card.is-dragging { opacity: 0.45; cursor: grabbing; }
+.pw-stream-card.is-selected { border-color: var(--oled); box-shadow: 0 0 0 2px var(--oled); }
+.pw-drag-handle {
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; width: 20px; color: var(--muted-light);
+}
+.pw-stream-photo { flex-shrink: 0; width: 64px; height: 64px; border-radius: 12px; overflow: hidden; }
+.pw-stream-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pw-stream-body { min-width: 0; display: flex; flex-direction: column; gap: 0.2rem; }
+.pw-stream-body .tag { margin-bottom: 0.1rem; font-size: 0.65rem; padding: 0.2rem 0.55rem; }
+.pw-stream-body h4 { font-size: 0.98rem; margin: 0; }
+.pw-stream-body p { font-size: 0.8rem; color: var(--text-muted); margin: 0; max-width: 32ch; }
+
+.pathway-canvas {
+  position: relative; min-height: 360px; border-radius: var(--radius-card);
+  border: 2px dashed var(--border); background-color: var(--surface);
+  background-image: radial-gradient(var(--border) 1.4px, transparent 1.4px);
+  background-size: 18px 18px; transition: border-color 0.2s ease, background-color 0.2s ease;
+  display: flex; align-items: center; justify-content: center; padding: 2rem;
+}
+.pathway-canvas.is-drag-over { border-color: var(--coral); background-color: var(--pw-peach); }
+.pathway-canvas-empty[hidden] { display: none; }
+.pathway-canvas-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem; max-width: 320px; }
+.pathway-route { color: var(--muted-light); }
+.pathway-canvas-icon {
+  display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%;
+  background: var(--pw-peach); color: var(--coral-deep);
+}
+.pathway-canvas-empty h4 { font-size: 1.1rem; margin: 0.25rem 0 0; }
+.pathway-canvas-empty p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+/* [hidden] alone would be defeated by the display:flex below (equal specificity, author
+   stylesheet beats the UA default) -- state it explicitly so toggling the attribute in
+   pathway-explorer.js actually hides this. */
+.pathway-canvas-selected[hidden] { display: none; }
+.pathway-canvas-selected { width: 100%; display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
+.pathway-canvas-selected img { width: 72px; height: 72px; border-radius: 14px; object-fit: cover; flex-shrink: 0; }
+.pathway-canvas-selected-text { flex: 1; min-width: 180px; }
+.pathway-canvas-selected-text h4 { font-size: 1.3rem; margin: 0.15rem 0 0.3rem; }
+.pathway-canvas-selected-text p { margin: 0; color: var(--text-muted); font-size: 0.92rem; }
+#pathway-change-stream { flex-shrink: 0; }
+
+/* ---- D. Learning journey / qualification progression ---- */
+.pathway-journey { margin-top: var(--space-md); }
+.pathway-journey > h3 { font-size: 1.4rem; margin-bottom: 0.35rem; }
+.pathway-journey > h3 span { font-style: italic; font-family: var(--font-display); color: var(--coral-text); }
+.pathway-journey-q { font-weight: 600; margin-bottom: 1rem; }
+
+.experience-selector {
+  display: inline-flex; flex-wrap: wrap; gap: 0.4rem; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-pill); padding: 0.3rem; margin-bottom: 2rem;
+}
+.experience-chip {
+  font-family: var(--font-body); font-weight: 600; font-size: 0.85rem; padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-pill); border: none; background: transparent; color: var(--text); cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease; min-height: 44px;
+}
+.experience-chip[aria-pressed="true"] { background: var(--oled); color: #fff; }
+
+.qualification-timeline { display: flex; gap: 1.5rem; overflow-x: auto; padding: 0.25rem 0.25rem 1rem; scroll-snap-type: x proximity; }
+.qualification-item { flex: 0 0 280px; scroll-snap-align: start; }
+.qualification-node-row { display: flex; align-items: center; margin-bottom: 1rem; }
+.qualification-node {
+  display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%; background: var(--surface); border: 2px solid var(--border); color: var(--text-muted);
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; z-index: 1;
+}
+.qualification-item.is-start .qualification-node { background: var(--oled); border-color: var(--oled); color: #fff; }
+.qualification-connector { flex: 1; height: 2px; background: var(--border); margin-left: -1px; }
+.qualification-item:last-child .qualification-connector { visibility: hidden; }
+
+.qualification-card {
+  position: relative; height: 100%; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-card); padding: 1.35rem; display: flex; flex-direction: column; gap: 0.6rem;
+}
+.qualification-item.is-start .qualification-card { background: var(--oled); border-color: var(--oled); color: #fff; }
+.qualification-item.is-start .qualification-card-meta,
+.qualification-item.is-start .qualification-card p { color: rgba(255,255,255,0.75); }
+.qualification-item.is-start .qualification-card .btn-ghost-small { color: var(--coral-text-dark); }
+.pw-start-badge {
+  align-self: flex-start; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--coral-text-dark); background: rgba(255,255,255,0.1);
+  padding: 0.25rem 0.6rem; border-radius: var(--radius-pill);
+}
+.qualification-card-head h4 { font-size: 1.05rem; margin: 0.4rem 0 0; }
+.qualification-card p { font-size: 0.88rem; margin: 0; }
+.qualification-card-meta { font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
+.qualification-card .btn-ghost-small { margin-top: auto; align-self: flex-start; }
+
+/* ---- Responsive ---- */
+@media (max-width: 960px) {
+  .pathway-intro { grid-template-columns: 1fr; }
+  .pathway-layout { grid-template-columns: 1fr; }
+  .stream-selector {
+    flex-direction: row; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x proximity;
+  }
+  .pw-stream-card { flex: 0 0 240px; scroll-snap-align: start; }
+  .pathway-canvas { min-height: 220px; }
+}
+@media (max-width: 640px) {
+  .pw-stream-body p { display: none; } /* keep mobile cards compact + touch-friendly */
+  .pw-stream-card { flex: 0 0 200px; }
+  .pathway-canvas-selected { flex-direction: column; align-items: flex-start; }
+  .qualification-item { flex-basis: 240px; }
+}

@@ -20,3 +20,17 @@ var COURSES = [
   { id: 'bsb80120', code: 'BSB80120', name: 'Graduate Diploma of Management (Learning)', level: 'Graduate Diploma', stream: 'management', tagLabel: 'Management', desc: 'Postgraduate management training focused on leading learning and development.', img: 'photos/course-management.jpg', imgAlt: 'A group of colleagues in a discussion around a meeting table' },
   { id: 'english', code: 'Code to be confirmed', name: 'General English Programs', level: null, stream: 'english', tagLabel: 'English', desc: 'English language training for further study or daily life in Australia.', img: 'photos/course-english.jpg', imgAlt: 'A student smiling in a lecture hall' }
 ];
+
+/* ---------- Stream metadata (Course Pathway Explorer) ----------
+   Used only by pathway-explorer.js (courses.html). `shortDesc` and `img`/`imgAlt` are the
+   same copy and photos already used for these five streams on index.html's #streams
+   section -- restated here rather than re-typed so the explorer's stream cards match the
+   rest of the site. Qualification counts and AQF ordering are derived from COURSES at
+   render time (see pathway-explorer.js), not hardcoded, so the two arrays can't drift. */
+var STREAMS = [
+  { id: 'engineering', label: 'Engineering', shortDesc: 'Fabrication trade training.', img: 'photos/course-engineering.jpg', imgAlt: 'A welder working on a metal fabrication project in a workshop' },
+  { id: 'hospitality', label: 'Hospitality', shortDesc: 'Kitchen & hotel management.', img: 'photos/course-hospitality-kitchen.jpg', imgAlt: 'A chef preparing food in a commercial kitchen' },
+  { id: 'business', label: 'Business', shortDesc: 'Core & advanced business skills.', img: 'photos/course-business-diploma.jpg', imgAlt: 'A presenter discussing a sales chart to colleagues in an office' },
+  { id: 'management', label: 'Management', shortDesc: 'Postgraduate leadership training.', img: 'photos/course-management.jpg', imgAlt: 'A group of colleagues in a discussion around a meeting table' },
+  { id: 'english', label: 'English', shortDesc: 'General English programs.', img: 'photos/course-english.jpg', imgAlt: 'A student smiling in a lecture hall' }
+];
