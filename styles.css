@@ -724,57 +724,80 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   .compare-bar-item-name { display: none; } /* thumbnails + count still convey the selection at this width */
 }
 
-/* ============ Course Discovery: white canvas / black cards (scoped to #courses only) ============
-   Explicit request, course section only -- not applied anywhere else on the site. Section is
-   .tone-light (so default heading/body text and --coral-text already resolve correctly for a
-   light background) with --bg forced to literal #fff and --text forced to literal #111111 per
-   the brief's exact hex values. Cards, the search box, filter chips and the quote-tool's
-   dropdowns are then explicitly pushed to solid black/charcoal with light text -- they no
-   longer get their surface color from --surface (which .tone-light would otherwise make white),
-   since this is the one part of the site where "card" means "black surface", not "whatever the
-   section tone says". Coral accents (buttons, active filter state, tags) are untouched. */
-.course-discovery--mono { --bg: #ffffff; --text: #111111; background: var(--bg); color: var(--text); }
-.course-discovery--mono .course-discovery-glow { opacity: 0.6; } /* a touch stronger -- glows read softer on white than on the dark bg they were tuned for */
+/* ============ Course Discovery: cream canvas / white cards / navy text (scoped to #courses) ============
+   Replaces this section's previous white-canvas/black-card treatment with the latest brief's
+   own exact hex table: #17234D navy, #F7F4EE cream, #FFFFFF white, #F2D5C5 peach, #E98763
+   coral, #292929 charcoal. Still scoped to #courses only -- nothing else on the site changed.
+   Cards/search/quote-tool get an explicit white surface regardless of .tone-light's own
+   --surface value, so "card" consistently means "white, bordered, on cream" throughout. */
+.course-discovery--editorial { --bg: #F7F4EE; --text: #17234D; background: var(--bg); color: var(--text); }
+.course-discovery--editorial .course-discovery-glow { opacity: 0.35; background: radial-gradient(circle at 50% 50%, rgba(233,135,99,0.18), rgba(233,135,99,0) 68%); }
+.course-discovery--editorial .course-discovery-head p { color: #292929; }
+.course-discovery--editorial .course-discovery-meta { color: #E98763; }
+.course-discovery--editorial .course-result-count { color: #292929; }
 
-.course-discovery--mono .course-search {
-  background: #111111; border-color: #111111; color: #fff;
+.course-discovery--editorial .course-search { background: #FFFFFF; border-color: #E8E5DF; color: #292929; }
+.course-discovery--editorial .course-search input { color: #17234D; }
+.course-discovery--editorial .course-search input::placeholder { color: #292929; opacity: 0.45; }
+.course-discovery--editorial .course-search:focus-within { border-color: #E98763; }
+
+/* Stream chips: small icon + label, icon sitting at the same opacity/color as the label so
+   it reads as "a quiet identifier", not a decorative flourish. */
+.filter-chip-icon { flex-shrink: 0; }
+.course-discovery--editorial .filter-chip { background: #FFFFFF; color: #17234D; border-color: #E8E5DF; }
+.course-discovery--editorial .filter-chip[aria-pressed="true"] { background: #E98763; border-color: #E98763; color: #fff; }
+.course-discovery--editorial .filter-chip:not([aria-pressed="true"]) .filter-count { background: #F2D5C5; color: #292929; }
+
+.course-discovery--editorial .course-search-empty { background: #FFFFFF; border-color: #E8E5DF; }
+.course-discovery--editorial .course-search-empty h2 { color: #17234D; }
+.course-discovery--editorial .course-search-empty p { color: #292929; }
+
+.course-discovery--editorial .course-featured { border-color: #E8E5DF; }
+.course-discovery--editorial .course-featured-body { background: #FFFFFF; color: #17234D; }
+.course-discovery--editorial .course-featured-body p { color: #292929; }
+.course-discovery--editorial .course-featured-meta { color: #292929; }
+.course-discovery--editorial .course-featured-media { background: #F2D5C5; }
+
+.course-discovery--editorial .course-card { background: #FFFFFF; border-color: #E8E5DF; color: #17234D; }
+.course-discovery--editorial .course-card::before { background: #E98763; }
+.course-discovery--editorial .course-card h3 { color: #17234D; }
+.course-discovery--editorial .course-card-desc { color: #292929; }
+.course-discovery--editorial .course-card-meta { color: #292929 !important; opacity: 0.7; }
+.course-discovery--editorial .course-meta-line { color: #292929; opacity: 0.75; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0; }
+.course-discovery--editorial .course-card-cta { color: #E98763; }
+.course-discovery--editorial .course-prospectus-btn { border-color: #E8E5DF; color: #292929; }
+.course-discovery--editorial .course-prospectus-btn:hover { border-color: #E98763; color: #E98763; }
+
+.course-discovery--editorial .quote-tool { background: #FFFFFF; border-color: #E8E5DF; }
+.course-discovery--editorial .quote-tool h3 { color: #17234D; }
+.course-discovery--editorial .quote-tool-copy p { color: #292929; }
+.course-discovery--editorial .quote-tool-form label { color: #17234D; }
+.course-discovery--editorial .quote-tool-form select {
+  background: #F7F4EE; color: #17234D; border-color: #E8E5DF;
 }
-.course-discovery--mono .course-search input { color: #fff; }
-.course-discovery--mono .course-search input::placeholder { color: #f3f4f6; opacity: 0.6; }
-.course-discovery--mono .course-search:focus-within { border-color: var(--coral); }
+.course-discovery--editorial .quote-tool-form select:focus { border-color: #E98763; outline-color: #E98763; }
 
-.course-discovery--mono .filter-chip { background: #111111; color: #f3f4f6; border-color: #111111; }
-.course-discovery--mono .filter-chip[aria-pressed="true"] { background: var(--coral); border-color: var(--coral); color: #fff; }
-.course-discovery--mono .filter-chip:not([aria-pressed="true"]) .filter-count { background: rgba(255,255,255,0.14); color: #f3f4f6; }
-
-.course-discovery--mono .course-search-empty { background: #111111; border-color: #111111; color: #fff; }
-.course-discovery--mono .course-search-empty p { color: #f3f4f6; }
-
-.course-discovery--mono .course-featured { border-color: #111111; }
-.course-discovery--mono .course-featured-body { background: #000000; color: #fff; }
-.course-discovery--mono .course-featured-body p { color: #f3f4f6; }
-.course-discovery--mono .course-featured-meta { color: #d1d5db; }
-
-.course-discovery--mono .course-card { background: #111111; border-color: #111111; color: #fff; }
-.course-discovery--mono .course-card::before { background: var(--coral); } /* was coral-bright, a light-theme-tuned shade; plain coral holds contrast against the now-black card corner */
-.course-discovery--mono .course-card h3,
-.course-discovery--mono .course-card p { color: #fff; }
-.course-discovery--mono .course-card-desc { color: #d1d5db; }
-.course-discovery--mono .course-card-meta { color: #9ca3af !important; }
-.course-discovery--mono .course-code { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
-.course-discovery--mono .course-level { background: #000000; border-color: rgba(255,255,255,0.25); color: #f3f4f6; }
-.course-discovery--mono .course-card-cta { color: var(--coral-bright); }
-.course-discovery--mono .course-prospectus-btn { border-color: rgba(255,255,255,0.3); color: #f3f4f6; }
-.course-discovery--mono .course-prospectus-btn:hover { border-color: var(--coral-bright); color: var(--coral-bright); }
-
-.course-discovery--mono .quote-tool { background: #111111; border-color: #111111; color: #fff; }
-.course-discovery--mono .quote-tool h3 { color: #fff; }
-.course-discovery--mono .quote-tool-copy p { color: #f3f4f6; }
-.course-discovery--mono .quote-tool-form label { color: #f3f4f6; }
-.course-discovery--mono .quote-tool-form select {
-  background: #000000; color: #fff; border-color: rgba(255,255,255,0.3);
+/* Minimal rounded corners + restrained shadow per this brief, specifically for these cards
+   (the sitewide --radius-card stays 18px everywhere else -- this is a local override, not a
+   token change). The coral corner-notch (.course-card::before) stays: it's what keeps these
+   cards from reading as a generic rounded-rectangle template, which the brief explicitly
+   asked to avoid -- tightening the radius around it, not removing it. */
+.course-discovery--editorial .course-featured,
+.course-discovery--editorial .course-card,
+.course-discovery--editorial .course-search,
+.course-discovery--editorial .course-search-empty,
+.course-discovery--editorial .quote-tool {
+  border-radius: 6px; box-shadow: 0 1px 2px rgba(23,35,77,0.04);
 }
-.course-discovery--mono .quote-tool-form select:focus { border-color: var(--coral); outline-color: var(--coral); }
+.course-discovery--editorial .course-card:hover { box-shadow: 0 12px 24px -16px rgba(23,35,77,0.2); }
+
+/* Explicit 3 / 2 / 1 column grid (was auto-fill, which rendered 4 columns at common desktop
+   widths) per this brief's exact breakpoint targets. */
+/* 1100px (not 1024px) so the brief's own 1024px "tablet" test width still gets the 2-column
+   tablet layout, not 3 -- only genuine desktop widths get the third column. */
+.course-discovery--editorial .course-grid { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .course-discovery--editorial .course-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .course-discovery--editorial .course-grid { grid-template-columns: repeat(3, 1fr); } }
 
 /* ============ Why McGill Institute ============ */
 /* Flipped from light cream to dark navy per explicit later request -- reuses the
