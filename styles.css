@@ -891,130 +891,100 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
    existing dark tokens. #0D1520 main bg, #111D2A secondary bg, #141F2D card/
    panel bg, #F6F3EE main text, #B7C0CB secondary text, #8995A4 muted text,
    #F47732 accent, #FF8A45 hover accent. See DESIGN.md. */
-#settling-in {
-  position: relative; overflow: hidden; background: #0D1520; color: #F6F3EE; padding: 4.5rem 0 1.5rem;
-}
 #practical-guidance {
   position: relative; background: #111D2A; color: #F6F3EE;
   border-top: 1px solid rgba(222,231,241,0.14); padding: 3rem 0 3.5rem;
 }
-#settling-in p, #practical-guidance p { color: #B7C0CB; }
+#practical-guidance p { color: #B7C0CB; }
 
-/* Soft coral glow + a near-invisible diagonal hairline texture behind the content -- the
-   "subtle texture / soft lighting / depth" the brief asked for, kept faint enough to read
-   as atmosphere rather than decoration. Same radial-glow technique as .why-shape, recolored
-   and repositioned for this section's own palette. */
-.settling-glow {
-  position: absolute; top: -22%; left: -10%; width: 760px; height: 760px; max-width: 65vw;
-  background: radial-gradient(circle at 50% 50%, rgba(244,119,50,0.16), rgba(244,119,50,0) 68%);
-  border-radius: 50%; pointer-events: none; z-index: 0;
+/* ---- Study in Australia: Cambridge-inspired editorial split ----
+   Own scoped literal palette per this brief's exact hex table (distinct from the previous
+   #0D1520-family treatment this section had, and from the sitewide OLED tokens) -- #17234D
+   deep navy, #F7F4EE warm ivory, #292929 muted charcoal, #E8E5DF warm grey, #E98763 coral.
+   Structural change from the previous pass: a real, large photograph (reused from the
+   existing Why McGill/Student Experience asset, not a new image) is now the section's major
+   visual element in an asymmetric split against a single unified navy content column,
+   replacing the glow/texture/glass treatment that stood in for imagery before. All copy is
+   unchanged from the previous version -- see index.html. */
+.settling-section { overflow: hidden; }
+.settling-split { display: grid; grid-template-columns: 1fr; }
+@media (min-width: 900px) { .settling-split { grid-template-columns: 0.95fr 1.05fr; min-height: 680px; } }
+.settling-photo { position: relative; overflow: hidden; background: #17234D; min-height: 280px; }
+.settling-photo img {
+  width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease;
 }
-.settling-texture {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: 0.5;
-  background-image: repeating-linear-gradient(135deg, rgba(246,243,238,0.025) 0 1px, transparent 1px 64px);
+.settling-split:hover .settling-photo img { transform: scale(1.04); }
+@media (prefers-reduced-motion: reduce) { .settling-split:hover .settling-photo img { transform: none; } }
+/* Soft navy wash along the inner edge so the hard photo/panel seam reads as one composition,
+   not two unrelated blocks pasted together. */
+.settling-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(23,35,77,0) 60%, rgba(23,35,77,0.5) 100%);
 }
-/* grid-template-columns: 1fr below the 900px breakpoint is load-bearing, not decorative --
-   without it the single implicit column sizes to its content's intrinsic width instead of
-   100% of the container (classic CSS Grid blowout), and the fixed-width numbered badges
-   added below were enough to push that past the viewport on narrow screens. */
-.settling-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-@media (min-width: 900px) { .settling-grid { grid-template-columns: 1.17fr 1fr; align-items: start; } }
+@media (max-width: 899px) { .settling-photo::after { background: linear-gradient(180deg, rgba(23,35,77,0) 55%, rgba(23,35,77,0.55) 100%); } }
+
+.settling-content {
+  background: #17234D; color: #F7F4EE; padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 4vw, 3.5rem);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.settling-content p { color: #E8E5DF; }
 
 .settling-eyebrow-row { display: flex; align-items: center; gap: 12px; margin-bottom: 1rem; }
-.settling-eyebrow { color: #F47732; margin-bottom: 0; }
-.settling-eyebrow-line { width: 48px; height: 2px; background: linear-gradient(90deg, #F47732, rgba(244,119,50,0)); flex-shrink: 0; }
+.settling-eyebrow { color: #E98763; margin-bottom: 0; }
+.settling-eyebrow-line { width: 48px; height: 2px; background: linear-gradient(90deg, #E98763, rgba(233,135,99,0)); flex-shrink: 0; }
 
 #settling-in-heading {
-  font-size: clamp(2.375rem, 1.3rem + 4.2vw, 4.75rem); line-height: 1.02; letter-spacing: -0.01em;
-  color: #F6F3EE; margin-bottom: 1.1rem;
+  font-size: clamp(2.25rem, 1.3rem + 3.6vw, 3.75rem); line-height: 1.05; letter-spacing: -0.01em;
+  color: #F7F4EE; margin-bottom: 1rem;
 }
-#settling-in-heading em { color: #F47732; font-style: normal; }
-.settling-copy > p { font-size: 1.15rem; line-height: 1.5; max-width: 500px; margin-bottom: 2rem; }
+#settling-in-heading em { color: #E98763; font-style: normal; }
+.settling-content > p { font-size: 1.1rem; line-height: 1.5; max-width: 46ch; margin-bottom: 2rem; }
 
-/* Study in Australia feature card: genuine glass -- backdrop-filter over the glow behind it,
-   a translucent (not solid) fill, and a top inner highlight simulating a light edge, rather
-   than the previous flat #141F2D panel. */
+/* Study in Australia panel: a restrained bordered block, not a glass card -- "avoid
+   excessive glassmorphism" per this brief, a deliberate change from the previous pass. */
 .settling-panel {
-  position: relative; display: flex; align-items: center; gap: 1.1rem;
-  background: linear-gradient(165deg, rgba(246,243,238,0.1), rgba(246,243,238,0.03));
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(246,243,238,0.16); border-radius: 18px; padding: 1.5rem 1.6rem;
-  box-shadow: 0 24px 48px -28px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.12);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  display: flex; align-items: center; gap: 1.1rem;
+  border: 1px solid rgba(247,244,238,0.18); border-radius: 4px; padding: 1.35rem 1.5rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
 }
-.settling-panel:hover {
-  transform: translateY(-4px); border-color: rgba(244,119,50,0.4);
-  box-shadow: 0 28px 56px -26px rgba(0,0,0,0.7), 0 0 0 1px rgba(244,119,50,0.12), inset 0 1px 0 rgba(255,255,255,0.14);
-}
-@media (prefers-reduced-motion: reduce) { .settling-panel:hover { transform: none; } }
-.settling-panel-icon {
-  width: 56px; height: 56px; border-radius: 50%; flex-shrink: 0; color: #F47732;
-  background: radial-gradient(circle at 35% 30%, rgba(255,138,69,0.3), rgba(244,119,50,0.1));
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 6px 16px -6px rgba(244,119,50,0.45), inset 0 1px 0 rgba(255,255,255,0.14);
-  transition: transform 0.25s ease;
-}
-.settling-panel-icon svg { width: 26px; height: 26px; }
-.settling-panel:hover .settling-panel-icon { transform: translateY(-2px) scale(1.04); }
-@media (prefers-reduced-motion: reduce) { .settling-panel:hover .settling-panel-icon { transform: none; } }
+.settling-panel:hover { border-color: rgba(233,135,99,0.5); background: rgba(233,135,99,0.05); }
+.settling-panel-icon { flex-shrink: 0; color: #E98763; display: flex; align-items: center; justify-content: center; }
+.settling-panel-icon svg { width: 24px; height: 24px; }
 .settling-panel-body { flex: 1; min-width: 0; }
-.settling-panel-body h3 { font-size: 1.1rem; margin-bottom: 0.3rem; color: #F6F3EE; }
-.settling-panel-body p { font-size: 0.9rem; margin-bottom: 0.6rem; }
+.settling-panel-body h3 { font-size: 1.05rem; margin-bottom: 0.25rem; color: #F7F4EE; }
+.settling-panel-body p { font-size: 0.88rem; margin-bottom: 0; }
 .settling-panel-cta {
-  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; color: #F47732;
-  border: 1px solid rgba(244,119,50,0.38); display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; color: #E98763;
+  border: 1px solid rgba(233,135,99,0.4); display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
-.settling-panel-cta:hover { background: #F47732; color: #0D1520; transform: translateX(3px); box-shadow: 0 8px 20px -8px rgba(244,119,50,0.6); }
-.settling-panel-cta:focus-visible { outline: 3px solid #F47732; outline-offset: 3px; }
+.settling-panel-cta:hover { background: #E98763; color: #17234D; transform: translateX(3px); }
+.settling-panel-cta:focus-visible { outline: 3px solid #E98763; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .settling-panel-cta:hover { transform: none; } }
 
-.settling-resources { display: flex; flex-direction: column; }
-@media (min-width: 900px) { .settling-resources { border-left: 1px solid rgba(222,231,241,0.14); padding-left: 2rem; } }
+/* Resource list: a clean numbered index (number + title + description + arrow), no icon
+   circles -- a quieter, more editorial reading than the previous icon-per-row treatment. */
+.settling-resources { display: flex; flex-direction: column; margin-top: 2rem; }
 .settling-resource {
-  position: relative; display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 1.1rem;
-  padding: 1.5rem 1rem 1.5rem 1.1rem; margin: 0 -1rem; border-radius: 14px;
-  border-bottom: 1px solid rgba(222,231,241,0.12);
-  text-decoration: none; color: inherit; transition: background 0.25s ease, transform 0.25s ease;
+  position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1.1rem;
+  padding: 1.25rem 0; border-top: 1px solid rgba(247,244,238,0.14);
+  text-decoration: none; color: inherit; transition: padding-left 0.25s ease;
 }
-.settling-resource::before {
-  content: ""; position: absolute; left: 0; top: 10%; bottom: 10%; width: 3px; border-radius: 2px;
-  background: #F47732; transform: scaleY(0); transform-origin: center; transition: transform 0.25s ease;
-}
-.settling-resource:last-child { border-bottom: none; }
-.settling-resource:hover { background: rgba(244,119,50,0.06); transform: translateX(2px); }
-.settling-resource:hover::before { transform: scaleY(1); }
-@media (prefers-reduced-motion: reduce) { .settling-resource:hover { transform: none; } }
-.settling-resource:focus-visible { outline: 3px solid #F47732; outline-offset: -3px; }
+.settling-resource:last-child { padding-bottom: 0; }
+.settling-resource:hover { padding-left: 0.4rem; }
+@media (prefers-reduced-motion: reduce) { .settling-resource:hover { padding-left: 0; } }
+.settling-resource:focus-visible { outline: 2px solid #E98763; outline-offset: 2px; }
 .settling-resource-num {
-  display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex-shrink: 0;
-  border-radius: 50%; border: 1px solid rgba(244,119,50,0.35);
-  font-family: var(--font-mono); font-weight: 700; font-size: 0.72rem; color: #F47732;
-  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; color: #E98763; letter-spacing: 0.04em;
 }
-.settling-resource:hover .settling-resource-num { background: #F47732; color: #0D1520; border-color: #F47732; }
-.settling-resource-icon {
-  width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0; color: #F47732;
-  background: rgba(244,119,50,0.12); display: flex; align-items: center; justify-content: center;
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-.settling-resource:hover .settling-resource-icon { background: rgba(244,119,50,0.22); transform: scale(1.05); }
-@media (prefers-reduced-motion: reduce) { .settling-resource:hover .settling-resource-icon { transform: none; } }
-.settling-resource-icon svg { width: 22px; height: 22px; }
-.settling-resource-body h3 {
-  font-size: 1.35rem; margin-bottom: 0.2rem; color: #F6F3EE; transition: color 0.2s ease;
-}
-.settling-resource-body p { font-size: 0.95rem; margin-bottom: 0; }
-.settling-resource:hover .settling-resource-body h3 { color: #FF8A45; }
-.settling-resource-arrow {
-  width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; color: #F47732; opacity: 0.55;
-  border: 1px solid rgba(244,119,50,0.3); display: flex; align-items: center; justify-content: center;
-  transition: transform 0.25s ease, opacity 0.25s ease, border-color 0.25s ease;
-}
-.settling-resource:hover .settling-resource-arrow { opacity: 1; border-color: #F47732; }
+.settling-resource-body h3 { font-size: 1.1rem; margin-bottom: 0.15rem; color: #F7F4EE; transition: color 0.2s ease; }
+.settling-resource-body p { font-size: 0.88rem; margin-bottom: 0; }
+.settling-resource:hover .settling-resource-body h3 { color: #E98763; }
+.settling-resource-arrow { color: #E98763; opacity: 0.6; display: flex; transition: opacity 0.2s ease; }
+.settling-resource:hover .settling-resource-arrow { opacity: 1; }
 .settling-resource-arrow svg { transition: transform 0.25s ease; }
 .settling-resource:hover .settling-resource-arrow svg { transform: translateX(3px); }
-@media (prefers-reduced-motion: reduce) { .settling-resource:hover .settling-resource-arrow svg { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .settling-resource-arrow svg { transition: none; } .settling-resource:hover .settling-resource-arrow svg { transform: none; } }
 
 .practical-guidance-head { margin-bottom: 2.5rem; position: relative; z-index: 1; }
 .practical-guidance-eyebrow { color: #F47732; }
@@ -1060,23 +1030,15 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 .practical-guidance-item:hover .practical-guidance-arrow { opacity: 1; transform: translate(0, 0); border-color: #F47732; }
 @media (prefers-reduced-motion: reduce) { .practical-guidance-arrow { transition: opacity 0.25s ease; transform: none; } }
 
-/* Per-card/row reveal stagger (same pattern as #streams .stream-card) rather than one block
+/* Per-card reveal stagger (same pattern as #streams .stream-card) rather than one block
    fading in together -- reads as a more deliberate, art-directed entrance. */
-.settling-resource.reveal:nth-child(1) { transition-delay: 0s; }
-.settling-resource.reveal:nth-child(2) { transition-delay: 0.08s; }
-.settling-resource.reveal:nth-child(3) { transition-delay: 0.16s; }
 .practical-guidance-item.reveal:nth-child(1) { transition-delay: 0s; }
 .practical-guidance-item.reveal:nth-child(2) { transition-delay: 0.08s; }
 .practical-guidance-item.reveal:nth-child(3) { transition-delay: 0.16s; }
 @media (prefers-reduced-motion: reduce) {
-  .settling-resource.reveal, .practical-guidance-item.reveal { transition-delay: 0s; }
+  .practical-guidance-item.reveal { transition-delay: 0s; }
 }
 
-@media (max-width: 899px) {
-  .settling-panel { flex-wrap: wrap; }
-  .settling-resource { grid-template-columns: auto auto 1fr; }
-  .settling-resource-arrow { display: none; }
-}
 @media (max-width: 759px) {
   .practical-guidance-arrow { display: none; }
 }
