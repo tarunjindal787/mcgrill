@@ -199,14 +199,19 @@ header.site-header {
      equal on both edges and .header-inner below gets an explicit height instead of a
      calc() that only ever accounted for the (asymmetric) top padding. */
   padding: 0.75rem 1.25rem;
-  background-color: rgba(11,15,23,0.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  /* Navy-tinted translucency (was a neutral near-black rgba(11,15,23,...)) -- ties the
+     pre-scroll state to the same #17234D navy the solid state below uses, so scrolling
+     reads as one continuous tone deepening, not a colour switch partway through. */
+  background-color: rgba(23,35,77,0.42); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   box-shadow: none; border-bottom: 1px solid rgba(255,255,255,0.06);
   transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 /* Solid once scrolled past the hero top -- same padding/height as the translucent
-   state (no shift/jump), only background/shadow/border-color change. */
+   state (no shift/jump), only background/shadow/border-color change. #17234D (was
+   --oled/#0B0F17) -- the same navy now established in Study in Australia and Course
+   Discovery, for one consistent identity across every page. */
 header.site-header.is-scrolled {
-  background-color: var(--oled);
+  background-color: #17234D;
   box-shadow: 0 4px 18px rgba(0,0,0,0.25);
   border-bottom-color: rgba(255,255,255,0.08);
 }
@@ -228,7 +233,7 @@ nav.main-nav a {
   padding: 0.4rem 0; border-bottom: 2px solid transparent; text-shadow: 0 1px 6px rgba(0,0,0,0.65);
   transition: border-color 0.2s ease, color 0.2s ease;
 }
-nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
+nav.main-nav a:hover { border-bottom-color: #E98763; color: #fff; }
 .header-actions { display: flex; align-items: center; gap: 0.75rem; }
 .nav-toggle {
   display: flex; width: 40px; height: 40px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2);
@@ -247,13 +252,13 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
 
 #mobile-nav {
   display: none; max-width: 1280px; margin: 0.5rem auto 0;
-  border-radius: 20px; background: rgba(11,15,23,0.9); backdrop-filter: blur(16px);
+  border-radius: 20px; background: rgba(23,35,77,0.92); backdrop-filter: blur(16px);
   border: 1px solid rgba(255,255,255,0.12);
 }
 #mobile-nav.open { display: block; }
 #mobile-nav ul { list-style: none; margin: 0; padding: 0.75rem; display: flex; flex-direction: column; }
 #mobile-nav a { display: block; padding: 0.85rem 1rem; text-decoration: none; color: #fff; font-weight: 500; min-height: 44px; }
-#mobile-nav a:hover { color: var(--coral-bright); }
+#mobile-nav a:hover { color: #E98763; }
 @media (min-width: 960px) { #mobile-nav { display: none !important; } }
 
 /* ============ Hero: full-screen photo slider ============ */
@@ -282,7 +287,10 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
      leaving visibly different darkness levels elsewhere. One flat, moderate overlay
      here (and none on .hero-content-inner) reads as a single consistent treatment
      regardless of where the text lands or which scene is playing underneath it. */
-  background: rgba(8,12,20,0.4);
+  /* Navy-tinted (was a neutral rgba(8,12,20,...)) -- ties the hero scrim to the same
+     #17234D navy now established across the header, Study in Australia and Course
+     Discovery, without changing the overlay's function (one flat legibility scrim). */
+  background: rgba(15,22,46,0.42);
 }
 /* In normal flow (not absolutely positioned), vertically centered via auto margins on both
    sides -- if content ever needs more room than the viewport-height video provides, the auto
@@ -321,7 +329,7 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   text-shadow: 0 2px 20px rgba(0,0,0,0.75), 0 1px 3px rgba(0,0,0,0.6);
 }
 .hero-lede { font-size: 1.15rem; line-height: 1.6; color: rgba(255,255,255,0.95); text-shadow: 0 1px 8px rgba(0,0,0,0.6); }
-.hero-lede em { font-style: normal; font-weight: 800; color: var(--coral-bright); text-shadow: 0 1px 10px rgba(0,0,0,0.75); }
+.hero-lede em { font-style: normal; font-weight: 800; color: #E98763; text-shadow: 0 1px 10px rgba(0,0,0,0.75); }
 .hero-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-top: 1.75rem; }
 
 /* Kinetic text reveal: each hero text element fades/tracks in on load via JS toggling .kinetic-play */
