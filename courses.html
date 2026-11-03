@@ -67,42 +67,71 @@
 
 <main id="main">
 
-  <!-- COURSES -->
-  <section id="courses" class="tone-dark">
+  <!-- COURSE DISCOVERY -->
+  <section id="courses" class="tone-dark course-discovery">
+    <div class="course-discovery-glow" aria-hidden="true"></div>
     <div class="container">
-      <div class="section-head reveal">
+      <div class="course-discovery-head reveal">
         <span class="section-eyebrow">Find Your Course</span>
-        <h1>Find the right path for you.</h1>
-        <p>Explore available courses and narrow your options using the information that matters to you.</p>
+        <h1>Find the course that moves you forward.</h1>
+        <p>Explore practical qualifications designed around your next step.</p>
+        <p class="course-discovery-meta" id="course-discovery-meta" aria-live="polite"></p>
       </div>
+
       <div class="course-search reveal">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-        <label for="course-search-input" class="visually-hidden">Search courses or qualifications</label>
-        <input type="search" id="course-search-input" placeholder="Search courses or qualifications&hellip;">
+        <label for="course-search-input" class="visually-hidden">Search courses, qualifications or careers</label>
+        <input type="search" id="course-search-input" placeholder="Search courses, qualifications or careers&hellip;">
       </div>
-      <div class="filter-bar reveal" role="group" aria-label="Filter courses by stream">
-        <button class="filter-chip" data-filter="all" aria-pressed="true" type="button">All Courses</button>
-        <button class="filter-chip" data-filter="engineering" aria-pressed="false" type="button">Engineering</button>
-        <button class="filter-chip" data-filter="hospitality" aria-pressed="false" type="button">Hospitality</button>
-        <button class="filter-chip" data-filter="business" aria-pressed="false" type="button">Business</button>
-        <button class="filter-chip" data-filter="management" aria-pressed="false" type="button">Management</button>
-        <button class="filter-chip" data-filter="english" aria-pressed="false" type="button">English</button>
+
+      <div class="course-filter-sticky reveal">
+        <div class="filter-bar" role="group" aria-label="Filter courses by stream" id="stream-filter-bar">
+          <button class="filter-chip" data-filter="all" aria-pressed="true" type="button">All Courses<span class="filter-count" id="count-all"></span></button>
+          <button class="filter-chip" data-filter="engineering" aria-pressed="false" type="button">Engineering<span class="filter-count" id="count-engineering"></span></button>
+          <button class="filter-chip" data-filter="hospitality" aria-pressed="false" type="button">Hospitality<span class="filter-count" id="count-hospitality"></span></button>
+          <button class="filter-chip" data-filter="business" aria-pressed="false" type="button">Business<span class="filter-count" id="count-business"></span></button>
+          <button class="filter-chip" data-filter="management" aria-pressed="false" type="button">Management<span class="filter-count" id="count-management"></span></button>
+          <button class="filter-chip" data-filter="english" aria-pressed="false" type="button">English<span class="filter-count" id="count-english"></span></button>
+        </div>
+        <div class="filter-bar filter-bar--level" role="group" aria-label="Filter courses by qualification level">
+          <button class="filter-chip" data-level="all" aria-pressed="true" type="button">All Levels</button>
+          <button class="filter-chip" data-level="Certificate III" aria-pressed="false" type="button">Certificate III</button>
+          <button class="filter-chip" data-level="Certificate IV" aria-pressed="false" type="button">Certificate IV</button>
+          <button class="filter-chip" data-level="Diploma" aria-pressed="false" type="button">Diploma</button>
+          <button class="filter-chip" data-level="Graduate Diploma" aria-pressed="false" type="button">Graduate Diploma</button>
+          <button type="button" class="btn-ghost-small filter-clear" id="filter-clear" hidden>Clear filters</button>
+        </div>
       </div>
-      <div class="filter-bar filter-bar--level reveal" role="group" aria-label="Filter courses by qualification level">
-        <button class="filter-chip" data-level="all" aria-pressed="true" type="button">All Levels</button>
-        <button class="filter-chip" data-level="Certificate III" aria-pressed="false" type="button">Certificate III</button>
-        <button class="filter-chip" data-level="Certificate IV" aria-pressed="false" type="button">Certificate IV</button>
-        <button class="filter-chip" data-level="Diploma" aria-pressed="false" type="button">Diploma</button>
-        <button class="filter-chip" data-level="Graduate Diploma" aria-pressed="false" type="button">Graduate Diploma</button>
-        <button type="button" class="btn-ghost-small filter-clear" id="filter-clear" hidden>Clear filters</button>
-      </div>
+
       <p class="course-result-count" id="course-result-count" aria-live="polite"></p>
       <div class="course-search-empty" id="course-search-empty" hidden>
         <h2>No matching courses found</h2>
         <p>Try changing your search or clearing one of your filters.</p>
         <button type="button" class="btn-ghost-small" id="empty-state-clear">Clear filters</button>
       </div>
-      <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data (courses-data.js) --></div>
+
+      <!-- Featured spotlight: an editorial pick (Hospitality is the only stream offering a
+           full Cert IV -> Diploma pathway), not a tracked "popular course" metric -- COURSES
+           has no popularity field, so none is implied here. -->
+      <a class="course-featured reveal" id="course-featured" href="#" data-course-id="sit50422">
+        <span class="course-featured-label">Popular Course</span>
+        <div class="course-featured-media">
+          <img src="photos/course-hospitality-service.jpg" alt="A waiter serving a plate of food at an outdoor café" width="1400" height="933" loading="lazy">
+        </div>
+        <div class="course-featured-body">
+          <span class="tag tag-hospitality">Hospitality</span>
+          <h2>Diploma of Hospitality Management</h2>
+          <p>Hospitality leadership training across food and beverage, accommodation, and guest service operations.</p>
+          <div class="course-featured-meta">
+            <span>Diploma &middot; SIT50422</span>
+            <span>Parramatta campus</span>
+            <span>Fees &amp; duration confirmed on enquiry</span>
+          </div>
+          <span class="btn btn-primary course-featured-cta">View Course<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </div>
+      </a>
+
+      <div class="course-grid reveal" id="course-grid"><!-- populated by JS from COURSES data (courses-data.js), featured course excluded --></div>
 
       <div class="quote-tool reveal" id="quote-tool">
         <div class="quote-tool-copy">
@@ -144,6 +173,18 @@
       </div>
     </div>
   </section>
+
+  <!-- Quick Compare: floating bar (appears once >=1 course is selected) -->
+  <div class="compare-bar" id="compare-bar" hidden>
+    <div class="container compare-bar-inner">
+      <div class="compare-bar-items" id="compare-bar-items"><!-- populated by JS --></div>
+      <span class="compare-bar-count" id="compare-bar-count"></span>
+      <div class="compare-bar-actions">
+        <button type="button" class="btn-ghost-small" id="compare-clear">Clear</button>
+        <button type="button" class="btn btn-primary" id="compare-open" disabled>Compare Courses</button>
+      </div>
+    </div>
+  </div>
 
   <!-- COURSE PATHWAY EXPLORER -->
   <section id="pathway-explorer" class="tone-light pathway-explorer">
@@ -220,11 +261,11 @@
           <li><a href="mailto:info@mcgill.edu.au">info@mcgill.edu.au</a></li>
         </ul>
         <ul class="footer-social" aria-label="Social media (coming soon)">
-          <li><span class="footer-social-icon" title="Facebook — coming soon" aria-label="Facebook — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 8h2V5h-2a4 4 0 0 0-4 4v2H9v3h2v6h3v-6h2.5l.5-3H14V9a1 1 0 0 1 1-1z"/></svg></span></li>
+          <li><span class="footer-social-icon" title="Facebook — coming soon" aria-label="Facebook — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 13.5h2.5l.5-3H14V8.5c0-.86.24-1.5 1.53-1.5H17V4.14C16.7 4.1 15.7 4 14.5 4 12 4 10.5 5.49 10.5 8.2V10.5H8v3h2.5V21h3.5v-7.5z"/></svg></span></li>
           <li><span class="footer-social-icon" title="Instagram — coming soon" aria-label="Instagram — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg></span></li>
-          <li><span class="footer-social-icon" title="LinkedIn — coming soon" aria-label="LinkedIn — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="9" width="4" height="12"/><circle cx="5" cy="4.5" r="2"/><path d="M11 21v-7a2.5 2.5 0 0 1 5 0v7M16 12.5a2.5 2.5 0 0 1 5 2v6.5"/></svg></span></li>
-          <li><span class="footer-social-icon" title="YouTube — coming soon" aria-label="YouTube — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="4"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z" fill="currentColor" stroke="none"/></svg></span></li>
-          <li><span class="footer-social-icon" title="X (Twitter) — coming soon" aria-label="X (Twitter) — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 4.5l15 15M19.5 4.5l-15 15"/></svg></span></li>
+          <li><span class="footer-social-icon" title="LinkedIn — coming soon" aria-label="LinkedIn — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10h3v11H7zM8.5 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4zM13 10h3v1.6c.5-1 1.6-1.9 3.3-1.9 3.5 0 4.2 2.3 4.2 5.3V21h-3v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-3z"/></svg></span></li>
+          <li><span class="footer-social-icon" title="YouTube — coming soon" aria-label="YouTube — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.8 7.2c-.2-1-1-1.8-2-2C18 4.7 12 4.7 12 4.7s-6 0-7.8.5c-1 .2-1.8 1-2 2C2 9 2 12 2 12s0 3 .2 4.8c.2 1 1 1.8 2 2 1.8.5 7.8.5 7.8.5s6 0 7.8-.5c1-.2 1.8-1 2-2 .2-1.8.2-4.8.2-4.8s0-3-.2-4.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg></span></li>
+          <li><span class="footer-social-icon" title="X (Twitter) — coming soon" aria-label="X (Twitter) — coming soon"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 3H22l-7.2 8.2L23 21h-6.6l-5.2-6.4L5.2 21H2l7.7-8.8L1 3h6.8l4.7 5.8L18.9 3zm-1.2 16.2h1.8L7.3 4.7H5.4l12.3 14.5z"/></svg></span></li>
         </ul>
       </div>
       <div>
@@ -321,6 +362,23 @@
   </div>
 </div>
 
+<!-- Quick Compare modal: up to 3 courses, fields limited to what COURSES actually tracks
+     (name/level/stream/description) -- no price, duration, study-mode or RPL columns,
+     since none of that is tracked per course anywhere in this project; all point to the
+     same "confirmed on enquiry" row already used throughout the site instead of inventing
+     values. -->
+<div class="modal-backdrop" id="compare-modal-backdrop">
+  <div class="modal compare-modal" role="dialog" aria-modal="true" aria-labelledby="compare-modal-title" id="compare-modal">
+    <div class="modal-head">
+      <h3 id="compare-modal-title" style="margin:0;">Compare Courses</h3>
+      <button class="modal-close" id="compare-modal-close" type="button" aria-label="Close comparison">&times;</button>
+    </div>
+    <div class="compare-table-wrap">
+      <table class="compare-table" id="compare-table"><!-- populated by JS --></table>
+    </div>
+  </div>
+</div>
+
 <script src="courses-data.js"></script>
 <script src="common.js"></script>
 <script src="pathway-explorer.js"></script>
@@ -328,43 +386,65 @@
 (function () {
   "use strict";
 
+  var FEATURED_ID = 'sit50422'; /* Diploma of Hospitality Management -- see HTML comment above #course-featured */
   var grid = document.getElementById('course-grid');
-  COURSES.forEach(function (c) {
-    var card = document.createElement('article');
-    card.className = 'course-card tilt-card';
-    card.id = 'course-' + c.id;
-    card.setAttribute('data-stream', c.stream);
-    card.innerHTML =
+  var featuredCard = document.getElementById('course-featured');
+  var GRID_COURSES = COURSES.filter(function (c) { return c.id !== FEATURED_ID; });
+
+  function courseCardHTML(c) {
+    return (
+      '<label class="course-compare-toggle" title="Add to compare">' +
+        '<input type="checkbox" class="compare-checkbox" data-compare-id="' + c.id + '">' +
+        '<span class="course-compare-box" aria-hidden="true"></span>' +
+        '<span class="visually-hidden">Add ' + c.name + ' to compare</span>' +
+      '</label>' +
       '<div class="course-photo">' +
         '<img src="' + c.img + '" alt="' + c.imgAlt + '" width="900" height="600" loading="lazy">' +
         '<span class="tag tag-' + c.stream + '">' + c.tagLabel + '</span>' +
       '</div>' +
-      '<div class="course-pills">' +
-        '<span class="course-code mono">' + c.code + '</span>' +
-        (c.level ? '<span class="course-level">' + c.level + '</span>' : '') +
-      '</div>' +
-      '<h3>' + c.name + '</h3>' +
-      '<p>' + c.desc + '</p>' +
-      '<p class="course-campus">Parramatta campus &middot; Fees and intakes confirmed on enquiry</p>' +
-      '<details class="entry-req">' +
-        '<summary>' +
-          '<span>Entry: Year 12 or equivalent, functional English <span class="entry-req-note">(confirmed at enquiry)</span></span>' +
-          '<svg class="chevron" width="16" height="16" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-        '</summary>' +
-        '<p>Entry requirements vary by course and by student type (domestic or international). Specific English-proficiency benchmarks for international student visa pathways are set per course and confirmed with our admissions team.</p>' +
-      '</details>' +
-      '<div class="course-actions">' +
-        '<button type="button" class="btn btn-outline" data-course-id="' + c.id + '">View details</button>' +
-        '<button type="button" class="btn btn-ghost-small" data-prospectus-id="' + c.id + '">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-          'Prospectus' +
-        '</button>' +
-      '</div>';
+      '<div class="course-card-body">' +
+        '<div class="course-pills">' +
+          '<span class="course-code mono">' + c.code + '</span>' +
+          (c.level ? '<span class="course-level">' + c.level + '</span>' : '') +
+        '</div>' +
+        '<h3>' + c.name + '</h3>' +
+        '<p class="course-card-desc">' + c.desc + '</p>' +
+        '<p class="course-card-meta">Fees &amp; duration confirmed on enquiry</p>' +
+        '<div class="course-actions">' +
+          '<button type="button" class="course-card-cta" data-course-id="' + c.id + '">View Course' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '</button>' +
+          '<button type="button" class="course-prospectus-btn" data-prospectus-id="' + c.id + '" aria-label="Download prospectus" title="Download prospectus">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+          '</button>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  GRID_COURSES.forEach(function (c) {
+    var card = document.createElement('article');
+    card.className = 'course-card tilt-card';
+    card.id = 'course-' + c.id;
+    card.setAttribute('data-stream', c.stream);
+    card.innerHTML = courseCardHTML(c);
     grid.appendChild(card);
   });
   if (fineHover && !prefersReducedMotion) {
     document.querySelectorAll('.course-card.tilt-card').forEach(attachTilt);
   }
+
+  /* ---------- Stream counts (computed from COURSES, never hardcoded -- can't drift) ---------- */
+  var STREAM_IDS = STREAMS.map(function (s) { return s.id; });
+  document.getElementById('count-all').textContent = COURSES.length;
+  STREAM_IDS.forEach(function (streamId) {
+    var el = document.getElementById('count-' + streamId);
+    if (el) el.textContent = COURSES.filter(function (c) { return c.stream === streamId; }).length;
+  });
+  var levelCount = {};
+  COURSES.forEach(function (c) { if (c.level) levelCount[c.level] = (levelCount[c.level] || 0) + 1; });
+  document.getElementById('course-discovery-meta').textContent =
+    COURSES.length + ' courses across ' + STREAM_IDS.length + ' streams and ' + Object.keys(levelCount).length + ' qualification levels';
 
   /* ---------- Filter + search (combined: stream AND qualification level AND keyword) ---------- */
   var streamChips = document.querySelectorAll('.filter-chip[data-filter]');
@@ -377,22 +457,31 @@
   var currentStream = 'all';
   var currentLevel = 'all';
 
+  function courseMatches(c, query) {
+    var matchesStream = currentStream === 'all' || c.stream === currentStream;
+    var matchesLevel = currentLevel === 'all' || c.level === currentLevel;
+    var matchesQuery = !query ||
+      c.name.toLowerCase().indexOf(query) !== -1 ||
+      c.code.toLowerCase().indexOf(query) !== -1 ||
+      c.tagLabel.toLowerCase().indexOf(query) !== -1 ||
+      c.desc.toLowerCase().indexOf(query) !== -1;
+    return matchesStream && matchesLevel && matchesQuery;
+  }
+
   function applySearchAndFilter() {
     var query = searchInput.value.trim().toLowerCase();
     var visibleCount = 0;
-    COURSES.forEach(function (c) {
+    GRID_COURSES.forEach(function (c) {
       var card = document.getElementById('course-' + c.id);
-      var matchesStream = currentStream === 'all' || c.stream === currentStream;
-      var matchesLevel = currentLevel === 'all' || c.level === currentLevel;
-      var matchesQuery = !query ||
-        c.name.toLowerCase().indexOf(query) !== -1 ||
-        c.code.toLowerCase().indexOf(query) !== -1 ||
-        c.tagLabel.toLowerCase().indexOf(query) !== -1 ||
-        c.desc.toLowerCase().indexOf(query) !== -1;
-      var match = matchesStream && matchesLevel && matchesQuery;
+      var match = courseMatches(c, query);
       card.style.display = match ? '' : 'none';
       if (match) visibleCount++;
     });
+    var featuredCourse = COURSES.filter(function (c) { return c.id === FEATURED_ID; })[0];
+    var featuredMatch = featuredCourse && courseMatches(featuredCourse, query);
+    featuredCard.style.display = featuredMatch ? '' : 'none';
+    if (featuredMatch) visibleCount++;
+
     searchEmpty.hidden = visibleCount !== 0;
     resultCount.textContent = visibleCount === 0 ? '' : (visibleCount + (visibleCount === 1 ? ' course found' : ' courses found'));
     filterClear.hidden = currentStream === 'all' && currentLevel === 'all' && !query;
@@ -485,6 +574,119 @@
   modalClose.addEventListener('click', closeModal);
   modalBackdrop.addEventListener('click', function (e) { if (e.target === modalBackdrop) closeModal(); });
   document.getElementById('modal-enquire').addEventListener('click', closeModal);
+  featuredCard.addEventListener('click', function (e) {
+    e.preventDefault();
+    openModal(featuredCard.getAttribute('data-course-id'));
+  });
+
+  /* ---------- Quick Compare: select up to 3 courses, compare only fields COURSES actually
+       has (name/level/stream/description) -- no price/duration/study-mode/RPL columns,
+       none of that is tracked per course anywhere in this project. ---------- */
+  var MAX_COMPARE = 3;
+  var compareIds = [];
+  var compareBar = document.getElementById('compare-bar');
+  var compareBarItems = document.getElementById('compare-bar-items');
+  var compareBarCount = document.getElementById('compare-bar-count');
+  var compareClearBtn = document.getElementById('compare-clear');
+  var compareOpenBtn = document.getElementById('compare-open');
+  var compareModalBackdrop = document.getElementById('compare-modal-backdrop');
+  var compareModal = document.getElementById('compare-modal');
+  var compareModalClose = document.getElementById('compare-modal-close');
+  var compareTable = document.getElementById('compare-table');
+  var compareLastFocused = null;
+
+  function allCompareCheckboxes() {
+    return document.querySelectorAll('.compare-checkbox');
+  }
+  function courseById(id) { return COURSES.filter(function (x) { return x.id === id; })[0]; }
+
+  function renderCompareBar() {
+    var count = compareIds.length;
+    compareBar.hidden = count === 0;
+    compareBarCount.textContent = count + ' of ' + MAX_COMPARE + ' selected';
+    compareOpenBtn.disabled = count < 2;
+    compareBarItems.innerHTML = compareIds.map(function (id) {
+      var c = courseById(id);
+      return (
+        '<span class="compare-bar-item">' +
+          '<img src="' + c.img + '" alt="" width="36" height="36">' +
+          '<span class="compare-bar-item-name">' + c.name + '</span>' +
+          '<button type="button" class="compare-bar-item-remove" data-remove-compare="' + c.id + '" aria-label="Remove ' + c.name + ' from compare">&times;</button>' +
+        '</span>'
+      );
+    }).join('');
+    /* Disable not-yet-selected checkboxes once at the limit, rather than silently
+       rejecting a click -- the checkbox itself visibly shows why it won't check. */
+    allCompareCheckboxes().forEach(function (box) {
+      if (!box.checked) box.disabled = count >= MAX_COMPARE;
+    });
+  }
+
+  function setCompareState(id, selected) {
+    var idx = compareIds.indexOf(id);
+    if (selected && idx === -1 && compareIds.length < MAX_COMPARE) compareIds.push(id);
+    else if (!selected && idx !== -1) compareIds.splice(idx, 1);
+    allCompareCheckboxes().forEach(function (box) {
+      if (box.getAttribute('data-compare-id') === id) box.checked = compareIds.indexOf(id) !== -1;
+    });
+    renderCompareBar();
+  }
+
+  document.addEventListener('change', function (e) {
+    var box = e.target.closest('.compare-checkbox');
+    if (box) setCompareState(box.getAttribute('data-compare-id'), box.checked);
+  });
+  compareBarItems.addEventListener('click', function (e) {
+    var removeBtn = e.target.closest('[data-remove-compare]');
+    if (removeBtn) setCompareState(removeBtn.getAttribute('data-remove-compare'), false);
+  });
+  compareClearBtn.addEventListener('click', function () {
+    compareIds.slice().forEach(function (id) { setCompareState(id, false); });
+  });
+
+  var COMPARE_FIELDS = [
+    { label: 'Qualification', render: function (c) { return c.name; } },
+    { label: 'Level', render: function (c) { return c.level || 'General English (no AQF level)'; } },
+    { label: 'Stream', render: function (c) { return c.tagLabel; } },
+    { label: 'Description', render: function (c) { return c.desc; } },
+    { label: 'Duration & fees', render: function () { return 'Confirmed on enquiry'; } }
+  ];
+  function buildCompareTable() {
+    var courses = compareIds.map(courseById);
+    var headRow = '<tr><th scope="col" class="compare-field-label"></th>' +
+      courses.map(function (c) { return '<th scope="col">' + c.name + '</th>'; }).join('') + '</tr>';
+    var bodyRows = COMPARE_FIELDS.map(function (field) {
+      return '<tr><th scope="row" class="compare-field-label">' + field.label + '</th>' +
+        courses.map(function (c) { return '<td>' + field.render(c) + '</td>'; }).join('') + '</tr>';
+    }).join('');
+    compareTable.innerHTML = '<thead>' + headRow + '</thead><tbody>' + bodyRows + '</tbody>';
+  }
+  function openCompareModal() {
+    if (compareIds.length < 2) return;
+    buildCompareTable();
+    compareLastFocused = document.activeElement;
+    compareModalBackdrop.classList.add('open');
+    compareModalClose.focus();
+    document.addEventListener('keydown', onCompareModalKeydown);
+  }
+  function closeCompareModal() {
+    compareModalBackdrop.classList.remove('open');
+    document.removeEventListener('keydown', onCompareModalKeydown);
+    if (compareLastFocused) compareLastFocused.focus();
+  }
+  function onCompareModalKeydown(e) {
+    if (e.key === 'Escape') { closeCompareModal(); return; }
+    if (e.key === 'Tab') {
+      var focusable = compareModal.querySelectorAll('button, a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
+  compareOpenBtn.addEventListener('click', openCompareModal);
+  compareModalClose.addEventListener('click', closeCompareModal);
+  compareModalBackdrop.addEventListener('click', function (e) { if (e.target === compareModalBackdrop) closeCompareModal(); });
 
   /* ---------- Downloadable prospectus (client-side PDF, honest facts only) ---------- */
   function downloadProspectus(courseId) {
