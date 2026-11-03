@@ -724,6 +724,58 @@ nav.main-nav a:hover { border-bottom-color: var(--coral-bright); color: #fff; }
   .compare-bar-item-name { display: none; } /* thumbnails + count still convey the selection at this width */
 }
 
+/* ============ Course Discovery: white canvas / black cards (scoped to #courses only) ============
+   Explicit request, course section only -- not applied anywhere else on the site. Section is
+   .tone-light (so default heading/body text and --coral-text already resolve correctly for a
+   light background) with --bg forced to literal #fff and --text forced to literal #111111 per
+   the brief's exact hex values. Cards, the search box, filter chips and the quote-tool's
+   dropdowns are then explicitly pushed to solid black/charcoal with light text -- they no
+   longer get their surface color from --surface (which .tone-light would otherwise make white),
+   since this is the one part of the site where "card" means "black surface", not "whatever the
+   section tone says". Coral accents (buttons, active filter state, tags) are untouched. */
+.course-discovery--mono { --bg: #ffffff; --text: #111111; background: var(--bg); color: var(--text); }
+.course-discovery--mono .course-discovery-glow { opacity: 0.6; } /* a touch stronger -- glows read softer on white than on the dark bg they were tuned for */
+
+.course-discovery--mono .course-search {
+  background: #111111; border-color: #111111; color: #fff;
+}
+.course-discovery--mono .course-search input { color: #fff; }
+.course-discovery--mono .course-search input::placeholder { color: #f3f4f6; opacity: 0.6; }
+.course-discovery--mono .course-search:focus-within { border-color: var(--coral); }
+
+.course-discovery--mono .filter-chip { background: #111111; color: #f3f4f6; border-color: #111111; }
+.course-discovery--mono .filter-chip[aria-pressed="true"] { background: var(--coral); border-color: var(--coral); color: #fff; }
+.course-discovery--mono .filter-chip:not([aria-pressed="true"]) .filter-count { background: rgba(255,255,255,0.14); color: #f3f4f6; }
+
+.course-discovery--mono .course-search-empty { background: #111111; border-color: #111111; color: #fff; }
+.course-discovery--mono .course-search-empty p { color: #f3f4f6; }
+
+.course-discovery--mono .course-featured { border-color: #111111; }
+.course-discovery--mono .course-featured-body { background: #000000; color: #fff; }
+.course-discovery--mono .course-featured-body p { color: #f3f4f6; }
+.course-discovery--mono .course-featured-meta { color: #d1d5db; }
+
+.course-discovery--mono .course-card { background: #111111; border-color: #111111; color: #fff; }
+.course-discovery--mono .course-card::before { background: var(--coral); } /* was coral-bright, a light-theme-tuned shade; plain coral holds contrast against the now-black card corner */
+.course-discovery--mono .course-card h3,
+.course-discovery--mono .course-card p { color: #fff; }
+.course-discovery--mono .course-card-desc { color: #d1d5db; }
+.course-discovery--mono .course-card-meta { color: #9ca3af !important; }
+.course-discovery--mono .course-code { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); color: #fff; }
+.course-discovery--mono .course-level { background: #000000; border-color: rgba(255,255,255,0.25); color: #f3f4f6; }
+.course-discovery--mono .course-card-cta { color: var(--coral-bright); }
+.course-discovery--mono .course-prospectus-btn { border-color: rgba(255,255,255,0.3); color: #f3f4f6; }
+.course-discovery--mono .course-prospectus-btn:hover { border-color: var(--coral-bright); color: var(--coral-bright); }
+
+.course-discovery--mono .quote-tool { background: #111111; border-color: #111111; color: #fff; }
+.course-discovery--mono .quote-tool h3 { color: #fff; }
+.course-discovery--mono .quote-tool-copy p { color: #f3f4f6; }
+.course-discovery--mono .quote-tool-form label { color: #f3f4f6; }
+.course-discovery--mono .quote-tool-form select {
+  background: #000000; color: #fff; border-color: rgba(255,255,255,0.3);
+}
+.course-discovery--mono .quote-tool-form select:focus { border-color: var(--coral); outline-color: var(--coral); }
+
 /* ============ Why McGill Institute ============ */
 /* Flipped from light cream to dark navy per explicit later request -- reuses the
    Settling-in section's exact dark palette (#0D1520 bg, #141F2D card, #F6F3EE/#B7C0CB
